@@ -10,5 +10,5 @@ package sgcmf.view;
  */
 public class LimEntusiasta
 {
-	int ji;
+	int jip;
 }
