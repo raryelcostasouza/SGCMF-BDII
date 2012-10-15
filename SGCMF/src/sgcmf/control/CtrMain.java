@@ -13,7 +13,7 @@ public class CtrMain
 
 	public CtrMain()
 	{
-		
+		int i;
 	}
 	
 }
