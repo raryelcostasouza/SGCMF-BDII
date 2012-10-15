@@ -2,16 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sgcmf.control;
+package sgcmf.view;
 
 /**
  *
  * @author Raryel Costa Souza
  */
-public class CtrMain
+public class LimEntusiasta
 {
-	public CtrMain()
-	{
-		
-	}
+	
 }
