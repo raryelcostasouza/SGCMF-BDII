@@ -5,11 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import sgcmf.util.UtilView;
+import sgcmf.view.table.JTableSGCMF;
 
 public class LimConsultaSelecao extends JFrame
 {
@@ -18,10 +21,11 @@ public class LimConsultaSelecao extends JFrame
 		setTitle("Consulta Seleção");
 		setLocationRelativeTo(null);
 		setVisible(true);
-		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(300,300);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		//setSize(300,300);
 		
 		add(montaMainPanel());		
+		pack();
 	}
 	
 	private JPanel montaMainPanel()
@@ -29,11 +33,15 @@ public class LimConsultaSelecao extends JFrame
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		JPanel northPanel = new JPanel(new BorderLayout());
 		JPanel northWestPanel = new JPanel();
+		JPanel northEastPanel= new JPanel();
+		String[] nomesColunas = {"País", "Técnico", "Bandeira"};
 		
-		JTable jt = new JTable(3, 3);	
-		mainPanel.add(jt, BorderLayout.CENTER);
+		JTableSGCMF jt = new JTableSGCMF(null, nomesColunas);	
+		JScrollPane jsp = new JScrollPane(jt,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		mainPanel.add(jsp, BorderLayout.CENTER);
 		
 		JRadioButton jrbPais = new JRadioButton("País");
+		jrbPais.setSelected(true);
 		JRadioButton jrbNomeTecnico = new JRadioButton("Nome Técnico");
 		
 		ButtonGroup bg = new ButtonGroup();
@@ -46,8 +54,12 @@ public class LimConsultaSelecao extends JFrame
 		
 		northPanel.add(northWestPanel, BorderLayout.WEST);
 		
-		JTextField jtfSearchBox = new JTextField(10);
-		northPanel.add(UtilView.putComponentInFlowLayoutPanel(jtfSearchBox), BorderLayout.EAST);
+		JLabel jlBusca = new JLabel("Busca:");
+		JTextField jtfSearchBox = new JTextField(15);
+		northEastPanel.add(jlBusca);
+		northEastPanel.add(jtfSearchBox);
+		
+		northPanel.add(northEastPanel, BorderLayout.EAST);
 		
 		mainPanel.add(northPanel, BorderLayout.NORTH);
 		

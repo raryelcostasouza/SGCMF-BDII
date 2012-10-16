@@ -1,5 +1,6 @@
 package sgcmf.util;
 
+import java.awt.Component;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
