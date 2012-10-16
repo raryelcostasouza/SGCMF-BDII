@@ -21,7 +21,6 @@ public class LimConsultaSelecao extends JFrame
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		//setSize(300,300);
 		
 		add(montaMainPanel());		
 		pack();
@@ -30,14 +29,27 @@ public class LimConsultaSelecao extends JFrame
 	private JPanel montaMainPanel()
 	{
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		JPanel northPanel = new JPanel(new BorderLayout());
-		JPanel northWestPanel = new JPanel();
-		JPanel northEastPanel= new JPanel();
-		String[] nomesColunas = {"País", "Técnico", "Bandeira"};
 		
-		JTableSGCMF jt = new JTableSGCMF(null, nomesColunas);	
-		JScrollPane jsp = new JScrollPane(jt,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		mainPanel.add(jsp, BorderLayout.CENTER);
+		mainPanel.add(montaCenterPanel(), BorderLayout.CENTER);
+		mainPanel.add(montaNorthPanel(), BorderLayout.NORTH);
+		
+		return mainPanel;
+	}
+	
+	public JPanel montaNorthPanel()
+	{
+		JPanel northPanel = new JPanel(new BorderLayout());
+		
+		northPanel.add(montaNorthEastPanel(), BorderLayout.EAST);
+		northPanel.add(montaNorthWestPanel(), BorderLayout.WEST);
+				
+		return northPanel;
+		
+	}
+	
+	public JPanel montaNorthWestPanel()
+	{
+		JPanel northWestPanel = new JPanel();
 		
 		JRadioButton jrbPais = new JRadioButton("País");
 		jrbPais.setSelected(true);
@@ -51,20 +63,31 @@ public class LimConsultaSelecao extends JFrame
 		northWestPanel.add(jrbPais);
 		northWestPanel.add(jrbNomeTecnico);	
 		
-		northPanel.add(northWestPanel, BorderLayout.WEST);
+		return northWestPanel;
+	}
+	
+	public JPanel montaNorthEastPanel()
+	{
+		JPanel northEastPanel= new JPanel();
 		
 		JLabel jlBusca = new JLabel("Busca:");
 		JTextField jtfSearchBox = new JTextField(15);
+		
 		northEastPanel.add(jlBusca);
 		northEastPanel.add(jtfSearchBox);
 		
-		northPanel.add(northEastPanel, BorderLayout.EAST);
-		
-		mainPanel.add(northPanel, BorderLayout.NORTH);
-		
-		return mainPanel;
+		return northEastPanel;
 	}
 	
+	private JScrollPane montaCenterPanel()
+	{
+		String[] nomesColunas = {"País", "Técnico", "Bandeira"};
+		
+		JTableSGCMF jt = new JTableSGCMF(null, nomesColunas);	
+		JScrollPane jsp = new JScrollPane(jt,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		return jsp;		
+	}
 	
 	public static void main(String[] args)
 	{
