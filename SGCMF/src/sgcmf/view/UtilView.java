@@ -1,4 +1,4 @@
-package sgcmf.util;
+package sgcmf.view;
 
 import java.awt.Component;
 import javax.swing.JComponent;

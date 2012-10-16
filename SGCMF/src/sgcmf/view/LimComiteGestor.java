@@ -6,7 +6,6 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import sgcmf.util.UtilView;
 
 public class LimComiteGestor extends JFrame
 {

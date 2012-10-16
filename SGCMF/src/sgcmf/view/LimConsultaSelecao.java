@@ -11,7 +11,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import sgcmf.util.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
 public class LimConsultaSelecao extends JFrame
