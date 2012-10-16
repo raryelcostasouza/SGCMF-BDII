@@ -4,8 +4,6 @@
  */
 package sgcmf.control;
 
-import sgcmf.view.LimComiteGestor;
-
 /**
  *
  * @author Raryel Costa Souza
@@ -14,6 +12,6 @@ public class CtrMain
 {
 	public CtrMain()
 	{
-		new LimComiteGestor();
+		
 	}
 }

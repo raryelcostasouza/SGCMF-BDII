@@ -2,6 +2,7 @@ package sgcmf.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,5 +31,17 @@ public class LimComiteGestor extends JFrame
 		mainPanel.add(jbLogout, BorderLayout.SOUTH);	
 		
 		return mainPanel;
+	}
+	
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable() {
+
+			@Override
+			public void run()
+			{
+				new LimComiteGestor();
+			}
+		});
 	}
 }
