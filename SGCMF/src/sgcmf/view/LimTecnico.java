@@ -5,7 +5,10 @@
 package sgcmf.view;
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,6 +19,7 @@ import javax.swing.JPanel;
  */
 public class LimTecnico extends JFrame
 {
+    private LimGerenciarJogador limGerenciarJogador;
     public LimTecnico()
     {
         setTitle("Usuário Técnico da Seleção");
@@ -23,16 +27,27 @@ public class LimTecnico extends JFrame
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        
+           
         add(montaPainel());
+        
+        limGerenciarJogador = new LimGerenciarJogador();
     }
     
-    public JPanel montaPainel()
+    private JPanel montaPainel()
     {
         JPanel jpPrincipal = new JPanel(new BorderLayout());
         JPanel jpAux = new JPanel(new GridLayout(2, 2));
+        
         JButton jbGerenciarJogadores = new JButton("Gerenciar Jogadores");
+        jbGerenciarJogadores.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                limGerenciarJogador.setVisible(true);
+            }
+        });       
+        
         JButton jbRelatorios = new JButton("Relatórios");
         JButton jbGerenciarEscalacao = new JButton("Gerenciar Escalação");
         JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato");
@@ -51,6 +66,13 @@ public class LimTecnico extends JFrame
     }
     public static void main(String[] args)
     {
-        new LimTecnico();
+        EventQueue.invokeLater(new Runnable() {
+
+            @Override
+            public void run()
+            {
+                new LimTecnico();
+            }
+        });   
     }
 }
