@@ -5,7 +5,6 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -25,8 +24,7 @@ public class LimConsultarJogo extends JFrame
 	public LimConsultarJogo()
 	{
 		setTitle("Consulta Jogo");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setVisible(true);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		add(montaMainPanel());
 		pack();
 		
@@ -138,7 +136,6 @@ public class LimConsultarJogo extends JFrame
 		northEastPanelComboBox.setBorder(BorderFactory.createTitledBorder("Tipo jogo:"));
 		
 		JComboBox jcb = new JComboBox(opcoesJCB);
-		
 		
 		northEastPanelComboBox.add(jcb);
 		return northEastPanelComboBox;		
