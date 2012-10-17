@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +14,8 @@ import javax.swing.JPanel;
 public class LimComiteGestor extends JFrame
 {
 	private LimConsultaSelecao limConsultaSelecao;
+	private LimConsultarJogo limConsultaJogo;
+	private LimGerenciarOcorrencia limGerenciarOcorrencia;
 	
 	public LimComiteGestor()
 	{
@@ -23,11 +26,11 @@ public class LimComiteGestor extends JFrame
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		
 		add(montaMainPanel());		
 		
 		limConsultaSelecao = new LimConsultaSelecao();
-		
+		limConsultaJogo = new LimConsultarJogo();		
+		limGerenciarOcorrencia = new LimGerenciarOcorrencia();
 	}
 	
 	private JPanel montaMainPanel()
@@ -50,6 +53,14 @@ public class LimComiteGestor extends JFrame
 		JButton jbConsultarSelecoes = new JButton("Consultar Seleções", imgIcon);
 		jbConsultarSelecoes.setVerticalTextPosition(JButton.BOTTOM);
 		jbConsultarSelecoes.setHorizontalTextPosition(JButton.CENTER);
+		
+		JButton jbConsultarJogos = new JButton("Consultar Jogos");
+		JButton jbGerOcorrenciaJogo = new JButton("Gerenciar Ocorrências de Jogo");
+		
+		JButton jbGerDisputaPenaltis = new JButton("Gerenciar Disputa de Pênaltis");
+		JButton jbRelatorios = new JButton("Relatórios");
+		JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato");
+		
 		jbConsultarSelecoes.addActionListener(new ActionListener() {
 
 			@Override
@@ -58,13 +69,22 @@ public class LimComiteGestor extends JFrame
 				limConsultaSelecao.setVisible(true);
 			}
 		});
-		
-		JButton jbConsultarJogos = new JButton("Consultar Jogos");
-		JButton jbGerOcorrenciaJogo = new JButton("Gerenciar Ocorrências de Jogo");
-		
-		JButton jbGerDisputaPenaltis = new JButton("Gerenciar Disputa de Pênaltis");
-		JButton jbRelatorios = new JButton("Relatórios");
-		JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato");
+		jbConsultarJogos.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limConsultaJogo.setVisible(true);
+			}
+		});		
+		jbGerOcorrenciaJogo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limGerenciarOcorrencia.setVisible(true);
+			}
+		});
 		
 		gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarSelecoes));
 		gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarJogos));
