@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import sgcmf.view.table.JTableSGCMF;
 
@@ -18,12 +17,12 @@ public class LimConsultaSelecao extends JFrame
 	public LimConsultaSelecao()
 	{
 		setTitle("Consulta Seleção");
-		setLocationRelativeTo(null);
-		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());		
 		pack();
+		
+		setLocationRelativeTo(null);
 	}
 	
 	private JPanel montaMainPanel()
@@ -69,11 +68,10 @@ public class LimConsultaSelecao extends JFrame
 	public JPanel montaNorthEastPanel()
 	{
 		JPanel northEastPanel= new JPanel();
+		northEastPanel.setBorder(BorderFactory.createTitledBorder("Busca:"));
 		
-		JLabel jlBusca = new JLabel("Busca:");
 		JTextField jtfSearchBox = new JTextField(15);
 		
-		northEastPanel.add(jlBusca);
 		northEastPanel.add(jtfSearchBox);
 		
 		return northEastPanel;
