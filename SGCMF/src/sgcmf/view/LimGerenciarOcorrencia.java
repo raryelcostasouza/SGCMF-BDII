@@ -17,8 +17,7 @@ public class LimGerenciarOcorrencia extends JFrame
 	public LimGerenciarOcorrencia()
 	{
 		setTitle("Gerenciar Ocorrências de Jogo: Selecione um jogo");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setVisible(true);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());
 		pack();
