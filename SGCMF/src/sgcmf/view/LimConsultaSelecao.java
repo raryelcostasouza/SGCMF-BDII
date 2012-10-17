@@ -35,7 +35,7 @@ public class LimConsultaSelecao extends JFrame
 		return mainPanel;
 	}
 	
-	public JPanel montaNorthPanel()
+	private JPanel montaNorthPanel()
 	{
 		JPanel northPanel = new JPanel(new BorderLayout());
 		
@@ -46,7 +46,7 @@ public class LimConsultaSelecao extends JFrame
 		
 	}
 	
-	public JPanel montaNorthWestPanel()
+	private JPanel montaNorthWestPanel()
 	{
 		JPanel northWestPanel = new JPanel();
 		
@@ -65,7 +65,7 @@ public class LimConsultaSelecao extends JFrame
 		return northWestPanel;
 	}
 	
-	public JPanel montaNorthEastPanel()
+	private JPanel montaNorthEastPanel()
 	{
 		JPanel northEastPanel= new JPanel();
 		northEastPanel.setBorder(BorderFactory.createTitledBorder("Busca:"));

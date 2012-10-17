@@ -42,7 +42,7 @@ public class LimComiteGestor extends JFrame
 		return mainPanel;
 	}
 	
-	public JPanel montaGridPanel()
+	private JPanel montaGridPanel()
 	{
 		JPanel gridPanel = new JPanel(new GridLayout(2,3));
 		
