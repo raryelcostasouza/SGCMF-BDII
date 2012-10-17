@@ -3,6 +3,8 @@ package sgcmf.view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,15 +12,22 @@ import javax.swing.JPanel;
 
 public class LimComiteGestor extends JFrame
 {
+	private LimConsultaSelecao limConsultaSelecao;
+	
 	public LimComiteGestor()
 	{
 		setTitle("Usuário Comitê Gestor");
+		setSize(700,400);	
 		setLocationRelativeTo(null);
+		
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(700,400);	
+		
 		
 		add(montaMainPanel());		
+		
+		limConsultaSelecao = new LimConsultaSelecao();
+		
 	}
 	
 	private JPanel montaMainPanel()
@@ -41,6 +50,15 @@ public class LimComiteGestor extends JFrame
 		JButton jbConsultarSelecoes = new JButton("Consultar Seleções", imgIcon);
 		jbConsultarSelecoes.setVerticalTextPosition(JButton.BOTTOM);
 		jbConsultarSelecoes.setHorizontalTextPosition(JButton.CENTER);
+		jbConsultarSelecoes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limConsultaSelecao.setVisible(true);
+			}
+		});
+		
 		JButton jbConsultarJogos = new JButton("Consultar Jogos");
 		JButton jbGerOcorrenciaJogo = new JButton("Gerenciar Ocorrências de Jogo");
 		
