@@ -13,14 +13,17 @@ import javax.swing.event.ChangeListener;
  */
 public class LimGerenciarUsuario extends JFrame {
 
-    private PanelCadastrarUsuario pcu;
+    private PanelCadastrarUsuario pcdu;
     private PanelAlterarUsuario pau;
     private PanelRemoverUsuario pru;
+    private PanelConsultarUsuario pcnu;
 
     public LimGerenciarUsuario()
     {
-        pcu = new PanelCadastrarUsuario();
+        pcdu = new PanelCadastrarUsuario();
         pau = new PanelAlterarUsuario();
+        pru = new PanelRemoverUsuario();
+        pcnu = new PanelConsultarUsuario();
         setTitle("Gerenciar Usuarios");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
@@ -38,25 +41,29 @@ public class LimGerenciarUsuario extends JFrame {
                 String tituloAba = jtp.getTitleAt(jtp.getSelectedIndex());
                 if (tituloAba.equals("Cadastrar"))
                 {
-                    setSize(380, 335);
+                    setSize(400, 400);
                     setLocationRelativeTo(null);
                 }
                 else if (tituloAba.equals("Alterar"))
                 {
-                    setSize(700,400);
+                    setSize(800,600);
                     setLocationRelativeTo(null);
                 }
                 else if(tituloAba.equals("Remover")){
-                    setSize(700,400);
+                    setSize(800,600);
+                    setLocationRelativeTo(null);
+                }
+                else if(tituloAba.equals("Consultar")){
+                    setSize(600,500);
                     setLocationRelativeTo(null);
                 }
             }
         });
 
-        jtp.add(pcu, "Cadastrar");
+        jtp.add(pcdu, "Cadastrar");
         jtp.add(pau,"Alterar");
         jtp.add(pru, "Remover");
-        jtp.add(null, "Consultar");
+        jtp.add(pcnu, "Consultar");
 
         return jtp;
     }
