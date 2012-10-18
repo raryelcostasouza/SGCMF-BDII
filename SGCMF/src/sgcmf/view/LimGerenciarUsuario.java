@@ -15,6 +15,7 @@ public class LimGerenciarUsuario extends JFrame {
 
     private PanelCadastrarUsuario pcu;
     private PanelAlterarUsuario pau;
+    private PanelRemoverUsuario pru;
 
     public LimGerenciarUsuario()
     {
@@ -45,12 +46,16 @@ public class LimGerenciarUsuario extends JFrame {
                     setSize(700,400);
                     setLocationRelativeTo(null);
                 }
+                else if(tituloAba.equals("Remover")){
+                    setSize(700,400);
+                    setLocationRelativeTo(null);
+                }
             }
         });
 
         jtp.add(pcu, "Cadastrar");
         jtp.add(pau,"Alterar");
-        jtp.add(null, "Remover");
+        jtp.add(pru, "Remover");
         jtp.add(null, "Consultar");
 
         return jtp;

@@ -63,7 +63,7 @@ public class PanelCadastrarUsuario extends JPanel {
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlEmail));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfEmail, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlCPF));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfCPF, FlowLayout.LEFT));
+        jpAux2.add(jtfCPF);
         jpAux2.add(jbPesquisar);
         jpAux.add(jpAux2);
         jpAux.setBorder(BorderFactory.createEtchedBorder());
