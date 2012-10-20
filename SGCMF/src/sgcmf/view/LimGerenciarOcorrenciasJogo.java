@@ -2,11 +2,9 @@ package sgcmf.view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -30,11 +28,10 @@ public class LimGerenciarOcorrenciasJogo extends JFrame
 	public LimGerenciarOcorrenciasJogo()
 	{
 		setTitle("Gerenciar Ocorrências para o Jogo Selecionado");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		add(montaMainPanel());
 		
 		setSize(600,500);
-		setVisible(true);
 		setLocationRelativeTo(null);
 	}
 	

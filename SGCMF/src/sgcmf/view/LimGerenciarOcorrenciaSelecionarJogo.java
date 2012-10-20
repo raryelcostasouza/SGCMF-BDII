@@ -3,6 +3,8 @@ package sgcmf.view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,8 +16,12 @@ import sgcmf.view.table.JTableSGCMF;
 
 public class LimGerenciarOcorrenciaSelecionarJogo extends JFrame
 {
+	private LimGerenciarOcorrenciasJogo limGerenciarOcorrenciasJogo;
+	
 	public LimGerenciarOcorrenciaSelecionarJogo()
 	{
+		limGerenciarOcorrenciasJogo = new LimGerenciarOcorrenciasJogo();
+		
 		setTitle("Gerenciar Ocorrências de Jogo: Selecione um jogo");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
@@ -64,6 +70,15 @@ public class LimGerenciarOcorrenciaSelecionarJogo extends JFrame
 		JPanel southPanel = new JPanel();
 		
 		JButton jbGerenciarOcorrencias = new JButton("Gerenciar Ocorrências para o Jogo Selecionado");
+		jbGerenciarOcorrencias.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limGerenciarOcorrenciasJogo.setVisible(true);
+			}
+		});
+		
 		southPanel.add(jbGerenciarOcorrencias);
 		
 		return southPanel;
