@@ -27,6 +27,5 @@ public class UtilView
     public static void alinhaLabel (JLabel jl)
     {
         jl.setPreferredSize(new Dimension(130, 20));
-        jl.setHorizontalAlignment(JLabel.LEFT);
     }
 }
