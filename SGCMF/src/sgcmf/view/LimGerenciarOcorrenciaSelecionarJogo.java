@@ -12,9 +12,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.view.table.JTableSGCMF;
 
-public class LimGerenciarOcorrencia extends JFrame
+public class LimGerenciarOcorrenciaSelecionarJogo extends JFrame
 {
-	public LimGerenciarOcorrencia()
+	public LimGerenciarOcorrenciaSelecionarJogo()
 	{
 		setTitle("Gerenciar Ocorrências de Jogo: Selecione um jogo");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -75,7 +75,7 @@ public class LimGerenciarOcorrencia extends JFrame
 			@Override
 			public void run()
 			{
-				new LimGerenciarOcorrencia();
+				new LimGerenciarOcorrenciaSelecionarJogo();
 			}
 		});
 	}

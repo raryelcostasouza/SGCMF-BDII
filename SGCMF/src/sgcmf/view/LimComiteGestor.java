@@ -15,7 +15,7 @@ public class LimComiteGestor extends JFrame
 {
 	private LimConsultaSelecao limConsultaSelecao;
 	private LimConsultarJogo limConsultaJogo;
-	private LimGerenciarOcorrencia limGerenciarOcorrencia;
+	private LimGerenciarOcorrenciaSelecionarJogo limGerenciarOcorrencia;
 	
 	public LimComiteGestor()
 	{
@@ -30,7 +30,7 @@ public class LimComiteGestor extends JFrame
 		
 		limConsultaSelecao = new LimConsultaSelecao();
 		limConsultaJogo = new LimConsultarJogo();		
-		limGerenciarOcorrencia = new LimGerenciarOcorrencia();
+		limGerenciarOcorrencia = new LimGerenciarOcorrenciaSelecionarJogo();
 	}
 	
 	private JPanel montaMainPanel()
