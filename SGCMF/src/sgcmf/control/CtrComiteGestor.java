@@ -5,14 +5,21 @@ import sgcmf.view.comiteGestor.LimComiteGestor;
 public class CtrComiteGestor
 {
 	private LimComiteGestor limComiteGestor;
+	private CtrMain ctrMain;
 	
-	public CtrComiteGestor()
+	public CtrComiteGestor(CtrMain ctrMain)
 	{
-		limComiteGestor = new LimComiteGestor();
+		this.ctrMain = ctrMain;
+		limComiteGestor = new LimComiteGestor(this);
 	}
 	
 	public void ativaTela()
 	{
 		limComiteGestor.setVisible(true);
+	}
+	
+	public void logout()
+	{
+		ctrMain.ativaTela();
 	}
 }

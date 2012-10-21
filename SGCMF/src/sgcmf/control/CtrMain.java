@@ -14,11 +14,16 @@ public class CtrMain
 	public CtrMain()
 	{
 		ctrAdmin = new CtrAdmin();
-		ctrComiteGestor = new CtrComiteGestor();
+		ctrComiteGestor = new CtrComiteGestor(this);
 		ctrTecnico = new CtrTecnico();
 		ctrEntusiasta = new CtrEntusiasta();
 		
 		limLogin = new LimLogin(this);
+		limLogin.setVisible(true);
+	}
+	
+	public void ativaTela()
+	{
 		limLogin.setVisible(true);
 	}
 
