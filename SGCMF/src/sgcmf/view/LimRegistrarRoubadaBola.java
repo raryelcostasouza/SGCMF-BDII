@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,8 +14,12 @@ import javax.swing.JTextField;
 
 public class LimRegistrarRoubadaBola extends JFrame
 {
-	public LimRegistrarRoubadaBola()
+	private LimBuscarJogador limBuscarJogador;
+	
+	public LimRegistrarRoubadaBola(LimBuscarJogador limBuscarJogador)
 	{
+		this.limBuscarJogador = limBuscarJogador;
+		
 		setTitle("Registrar Roubada de Bola");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
@@ -38,6 +44,14 @@ public class LimRegistrarRoubadaBola extends JFrame
 		
 		JButton jbRegistrarRoubadaBola = new JButton("Registrar Roubada de Bola");
 		JButton jbPesqJogador = new JButton("P");
+		jbPesqJogador.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limBuscarJogador.setVisible(true);
+			}
+		});
 		
 		formPanel.add(UtilView.putComponentInFlowLayoutPanel(jlInstanteTempo));
 		formPanel.add(UtilView.putComponentInFlowLayoutPanel(jtfInstanteTempo, FlowLayout.LEFT));
@@ -51,17 +65,5 @@ public class LimRegistrarRoubadaBola extends JFrame
 		mainPanel.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarRoubadaBola), BorderLayout.SOUTH);
 		
 		return mainPanel;	
-	}
-	
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run()
-			{
-				new LimRegistrarRoubadaBola();
-			}
-		});
 	}
 }

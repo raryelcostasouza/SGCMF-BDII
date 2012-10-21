@@ -18,9 +18,9 @@ public class LimGerenciarOcorrenciaSelecionarJogo extends JFrame
 {
 	private LimGerenciarOcorrenciasJogo limGerenciarOcorrenciasJogo;
 	
-	public LimGerenciarOcorrenciaSelecionarJogo()
+	public LimGerenciarOcorrenciaSelecionarJogo(LimBuscarJogador limBuscarJogador)
 	{
-		limGerenciarOcorrenciasJogo = new LimGerenciarOcorrenciasJogo();
+		limGerenciarOcorrenciasJogo = new LimGerenciarOcorrenciasJogo(limBuscarJogador);
 		
 		setTitle("Gerenciar Ocorrências de Jogo: Selecione um jogo");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -82,16 +82,5 @@ public class LimGerenciarOcorrenciaSelecionarJogo extends JFrame
 		southPanel.add(jbGerenciarOcorrencias);
 		
 		return southPanel;
-	}
-	
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run()
-			{
-				new LimGerenciarOcorrenciaSelecionarJogo();
-			}
-		});
 	}
 }

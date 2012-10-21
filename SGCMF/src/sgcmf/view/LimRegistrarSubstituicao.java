@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,8 +16,12 @@ import javax.swing.JTextField;
 
 public class LimRegistrarSubstituicao extends JFrame
 {
-	public LimRegistrarSubstituicao()
+	private LimBuscarJogador limBuscarJogador;
+	
+	public LimRegistrarSubstituicao(LimBuscarJogador limBuscarJogador)
 	{
+		this.limBuscarJogador = limBuscarJogador;
+		
 		setTitle("Registrar Substituição");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
@@ -53,6 +59,24 @@ public class LimRegistrarSubstituicao extends JFrame
 		JButton jbPesqJogSaiu = new JButton("P");
 		JButton jbPesqJogEntrou = new JButton("P");
 		
+		jbPesqJogSaiu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limBuscarJogador.setVisible(true);
+			}
+		});
+		
+		jbPesqJogEntrou.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limBuscarJogador.setVisible(true);
+			}
+		});
+		
 		ButtonGroup bgMotivo = new ButtonGroup();
 		bgMotivo.add(jrbMotivoEstrategica);
 		bgMotivo.add(jrbMotivoContusao);
@@ -79,17 +103,5 @@ public class LimRegistrarSubstituicao extends JFrame
 		mainPanel.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarSubst), BorderLayout.SOUTH);
 		
 		return mainPanel;
-	}
-	
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run()
-			{
-				new LimRegistrarSubstituicao();
-			}
-		});
 	}
 }

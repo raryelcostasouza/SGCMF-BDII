@@ -16,9 +16,16 @@ public class LimComiteGestor extends JFrame
 	private LimConsultaSelecao limConsultaSelecao;
 	private LimConsultarJogo limConsultaJogo;
 	private LimGerenciarOcorrenciaSelecionarJogo limGerenciarOcorrencia;
+	private LimBuscarJogador limBuscarJogador;
 	
 	public LimComiteGestor()
 	{
+		limConsultaSelecao = new LimConsultaSelecao();
+		limConsultaJogo = new LimConsultarJogo();		
+		limBuscarJogador = new LimBuscarJogador();
+		limGerenciarOcorrencia = new LimGerenciarOcorrenciaSelecionarJogo(limBuscarJogador);
+		
+		
 		setTitle("Usuário Comitê Gestor");
 		setSize(700,400);	
 		setLocationRelativeTo(null);
@@ -26,11 +33,7 @@ public class LimComiteGestor extends JFrame
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		add(montaMainPanel());		
-		
-		limConsultaSelecao = new LimConsultaSelecao();
-		limConsultaJogo = new LimConsultarJogo();		
-		limGerenciarOcorrencia = new LimGerenciarOcorrenciaSelecionarJogo();
+		add(montaMainPanel());
 	}
 	
 	private JPanel montaMainPanel()

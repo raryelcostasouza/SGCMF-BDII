@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,8 +17,12 @@ import javax.swing.JTextField;
 
 public class LimRegistrarGol extends JFrame
 {
-	public LimRegistrarGol()
+	private LimBuscarJogador limBuscarJogador;
+	
+	public LimRegistrarGol(LimBuscarJogador limBuscarJogador)
 	{
+		this.limBuscarJogador = limBuscarJogador;
+		
 		setTitle("Registrar Gol");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
@@ -61,6 +67,23 @@ public class LimRegistrarGol extends JFrame
 		JButton jbPesqJogadorAutor = new JButton("P");
 		JButton jbPesqJogadorAssist = new JButton("P");
 		
+		jbPesqJogadorAutor.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limBuscarJogador.setVisible(true);
+			}
+		});
+		jbPesqJogadorAssist.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limBuscarJogador.setVisible(true);
+			}
+		});
+		
 		ButtonGroup bgTipo = new ButtonGroup();
 		bgTipo.add(jrbTipoAFavor);
 		bgTipo.add(jrbTipoContra);
@@ -99,18 +122,5 @@ public class LimRegistrarGol extends JFrame
 		mainPanel.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarGol), BorderLayout.SOUTH);
 		
 		return mainPanel;
-	}
-	
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run()
-			{
-				new LimRegistrarGol();
-			}
-		});
-	}
-	
+	}	
 }

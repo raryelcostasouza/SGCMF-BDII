@@ -18,7 +18,6 @@ public class LimBuscarJogador extends JFrame
 	{
 		setTitle("Buscar jogador");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setVisible(true);
 		
 		add(montaMainPanel());
 		setSize(500, 400);

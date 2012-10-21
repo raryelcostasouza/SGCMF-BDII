@@ -31,13 +31,13 @@ public class LimGerenciarOcorrenciasJogo extends JFrame
 	
 	private JPanel centerPanel;
 	
-	public LimGerenciarOcorrenciasJogo()
+	public LimGerenciarOcorrenciasJogo(LimBuscarJogador limBuscarJogador)
 	{
-		limRegistrarGol = new LimRegistrarGol();
-		limRegistrarFalta = new LimRegistrarFalta();
-		limRegistrarCartao = new LimRegistrarCartao();
-		limRegistrarSubstituicao = new LimRegistrarSubstituicao();
-		limRegistrarRoubadaBola = new LimRegistrarRoubadaBola();
+		limRegistrarGol = new LimRegistrarGol(limBuscarJogador);
+		limRegistrarFalta = new LimRegistrarFalta(limBuscarJogador);
+		limRegistrarCartao = new LimRegistrarCartao(limBuscarJogador);
+		limRegistrarSubstituicao = new LimRegistrarSubstituicao(limBuscarJogador);
+		limRegistrarRoubadaBola = new LimRegistrarRoubadaBola(limBuscarJogador);
 		
 		setTitle("Gerenciar Ocorrências para o Jogo Selecionado");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -289,16 +289,4 @@ public class LimGerenciarOcorrenciasJogo extends JFrame
 		
 		return southPanel;
 	}
-	
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run()
-			{
-				new LimGerenciarOcorrenciasJogo();
-			}
-		});
-	}	
 }

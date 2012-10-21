@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,8 +16,12 @@ import javax.swing.JTextField;
 
 public class LimRegistrarFalta extends JFrame
 {
-	public LimRegistrarFalta()
+	private LimBuscarJogador limBuscarJogador;
+	
+	public LimRegistrarFalta(LimBuscarJogador limBuscarJogador)
 	{
+		this.limBuscarJogador = limBuscarJogador;
+		
 		setTitle("Registrar Falta");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		add(montaMainPanel());
@@ -54,6 +60,14 @@ public class LimRegistrarFalta extends JFrame
 		
 		JButton jbRegistrarFalta = new JButton("Registrar Falta");
 		JButton jbPesqJogador = new JButton("P");
+		jbPesqJogador.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limBuscarJogador.setVisible(true);
+			}
+		});
 		
 		ButtonGroup bgCartao = new ButtonGroup();
 		bgCartao.add(jrbCartaoNenhum);
@@ -86,17 +100,5 @@ public class LimRegistrarFalta extends JFrame
 		mainPanel.add(formPanel, BorderLayout.CENTER);
 		mainPanel.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarFalta), BorderLayout.SOUTH);
 		return mainPanel;
-	}
-	
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run()
-			{
-				new LimRegistrarFalta();
-			}
-		});
 	}
 }
