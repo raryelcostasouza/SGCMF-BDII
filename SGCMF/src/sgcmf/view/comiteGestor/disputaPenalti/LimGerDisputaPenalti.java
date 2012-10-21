@@ -6,25 +6,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.table.JTableSGCMF;
 
-public class LimGerDisputaPenalti extends JFrame
+public class LimGerDisputaPenalti extends JDialog
 {
 	private LimLancarRodadaPenaltis limLancarRodadaPenalti;
 	
-	public LimGerDisputaPenalti()
+	public LimGerDisputaPenalti(LimBuscarJogador limBuscarJogador)
 	{
-		limLancarRodadaPenalti = new LimLancarRodadaPenaltis();
+		limLancarRodadaPenalti = new LimLancarRodadaPenaltis(limBuscarJogador);
 		
 		setTitle("Gerenciar Disputa de Pênaltis para o Jogo Selecionado");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());
-		
+		setModal(true);
 		pack();		
 		setLocationRelativeTo(null);
 	}
@@ -82,19 +84,5 @@ public class LimGerDisputaPenalti extends JFrame
 		southPanel.add(jbRemover);
 		
 		return southPanel;
-	}
-	
-		
-		
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run()
-			{
-				new LimGerDisputaPenalti();
-			}
-		});
 	}
 }

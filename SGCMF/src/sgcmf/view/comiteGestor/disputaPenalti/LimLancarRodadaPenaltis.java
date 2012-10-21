@@ -4,24 +4,34 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import sgcmf.view.UtilView;
+import sgcmf.view.comiteGestor.LimBuscarJogador;
 
-public class LimLancarRodadaPenaltis extends JFrame
+public class LimLancarRodadaPenaltis extends JDialog
 {
-	public LimLancarRodadaPenaltis()
+	private LimBuscarJogador limBuscarJogador;
+	
+	public LimLancarRodadaPenaltis(LimBuscarJogador limBuscarJogador)
 	{
+		this.limBuscarJogador = limBuscarJogador;
+		
 		setTitle("Lançar Resultado de Rodada de Pênaltis");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());
+		setModal(true);
 		pack();
 		setLocationRelativeTo(null);
 	}
@@ -66,6 +76,14 @@ public class LimLancarRodadaPenaltis extends JFrame
 		JRadioButton jrbGolMarcado = new JRadioButton("Gol Marcado");
 		
 		JButton jbPesqJogador = new JButton("P");
+		jbPesqJogador.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limBuscarJogador.setVisible(true);
+			}
+		});
 		
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(jrbGolNaoMarcado);

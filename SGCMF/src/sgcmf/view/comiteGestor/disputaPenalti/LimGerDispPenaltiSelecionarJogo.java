@@ -6,19 +6,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.comiteGestor.LimConsultarJogo;
 
 public class LimGerDispPenaltiSelecionarJogo extends LimConsultarJogo
 {
 	private LimGerDisputaPenalti limGerDisputaPenalti;
 	
-	public LimGerDispPenaltiSelecionarJogo()
+	public LimGerDispPenaltiSelecionarJogo(LimBuscarJogador limBuscarJogador)
 	{
 		super();
 		setTitle("Gerenciar Disputa de Pênaltis: Selecione um Jogo");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
-		limGerDisputaPenalti = new LimGerDisputaPenalti();
+		limGerDisputaPenalti = new LimGerDisputaPenalti(limBuscarJogador);
 		
 		mainPanel.add(montaSouthPanel(), BorderLayout.SOUTH);
 	}
