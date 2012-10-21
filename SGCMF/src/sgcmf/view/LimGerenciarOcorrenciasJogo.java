@@ -21,6 +21,7 @@ public class LimGerenciarOcorrenciasJogo extends JFrame
 	private LimRegistrarFalta limRegistrarFalta;
 	private LimRegistrarCartao limRegistrarCartao;
 	private LimRegistrarSubstituicao limRegistrarSubstituicao;
+	private LimRegistrarRoubadaBola limRegistrarRoubadaBola;
 	
 	private final String nameCardPanelGol = "GOL";
 	private final String nameCardPanelFalta = "FALTA";
@@ -36,6 +37,7 @@ public class LimGerenciarOcorrenciasJogo extends JFrame
 		limRegistrarFalta = new LimRegistrarFalta();
 		limRegistrarCartao = new LimRegistrarCartao();
 		limRegistrarSubstituicao = new LimRegistrarSubstituicao();
+		limRegistrarRoubadaBola = new LimRegistrarRoubadaBola();
 		
 		setTitle("Gerenciar Ocorrências para o Jogo Selecionado");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -265,6 +267,14 @@ public class LimGerenciarOcorrenciasJogo extends JFrame
 		centerPanelRoubadaBola.add(jsp,BorderLayout.CENTER);
 		
 		JButton jbRegistrarRoubadaBola = new JButton("Registrar Nova Roubada de Bola");
+		jbRegistrarRoubadaBola.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limRegistrarRoubadaBola.setVisible(true);
+			}
+		});
 		centerPanelRoubadaBola.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarRoubadaBola), BorderLayout.SOUTH);
 			
 		return centerPanelRoubadaBola;
