@@ -1,4 +1,4 @@
-package sgcmf.view;
+package sgcmf.view.comiteGestor.ocorrenciaJogo;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import sgcmf.view.LimBuscarJogador;
+import sgcmf.view.UtilView;
 
 public class LimRegistrarGol extends JFrame
 {

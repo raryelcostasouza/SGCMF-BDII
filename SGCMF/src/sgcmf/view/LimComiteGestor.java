@@ -1,5 +1,6 @@
 package sgcmf.view;
 
+import sgcmf.view.comiteGestor.ocorrenciaJogo.LimGerOcorrSelecionarJogo;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;

@@ -1,4 +1,4 @@
-package sgcmf.view;
+package sgcmf.view.comiteGestor.ocorrenciaJogo;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import sgcmf.view.LimBuscarJogador;
+import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
 public class LimGerenciarOcorrenciasJogo extends JFrame

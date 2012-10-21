@@ -1,4 +1,4 @@
-package sgcmf.view;
+package sgcmf.view.comiteGestor.ocorrenciaJogo;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import sgcmf.view.LimBuscarJogador;
+import sgcmf.view.LimConsultarJogo;
 
 public class LimGerOcorrSelecionarJogo extends LimConsultarJogo
 {
