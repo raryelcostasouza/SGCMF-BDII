@@ -22,8 +22,8 @@ public class LimAdmin extends JFrame
         setTitle("Usuário Administrador");
         setSize(600, 200);
         setLocationRelativeTo(null);
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //setVisible(true);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         add(montaPainel());
 

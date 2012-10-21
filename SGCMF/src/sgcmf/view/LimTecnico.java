@@ -25,8 +25,8 @@ public class LimTecnico extends JFrame
         setTitle("Usuário Técnico da Seleção");
         setSize(400, 400);
         setLocationRelativeTo(null);
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //setVisible(true);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
            
         add(montaPainel());
         
