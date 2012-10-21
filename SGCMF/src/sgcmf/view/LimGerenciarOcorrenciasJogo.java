@@ -17,6 +17,9 @@ import sgcmf.view.table.JTableSGCMF;
 
 public class LimGerenciarOcorrenciasJogo extends JFrame
 {
+	private LimRegistrarGol limRegistrarGol;
+	private LimRegistrarFalta limRegistrarFalta;
+	
 	private final String nameCardPanelGol = "GOL";
 	private final String nameCardPanelFalta = "FALTA";
 	private final String nameCardPanelCartao = "CARTAO";
@@ -27,6 +30,9 @@ public class LimGerenciarOcorrenciasJogo extends JFrame
 	
 	public LimGerenciarOcorrenciasJogo()
 	{
+		limRegistrarGol = new LimRegistrarGol();
+		limRegistrarFalta = new LimRegistrarFalta();
+		
 		setTitle("Gerenciar Ocorrências para o Jogo Selecionado");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		add(montaMainPanel());
@@ -159,6 +165,14 @@ public class LimGerenciarOcorrenciasJogo extends JFrame
 		centerPanelGol.add(jsp,BorderLayout.CENTER);
 		
 		JButton jbRegistrarGol = new JButton("Registrar Novo Gol");
+		jbRegistrarGol.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limRegistrarGol.setVisible(true);
+			}
+		});
 		centerPanelGol.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarGol), BorderLayout.SOUTH);
 			
 		return centerPanelGol;
@@ -175,6 +189,14 @@ public class LimGerenciarOcorrenciasJogo extends JFrame
 		centerPanelFalta.add(jsp,BorderLayout.CENTER);
 		
 		JButton jbRegistrarFalta = new JButton("Registrar Nova Falta");
+		jbRegistrarFalta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limRegistrarFalta.setVisible(true);
+			}
+		});
 		centerPanelFalta.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarFalta), BorderLayout.SOUTH);
 			
 		return centerPanelFalta;
