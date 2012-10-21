@@ -38,9 +38,9 @@ public class LimComiteGestor extends JDialog
 		limConsultaJogo = new LimConsultarJogo();
 		limBuscarJogador = new LimBuscarJogador();
 		limGerOcorrSelecionarJogo = new LimGerOcorrSelecionarJogo(limBuscarJogador);
-		limGerDispPenaltiSelecionarJogo = new LimGerDispPenaltiSelecionarJogo();
+		limGerDispPenaltiSelecionarJogo = new LimGerDispPenaltiSelecionarJogo(limBuscarJogador);
 
-		setTitle("Usuário Comitê Gestor");
+		setTitle("SGCMF | Usuário Comitê Gestor");
 		setSize(700, 400);
 		setLocationRelativeTo(null);
 

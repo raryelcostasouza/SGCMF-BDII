@@ -26,7 +26,7 @@ public class LimLogin extends JFrame
 	{
 		this.ctrMain = ctrMain;
 		
-		setTitle("Login no SGCMF");
+		setTitle("SGCMF | Login");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		add(montaPainel());
