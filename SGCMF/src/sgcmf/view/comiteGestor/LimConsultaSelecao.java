@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,7 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.view.table.JTableSGCMF;
 
-public class LimConsultaSelecao extends JFrame
+public class LimConsultaSelecao extends JDialog
 {
 	public LimConsultaSelecao()
 	{
@@ -21,6 +22,7 @@ public class LimConsultaSelecao extends JFrame
 		
 		add(montaMainPanel());		
 		pack();
+		setModal(true);
 		
 		setLocationRelativeTo(null);
 	}

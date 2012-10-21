@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,7 +18,7 @@ import javax.swing.JTextField;
 import sgcmf.view.LimBuscarJogador;
 import sgcmf.view.UtilView;
 
-public class LimRegistrarCartao extends JFrame
+public class LimRegistrarCartao extends JDialog
 {
 	private LimBuscarJogador limBuscarJogador;
 	
@@ -29,6 +30,7 @@ public class LimRegistrarCartao extends JFrame
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());
+		setModal(true);
 		setSize(360, 170);
 		setLocationRelativeTo(null);
 	}

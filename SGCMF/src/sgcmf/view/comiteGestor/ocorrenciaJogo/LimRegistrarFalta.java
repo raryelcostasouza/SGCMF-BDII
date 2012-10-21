@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,7 +17,7 @@ import javax.swing.JTextField;
 import sgcmf.view.LimBuscarJogador;
 import sgcmf.view.UtilView;
 
-public class LimRegistrarFalta extends JFrame
+public class LimRegistrarFalta extends JDialog
 {
 	private LimBuscarJogador limBuscarJogador;
 	
@@ -27,6 +28,7 @@ public class LimRegistrarFalta extends JFrame
 		setTitle("Registrar Falta");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		add(montaMainPanel());
+		setModal(true);
 		setSize(370,230);
 		setLocationRelativeTo(null);
 	}

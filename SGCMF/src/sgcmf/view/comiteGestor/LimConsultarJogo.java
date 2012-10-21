@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -15,7 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.view.table.JTableSGCMF;
 
-public class LimConsultarJogo extends JFrame
+public class LimConsultarJogo extends JDialog
 {
 	protected JPanel mainPanel;
 	
@@ -30,6 +31,7 @@ public class LimConsultarJogo extends JFrame
 		add(montaMainPanel());
 		pack();
 		
+		setModal(true);
 		setLocationRelativeTo(null);
 	}
 	

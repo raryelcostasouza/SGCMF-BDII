@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,7 +15,7 @@ import javax.swing.JTextField;
 import sgcmf.view.LimBuscarJogador;
 import sgcmf.view.UtilView;
 
-public class LimRegistrarRoubadaBola extends JFrame
+public class LimRegistrarRoubadaBola extends JDialog
 {
 	private LimBuscarJogador limBuscarJogador;
 	
@@ -26,6 +27,7 @@ public class LimRegistrarRoubadaBola extends JFrame
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());
+		setModal(true);
 		setSize(360, 140);
 		setLocationRelativeTo(null);
 	}

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,7 +18,7 @@ import sgcmf.view.LimBuscarJogador;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
-public class LimGerenciarOcorrenciasJogo extends JFrame
+public class LimGerenciarOcorrenciasJogo extends JDialog
 {
 	private LimRegistrarGol limRegistrarGol;
 	private LimRegistrarFalta limRegistrarFalta;
@@ -45,6 +46,7 @@ public class LimGerenciarOcorrenciasJogo extends JFrame
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		add(montaMainPanel());
 		
+		setModal(true);
 		setSize(600,500);
 		setLocationRelativeTo(null);
 	}
