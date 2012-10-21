@@ -35,8 +35,7 @@ public class LimComiteGestor extends JFrame
 		setSize(700,400);	
 		setLocationRelativeTo(null);
 		
-		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());
 	}
@@ -111,16 +110,5 @@ public class LimComiteGestor extends JFrame
 		gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));
 		
 		return gridPanel;
-	}
-	
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run()
-			{
-				new LimComiteGestor();
-			}
-		});
 	}
 }
