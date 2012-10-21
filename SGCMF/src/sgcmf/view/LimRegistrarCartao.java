@@ -21,7 +21,7 @@ public class LimRegistrarCartao extends JFrame
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());
-		setSize(365, 170);
+		setSize(360, 170);
 		setLocationRelativeTo(null);
 	}
 	
