@@ -18,7 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import sgcmf.control.CtrComiteGestor;
-import sgcmf.view.LimBuscarJogador;
 import sgcmf.view.UtilView;
 
 public class LimComiteGestor extends JDialog

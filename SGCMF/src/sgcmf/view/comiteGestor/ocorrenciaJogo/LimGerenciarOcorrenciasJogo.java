@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import sgcmf.view.LimBuscarJogador;
+import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
