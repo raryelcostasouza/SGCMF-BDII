@@ -17,6 +17,8 @@ import sgcmf.view.table.JTableSGCMF;
 
 public class LimConsultarJogo extends JFrame
 {
+	protected JPanel mainPanel;
+	
 	private JPanel northEastPanel;
 	private final String nameCardPanelSearchBox = "SEARCH_BOX";
 	private final String nameCardPanelComboBox = "COMBO_BOX";
@@ -33,7 +35,7 @@ public class LimConsultarJogo extends JFrame
 	
 	private JPanel montaMainPanel()
 	{
-		JPanel mainPanel = new JPanel(new BorderLayout());
+		mainPanel = new JPanel(new BorderLayout());
 		
 		mainPanel.add(montaNorthPanel(), BorderLayout.NORTH);
 		mainPanel.add(montaCenterPanel(), BorderLayout.CENTER);
