@@ -3,6 +3,7 @@ package sgcmf.view.comiteGestor;
 import sgcmf.view.comiteGestor.disputaPenalti.LimGerDispPenaltiSelecionarJogo;
 import sgcmf.view.comiteGestor.ocorrenciaJogo.LimGerOcorrSelecionarJogo;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import sgcmf.control.CtrComiteGestor;
 import sgcmf.view.UtilView;
 
@@ -41,7 +43,7 @@ public class LimComiteGestor extends JDialog
 		limGerDispPenaltiSelecionarJogo = new LimGerDispPenaltiSelecionarJogo(limBuscarJogador);
 
 		setTitle("SGCMF | Usuário Comitê Gestor");
-		setSize(700, 400);
+		setSize(570, 480);
 		setLocationRelativeTo(null);
 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -64,7 +66,9 @@ public class LimComiteGestor extends JDialog
 
 		mainPanel.add(montaGridPanel(), BorderLayout.CENTER);
 
-		JButton jbLogout = new JButton("Logout");
+		ImageIcon iconLogout = new ImageIcon("img/logout.png");
+		JButton jbLogout = new JButton("Logout", iconLogout);
+		
 		jbLogout.addActionListener(new ActionListener() {
 
 			@Override
@@ -81,19 +85,46 @@ public class LimComiteGestor extends JDialog
 
 	private JPanel montaGridPanel()
 	{
+		Dimension buttonDimension = new Dimension(180,180);
 		JPanel gridPanel = new JPanel(new GridLayout(2, 3));
 
-		ImageIcon imgIcon = new ImageIcon("img/error.png");
-		JButton jbConsultarSelecoes = new JButton("Consultar Seleções", imgIcon);
+		ImageIcon iconSelecao = new ImageIcon("img/selecao.png");
+		ImageIcon iconJogo = new ImageIcon("img/jogo.png");
+		ImageIcon iconOcorrenciaJogo = new ImageIcon("img/ocorrencia-jogo.png");
+		ImageIcon iconPenalti = new ImageIcon("img/penalti.png");
+		ImageIcon iconRelatorio = new ImageIcon("img/relatorio.png");
+		ImageIcon iconTabela = new ImageIcon("img/tabela.png");
+		
+		JButton jbConsultarSelecoes = new JButton("Consultar Seleções", iconSelecao);
 		jbConsultarSelecoes.setVerticalTextPosition(JButton.BOTTOM);
 		jbConsultarSelecoes.setHorizontalTextPosition(JButton.CENTER);
+		jbConsultarSelecoes.setPreferredSize(buttonDimension);
 
-		JButton jbConsultarJogos = new JButton("Consultar Jogos");
-		JButton jbGerOcorrenciaJogo = new JButton("Gerenciar Ocorrências de Jogo");
+		JButton jbConsultarJogos = new JButton("Consultar Jogos", iconJogo);
+		jbConsultarJogos.setVerticalTextPosition(JButton.BOTTOM);
+		jbConsultarJogos.setHorizontalTextPosition(JButton.CENTER);
+		jbConsultarJogos.setPreferredSize(buttonDimension);
+		
+		JButton jbGerOcorrenciaJogo = new JButton("<html>Gerenciar Ocorrências<br><center>de Jogo</center></html>", iconOcorrenciaJogo);
+		jbGerOcorrenciaJogo.setVerticalTextPosition(JButton.BOTTOM);
+		jbGerOcorrenciaJogo.setHorizontalTextPosition(JButton.CENTER);
+		jbGerOcorrenciaJogo.setHorizontalAlignment(SwingConstants.CENTER);
+		jbGerOcorrenciaJogo.setPreferredSize(buttonDimension);
 
-		JButton jbGerDisputaPenaltis = new JButton("Gerenciar Disputa de Pênaltis");
-		JButton jbRelatorios = new JButton("Relatórios");
-		JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato");
+		JButton jbGerDisputaPenaltis = new JButton("<html>Gerenciar Disputa<br><center>de Pênaltis</center></html>", iconPenalti);
+		jbGerDisputaPenaltis.setVerticalTextPosition(JButton.BOTTOM);
+		jbGerDisputaPenaltis.setHorizontalTextPosition(JButton.CENTER);
+		jbGerDisputaPenaltis.setPreferredSize(buttonDimension);
+		
+		JButton jbRelatorios = new JButton("Relatórios", iconRelatorio);
+		jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
+		jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
+		jbRelatorios.setPreferredSize(buttonDimension);
+		
+		JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", iconTabela);
+		jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
+		jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
+		jbTabelaCampeonato.setPreferredSize(buttonDimension);
 
 		jbConsultarSelecoes.addActionListener(new ActionListener()
 		{

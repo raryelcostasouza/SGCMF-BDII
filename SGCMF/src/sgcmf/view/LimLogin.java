@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,7 +39,8 @@ public class LimLogin extends JFrame
 	{
 		JPanel jpPrincipal = new JPanel(new BorderLayout());
 		JPanel jpAux = new JPanel(new GridLayout(2, 1));
-
+		
+		JLabel jlLogo = new JLabel(new ImageIcon("img/logo.png"));
 
 		JLabel jlLogin = new JLabel("Login:");
 		UtilView.alinhaLabel(jlLogin);
@@ -67,6 +69,7 @@ public class LimLogin extends JFrame
 
 		this.add(jpAux, BorderLayout.CENTER);
 
+		jpPrincipal.add(jlLogo, BorderLayout.NORTH);
 		jpPrincipal.add(jpAux, BorderLayout.CENTER);
 		jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbLogin), BorderLayout.SOUTH);
 
