@@ -158,18 +158,5 @@ public class LimConsultarJogo extends JFrame
 	{
 		CardLayout cl = (CardLayout)northEastPanel.getLayout();
 		cl.show(northEastPanel, nameCardPanelSearchBox);
-	}
-	
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run()
-			{
-				new LimConsultarJogo();
-			}
-		});
-	}
-	
+	}	
 }
