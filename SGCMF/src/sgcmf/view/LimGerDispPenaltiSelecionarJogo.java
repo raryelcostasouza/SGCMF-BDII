@@ -9,11 +9,15 @@ import javax.swing.JPanel;
 
 public class LimGerDispPenaltiSelecionarJogo extends LimConsultarJogo
 {
+	private LimGerDisputaPenalti limGerDisputaPenalti;
+	
 	public LimGerDispPenaltiSelecionarJogo()
 	{
 		super();
 		setTitle("Gerenciar Disputa de Pênaltis: Selecione um Jogo");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
+		
+		limGerDisputaPenalti = new LimGerDisputaPenalti();
 		
 		mainPanel.add(montaSouthPanel(), BorderLayout.SOUTH);
 	}
@@ -29,7 +33,7 @@ public class LimGerDispPenaltiSelecionarJogo extends LimConsultarJogo
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				//.setVisible(true);
+				limGerDisputaPenalti.setVisible(true);
 			}
 		});
 		
