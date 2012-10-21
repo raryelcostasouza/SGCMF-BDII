@@ -38,7 +38,7 @@ public class LimRegistrarSubstituicao extends JFrame
 		UtilView.alinhaLabel(jlJogadorSaiu);
 		JLabel jlJogadorEntrou = new JLabel("Jogador Entrou:");
 		UtilView.alinhaLabel(jlJogadorEntrou);
-		JLabel jlMotivo = new JLabel("Motivo");
+		JLabel jlMotivo = new JLabel("Motivo:");
 		UtilView.alinhaLabel(jlMotivo);
 		
 		JTextField jtfInstanteTempo = new JTextField(10);
