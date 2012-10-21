@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,7 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.view.table.JTableSGCMF;
 
-public class LimBuscarJogador extends JFrame
+public class LimBuscarJogador extends JDialog
 {
 	public LimBuscarJogador()
 	{
@@ -20,6 +21,7 @@ public class LimBuscarJogador extends JFrame
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());
+		setModal(true);
 		setSize(500, 400);
 		setLocationRelativeTo(null);
 	}
