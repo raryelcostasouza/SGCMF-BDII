@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import sgcmf.view.LimBuscarJogador;
-import sgcmf.view.LimConsultarJogo;
+import sgcmf.view.comiteGestor.LimConsultarJogo;
 
 public class LimGerOcorrSelecionarJogo extends LimConsultarJogo
 {

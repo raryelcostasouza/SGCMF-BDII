@@ -1,4 +1,4 @@
-package sgcmf.view;
+package sgcmf.view.comiteGestor.disputaPenalti;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import sgcmf.view.UtilView;
 
 public class LimLancarRodadaPenaltis extends JFrame
 {

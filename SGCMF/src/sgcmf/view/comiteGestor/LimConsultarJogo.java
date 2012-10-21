@@ -1,4 +1,4 @@
-package sgcmf.view; 
+package sgcmf.view.comiteGestor; 
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;

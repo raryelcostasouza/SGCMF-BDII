@@ -1,5 +1,6 @@
-package sgcmf.view;
+package sgcmf.view.comiteGestor;
 
+import sgcmf.view.comiteGestor.disputaPenalti.LimGerDispPenaltiSelecionarJogo;
 import sgcmf.view.comiteGestor.ocorrenciaJogo.LimGerOcorrSelecionarJogo;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -11,6 +12,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import sgcmf.view.LimBuscarJogador;
+import sgcmf.view.UtilView;
 
 public class LimComiteGestor extends JFrame
 {
