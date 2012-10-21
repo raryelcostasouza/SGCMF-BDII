@@ -26,12 +26,12 @@ public class LimLogin extends JFrame
 	{
 		this.ctrMain = ctrMain;
 		
-		setTitle("Usuário Administrador");
-		setSize(300, 300);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(HIDE_ON_CLOSE);
-
+		setTitle("Login no SGCMF");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		add(montaPainel());
+		pack();
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel montaPainel()
