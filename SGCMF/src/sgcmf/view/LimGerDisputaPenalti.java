@@ -2,6 +2,8 @@ package sgcmf.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,8 +14,12 @@ import sgcmf.view.table.JTableSGCMF;
 
 public class LimGerDisputaPenalti extends JFrame
 {
+	private LimLancarRodadaPenaltis limLancarRodadaPenalti;
+	
 	public LimGerDisputaPenalti()
 	{
+		limLancarRodadaPenalti = new LimLancarRodadaPenaltis();
+		
 		setTitle("Gerenciar Disputa de Pênaltis para o Jogo Selecionado");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
@@ -62,6 +68,15 @@ public class LimGerDisputaPenalti extends JFrame
 		
 		JButton jbLancar = new JButton("Lançar Novo Resultado de Rodada");
 		JButton jbRemover = new JButton("Remover Lançamento");
+		
+		jbLancar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limLancarRodadaPenalti.setVisible(true);
+			}
+		});
 		
 		southPanel.add(jbLancar);
 		southPanel.add(jbRemover);
