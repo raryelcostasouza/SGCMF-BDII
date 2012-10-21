@@ -18,11 +18,10 @@ public class LimRegistrarGol extends JFrame
 	public LimRegistrarGol()
 	{
 		setTitle("Registrar Gol");
-		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());
-		pack();
+		setSize(370,275);
 		setLocationRelativeTo(null);
 	}
 	
