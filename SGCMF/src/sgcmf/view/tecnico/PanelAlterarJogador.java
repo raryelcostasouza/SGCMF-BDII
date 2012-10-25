@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sgcmf.view;
+package sgcmf.view.tecnico;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
 /**

@@ -2,11 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sgcmf.view;
+package sgcmf.view.tecnico;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -17,13 +15,17 @@ import javax.swing.event.ChangeListener;
  */
 public class LimGerenciarJogador extends JFrame
 {
-    private PanelCadastrarJogador pcj;
-    private PanelAlterarJogador paj;
+    private PanelCadastrarJogador pCadastrarJogador;
+    private PanelAlterarJogador pAlterarJogador;
+    private PanelRemoverJogador pRemoverJogador;
+    private PanelConsultarJogador pConsultarJogador;
     
     public LimGerenciarJogador()
     {
-        pcj = new PanelCadastrarJogador();
-        paj = new PanelAlterarJogador();
+        pCadastrarJogador = new PanelCadastrarJogador();
+        pAlterarJogador = new PanelAlterarJogador();
+        pRemoverJogador = new PanelRemoverJogador();
+        pConsultarJogador = new PanelConsultarJogador();
         setTitle("Gerenciar Jogadores");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
@@ -49,13 +51,23 @@ public class LimGerenciarJogador extends JFrame
                     setSize(700,400);
                     setLocationRelativeTo(null);
                 }
+                else if (tituloAba.equals("Remover"))
+                {
+                    setSize(700,400);
+                    setLocationRelativeTo(null);
+                }
+                else if (tituloAba.equals("Consultar"))
+                {
+                    setSize(700,400);
+                    setLocationRelativeTo(null);
+                }
             }
         });
 
-        jtp.add(pcj, "Cadastrar");
-        jtp.add(paj,"Alterar");
-        jtp.add(null, "Remover");
-        jtp.add(null, "Consultar");
+        jtp.add(pCadastrarJogador, "Cadastrar");
+        jtp.add(pAlterarJogador,"Alterar");
+        jtp.add(pRemoverJogador, "Remover");
+        jtp.add(pConsultarJogador, "Consultar");
         
         return jtp;
     }
