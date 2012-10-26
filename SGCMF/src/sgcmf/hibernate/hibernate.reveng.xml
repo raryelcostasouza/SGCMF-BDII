@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="sgcmf" match-schema="public"/>
+  <table-filter match-name="jogo"/>
+  <table-filter match-name="gol"/>
+  <table-filter match-name="rodadadepenaltis"/>
+  <table-filter match-name="falta"/>
+  <table-filter match-name="jogador"/>
+  <table-filter match-name="escalacao"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="ocorrencia"/>
+  <table-filter match-name="substituicao"/>
+  <table-filter match-name="roubadadebola"/>
+  <table-filter match-name="selecao"/>
+  <table-filter match-name="cartao"/>
+</hibernate-reverse-engineering>

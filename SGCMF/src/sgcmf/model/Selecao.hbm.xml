@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2012 6:12:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sgcmf.model.Selecao" table="selecao" schema="public">
+        <id name="id" type="short">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuario" class="sgcmf.model.Usuario" fetch="select">
+            <column name="idusuariotecnico" not-null="true" />
+        </many-to-one>
+        <property name="pais" type="string">
+            <column name="pais" not-null="true" unique="true" />
+        </property>
+        <property name="caminhoimgbandeira" type="string">
+            <column name="caminhoimgbandeira" not-null="true" />
+        </property>
+        <set name="escalacaos" inverse="true">
+            <key>
+                <column name="idselecao" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Escalacao" />
+        </set>
+        <set name="jogosForIdselecaoii" inverse="true">
+            <key>
+                <column name="idselecaoii" />
+            </key>
+            <one-to-many class="sgcmf.model.Jogo" />
+        </set>
+        <set name="jogosForIdselecaoi" inverse="true">
+            <key>
+                <column name="idselecaoi" />
+            </key>
+            <one-to-many class="sgcmf.model.Jogo" />
+        </set>
+        <set name="jogadors" inverse="true">
+            <key>
+                <column name="idselecao" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Jogador" />
+        </set>
+    </class>
+</hibernate-mapping>

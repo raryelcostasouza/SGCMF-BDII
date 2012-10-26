@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2012 6:12:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sgcmf.model.Escalacao" table="escalacao" schema="public">
+        <id name="id" type="short">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="selecao" class="sgcmf.model.Selecao" fetch="select">
+            <column name="idselecao" not-null="true" />
+        </many-to-one>
+        <many-to-one name="jogo" class="sgcmf.model.Jogo" fetch="select">
+            <column name="idjogo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="jogador" class="sgcmf.model.Jogador" fetch="select">
+            <column name="idjogador" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

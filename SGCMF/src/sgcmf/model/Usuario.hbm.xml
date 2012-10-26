@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2012 6:12:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sgcmf.model.Usuario" table="usuario" schema="public">
+        <id name="id" type="short">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" not-null="true" />
+        </property>
+        <property name="cpf" type="string">
+            <column name="cpf" length="14" not-null="true" unique="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" not-null="true" unique="true" />
+        </property>
+        <property name="perfil" type="serializable">
+            <column name="perfil" not-null="true" />
+        </property>
+        <property name="login" type="string">
+            <column name="login" not-null="true" unique="true" />
+        </property>
+        <property name="senha" type="string">
+            <column name="senha" not-null="true" />
+        </property>
+        <set name="selecaos" inverse="true">
+            <key>
+                <column name="idusuariotecnico" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Selecao" />
+        </set>
+    </class>
+</hibernate-mapping>

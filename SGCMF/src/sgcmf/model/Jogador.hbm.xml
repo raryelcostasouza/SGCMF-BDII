@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2012 6:12:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sgcmf.model.Jogador" table="jogador" schema="public">
+        <id name="id" type="short">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="selecao" class="sgcmf.model.Selecao" fetch="select">
+            <column name="idselecao" not-null="true" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" not-null="true" />
+        </property>
+        <property name="altura" type="big_decimal">
+            <column name="altura" precision="3" not-null="true" />
+        </property>
+        <property name="ncamisa" type="short">
+            <column name="ncamisa" not-null="true" />
+        </property>
+        <property name="datanasc" type="date">
+            <column name="datanasc" length="13" not-null="true" />
+        </property>
+        <property name="posicao" type="serializable">
+            <column name="posicao" not-null="true" />
+        </property>
+        <property name="titular" type="boolean">
+            <column name="titular" not-null="true" />
+        </property>
+        <set name="gols" inverse="true">
+            <key>
+                <column name="idjogadorassistencia" />
+            </key>
+            <one-to-many class="sgcmf.model.Gol" />
+        </set>
+        <set name="substituicaosForIdjogadorentrou" inverse="true">
+            <key>
+                <column name="idjogadorentrou" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Substituicao" />
+        </set>
+        <set name="substituicaosForIdjogadorsaiu" inverse="true">
+            <key>
+                <column name="idjogadorsaiu" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Substituicao" />
+        </set>
+        <set name="escalacaos" inverse="true">
+            <key>
+                <column name="idjogador" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Escalacao" />
+        </set>
+        <set name="faltas" inverse="true">
+            <key>
+                <column name="idjogador" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Falta" />
+        </set>
+        <set name="cartaos" inverse="true">
+            <key>
+                <column name="idjogador" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Cartao" />
+        </set>
+        <set name="ocorrencias" inverse="false" table="roubadadebola">
+            <key>
+                <column name="idjogadorladrao" not-null="true" />
+            </key>
+            <many-to-many entity-name="sgcmf.model.Ocorrencia">
+                <column name="idoc" not-null="true" unique="true" />
+            </many-to-many>
+        </set>
+        <set name="rodadadepenaltisesForIdjogadorcobrancai" inverse="true">
+            <key>
+                <column name="idjogadorcobrancai" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Rodadadepenaltis" />
+        </set>
+        <set name="rodadadepenaltisesForIdjogadorcobrancaii" inverse="true">
+            <key>
+                <column name="idjogadorcobrancaii" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Rodadadepenaltis" />
+        </set>
+    </class>
+</hibernate-mapping>

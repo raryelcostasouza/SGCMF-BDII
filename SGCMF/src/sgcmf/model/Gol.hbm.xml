@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2012 6:12:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sgcmf.model.Gol" table="gol" schema="public">
+        <id name="idoc" type="short">
+            <column name="idoc" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ocorrencia" class="sgcmf.model.Ocorrencia" update="false" insert="false" fetch="select">
+            <column name="idoc" not-null="true" unique="true" />
+        </many-to-one>
+        <many-to-one name="jogador" class="sgcmf.model.Jogador" fetch="select">
+            <column name="idjogadorassistencia" />
+        </many-to-one>
+        <property name="idjogadorautor" type="short">
+            <column name="idjogadorautor" not-null="true" />
+        </property>
+        <property name="tipo" type="serializable">
+            <column name="tipo" not-null="true" />
+        </property>
+        <property name="modo" type="serializable">
+            <column name="modo" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

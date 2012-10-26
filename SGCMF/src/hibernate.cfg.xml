@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost/sgcmf</property>
+    <property name="hibernate.connection.username">javaappsgcmf</property>
+    <property name="hibernate.connection.password">java</property>
+    <mapping resource="sgcmf/model/Jogador.hbm.xml"/>
+    <mapping resource="sgcmf/model/Jogo.hbm.xml"/>
+    <mapping resource="sgcmf/model/Selecao.hbm.xml"/>
+    <mapping resource="sgcmf/model/Gol.hbm.xml"/>
+    <mapping resource="sgcmf/model/Escalacao.hbm.xml"/>
+    <mapping resource="sgcmf/model/Ocorrencia.hbm.xml"/>
+    <mapping resource="sgcmf/model/Substituicao.hbm.xml"/>
+    <mapping resource="sgcmf/model/Usuario.hbm.xml"/>
+    <mapping resource="sgcmf/model/Falta.hbm.xml"/>
+    <mapping resource="sgcmf/model/Cartao.hbm.xml"/>
+    <mapping resource="sgcmf/model/Rodadadepenaltis.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

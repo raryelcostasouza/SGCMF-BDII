@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2012 6:12:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sgcmf.model.Jogo" table="jogo" schema="public">
+        <id name="id" type="short">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="selecaoByIdselecaoi" class="sgcmf.model.Selecao" fetch="select">
+            <column name="idselecaoi" />
+        </many-to-one>
+        <many-to-one name="selecaoByIdselecaoii" class="sgcmf.model.Selecao" fetch="select">
+            <column name="idselecaoii" />
+        </many-to-one>
+        <property name="tipo" type="serializable">
+            <column name="tipo" not-null="true" />
+        </property>
+        <property name="cidade" type="string">
+            <column name="cidade" not-null="true" />
+        </property>
+        <property name="nomeestadio" type="string">
+            <column name="nomeestadio" not-null="true" />
+        </property>
+        <property name="prorrogacao" type="boolean">
+            <column name="prorrogacao" not-null="true" />
+        </property>
+        <property name="datahora" type="timestamp">
+            <column name="datahora" length="35" not-null="true" />
+        </property>
+        <set name="escalacaos" inverse="true">
+            <key>
+                <column name="idjogo" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Escalacao" />
+        </set>
+        <set name="ocorrencias" inverse="true">
+            <key>
+                <column name="idjogo" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Ocorrencia" />
+        </set>
+    </class>
+</hibernate-mapping>

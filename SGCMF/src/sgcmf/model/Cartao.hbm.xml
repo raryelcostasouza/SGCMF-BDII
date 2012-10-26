@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2012 6:12:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sgcmf.model.Cartao" table="cartao" schema="public">
+        <id name="idoc" type="short">
+            <column name="idoc" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ocorrencia" class="sgcmf.model.Ocorrencia" update="false" insert="false" fetch="select">
+            <column name="idoc" not-null="true" unique="true" />
+        </many-to-one>
+        <many-to-one name="jogador" class="sgcmf.model.Jogador" fetch="select">
+            <column name="idjogador" not-null="true" />
+        </many-to-one>
+        <property name="cor" type="serializable">
+            <column name="cor" not-null="true" />
+        </property>
+        <set name="faltas" inverse="true">
+            <key>
+                <column name="idcartao" />
+            </key>
+            <one-to-many class="sgcmf.model.Falta" />
+        </set>
+    </class>
+</hibernate-mapping>

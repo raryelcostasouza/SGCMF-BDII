@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2012 6:12:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="sgcmf.model.Substituicao" table="substituicao" schema="public">
+        <id name="idoc" type="short">
+            <column name="idoc" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="jogadorByIdjogadorentrou" class="sgcmf.model.Jogador" fetch="select">
+            <column name="idjogadorentrou" not-null="true" />
+        </many-to-one>
+        <many-to-one name="jogadorByIdjogadorsaiu" class="sgcmf.model.Jogador" fetch="select">
+            <column name="idjogadorsaiu" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ocorrencia" class="sgcmf.model.Ocorrencia" update="false" insert="false" fetch="select">
+            <column name="idoc" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="motivo" type="serializable">
+            <column name="motivo" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
