@@ -45,6 +45,7 @@ public class JTableSGCMF extends JTable
 
     public void preencheTabela(String[][] dados)
     {
-        setModel(new DefaultTableModelSGCMF(dados,nomeColunas));
+		DefaultTableModelSGCMF dm = (DefaultTableModelSGCMF) getModel();
+		dm.setDataVector(dados, nomeColunas);	
     }
 }
