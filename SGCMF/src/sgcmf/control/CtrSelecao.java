@@ -12,22 +12,13 @@ public class CtrSelecao
 		GeneralDAO<Selecao> gdao;
 		ArrayList<Selecao> alSelecao;
 		String[][] dadosSelecoes;
-		Selecao s;
 		
 		gdao = new GeneralDAO<Selecao>();
 		alSelecao = gdao.listaTodos("Selecao");
 		
-		dadosSelecoes = new String[alSelecao.size()][3];
-		for (int i = 0; i < alSelecao.size(); i++)
-		{
-			s = alSelecao.get(i);
-			dadosSelecoes[i][0] = s.getPais();
-			dadosSelecoes[i][1] = s.getUsuario().getNome();			
-			dadosSelecoes[i][2] = s.getCaminhoimgbandeira();			
-		}
+		dadosSelecoes = arrayList2StringMatrix(alSelecao);
 		
-		gdao.fecharSessao();
-		
+		gdao.fecharSessao();	
 		return dadosSelecoes;
 	}
 	
@@ -36,22 +27,13 @@ public class CtrSelecao
 		SelecaoDAO sdao;
 		ArrayList<Selecao> alSelecao;
 		String[][] dadosSelecoes;
-		Selecao s;
 		
 		sdao = new SelecaoDAO();
 		alSelecao = sdao.querySelecaoByNomePais(pais);
 		
-		dadosSelecoes = new String[alSelecao.size()][3];
-		for (int i = 0; i < alSelecao.size(); i++)
-		{
-			s = alSelecao.get(i);
-			dadosSelecoes[i][0] = s.getPais();
-			dadosSelecoes[i][1] = s.getUsuario().getNome();			
-			dadosSelecoes[i][2] = s.getCaminhoimgbandeira();	
-		}
-		
+		dadosSelecoes = arrayList2StringMatrix(alSelecao);
+
 		sdao.fecharSessao();
-		
 		return dadosSelecoes;
 	}
 	
@@ -60,10 +42,19 @@ public class CtrSelecao
 		String[][] dadosSelecoes;
 		SelecaoDAO sdao;
 		ArrayList<Selecao> alSelecao;
-		Selecao s;
 		
 		sdao = new SelecaoDAO();
 		alSelecao = sdao.querySelecaoByNomeTecnico(nomeTecnico);
+		dadosSelecoes = arrayList2StringMatrix(alSelecao);
+		
+		sdao.fecharSessao();
+		return dadosSelecoes;
+	}
+	
+	private String[][] arrayList2StringMatrix(ArrayList<Selecao> alSelecao)
+	{
+		String[][] dadosSelecoes;
+		Selecao s;
 		
 		dadosSelecoes = new String[alSelecao.size()][3];
 		for (int i = 0; i < alSelecao.size(); i++)
@@ -74,8 +65,7 @@ public class CtrSelecao
 			dadosSelecoes[i][2] = s.getCaminhoimgbandeira();			
 		}
 		
-		sdao.fecharSessao();
-		
 		return dadosSelecoes;
 	}
+			
 }
