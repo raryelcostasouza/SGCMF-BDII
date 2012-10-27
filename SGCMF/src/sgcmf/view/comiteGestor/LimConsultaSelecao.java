@@ -2,6 +2,9 @@ package sgcmf.view.comiteGestor;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JDialog;
@@ -11,12 +14,21 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.model.Selecao;
 import sgcmf.view.table.JTableSGCMF;
 
 public class LimConsultaSelecao extends JDialog
 {
-	public LimConsultaSelecao()
+	private LimComiteGestor limComiteGestor;
+	
+	private JRadioButton jrbPais;
+	private JRadioButton jrbNomeTecnico;	
+	private JTableSGCMF jt;
+	
+	public LimConsultaSelecao(LimComiteGestor limComiteGestor)
 	{
+		this.limComiteGestor = limComiteGestor;
+		
 		setTitle("Consulta Seleção");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
@@ -52,9 +64,9 @@ public class LimConsultaSelecao extends JDialog
 	{
 		JPanel northWestPanel = new JPanel();
 		
-		JRadioButton jrbPais = new JRadioButton("País");
+		jrbPais = new JRadioButton("País");
 		jrbPais.setSelected(true);
-		JRadioButton jrbNomeTecnico = new JRadioButton("Nome Técnico");
+		jrbNomeTecnico = new JRadioButton("Nome Técnico");
 		
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(jrbPais);
@@ -72,7 +84,15 @@ public class LimConsultaSelecao extends JDialog
 		JPanel northEastPanel= new JPanel();
 		northEastPanel.setBorder(BorderFactory.createTitledBorder("Busca:"));
 		
-		JTextField jtfSearchBox = new JTextField(15);
+		final JTextField jtfSearchBox = new JTextField(15);
+		jtfSearchBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				pesquisa(jtfSearchBox.getText());
+			}
+		});
 		
 		northEastPanel.add(jtfSearchBox);
 		
@@ -83,9 +103,34 @@ public class LimConsultaSelecao extends JDialog
 	{
 		String[] nomesColunas = {"País", "Técnico", "Bandeira"};
 		
-		JTableSGCMF jt = new JTableSGCMF(null, nomesColunas);	
+		jt = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jt,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		return jsp;		
+	}
+	
+	public void ativaTela()
+	{		
+		String[][] dadosSelecoes;
+		
+		dadosSelecoes = limComiteGestor.getCtrComiteGestor().querySelecaoTodos();
+		jt.preencheTabela(dadosSelecoes);
+		
+		setVisible(true);
+	}
+	
+	private void pesquisa(String chavePesquisa)
+	{
+		String[][] dadosSelecoes;
+		
+		if (jrbPais.isSelected())
+		{
+			dadosSelecoes = limComiteGestor.getCtrComiteGestor().querySelecaoByNomePais(chavePesquisa);
+		}
+		else
+		{
+			dadosSelecoes = limComiteGestor.getCtrComiteGestor().querySelecaoByNomeTecnico(chavePesquisa);
+		}
+		jt.preencheTabela(dadosSelecoes);		
 	}
 }
