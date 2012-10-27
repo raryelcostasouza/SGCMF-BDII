@@ -1,33 +1,29 @@
 package sgcmf.view.comiteGestor;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import sgcmf.model.Selecao;
+import sgcmf.control.CtrSelecao;
 import sgcmf.view.table.JTableSGCMF;
 
 public class LimConsultaSelecao extends JDialog
 {
-	private LimComiteGestor limComiteGestor;
+	private CtrSelecao ctrSelecao;
 	
 	private JRadioButton jrbPais;
 	private JRadioButton jrbNomeTecnico;	
 	private JTableSGCMF jt;
 	
-	public LimConsultaSelecao(LimComiteGestor limComiteGestor)
+	public LimConsultaSelecao(CtrSelecao ctrSelecao)
 	{
-		this.limComiteGestor = limComiteGestor;
+		this.ctrSelecao = ctrSelecao;
 		
 		setTitle("Consulta Seleção");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -113,7 +109,7 @@ public class LimConsultaSelecao extends JDialog
 	{		
 		String[][] dadosSelecoes;
 		
-		dadosSelecoes = limComiteGestor.getCtrComiteGestor().querySelecaoTodos();
+		dadosSelecoes = ctrSelecao.querySelecaoTodos();
 		jt.preencheTabela(dadosSelecoes);
 		
 		setVisible(true);
@@ -125,11 +121,11 @@ public class LimConsultaSelecao extends JDialog
 		
 		if (jrbPais.isSelected())
 		{
-			dadosSelecoes = limComiteGestor.getCtrComiteGestor().querySelecaoByNomePais(chavePesquisa);
+			dadosSelecoes = ctrSelecao.querySelecaoByNomePais(chavePesquisa);
 		}
 		else
 		{
-			dadosSelecoes = limComiteGestor.getCtrComiteGestor().querySelecaoByNomeTecnico(chavePesquisa);
+			dadosSelecoes = ctrSelecao.querySelecaoByNomeTecnico(chavePesquisa);
 		}
 		jt.preencheTabela(dadosSelecoes);		
 	}

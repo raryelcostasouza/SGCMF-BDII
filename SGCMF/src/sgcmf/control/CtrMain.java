@@ -1,19 +1,25 @@
 package sgcmf.control;
 
 import javax.swing.JOptionPane;
-import sgcmf.model.dao.GeneralDAO;
 import sgcmf.view.LimLogin;
 
 public class CtrMain
 {
     private LimLogin limLogin;
-    private CtrAdmin ctrAdmin;
+    
+	private CtrAdmin ctrAdmin;
     private CtrComiteGestor ctrComiteGestor;
     private CtrTecnico ctrTecnico;
     private CtrEntusiasta ctrEntusiasta;
+	
+	private CtrJogo ctrJogo;
+	private CtrSelecao ctrSelecao;
 
     public CtrMain()
     {
+		ctrJogo = new CtrJogo();
+		ctrSelecao = new CtrSelecao();
+		
         ctrAdmin = new CtrAdmin();
         ctrComiteGestor = new CtrComiteGestor(this);
         ctrTecnico = new CtrTecnico(this);
@@ -55,4 +61,14 @@ public class CtrMain
             JOptionPane.showMessageDialog(null, "Login inválido!", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }
+	
+	public CtrJogo getCtrJogo()
+	{
+		return ctrJogo;
+	}
+
+	public CtrSelecao getCtrSelecao()
+	{
+		return ctrSelecao;
+	}
 }

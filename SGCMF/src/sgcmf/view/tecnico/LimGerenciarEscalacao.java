@@ -16,7 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import sgcmf.control.CtrJogo;
 import sgcmf.view.UtilView;
+import sgcmf.view.comiteGestor.LimComiteGestor;
 import sgcmf.view.comiteGestor.LimConsultarJogo;
 
 /**
@@ -26,9 +28,10 @@ import sgcmf.view.comiteGestor.LimConsultarJogo;
 public class LimGerenciarEscalacao extends JFrame
 {
     private LimConsultarJogo limConsultarJogo;
-    public LimGerenciarEscalacao()
+	
+    public LimGerenciarEscalacao(CtrJogo ctrJogo)
     {
-        limConsultarJogo = new LimConsultarJogo();
+        limConsultarJogo = new LimConsultarJogo(ctrJogo);
         setVisible(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(500, 400);

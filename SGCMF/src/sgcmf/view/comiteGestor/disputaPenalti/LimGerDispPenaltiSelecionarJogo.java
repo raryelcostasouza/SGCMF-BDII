@@ -1,11 +1,11 @@
 package sgcmf.view.comiteGestor.disputaPenalti;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import sgcmf.control.CtrJogo;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.comiteGestor.LimConsultarJogo;
 
@@ -13,9 +13,10 @@ public class LimGerDispPenaltiSelecionarJogo extends LimConsultarJogo
 {
 	private LimGerDisputaPenalti limGerDisputaPenalti;
 	
-	public LimGerDispPenaltiSelecionarJogo(LimBuscarJogador limBuscarJogador)
+	public LimGerDispPenaltiSelecionarJogo(CtrJogo ctrJogo, LimBuscarJogador limBuscarJogador)
 	{
-		super();
+		super(ctrJogo);
+		
 		setTitle("Gerenciar Disputa de Pênaltis: Selecione um Jogo");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		

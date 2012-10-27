@@ -10,7 +10,7 @@ public class CtrTecnico
     public CtrTecnico(CtrMain ctrMain)
     {
         this.ctrMain = ctrMain;
-        limTecnico = new LimTecnico(this);
+        limTecnico = new LimTecnico(this, ctrMain.getCtrJogo());
     }
 
     public void ativaTela()

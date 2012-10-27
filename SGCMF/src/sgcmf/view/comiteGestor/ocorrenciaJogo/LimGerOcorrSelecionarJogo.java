@@ -6,16 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import sgcmf.control.CtrJogo;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
+import sgcmf.view.comiteGestor.LimComiteGestor;
 import sgcmf.view.comiteGestor.LimConsultarJogo;
 
 public class LimGerOcorrSelecionarJogo extends LimConsultarJogo
 {
 	private LimGerenciarOcorrenciasJogo limGerenciarOcorrenciasJogo;
 	
-	public LimGerOcorrSelecionarJogo(LimBuscarJogador limBuscarJogador)
+	public LimGerOcorrSelecionarJogo(CtrJogo ctrJogo, LimBuscarJogador limBuscarJogador)
 	{
-		super();
+		super(ctrJogo);
+		
 		setTitle("Gerenciar Ocorrências de Jogo: Selecione um Jogo");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		

@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrTecnico;
 import sgcmf.view.UtilView;
 
@@ -29,11 +30,11 @@ public class LimTecnico extends JFrame
     private LimGerenciarEscalacao limGerenciarEscalacao;
     private CtrTecnico ctrTecnico;
 
-    public LimTecnico(CtrTecnico ctrTecnico)
+    public LimTecnico(CtrTecnico ctrTecnico, CtrJogo ctrJogo)
     {
         this.ctrTecnico = ctrTecnico;
         limGerenciarJogador = new LimGerenciarJogador();
-        limGerenciarEscalacao = new LimGerenciarEscalacao();
+        limGerenciarEscalacao = new LimGerenciarEscalacao(ctrJogo);
 
         setTitle("Usuário Técnico da Seleção");
         setSize(400, 400);

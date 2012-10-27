@@ -12,13 +12,14 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.control.CtrJogo;
 import sgcmf.view.table.JTableSGCMF;
 
 public class LimConsultarJogo extends JDialog
 {
 	protected JPanel mainPanel;
 	
-	private LimComiteGestor limComiteGestor;
+	private CtrJogo ctrJogo;
 	private JPanel northEastPanel;
 	private final String nameCardPanelSearchBox = "SEARCH_BOX";
 	private final String nameCardPanelComboBox = "COMBO_BOX";
@@ -29,9 +30,9 @@ public class LimConsultarJogo extends JDialog
 	private JRadioButton jrbSelecao;
 	private JComboBox jcb;
 	
-	public LimConsultarJogo(LimComiteGestor limComiteGestor)
+	public LimConsultarJogo(CtrJogo ctrJogo)
 	{
-		this.limComiteGestor = limComiteGestor;
+		this.ctrJogo = ctrJogo;
 		setTitle("Consulta Jogo");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		add(montaMainPanel());
@@ -190,7 +191,7 @@ public class LimConsultarJogo extends JDialog
 	{
 		String [][] dadosJogos;
 		
-		dadosJogos = limComiteGestor.getCtrComiteGestor().queryJogoTodos();
+		dadosJogos = ctrJogo.queryJogoTodos();
 		jt.preencheTabela(dadosJogos);
 		
 		setVisible(true);
@@ -202,19 +203,19 @@ public class LimConsultarJogo extends JDialog
 		
 		if (jrbSelecao.isSelected())
 		{
-			dadosJogo = limComiteGestor.getCtrComiteGestor().queryJogoBySelecao(chave);
+			dadosJogo = ctrJogo.queryJogoBySelecao(chave);
 		}
 		else if(jrbCidade.isSelected())
 		{
-			dadosJogo = limComiteGestor.getCtrComiteGestor().queryJogoByCidade(chave);
+			dadosJogo = ctrJogo.queryJogoByCidade(chave);
 		}
 		else if (jrbEstadio.isSelected())
 		{
-			dadosJogo = limComiteGestor.getCtrComiteGestor().queryJogoByEstadio(chave);
+			dadosJogo = ctrJogo.queryJogoByEstadio(chave);
 		}
 		else 
 		{
-			dadosJogo = limComiteGestor.getCtrComiteGestor().queryJogoByTipo(chave);
+			dadosJogo = ctrJogo.queryJogoByTipo(chave);
 		}
 		jt.preencheTabela(dadosJogo);
 	}
