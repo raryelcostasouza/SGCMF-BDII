@@ -1,6 +1,9 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
+import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.type.Type;
+import sgcmf.hibernate.SGCMFHibernateUtil;
 import sgcmf.model.Jogo;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.JogoDAO;
@@ -68,7 +71,6 @@ public class CtrJogo
 		String[][] dadosJogos;
 		JogoDAO jDao;
 		ArrayList<Jogo> alJogo;
-		Jogo j;
 		
 		jDao = new JogoDAO();
 		alJogo = jDao.queryJogoByTipo(tipo);
