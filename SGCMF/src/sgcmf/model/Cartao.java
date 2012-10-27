@@ -1,8 +1,7 @@
 package sgcmf.model;
-// Generated Oct 26, 2012 6:12:10 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 27, 2012 11:54:54 AM by Hibernate Tools 3.2.1.GA
 
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,20 +14,20 @@ public class Cartao  implements java.io.Serializable {
      private short idoc;
      private Ocorrencia ocorrencia;
      private Jogador jogador;
-     private Serializable cor;
+     private String cor;
      private Set faltas = new HashSet(0);
 
     public Cartao() {
     }
 
 	
-    public Cartao(short idoc, Ocorrencia ocorrencia, Jogador jogador, Serializable cor) {
+    public Cartao(short idoc, Ocorrencia ocorrencia, Jogador jogador, String cor) {
         this.idoc = idoc;
         this.ocorrencia = ocorrencia;
         this.jogador = jogador;
         this.cor = cor;
     }
-    public Cartao(short idoc, Ocorrencia ocorrencia, Jogador jogador, Serializable cor, Set faltas) {
+    public Cartao(short idoc, Ocorrencia ocorrencia, Jogador jogador, String cor, Set faltas) {
        this.idoc = idoc;
        this.ocorrencia = ocorrencia;
        this.jogador = jogador;
@@ -57,11 +56,11 @@ public class Cartao  implements java.io.Serializable {
     public void setJogador(Jogador jogador) {
         this.jogador = jogador;
     }
-    public Serializable getCor() {
+    public String getCor() {
         return this.cor;
     }
     
-    public void setCor(Serializable cor) {
+    public void setCor(String cor) {
         this.cor = cor;
     }
     public Set getFaltas() {

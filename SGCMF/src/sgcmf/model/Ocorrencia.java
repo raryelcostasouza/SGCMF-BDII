@@ -1,5 +1,5 @@
 package sgcmf.model;
-// Generated Oct 26, 2012 6:12:10 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 27, 2012 11:54:54 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;

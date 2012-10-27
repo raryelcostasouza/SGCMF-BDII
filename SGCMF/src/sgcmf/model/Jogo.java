@@ -1,8 +1,7 @@
 package sgcmf.model;
-// Generated Oct 26, 2012 6:12:10 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 27, 2012 11:54:54 AM by Hibernate Tools 3.2.1.GA
 
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +15,7 @@ public class Jogo  implements java.io.Serializable {
      private short id;
      private Selecao selecaoByIdselecaoi;
      private Selecao selecaoByIdselecaoii;
-     private Serializable tipo;
+     private String tipo;
      private String cidade;
      private String nomeestadio;
      private boolean prorrogacao;
@@ -28,7 +27,7 @@ public class Jogo  implements java.io.Serializable {
     }
 
 	
-    public Jogo(short id, Serializable tipo, String cidade, String nomeestadio, boolean prorrogacao, Date datahora) {
+    public Jogo(short id, String tipo, String cidade, String nomeestadio, boolean prorrogacao, Date datahora) {
         this.id = id;
         this.tipo = tipo;
         this.cidade = cidade;
@@ -36,7 +35,7 @@ public class Jogo  implements java.io.Serializable {
         this.prorrogacao = prorrogacao;
         this.datahora = datahora;
     }
-    public Jogo(short id, Selecao selecaoByIdselecaoi, Selecao selecaoByIdselecaoii, Serializable tipo, String cidade, String nomeestadio, boolean prorrogacao, Date datahora, Set escalacaos, Set ocorrencias) {
+    public Jogo(short id, Selecao selecaoByIdselecaoi, Selecao selecaoByIdselecaoii, String tipo, String cidade, String nomeestadio, boolean prorrogacao, Date datahora, Set escalacaos, Set ocorrencias) {
        this.id = id;
        this.selecaoByIdselecaoi = selecaoByIdselecaoi;
        this.selecaoByIdselecaoii = selecaoByIdselecaoii;
@@ -70,11 +69,11 @@ public class Jogo  implements java.io.Serializable {
     public void setSelecaoByIdselecaoii(Selecao selecaoByIdselecaoii) {
         this.selecaoByIdselecaoii = selecaoByIdselecaoii;
     }
-    public Serializable getTipo() {
+    public String getTipo() {
         return this.tipo;
     }
     
-    public void setTipo(Serializable tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
     public String getCidade() {

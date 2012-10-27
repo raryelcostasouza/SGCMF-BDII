@@ -1,8 +1,7 @@
 package sgcmf.model;
-// Generated Oct 26, 2012 6:12:10 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 27, 2012 11:54:54 AM by Hibernate Tools 3.2.1.GA
 
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ public class Usuario  implements java.io.Serializable {
      private String nome;
      private String cpf;
      private String email;
-     private Serializable perfil;
+     private String perfil;
      private String login;
      private String senha;
      private Set selecaos = new HashSet(0);
@@ -25,7 +24,7 @@ public class Usuario  implements java.io.Serializable {
     }
 
 	
-    public Usuario(short id, String nome, String cpf, String email, Serializable perfil, String login, String senha) {
+    public Usuario(short id, String nome, String cpf, String email, String perfil, String login, String senha) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -34,7 +33,7 @@ public class Usuario  implements java.io.Serializable {
         this.login = login;
         this.senha = senha;
     }
-    public Usuario(short id, String nome, String cpf, String email, Serializable perfil, String login, String senha, Set selecaos) {
+    public Usuario(short id, String nome, String cpf, String email, String perfil, String login, String senha, Set selecaos) {
        this.id = id;
        this.nome = nome;
        this.cpf = cpf;
@@ -73,11 +72,11 @@ public class Usuario  implements java.io.Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Serializable getPerfil() {
+    public String getPerfil() {
         return this.perfil;
     }
     
-    public void setPerfil(Serializable perfil) {
+    public void setPerfil(String perfil) {
         this.perfil = perfil;
     }
     public String getLogin() {

@@ -1,8 +1,7 @@
 package sgcmf.model;
-// Generated Oct 26, 2012 6:12:10 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 27, 2012 11:54:54 AM by Hibernate Tools 3.2.1.GA
 
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
@@ -20,7 +19,7 @@ public class Jogador  implements java.io.Serializable {
      private BigDecimal altura;
      private short ncamisa;
      private Date datanasc;
-     private Serializable posicao;
+     private String posicao;
      private boolean titular;
      private Set gols = new HashSet(0);
      private Set substituicaosForIdjogadorentrou = new HashSet(0);
@@ -36,7 +35,7 @@ public class Jogador  implements java.io.Serializable {
     }
 
 	
-    public Jogador(short id, Selecao selecao, String nome, BigDecimal altura, short ncamisa, Date datanasc, Serializable posicao, boolean titular) {
+    public Jogador(short id, Selecao selecao, String nome, BigDecimal altura, short ncamisa, Date datanasc, String posicao, boolean titular) {
         this.id = id;
         this.selecao = selecao;
         this.nome = nome;
@@ -46,7 +45,7 @@ public class Jogador  implements java.io.Serializable {
         this.posicao = posicao;
         this.titular = titular;
     }
-    public Jogador(short id, Selecao selecao, String nome, BigDecimal altura, short ncamisa, Date datanasc, Serializable posicao, boolean titular, Set gols, Set substituicaosForIdjogadorentrou, Set substituicaosForIdjogadorsaiu, Set escalacaos, Set faltas, Set cartaos, Set ocorrencias, Set rodadadepenaltisesForIdjogadorcobrancai, Set rodadadepenaltisesForIdjogadorcobrancaii) {
+    public Jogador(short id, Selecao selecao, String nome, BigDecimal altura, short ncamisa, Date datanasc, String posicao, boolean titular, Set gols, Set substituicaosForIdjogadorentrou, Set substituicaosForIdjogadorsaiu, Set escalacaos, Set faltas, Set cartaos, Set ocorrencias, Set rodadadepenaltisesForIdjogadorcobrancai, Set rodadadepenaltisesForIdjogadorcobrancaii) {
        this.id = id;
        this.selecao = selecao;
        this.nome = nome;
@@ -108,11 +107,11 @@ public class Jogador  implements java.io.Serializable {
     public void setDatanasc(Date datanasc) {
         this.datanasc = datanasc;
     }
-    public Serializable getPosicao() {
+    public String getPosicao() {
         return this.posicao;
     }
     
-    public void setPosicao(Serializable posicao) {
+    public void setPosicao(String posicao) {
         this.posicao = posicao;
     }
     public boolean isTitular() {
