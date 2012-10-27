@@ -1,6 +1,7 @@
 package sgcmf.control;
 
 import javax.swing.JOptionPane;
+import sgcmf.model.dao.GeneralDAO;
 import sgcmf.view.LimLogin;
 
 public class CtrMain
