@@ -16,7 +16,8 @@ public class CtrComiteGestor
     public CtrComiteGestor(CtrMain ctrMain)
     {
         this.ctrMain = ctrMain;
-        limComiteGestor = new LimComiteGestor(this, ctrMain.getCtrJogo(), ctrMain.getCtrSelecao());
+        limComiteGestor = new LimComiteGestor(this, ctrMain.getCtrJogo(), ctrMain.getCtrSelecao(), 
+												ctrMain.getCtrOcorrenciaJogo(), ctrMain.getCtrJogador());
     }
 
     public void ativaTela()

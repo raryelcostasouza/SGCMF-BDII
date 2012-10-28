@@ -3,6 +3,8 @@ package sgcmf.view.comiteGestor;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,12 +13,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.control.CtrJogador;
 import sgcmf.view.table.JTableSGCMF;
+import sgcmf.view.tecnico.ISelecionarJogador;
 
 public class LimBuscarJogador extends JDialog
 {
-	public LimBuscarJogador()
+	private CtrJogador ctrJogador;
+	private JTableSGCMF jt;
+	private ISelecionarJogador isj;
+	
+	public LimBuscarJogador(CtrJogador ctrJogador)
 	{
+		this.ctrJogador = ctrJogador;
+		
 		setTitle("Buscar jogador");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
@@ -43,7 +53,15 @@ public class LimBuscarJogador extends JDialog
 		northPanel.setBorder(BorderFactory.createTitledBorder("Busca:"));
 		
 		JLabel jlNomeJogador = new JLabel("Nome do jogador:");
-		JTextField jtfSearchBox = new JTextField(15);
+		final JTextField jtfSearchBox = new JTextField(15);
+		jtfSearchBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				pesquisa(jtfSearchBox.getText());
+			}
+		});
 		
 		northPanel.add(jlNomeJogador);
 		northPanel.add(jtfSearchBox);
@@ -53,9 +71,9 @@ public class LimBuscarJogador extends JDialog
 	
 	private JScrollPane montaCenterPanel()
 	{
-		String[] nomesColunas = {"Seleção", "Nome", "Número da Camisa", "Posição"};
+		String[] nomesColunas = {"ID", "Seleção", "Número da Camisa", "Nome", "Posição"};
 		
-		JTableSGCMF jt = new JTableSGCMF(null, nomesColunas);	
+		jt = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jt,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		return jsp;		
@@ -66,9 +84,51 @@ public class LimBuscarJogador extends JDialog
 		JPanel southPanel = new JPanel();
 		
 		JButton jbSelecionar = new JButton("Selecionar");
+		jbSelecionar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				selecionaJogador();
+			}
+		});
 		
 		southPanel.add(jbSelecionar);
 		
 		return southPanel;
+	}
+	
+	public void ativaTela(ISelecionarJogador isj)
+	{
+		String[][] dadosJogador;
+		
+		this.isj = isj;
+		
+		dadosJogador = ctrJogador.queryJogadorTodos();
+		jt.preencheTabela(dadosJogador);
+		
+		setVisible(true);
+	}
+	
+	private void pesquisa(String chave)
+	{
+		String[][] dadosJogador;
+		
+		dadosJogador = ctrJogador.queryJogadorByNome(chave);
+		jt.preencheTabela(dadosJogador);
+	}
+	
+	private void selecionaJogador()
+	{
+		int linhaSelecionada;
+		Short idJogador;
+		
+		linhaSelecionada = jt.getSelectedRow();
+		if (linhaSelecionada != -1)
+		{
+			idJogador = Short.parseShort((String) jt.getValueAt(linhaSelecionada, 0));
+			isj.jogadorSelecionado(idJogador);	
+			setVisible(false);
+		}			
 	}
 }

@@ -14,7 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import sgcmf.control.CtrComiteGestor;
+import sgcmf.control.CtrJogador;
 import sgcmf.control.CtrJogo;
+import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.control.CtrSelecao;
 import sgcmf.view.UtilView;
 import sgcmf.view.comiteGestor.disputaPenalti.LimGerDispPenaltiSelecionarJogo;
@@ -29,14 +31,15 @@ public class LimComiteGestor extends JDialog
 	private LimGerDispPenaltiSelecionarJogo limGerDispPenaltiSelecionarJogo;
 	private LimBuscarJogador limBuscarJogador;
 
-	public LimComiteGestor(CtrComiteGestor ctrComiteGestor, CtrJogo ctrJogo, CtrSelecao ctrSelecao)
+	public LimComiteGestor(CtrComiteGestor ctrComiteGestor, CtrJogo ctrJogo, CtrSelecao ctrSelecao, 
+							CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrJogador ctrJogador)
 	{
 		this.ctrComiteGestor = ctrComiteGestor;
 		
 		limConsultaSelecao = new LimConsultaSelecao(ctrSelecao);
 		limConsultaJogo = new LimConsultarJogo(ctrJogo);
-		limBuscarJogador = new LimBuscarJogador();
-		limGerOcorrSelecionarJogo = new LimGerOcorrSelecionarJogo(ctrJogo, limBuscarJogador);
+		limBuscarJogador = new LimBuscarJogador(ctrJogador);
+		limGerOcorrSelecionarJogo = new LimGerOcorrSelecionarJogo(ctrJogo, ctrOcorrenciaJogo, limBuscarJogador);
 		limGerDispPenaltiSelecionarJogo = new LimGerDispPenaltiSelecionarJogo(ctrJogo, limBuscarJogador);
 
 		setTitle("SGCMF | Usuário Comitê Gestor");
@@ -144,7 +147,7 @@ public class LimComiteGestor extends JDialog
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				limGerOcorrSelecionarJogo.setVisible(true);
+				limGerOcorrSelecionarJogo.ativaTela();
 			}
 		});
 		jbGerDisputaPenaltis.addActionListener(new ActionListener()

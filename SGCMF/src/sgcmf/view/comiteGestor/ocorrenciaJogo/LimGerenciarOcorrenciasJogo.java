@@ -5,6 +5,8 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -14,12 +16,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import sgcmf.control.CtrJogo;
+import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
 public class LimGerenciarOcorrenciasJogo extends JDialog
 {
+	private CtrOcorrenciaJogo ctrOcorrenciaJogo;
+	private CtrJogo ctrJogo;
+	
 	private LimRegistrarGol limRegistrarGol;
 	private LimRegistrarFalta limRegistrarFalta;
 	private LimRegistrarCartao limRegistrarCartao;
@@ -32,11 +39,30 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 	private final String nameCardPanelSubst = "SUBST";
 	private final String nameCardPanelRoubadaBola = "ROUBADA";
 	
+	private JTableSGCMF jtGol;
+	private JTableSGCMF jtFalta;
+	private JTableSGCMF jtCartao;
+	private JTableSGCMF jtSubst;
+	private JTableSGCMF jtRoubadaBola;
+	
+	private JRadioButton jrbGol;
+	private JRadioButton jrbFalta;
+	private JRadioButton jrbCartao;
+	private JRadioButton jrbSubst;
+	private JRadioButton jrbRoubadaBola;
+	
+	private JLabel jlInfoJogo;
+	
 	private JPanel centerPanel;
 	
-	public LimGerenciarOcorrenciasJogo(LimBuscarJogador limBuscarJogador)
+	private Short idJogo;
+	
+	public LimGerenciarOcorrenciasJogo(CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrJogo ctrJogo, LimBuscarJogador limBuscarJogador)
 	{
-		limRegistrarGol = new LimRegistrarGol(limBuscarJogador);
+		this.ctrOcorrenciaJogo = ctrOcorrenciaJogo;
+		this.ctrJogo = ctrJogo;
+		
+		limRegistrarGol = new LimRegistrarGol(ctrOcorrenciaJogo, limBuscarJogador);
 		limRegistrarFalta = new LimRegistrarFalta(limBuscarJogador);
 		limRegistrarCartao = new LimRegistrarCartao(limBuscarJogador);
 		limRegistrarSubstituicao = new LimRegistrarSubstituicao(limBuscarJogador);
@@ -49,6 +75,15 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 		setModal(true);
 		setSize(600,500);
 		setLocationRelativeTo(null);
+		
+		addWindowListener(new WindowAdapter() 
+		{
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				resetCamposInterface();
+			}
+		});
 	}
 	
 	private JPanel montaMainPanel()
@@ -68,19 +103,19 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 		JPanel rotuloJogoPanel = new JPanel();
 		rotuloJogoPanel.setBorder(BorderFactory.createTitledBorder("Informações do jogo selecionado:"));
 		
-		JLabel jlInfoJogo = new JLabel("Data/Hora | Tipo do Jogo | SeleçãoI x SeleçãoII", JLabel.CENTER);
+		jlInfoJogo = new JLabel("", JLabel.CENTER);
 		rotuloJogoPanel.add(jlInfoJogo);		
 		
 		JPanel radioButtonPanel = new JPanel();
 		radioButtonPanel.setBorder(BorderFactory.createTitledBorder("Ver ocorrências do tipo:"));
 		
 		ButtonGroup bg = new ButtonGroup();
-		JRadioButton jrbGol = new JRadioButton("Gol");
+		jrbGol = new JRadioButton("Gol");
 		jrbGol.setSelected(true);
-		JRadioButton jrbFalta = new JRadioButton("Falta");
-		JRadioButton jrbCartao = new JRadioButton("Cartão");
-		JRadioButton jrbSubst = new JRadioButton("Substituição");
-		JRadioButton jrbRoubadaBola = new JRadioButton("Roubada de bola");
+		jrbFalta = new JRadioButton("Falta");
+		jrbCartao = new JRadioButton("Cartão");
+		jrbSubst = new JRadioButton("Substituição");
+		jrbRoubadaBola = new JRadioButton("Roubada de bola");
 		
 		bg.add(jrbGol);
 		bg.add(jrbFalta);
@@ -168,8 +203,8 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 	{
 		JPanel centerPanelGol = new JPanel(new BorderLayout());
 		
-		String[] nomesColunas = {"Instante de Tempo", "Jogador Autor", "Jogador Assistência", "Tipo Gol", "Modo"};
-		JTableSGCMF jtGol = new JTableSGCMF(null, nomesColunas);	
+		String[] nomesColunas = {"ID", "Instante de Tempo", "Jogador Autor", "Jogador Assistência", "Tipo Gol", "Modo"};
+		jtGol = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jtGol,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	
 		centerPanelGol.add(jsp,BorderLayout.CENTER);
@@ -180,7 +215,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				limRegistrarGol.setVisible(true);
+				limRegistrarGol.ativaTela(idJogo);
 			}
 		});
 		centerPanelGol.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarGol), BorderLayout.SOUTH);
@@ -193,7 +228,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 		JPanel centerPanelFalta = new JPanel(new BorderLayout());
 		
 		String[] nomesColunas = {"Instante de Tempo", "Jogador Autor", "Cartão", "Tipo"};
-		JTableSGCMF jtFalta = new JTableSGCMF(null, nomesColunas);	
+		jtFalta = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jtFalta,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	
 		centerPanelFalta.add(jsp,BorderLayout.CENTER);
@@ -217,7 +252,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 		JPanel centerPanelCartao = new JPanel(new BorderLayout());
 		
 		String[] nomesColunas = {"Instante de Tempo", "Jogador", "Cor"};
-		JTableSGCMF jtCartao = new JTableSGCMF(null, nomesColunas);	
+		jtCartao = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jtCartao,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	
 		centerPanelCartao.add(jsp,BorderLayout.CENTER);
@@ -241,7 +276,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 		JPanel centerPanelSubst = new JPanel(new BorderLayout());
 		
 		String[] nomesColunas = {"Instante de Tempo", "Jogador Entrou", "Jogador Saiu", "Motivo"};
-		JTableSGCMF jtSubst = new JTableSGCMF(null, nomesColunas);	
+		jtSubst = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jtSubst,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	
 		centerPanelSubst.add(jsp,BorderLayout.CENTER);
@@ -265,7 +300,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 		JPanel centerPanelRoubadaBola = new JPanel(new BorderLayout());
 		
 		String[] nomesColunas = {"Instante de Tempo", "Jogador Ladrão"};
-		JTableSGCMF jtRoubadaBola = new JTableSGCMF(null, nomesColunas);	
+		jtRoubadaBola = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jtRoubadaBola,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	
 		centerPanelRoubadaBola.add(jsp,BorderLayout.CENTER);
@@ -289,8 +324,57 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 		JPanel southPanel = new JPanel();
 		
 		JButton jbRemoverOcorrencia = new JButton("Remover Ocorrência");
+		jbRemoverOcorrencia.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				removerOcorrencia();
+			}
+		});
 		southPanel.add(jbRemoverOcorrencia);
 		
 		return southPanel;
+	}
+	
+	public void ativaTela(Short idJogo)
+	{
+		this.idJogo = idJogo;
+		preencheTabelaGol();
+		setVisible(true);
+	}
+	
+	private void preencheTabelaGol()
+	{
+		String[][] dadosGol;
+		
+		dadosGol = ctrOcorrenciaJogo.queryGolTodos();
+		jtGol.preencheTabela(dadosGol);
+		jlInfoJogo.setText(ctrJogo.queryInfoJogoById(idJogo));
+		
+	}
+	
+	private void resetCamposInterface()
+	{
+		jlInfoJogo.setText("");
+		jrbGol.setSelected(true);
+	}
+	
+	private void removerOcorrencia()
+	{
+		Short idOc;
+		int linhaSelecionada;
+
+		if(jrbGol.isSelected())
+		{
+			linhaSelecionada = jtGol.getSelectedRow();
+			if (linhaSelecionada != -1)
+			{
+				idOc = Short.parseShort((String)jtGol.getValueAt(linhaSelecionada, 0));
+				ctrOcorrenciaJogo.removeGol(idOc);
+				
+				preencheTabelaGol();				
+			}
+		}
 	}
 }

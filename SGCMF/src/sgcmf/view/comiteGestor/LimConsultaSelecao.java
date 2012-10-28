@@ -3,6 +3,8 @@ package sgcmf.view.comiteGestor;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JDialog;
@@ -20,6 +22,7 @@ public class LimConsultaSelecao extends JDialog
 	private JRadioButton jrbPais;
 	private JRadioButton jrbNomeTecnico;	
 	private JTableSGCMF jt;
+	private JTextField jtfSearchBox;
 	
 	public LimConsultaSelecao(CtrSelecao ctrSelecao)
 	{
@@ -33,6 +36,15 @@ public class LimConsultaSelecao extends JDialog
 		setModal(true);
 		
 		setLocationRelativeTo(null);
+		
+		addWindowListener(new WindowAdapter() 
+		{
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				resetCamposInterface();
+			}
+		});
 	}
 	
 	private JPanel montaMainPanel()
@@ -80,7 +92,7 @@ public class LimConsultaSelecao extends JDialog
 		JPanel northEastPanel= new JPanel();
 		northEastPanel.setBorder(BorderFactory.createTitledBorder("Busca:"));
 		
-		final JTextField jtfSearchBox = new JTextField(15);
+		jtfSearchBox = new JTextField(15);
 		jtfSearchBox.addActionListener(new ActionListener() {
 
 			@Override
@@ -113,6 +125,12 @@ public class LimConsultaSelecao extends JDialog
 		jt.preencheTabela(dadosSelecoes);
 		
 		setVisible(true);
+	}
+	
+	private void resetCamposInterface()
+	{
+		jrbPais.setSelected(true);
+		jtfSearchBox.setText("");		
 	}
 	
 	private void pesquisa(String chavePesquisa)

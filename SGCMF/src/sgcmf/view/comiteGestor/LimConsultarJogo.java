@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -18,17 +20,19 @@ import sgcmf.view.table.JTableSGCMF;
 public class LimConsultarJogo extends JDialog
 {
 	protected JPanel mainPanel;
+	protected JTableSGCMF jt;
 	
 	private CtrJogo ctrJogo;
 	private JPanel northEastPanel;
 	private final String nameCardPanelSearchBox = "SEARCH_BOX";
 	private final String nameCardPanelComboBox = "COMBO_BOX";
-	private JTableSGCMF jt;
+	
 	private JRadioButton jrbTipoJogo;
 	private JRadioButton jrbCidade;
 	private JRadioButton jrbEstadio;
 	private JRadioButton jrbSelecao;
 	private JComboBox jcb;
+	private JTextField jtfSearchBox;
 	
 	public LimConsultarJogo(CtrJogo ctrJogo)
 	{
@@ -40,6 +44,15 @@ public class LimConsultarJogo extends JDialog
 		
 		setModal(true);
 		setLocationRelativeTo(null);
+		
+		addWindowListener(new WindowAdapter() 
+		{
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				resetCamposInterface();
+			}
+		});
 	}
 	
 	private JPanel montaMainPanel()
@@ -136,7 +149,7 @@ public class LimConsultarJogo extends JDialog
 		JPanel northEastPanelSearchBox= new JPanel();
 		northEastPanelSearchBox.setBorder(BorderFactory.createTitledBorder("Busca:"));
 		
-		final JTextField jtfSearchBox = new JTextField(15);
+		jtfSearchBox = new JTextField(15);
 		jtfSearchBox.addActionListener(new ActionListener() {
 
 			@Override
@@ -172,7 +185,7 @@ public class LimConsultarJogo extends JDialog
 	
 	private JScrollPane montaCenterPanel()
 	{
-		String[] nomesColunas = {"Tipo do Jogo", "Data/Hora", "Cidade", "Estádio", "Seleção I", "Seleção II", "Prorrogacao"};
+		String[] nomesColunas = {"ID", "Tipo do Jogo", "Data/Hora", "Cidade", "Estádio", "Seleção I", "Seleção II", "Prorrogacao"};
 		
 		jt = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jt,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -195,6 +208,13 @@ public class LimConsultarJogo extends JDialog
 		jt.preencheTabela(dadosJogos);
 		
 		setVisible(true);
+	}
+	
+	private void resetCamposInterface()
+	{
+		jrbSelecao.setSelected(true);
+		jtfSearchBox.setText("");
+		jcb.setSelectedIndex(0);
 	}
 	
 	private void pesquisa(String chave)

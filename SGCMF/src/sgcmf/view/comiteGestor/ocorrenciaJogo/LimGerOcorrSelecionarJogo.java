@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import sgcmf.control.CtrJogo;
+import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.comiteGestor.LimComiteGestor;
 import sgcmf.view.comiteGestor.LimConsultarJogo;
@@ -15,14 +16,14 @@ public class LimGerOcorrSelecionarJogo extends LimConsultarJogo
 {
 	private LimGerenciarOcorrenciasJogo limGerenciarOcorrenciasJogo;
 	
-	public LimGerOcorrSelecionarJogo(CtrJogo ctrJogo, LimBuscarJogador limBuscarJogador)
+	public LimGerOcorrSelecionarJogo(CtrJogo ctrJogo, CtrOcorrenciaJogo ctrOcorrenciaJogo, LimBuscarJogador limBuscarJogador)
 	{
 		super(ctrJogo);
 		
 		setTitle("Gerenciar Ocorrências de Jogo: Selecione um Jogo");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
-		limGerenciarOcorrenciasJogo = new LimGerenciarOcorrenciasJogo(limBuscarJogador);
+		limGerenciarOcorrenciasJogo = new LimGerenciarOcorrenciasJogo(ctrOcorrenciaJogo, ctrJogo, limBuscarJogador);
 		mainPanel.add(montaSouthPanel(), BorderLayout.SOUTH);
 	}
 	
@@ -36,7 +37,12 @@ public class LimGerOcorrSelecionarJogo extends LimConsultarJogo
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				limGerenciarOcorrenciasJogo.setVisible(true);
+				Short idJogo;
+				if (jt.getSelectedRow() != -1)
+				{
+					idJogo = Short.parseShort((String) jt.getValueAt(jt.getSelectedRow(), 0));
+					limGerenciarOcorrenciasJogo.ativaTela(idJogo);
+				}			
 			}
 		});
 		

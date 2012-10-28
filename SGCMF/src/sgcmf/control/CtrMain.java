@@ -14,11 +14,15 @@ public class CtrMain
 	
 	private CtrJogo ctrJogo;
 	private CtrSelecao ctrSelecao;
-
+	private CtrOcorrenciaJogo ctrOcorrenciaJogo;
+	private CtrJogador ctrJogador;
+	
     public CtrMain()
     {
 		ctrJogo = new CtrJogo();
 		ctrSelecao = new CtrSelecao();
+		ctrOcorrenciaJogo = new CtrOcorrenciaJogo();
+		ctrJogador = new CtrJogador();
 		
         ctrAdmin = new CtrAdmin();
         ctrComiteGestor = new CtrComiteGestor(this);
@@ -27,7 +31,7 @@ public class CtrMain
 
         limLogin = new LimLogin(this);
         limLogin.setVisible(true);
-    }
+	}
 
     public void ativaTela()
     {
@@ -70,5 +74,15 @@ public class CtrMain
 	public CtrSelecao getCtrSelecao()
 	{
 		return ctrSelecao;
+	}
+
+	public CtrOcorrenciaJogo getCtrOcorrenciaJogo()
+	{
+		return ctrOcorrenciaJogo;
+	}
+	
+	public CtrJogador getCtrJogador()
+	{
+		return ctrJogador;
 	}
 }
