@@ -7,6 +7,18 @@ import sgcmf.model.dao.JogadorDAO;
 
 public class CtrJogador
 {
+	public Jogador carregaJogadorById(Short idJogador)
+	{
+		GeneralDAO<Jogador> gdao;
+		Jogador jogador;
+		
+		gdao = new GeneralDAO<Jogador>();
+		jogador = new Jogador();
+		jogador = gdao.carregar(jogador, idJogador);
+		
+		return jogador;
+	}
+	
 	public String[][] queryJogadorTodos()
 	{
 		String[][] dadosJogadores;

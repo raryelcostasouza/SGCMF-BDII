@@ -7,6 +7,18 @@ import sgcmf.model.dao.JogoDAO;
 
 public class CtrJogo
 {
+	public Jogo carregarJogoById(Short idJogo)
+	{
+		GeneralDAO<Jogo> jDAO;
+		Jogo j;
+		
+		j = new Jogo();
+		jDAO = new GeneralDAO<Jogo>();
+		j = jDAO.carregar(j, idJogo);
+	
+		return j;
+	}
+	
 	public String[][] queryJogoTodos()
 	{
 		GeneralDAO<Jogo> gdao;
