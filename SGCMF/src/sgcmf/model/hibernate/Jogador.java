@@ -1,5 +1,5 @@
-package sgcmf.model;
-// Generated Oct 27, 2012 4:35:00 PM by Hibernate Tools 3.2.1.GA
+package sgcmf.model.hibernate;
+// Generated Oct 28, 2012 12:07:10 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;

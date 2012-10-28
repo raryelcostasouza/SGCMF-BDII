@@ -2,14 +2,15 @@ package sgcmf.control;
 
 import java.sql.Time;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
-import sgcmf.model.Gol;
-import sgcmf.model.Jogador;
-import sgcmf.model.Jogo;
-import sgcmf.model.Ocorrencia;
+import sgcmf.model.util.ResultadoOperacao;
+import sgcmf.model.util.TipoResultadoOperacao;
 import sgcmf.model.dao.GeneralDAO;
+import sgcmf.model.hibernate.Gol;
+import sgcmf.model.hibernate.Jogador;
+import sgcmf.model.hibernate.Jogo;
+import sgcmf.model.hibernate.Ocorrencia;
 
 public class CtrOcorrenciaJogo
 {
@@ -39,7 +40,7 @@ public class CtrOcorrenciaJogo
 		return oc;
 	}
 	
-	public String registraGol(String min, String seg, Short idJogo, String idJogadorAutor, String idJogadorAssist,
+	public ResultadoOperacao registraGol(String min, String seg, Short idJogo, String idJogadorAutor, String idJogadorAssist,
 							String tipoGol, String modoGol)
 	{
 		Short shortIdJogadorAutor;
@@ -51,10 +52,11 @@ public class CtrOcorrenciaJogo
 		Jogador jAutor;
 		Jogador jAssist;		
 		String errorMessage;
+		ResultadoOperacao result;
 		
 		errorMessage = validaCamposGol(min, seg, idJogo, idJogadorAutor);
 		
-		//se nao tiver erros nos campos faz o cadastro
+		//se nao tiver erros nos campos, entao faz o cadastro
 		if (errorMessage.equals(""))
 		{
 			gdao = new GeneralDAO();
@@ -82,15 +84,21 @@ public class CtrOcorrenciaJogo
 				//salva o gol e commita
 				gdao.salvar(g);
 				tr.commit();
+				
+				result = new ResultadoOperacao("Gol cadastrado com êxito!", TipoResultadoOperacao.EXITO);
 			}
 			catch(HibernateException hex)
 			{
 				tr.rollback();
-				System.out.println(hex.getMessage());			
+				result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);			
 			}
 		}
+		else
+		{
+			result = new ResultadoOperacao(errorMessage, TipoResultadoOperacao.ERRO);
+		}
 		
-		return errorMessage;
+		return result;
 	}
 	
 	private String validaCamposGol(String min, String seg, Short idJogo, String idJogadorAutor)

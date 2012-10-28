@@ -1,8 +1,6 @@
 package sgcmf.view.comiteGestor.ocorrenciaJogo;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,13 +10,14 @@ import java.awt.event.WindowEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import sgcmf.control.CtrOcorrenciaJogo;
+import sgcmf.model.util.ResultadoOperacao;
+import sgcmf.model.util.TipoResultadoOperacao;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.UtilView;
 import sgcmf.view.tecnico.ISelecionarJogador;
@@ -37,7 +36,6 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 	private ButtonGroup bgModo;
 	
 	private boolean selecaoJogadorAutor = false;
-	private boolean selecaoJogadorAssistente = false;
 	
 	private JRadioButton jrbTipoAFavor;
 	private JRadioButton jrbTipoContra;	
@@ -140,7 +138,6 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				selecaoJogadorAssistente = true;
 				ativaTelaBuscarJogador();
 			}
 		});
@@ -198,7 +195,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 	{		
 		String tipo;
 		String modo;
-		String errorMsg;
+		ResultadoOperacao result;
 		
 		if (jrbTipoAFavor.isSelected())
 		{
@@ -222,21 +219,24 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 			modo = jrbModoPenalti.getText();
 		}
 		
-		errorMsg = ctrOcorrenciaJogo.registraGol(jtfInstanteTempoMin.getText(),
+		result = ctrOcorrenciaJogo.registraGol(jtfInstanteTempoMin.getText(),
 									jtfInstateTempoSeg.getText(),
 									idJogo,
 									jtfJogador.getText(), 
 									jtfJogadorAssist.getText(),
 									tipo,
 									modo);
-		if (errorMsg.equals(""))
+		
+		if (result.getTipo() == TipoResultadoOperacao.EXITO)
 		{
+			JOptionPane.showMessageDialog(this, result.getMsg(), "Exito!", JOptionPane.INFORMATION_MESSAGE);
+			
 			setVisible(false);
 			limGerenciarOcorrencias.preencheTabelaGol();
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(this, errorMsg, "Erro!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, result.getMsg(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -266,7 +266,6 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 		else
 		{
 			jtfJogadorAssist.setText(idJogador+"");
-			selecaoJogadorAssistente = false;
 		}		
 	}	
 }

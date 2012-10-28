@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 27, 2012 4:35:01 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Oct 28, 2012 12:07:10 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="sgcmf.model.Ocorrencia" table="ocorrencia" schema="public">
+    <class name="sgcmf.model.hibernate.Ocorrencia" table="ocorrencia" schema="public">
         <id name="id" type="short">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="jogo" class="sgcmf.model.Jogo" fetch="select">
+        <many-to-one name="jogo" class="sgcmf.model.hibernate.Jogo" fetch="select">
             <column name="idjogo" not-null="true" />
         </many-to-one>
         <property name="instantetempo" type="time">
@@ -18,25 +18,25 @@
             <key>
                 <column name="idoc" not-null="true" unique="true" />
             </key>
-            <one-to-many class="sgcmf.model.Cartao" />
+            <one-to-many class="sgcmf.model.hibernate.Cartao" />
         </set>
         <set name="faltas" inverse="true">
             <key>
                 <column name="idoc" not-null="true" unique="true" />
             </key>
-            <one-to-many class="sgcmf.model.Falta" />
+            <one-to-many class="sgcmf.model.hibernate.Falta" />
         </set>
         <set name="substituicaos" inverse="true">
             <key>
                 <column name="idoc" not-null="true" unique="true" />
             </key>
-            <one-to-many class="sgcmf.model.Substituicao" />
+            <one-to-many class="sgcmf.model.hibernate.Substituicao" />
         </set>
         <set name="jogadors" inverse="false" table="roubadadebola">
             <key>
                 <column name="idoc" not-null="true" unique="true" />
             </key>
-            <many-to-many entity-name="sgcmf.model.Jogador">
+            <many-to-many entity-name="sgcmf.model.hibernate.Jogador">
                 <column name="idjogadorladrao" not-null="true" />
             </many-to-many>
         </set>
@@ -44,7 +44,7 @@
             <key>
                 <column name="idoc" not-null="true" unique="true" />
             </key>
-            <one-to-many class="sgcmf.model.Gol" />
+            <one-to-many class="sgcmf.model.hibernate.Gol" />
         </set>
     </class>
 </hibernate-mapping>

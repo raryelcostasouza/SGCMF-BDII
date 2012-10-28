@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 27, 2012 4:35:01 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Oct 28, 2012 12:07:10 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="sgcmf.model.Jogador" table="jogador" schema="public">
+    <class name="sgcmf.model.hibernate.Jogador" table="jogador" schema="public">
         <id name="id" type="short">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
-        <many-to-one name="selecao" class="sgcmf.model.Selecao" fetch="select">
+        <many-to-one name="selecao" class="sgcmf.model.hibernate.Selecao" fetch="select">
             <column name="idselecao" not-null="true" />
         </many-to-one>
         <property name="nome" type="string">
@@ -33,49 +33,49 @@
             <key>
                 <column name="idjogadorassistencia" />
             </key>
-            <one-to-many class="sgcmf.model.Gol" />
+            <one-to-many class="sgcmf.model.hibernate.Gol" />
         </set>
         <set name="substituicaosForIdjogadorentrou" inverse="true">
             <key>
                 <column name="idjogadorentrou" not-null="true" />
             </key>
-            <one-to-many class="sgcmf.model.Substituicao" />
+            <one-to-many class="sgcmf.model.hibernate.Substituicao" />
         </set>
         <set name="golsForIdjogadorautor" inverse="true">
             <key>
                 <column name="idjogadorautor" not-null="true" />
             </key>
-            <one-to-many class="sgcmf.model.Gol" />
+            <one-to-many class="sgcmf.model.hibernate.Gol" />
         </set>
         <set name="substituicaosForIdjogadorsaiu" inverse="true">
             <key>
                 <column name="idjogadorsaiu" not-null="true" />
             </key>
-            <one-to-many class="sgcmf.model.Substituicao" />
+            <one-to-many class="sgcmf.model.hibernate.Substituicao" />
         </set>
         <set name="escalacaos" inverse="true">
             <key>
                 <column name="idjogador" not-null="true" />
             </key>
-            <one-to-many class="sgcmf.model.Escalacao" />
+            <one-to-many class="sgcmf.model.hibernate.Escalacao" />
         </set>
         <set name="faltas" inverse="true">
             <key>
                 <column name="idjogador" not-null="true" />
             </key>
-            <one-to-many class="sgcmf.model.Falta" />
+            <one-to-many class="sgcmf.model.hibernate.Falta" />
         </set>
         <set name="cartaos" inverse="true">
             <key>
                 <column name="idjogador" not-null="true" />
             </key>
-            <one-to-many class="sgcmf.model.Cartao" />
+            <one-to-many class="sgcmf.model.hibernate.Cartao" />
         </set>
         <set name="ocorrencias" inverse="false" table="roubadadebola">
             <key>
                 <column name="idjogadorladrao" not-null="true" />
             </key>
-            <many-to-many entity-name="sgcmf.model.Ocorrencia">
+            <many-to-many entity-name="sgcmf.model.hibernate.Ocorrencia">
                 <column name="idoc" not-null="true" unique="true" />
             </many-to-many>
         </set>
@@ -83,13 +83,13 @@
             <key>
                 <column name="idjogadorcobrancai" not-null="true" />
             </key>
-            <one-to-many class="sgcmf.model.Rodadadepenaltis" />
+            <one-to-many class="sgcmf.model.hibernate.Rodadadepenaltis" />
         </set>
         <set name="rodadadepenaltisesForIdjogadorcobrancaii" inverse="true">
             <key>
                 <column name="idjogadorcobrancaii" not-null="true" />
             </key>
-            <one-to-many class="sgcmf.model.Rodadadepenaltis" />
+            <one-to-many class="sgcmf.model.hibernate.Rodadadepenaltis" />
         </set>
     </class>
 </hibernate-mapping>

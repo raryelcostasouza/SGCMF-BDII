@@ -1,9 +1,9 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
-import sgcmf.model.Jogo;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.JogoDAO;
+import sgcmf.model.hibernate.Jogo;
 
 public class CtrJogo
 {

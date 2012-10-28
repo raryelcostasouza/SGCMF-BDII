@@ -1,7 +1,7 @@
 package sgcmf.model.dao;
 
 import java.util.ArrayList;
-import sgcmf.model.Jogo;
+import sgcmf.model.hibernate.Jogo;
 
 public class JogoDAO extends GeneralDAO<Jogo>
 {

@@ -1,7 +1,7 @@
 package sgcmf.model.dao;
 
 import java.util.ArrayList;
-import sgcmf.model.Selecao;
+import sgcmf.model.hibernate.Selecao;
 
 public class SelecaoDAO extends GeneralDAO<Selecao>
 {	

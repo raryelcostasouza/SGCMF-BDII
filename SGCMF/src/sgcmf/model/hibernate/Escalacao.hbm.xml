@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 27, 2012 4:35:01 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Oct 28, 2012 12:07:10 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="sgcmf.model.Escalacao" table="escalacao" schema="public">
+    <class name="sgcmf.model.hibernate.Escalacao" table="escalacao" schema="public">
         <id name="id" type="short">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
-        <many-to-one name="selecao" class="sgcmf.model.Selecao" fetch="select">
+        <many-to-one name="selecao" class="sgcmf.model.hibernate.Selecao" fetch="select">
             <column name="idselecao" not-null="true" />
         </many-to-one>
-        <many-to-one name="jogo" class="sgcmf.model.Jogo" fetch="select">
+        <many-to-one name="jogo" class="sgcmf.model.hibernate.Jogo" fetch="select">
             <column name="idjogo" not-null="true" />
         </many-to-one>
-        <many-to-one name="jogador" class="sgcmf.model.Jogador" fetch="select">
+        <many-to-one name="jogador" class="sgcmf.model.hibernate.Jogador" fetch="select">
             <column name="idjogador" not-null="true" />
         </many-to-one>
     </class>

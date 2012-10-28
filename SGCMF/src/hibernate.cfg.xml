@@ -7,16 +7,16 @@
     <property name="hibernate.connection.url">jdbc:postgresql://localhost/sgcmf</property>
     <property name="hibernate.connection.username">javaappsgcmf</property>
     <property name="hibernate.connection.password">java</property>
-    <mapping resource="sgcmf/model/Jogador.hbm.xml"/>
-    <mapping resource="sgcmf/model/Jogo.hbm.xml"/>
-    <mapping resource="sgcmf/model/Selecao.hbm.xml"/>
-    <mapping resource="sgcmf/model/Gol.hbm.xml"/>
-    <mapping resource="sgcmf/model/Escalacao.hbm.xml"/>
-    <mapping resource="sgcmf/model/Ocorrencia.hbm.xml"/>
-    <mapping resource="sgcmf/model/Substituicao.hbm.xml"/>
-    <mapping resource="sgcmf/model/Usuario.hbm.xml"/>
-    <mapping resource="sgcmf/model/Falta.hbm.xml"/>
-    <mapping resource="sgcmf/model/Cartao.hbm.xml"/>
-    <mapping resource="sgcmf/model/Rodadadepenaltis.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Escalacao.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Falta.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Jogo.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Selecao.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Substituicao.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Ocorrencia.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Jogador.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Cartao.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Usuario.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Rodadadepenaltis.hbm.xml"/>
+    <mapping resource="sgcmf/model/hibernate/Gol.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
