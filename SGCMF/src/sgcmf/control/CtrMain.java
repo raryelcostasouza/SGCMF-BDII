@@ -40,22 +40,22 @@ public class CtrMain
 
     public void login(String login, char[] senha)
     {
-        if (login.equals("admin"))
+        if (login.equals("a"))
         {
             limLogin.setVisible(false);
             ctrAdmin.ativaTela();
         }
-        else if (login.equals("comiteGestor"))
+        else if (login.equals("c"))
         {
             limLogin.setVisible(false);
             ctrComiteGestor.ativaTela();
         }
-        else if (login.equals("tecnico"))
+        else if (login.equals("t"))
         {
             limLogin.setVisible(false);
             ctrTecnico.ativaTela();
         }
-        else if (login.equals("entusiasta"))
+        else if (login.equals("e"))
         {
             limLogin.setVisible(false);
             ctrEntusiasta.ativaTela();
