@@ -1,5 +1,5 @@
 package sgcmf.model;
-// Generated Oct 27, 2012 11:54:54 AM by Hibernate Tools 3.2.1.GA
+// Generated Oct 27, 2012 4:35:00 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
@@ -21,8 +21,9 @@ public class Jogador  implements java.io.Serializable {
      private Date datanasc;
      private String posicao;
      private boolean titular;
-     private Set gols = new HashSet(0);
+     private Set golsForIdjogadorassistencia = new HashSet(0);
      private Set substituicaosForIdjogadorentrou = new HashSet(0);
+     private Set golsForIdjogadorautor = new HashSet(0);
      private Set substituicaosForIdjogadorsaiu = new HashSet(0);
      private Set escalacaos = new HashSet(0);
      private Set faltas = new HashSet(0);
@@ -45,7 +46,7 @@ public class Jogador  implements java.io.Serializable {
         this.posicao = posicao;
         this.titular = titular;
     }
-    public Jogador(short id, Selecao selecao, String nome, BigDecimal altura, short ncamisa, Date datanasc, String posicao, boolean titular, Set gols, Set substituicaosForIdjogadorentrou, Set substituicaosForIdjogadorsaiu, Set escalacaos, Set faltas, Set cartaos, Set ocorrencias, Set rodadadepenaltisesForIdjogadorcobrancai, Set rodadadepenaltisesForIdjogadorcobrancaii) {
+    public Jogador(short id, Selecao selecao, String nome, BigDecimal altura, short ncamisa, Date datanasc, String posicao, boolean titular, Set golsForIdjogadorassistencia, Set substituicaosForIdjogadorentrou, Set golsForIdjogadorautor, Set substituicaosForIdjogadorsaiu, Set escalacaos, Set faltas, Set cartaos, Set ocorrencias, Set rodadadepenaltisesForIdjogadorcobrancai, Set rodadadepenaltisesForIdjogadorcobrancaii) {
        this.id = id;
        this.selecao = selecao;
        this.nome = nome;
@@ -54,8 +55,9 @@ public class Jogador  implements java.io.Serializable {
        this.datanasc = datanasc;
        this.posicao = posicao;
        this.titular = titular;
-       this.gols = gols;
+       this.golsForIdjogadorassistencia = golsForIdjogadorassistencia;
        this.substituicaosForIdjogadorentrou = substituicaosForIdjogadorentrou;
+       this.golsForIdjogadorautor = golsForIdjogadorautor;
        this.substituicaosForIdjogadorsaiu = substituicaosForIdjogadorsaiu;
        this.escalacaos = escalacaos;
        this.faltas = faltas;
@@ -121,12 +123,12 @@ public class Jogador  implements java.io.Serializable {
     public void setTitular(boolean titular) {
         this.titular = titular;
     }
-    public Set getGols() {
-        return this.gols;
+    public Set getGolsForIdjogadorassistencia() {
+        return this.golsForIdjogadorassistencia;
     }
     
-    public void setGols(Set gols) {
-        this.gols = gols;
+    public void setGolsForIdjogadorassistencia(Set golsForIdjogadorassistencia) {
+        this.golsForIdjogadorassistencia = golsForIdjogadorassistencia;
     }
     public Set getSubstituicaosForIdjogadorentrou() {
         return this.substituicaosForIdjogadorentrou;
@@ -134,6 +136,13 @@ public class Jogador  implements java.io.Serializable {
     
     public void setSubstituicaosForIdjogadorentrou(Set substituicaosForIdjogadorentrou) {
         this.substituicaosForIdjogadorentrou = substituicaosForIdjogadorentrou;
+    }
+    public Set getGolsForIdjogadorautor() {
+        return this.golsForIdjogadorautor;
+    }
+    
+    public void setGolsForIdjogadorautor(Set golsForIdjogadorautor) {
+        this.golsForIdjogadorautor = golsForIdjogadorautor;
     }
     public Set getSubstituicaosForIdjogadorsaiu() {
         return this.substituicaosForIdjogadorsaiu;

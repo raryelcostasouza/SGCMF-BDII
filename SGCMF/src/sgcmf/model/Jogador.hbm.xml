@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 27, 2012 11:54:56 AM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Oct 27, 2012 4:35:01 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="sgcmf.model.Jogador" table="jogador" schema="public">
         <id name="id" type="short">
@@ -29,7 +29,7 @@
         <property name="titular" type="boolean">
             <column name="titular" not-null="true" />
         </property>
-        <set name="gols" inverse="true">
+        <set name="golsForIdjogadorassistencia" inverse="true">
             <key>
                 <column name="idjogadorassistencia" />
             </key>
@@ -40,6 +40,12 @@
                 <column name="idjogadorentrou" not-null="true" />
             </key>
             <one-to-many class="sgcmf.model.Substituicao" />
+        </set>
+        <set name="golsForIdjogadorautor" inverse="true">
+            <key>
+                <column name="idjogadorautor" not-null="true" />
+            </key>
+            <one-to-many class="sgcmf.model.Gol" />
         </set>
         <set name="substituicaosForIdjogadorsaiu" inverse="true">
             <key>

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 27, 2012 11:54:56 AM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Oct 27, 2012 4:35:01 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="sgcmf.model.Ocorrencia" table="ocorrencia" schema="public">
         <id name="id" type="short">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="jogo" class="sgcmf.model.Jogo" fetch="select">
             <column name="idjogo" not-null="true" />

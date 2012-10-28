@@ -1,5 +1,5 @@
 package sgcmf.model;
-// Generated Oct 27, 2012 11:54:54 AM by Hibernate Tools 3.2.1.GA
+// Generated Oct 27, 2012 4:35:00 PM by Hibernate Tools 3.2.1.GA
 
 
 
@@ -10,9 +10,9 @@ public class Gol  implements java.io.Serializable {
 
 
      private short idoc;
+     private Jogador jogadorByIdjogadorautor;
      private Ocorrencia ocorrencia;
-     private Jogador jogador;
-     private short idjogadorautor;
+     private Jogador jogadorByIdjogadorassistencia;
      private String tipo;
      private String modo;
 
@@ -20,18 +20,18 @@ public class Gol  implements java.io.Serializable {
     }
 
 	
-    public Gol(short idoc, Ocorrencia ocorrencia, short idjogadorautor, String tipo, String modo) {
+    public Gol(short idoc, Jogador jogadorByIdjogadorautor, Ocorrencia ocorrencia, String tipo, String modo) {
         this.idoc = idoc;
+        this.jogadorByIdjogadorautor = jogadorByIdjogadorautor;
         this.ocorrencia = ocorrencia;
-        this.idjogadorautor = idjogadorautor;
         this.tipo = tipo;
         this.modo = modo;
     }
-    public Gol(short idoc, Ocorrencia ocorrencia, Jogador jogador, short idjogadorautor, String tipo, String modo) {
+    public Gol(short idoc, Jogador jogadorByIdjogadorautor, Ocorrencia ocorrencia, Jogador jogadorByIdjogadorassistencia, String tipo, String modo) {
        this.idoc = idoc;
+       this.jogadorByIdjogadorautor = jogadorByIdjogadorautor;
        this.ocorrencia = ocorrencia;
-       this.jogador = jogador;
-       this.idjogadorautor = idjogadorautor;
+       this.jogadorByIdjogadorassistencia = jogadorByIdjogadorassistencia;
        this.tipo = tipo;
        this.modo = modo;
     }
@@ -43,6 +43,13 @@ public class Gol  implements java.io.Serializable {
     public void setIdoc(short idoc) {
         this.idoc = idoc;
     }
+    public Jogador getJogadorByIdjogadorautor() {
+        return this.jogadorByIdjogadorautor;
+    }
+    
+    public void setJogadorByIdjogadorautor(Jogador jogadorByIdjogadorautor) {
+        this.jogadorByIdjogadorautor = jogadorByIdjogadorautor;
+    }
     public Ocorrencia getOcorrencia() {
         return this.ocorrencia;
     }
@@ -50,19 +57,12 @@ public class Gol  implements java.io.Serializable {
     public void setOcorrencia(Ocorrencia ocorrencia) {
         this.ocorrencia = ocorrencia;
     }
-    public Jogador getJogador() {
-        return this.jogador;
+    public Jogador getJogadorByIdjogadorassistencia() {
+        return this.jogadorByIdjogadorassistencia;
     }
     
-    public void setJogador(Jogador jogador) {
-        this.jogador = jogador;
-    }
-    public short getIdjogadorautor() {
-        return this.idjogadorautor;
-    }
-    
-    public void setIdjogadorautor(short idjogadorautor) {
-        this.idjogadorautor = idjogadorautor;
+    public void setJogadorByIdjogadorassistencia(Jogador jogadorByIdjogadorassistencia) {
+        this.jogadorByIdjogadorassistencia = jogadorByIdjogadorassistencia;
     }
     public String getTipo() {
         return this.tipo;

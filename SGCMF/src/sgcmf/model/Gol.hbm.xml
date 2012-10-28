@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 27, 2012 11:54:56 AM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Oct 27, 2012 4:35:01 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="sgcmf.model.Gol" table="gol" schema="public">
         <id name="idoc" type="short">
             <column name="idoc" />
             <generator class="assigned" />
         </id>
+        <many-to-one name="jogadorByIdjogadorautor" class="sgcmf.model.Jogador" fetch="select">
+            <column name="idjogadorautor" not-null="true" />
+        </many-to-one>
         <many-to-one name="ocorrencia" class="sgcmf.model.Ocorrencia" update="false" insert="false" fetch="select">
             <column name="idoc" not-null="true" unique="true" />
         </many-to-one>
-        <many-to-one name="jogador" class="sgcmf.model.Jogador" fetch="select">
+        <many-to-one name="jogadorByIdjogadorassistencia" class="sgcmf.model.Jogador" fetch="select">
             <column name="idjogadorassistencia" />
         </many-to-one>
-        <property name="idjogadorautor" type="short">
-            <column name="idjogadorautor" not-null="true" />
-        </property>
         <property name="tipo" type="string">
             <column name="tipo" not-null="true" />
         </property>
