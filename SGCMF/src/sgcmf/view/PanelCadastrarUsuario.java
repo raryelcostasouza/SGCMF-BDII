@@ -27,7 +27,6 @@ public class PanelCadastrarUsuario extends JPanel {
     private void montaPainel()
     {
         JPanel jpAux = new JPanel(new GridLayout(6, 1));
-        JPanel jpAux2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         JLabel jlLogin = new JLabel("Login:");
         UtilView.alinhaLabel(jlLogin);
@@ -50,7 +49,6 @@ public class PanelCadastrarUsuario extends JPanel {
         JTextField jtfCPF = new JTextField(10);
 
         JButton jbCadastrar = new JButton("Cadastrar");
-        JButton jbPesquisar = new JButton("P");
 
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfLogin, FlowLayout.LEFT));
@@ -63,9 +61,7 @@ public class PanelCadastrarUsuario extends JPanel {
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlEmail));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfEmail, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlCPF));
-        jpAux2.add(jtfCPF);
-        jpAux2.add(jbPesquisar);
-        jpAux.add(jpAux2);
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfCPF, FlowLayout.LEFT));
         jpAux.setBorder(BorderFactory.createEtchedBorder());
 
 

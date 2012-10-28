@@ -92,7 +92,6 @@ public class PanelRemoverUsuario extends JPanel {
     {
         JPanel jpPrincipal = new JPanel(new BorderLayout());
         JPanel jpAux = new JPanel(new GridLayout(3, 2));
-        JPanel jpAux2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         JLabel jlLogin = new JLabel("Login:");
         UtilView.alinhaLabel(jlLogin);
@@ -115,7 +114,6 @@ public class PanelRemoverUsuario extends JPanel {
         JTextField jtfCPF = new JTextField(10);
 
 
-        JButton jbPesquisar = new JButton("P");
         JButton jbAlterar = new JButton("Remover");
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfLogin, FlowLayout.LEFT));
@@ -128,9 +126,7 @@ public class PanelRemoverUsuario extends JPanel {
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlEmail));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfEmail, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlCPF));
-        jpAux2.add(jtfCPF);
-        jpAux2.add(jbPesquisar);
-        jpAux.add(jpAux2);
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfCPF, FlowLayout.LEFT));
         jpAux.setBorder(BorderFactory.createEtchedBorder());
 
         jpPrincipal.add(jpAux, BorderLayout.CENTER);
