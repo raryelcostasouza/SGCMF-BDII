@@ -5,11 +5,14 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-
+import sgcmf.control.CtrAdmin;
+import sgcmf.model.other.SGCMFIcons;
 
 /**
  *
@@ -17,57 +20,80 @@ import javax.swing.JPanel;
  */
 public class LimAdmin extends JFrame
 {
-    private LimGerenciarUsuario limGerenciarUsuario;
-    public LimAdmin(){
-        setTitle("Usuário Administrador");
-        setSize(600, 200);
-        setLocationRelativeTo(null);
-        //setVisible(true);
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
+	private LimGerenciarUsuario limGerenciarUsuario;
+	private CtrAdmin ctrAdmin;
+	
+	public LimAdmin(CtrAdmin ctrAdmin)
+	{
+		this.ctrAdmin = ctrAdmin;
+		
+		setTitle("Usuário Administrador");
+		add(montaPainel());
+		pack();
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		limGerenciarUsuario = new LimGerenciarUsuario();
+		
+		addWindowListener(new WindowAdapter() 
+		{
 
-        add(montaPainel());
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				acaoLogout();
+			}			
+		});
+		
+	}
 
-        limGerenciarUsuario = new LimGerenciarUsuario();
-    }
+	private JPanel montaPainel()
+	{
+		JPanel jpPrincipal = new JPanel(new BorderLayout());
+		JPanel jpAux = new JPanel(new GridLayout(1, 1));
 
-    private JPanel montaPainel()
-    {
-        JPanel jpPrincipal = new JPanel(new BorderLayout());
-        JPanel jpAux = new JPanel(new GridLayout(1, 1));
+		JButton jbGerenciarUsuarios = new JButton("Gerenciar Usuários", SGCMFIcons.USUARIO);
+		jbGerenciarUsuarios.setVerticalTextPosition(JButton.BOTTOM);
+		jbGerenciarUsuarios.setHorizontalTextPosition(JButton.CENTER);
+		
+		jbGerenciarUsuarios.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				limGerenciarUsuario.setVisible(true);
+			}
+		});
 
-        JButton jbGerenciarUsuarios = new JButton("Gerenciar Usuários");
-        jbGerenciarUsuarios.addActionListener(new ActionListener() {
+		JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
+		jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
+		jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
 
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                limGerenciarUsuario.setVisible(true);
-            }
-        });
+		JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
+		jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
+		jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
 
-        JButton jbRelatorios = new JButton("Relatórios");
-        JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato");
+		JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
 
-        JButton jbLogout = new JButton("Logout");
+		jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbGerenciarUsuarios));
+		jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorios));
+		jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));
 
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbGerenciarUsuarios));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorios));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));
+		jpPrincipal.add(jpAux, BorderLayout.CENTER);
+		jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbLogout), BorderLayout.SOUTH);
 
-        jpPrincipal.add(jpAux, BorderLayout.CENTER);
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbLogout), BorderLayout.SOUTH);
+		return jpPrincipal;
+	}
+	
+	private void acaoLogout()
+	{
+		int op;
 
-        return jpPrincipal;
-    }
-    public static void main(String[] args)
-    {
-        EventQueue.invokeLater(new Runnable() {
+		op = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja fazer logout do sistema?", "Confirmação de Logout", JOptionPane.YES_NO_OPTION);
 
-            @Override
-            public void run()
-            {
-                new LimAdmin();
-            }
-        });
-    }
+		if (op == JOptionPane.OK_OPTION)
+		{
+			setVisible(false);
+			ctrAdmin.logout();
+		}
+	}
 }

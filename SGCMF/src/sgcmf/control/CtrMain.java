@@ -24,7 +24,7 @@ public class CtrMain
 		ctrOcorrenciaJogo = new CtrOcorrenciaJogo(this);
 		ctrJogador = new CtrJogador();
 		
-        ctrAdmin = new CtrAdmin();
+        ctrAdmin = new CtrAdmin(this);
         ctrComiteGestor = new CtrComiteGestor(this);
         ctrTecnico = new CtrTecnico(this);
         ctrEntusiasta = new CtrEntusiasta();
