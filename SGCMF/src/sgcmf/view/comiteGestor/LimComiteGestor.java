@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -18,6 +17,7 @@ import sgcmf.control.CtrJogador;
 import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.control.CtrSelecao;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 import sgcmf.view.comiteGestor.disputaPenalti.LimGerDispPenaltiSelecionarJogo;
 import sgcmf.view.comiteGestor.ocorrenciaJogo.LimGerOcorrSelecionarJogo;
@@ -66,8 +66,7 @@ public class LimComiteGestor extends JDialog
 
 		mainPanel.add(montaGridPanel(), BorderLayout.CENTER);
 
-		ImageIcon iconLogout = new ImageIcon("img/logout.png");
-		JButton jbLogout = new JButton("Logout", iconLogout);
+		JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
 
 		jbLogout.addActionListener(new ActionListener()
 		{
@@ -88,40 +87,33 @@ public class LimComiteGestor extends JDialog
 		Dimension buttonDimension = new Dimension(180, 180);
 		JPanel gridPanel = new JPanel(new GridLayout(2, 3));
 
-		ImageIcon iconSelecao = new ImageIcon("img/selecao.png");
-		ImageIcon iconJogo = new ImageIcon("img/jogo.png");
-		ImageIcon iconOcorrenciaJogo = new ImageIcon("img/ocorrencia-jogo.png");
-		ImageIcon iconPenalti = new ImageIcon("img/penalti.png");
-		ImageIcon iconRelatorio = new ImageIcon("img/relatorio.png");
-		ImageIcon iconTabela = new ImageIcon("img/tabela.png");
-
-		JButton jbConsultarSelecoes = new JButton("Consultar Seleções", iconSelecao);
+		JButton jbConsultarSelecoes = new JButton("Consultar Seleções", SGCMFIcons.SELECAO);
 		jbConsultarSelecoes.setVerticalTextPosition(JButton.BOTTOM);
 		jbConsultarSelecoes.setHorizontalTextPosition(JButton.CENTER);
 		jbConsultarSelecoes.setPreferredSize(buttonDimension);
 
-		JButton jbConsultarJogos = new JButton("Consultar Jogos", iconJogo);
+		JButton jbConsultarJogos = new JButton("Consultar Jogos", SGCMFIcons.JOGO);
 		jbConsultarJogos.setVerticalTextPosition(JButton.BOTTOM);
 		jbConsultarJogos.setHorizontalTextPosition(JButton.CENTER);
 		jbConsultarJogos.setPreferredSize(buttonDimension);
 
-		JButton jbGerOcorrenciaJogo = new JButton("<html>Gerenciar Ocorrências<br><center>de Jogo</center></html>", iconOcorrenciaJogo);
+		JButton jbGerOcorrenciaJogo = new JButton("<html>Gerenciar Ocorrências<br><center>de Jogo</center></html>", SGCMFIcons.OCORRENCIA_JOGO);
 		jbGerOcorrenciaJogo.setVerticalTextPosition(JButton.BOTTOM);
 		jbGerOcorrenciaJogo.setHorizontalTextPosition(JButton.CENTER);
 		jbGerOcorrenciaJogo.setHorizontalAlignment(SwingConstants.CENTER);
 		jbGerOcorrenciaJogo.setPreferredSize(buttonDimension);
 
-		JButton jbGerDisputaPenaltis = new JButton("<html>Gerenciar Disputa<br><center>de Pênaltis</center></html>", iconPenalti);
+		JButton jbGerDisputaPenaltis = new JButton("<html>Gerenciar Disputa<br><center>de Pênaltis</center></html>", SGCMFIcons.PENALTI);
 		jbGerDisputaPenaltis.setVerticalTextPosition(JButton.BOTTOM);
 		jbGerDisputaPenaltis.setHorizontalTextPosition(JButton.CENTER);
 		jbGerDisputaPenaltis.setPreferredSize(buttonDimension);
 
-		JButton jbRelatorios = new JButton("Relatórios", iconRelatorio);
+		JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
 		jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
 		jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
 		jbRelatorios.setPreferredSize(buttonDimension);
 
-		JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", iconTabela);
+		JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
 		jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
 		jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
 		jbTabelaCampeonato.setPreferredSize(buttonDimension);

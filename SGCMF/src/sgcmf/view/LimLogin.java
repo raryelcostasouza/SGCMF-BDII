@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import sgcmf.control.CtrMain;
+import sgcmf.model.other.SGCMFIcons;
 
 public class LimLogin extends JFrame
 {
@@ -49,7 +50,7 @@ public class LimLogin extends JFrame
 
 		jtfLogin = new JTextField(10);
 		jpSenha = new JPasswordField(10);
-		JButton jbLogin = new JButton("Entrar");
+		JButton jbLogin = new JButton("Entrar", SGCMFIcons.LOGIN);		
 		jbLogin.addActionListener(new ActionListener() {
 
 			@Override
