@@ -7,11 +7,14 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -23,6 +26,7 @@ import sgcmf.view.tecnico.ISelecionarJogador;
 public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 {
 	private LimBuscarJogador limBuscarJogador;
+	private LimGerenciarOcorrenciasJogo limGerenciarOcorrencias;
 	private CtrOcorrenciaJogo ctrOcorrenciaJogo;
 	
 	private JTextField jtfInstanteTempoMin;
@@ -43,10 +47,11 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 	
 	private Short idJogo;
 	
-	public LimRegistrarGol(CtrOcorrenciaJogo ctrOcorrenciaJogo, LimBuscarJogador limBuscarJogador)
+	public LimRegistrarGol(CtrOcorrenciaJogo ctrOcorrenciaJogo, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
 	{
 		this.ctrOcorrenciaJogo = ctrOcorrenciaJogo;
 		this.limBuscarJogador = limBuscarJogador;
+		this.limGerenciarOcorrencias = limGerenciarOcorrencias;
 		
 		setTitle("Registrar Gol");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -55,6 +60,16 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 		setModal(true);
 		setSize(370,275);
 		setLocationRelativeTo(null);
+		
+		addWindowListener(new WindowAdapter() 
+		{
+
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				resetCamposInterface();
+			}
+		});
 	}
 	
 	private JPanel montaMainPanel()
@@ -183,6 +198,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 	{		
 		String tipo;
 		String modo;
+		String errorMsg;
 		
 		if (jrbTipoAFavor.isSelected())
 		{
@@ -206,18 +222,37 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 			modo = jrbModoPenalti.getText();
 		}
 		
-		ctrOcorrenciaJogo.registraGol(jtfInstanteTempoMin.getText(),
+		errorMsg = ctrOcorrenciaJogo.registraGol(jtfInstanteTempoMin.getText(),
 									jtfInstateTempoSeg.getText(),
 									idJogo,
 									jtfJogador.getText(), 
 									jtfJogadorAssist.getText(),
 									tipo,
 									modo);
+		if (errorMsg.equals(""))
+		{
+			setVisible(false);
+			limGerenciarOcorrencias.preencheTabelaGol();
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(this, errorMsg, "Erro!", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void ativaTelaBuscarJogador()
 	{
 		limBuscarJogador.ativaTela(this);
+	}
+	
+	private void resetCamposInterface()
+	{
+		jtfInstanteTempoMin.setText("");
+		jtfInstateTempoSeg.setText("");
+		jtfJogador.setText("");
+		jtfJogadorAssist.setText("");
+		jrbTipoAFavor.setSelected(true);
+		jrbModoComum.setSelected(true);
 	}
 	
 	@Override
@@ -233,6 +268,5 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 			jtfJogadorAssist.setText(idJogador+"");
 			selecaoJogadorAssistente = false;
 		}		
-	}
-	
+	}	
 }
