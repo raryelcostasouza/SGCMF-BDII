@@ -62,7 +62,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 		this.ctrOcorrenciaJogo = ctrOcorrenciaJogo;
 		this.ctrJogo = ctrJogo;
 		
-		limRegistrarGol = new LimRegistrarGol(ctrOcorrenciaJogo, limBuscarJogador);
+		limRegistrarGol = new LimRegistrarGol(ctrOcorrenciaJogo, limBuscarJogador, this);
 		limRegistrarFalta = new LimRegistrarFalta(limBuscarJogador);
 		limRegistrarCartao = new LimRegistrarCartao(limBuscarJogador);
 		limRegistrarSubstituicao = new LimRegistrarSubstituicao(limBuscarJogador);
@@ -344,14 +344,13 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 		setVisible(true);
 	}
 	
-	private void preencheTabelaGol()
+	public void preencheTabelaGol()
 	{
 		String[][] dadosGol;
 		
 		dadosGol = ctrOcorrenciaJogo.queryGolTodos();
 		jtGol.preencheTabela(dadosGol);
 		jlInfoJogo.setText(ctrJogo.queryInfoJogoById(idJogo));
-		
 	}
 	
 	private void resetCamposInterface()
