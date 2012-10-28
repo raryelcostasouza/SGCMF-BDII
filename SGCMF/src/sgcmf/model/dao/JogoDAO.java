@@ -45,4 +45,14 @@ public class JogoDAO extends GeneralDAO<Jogo>
 		
 		return (ArrayList<Jogo>)sessao.createQuery(hql).list();
 	}
+	
+	public Jogo queryInfoJogoById(Short idJogo)
+	{
+		String hql;
+		hql = "from Jogo j "
+				+ "where j.id = " + idJogo;
+		
+		return (Jogo) sessao.createQuery(hql).uniqueResult();
+	}
+			
 }
