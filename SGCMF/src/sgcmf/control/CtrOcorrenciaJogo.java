@@ -2,7 +2,8 @@ package sgcmf.control;
 
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
+import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.model.Gol;
 import sgcmf.model.Jogador;
@@ -12,40 +13,115 @@ import sgcmf.model.dao.GeneralDAO;
 
 public class CtrOcorrenciaJogo
 {
-	public void registraGol(String min, String seg, Short idJogo, String idJogadorAutor, String idJogadorAssist,
+	private CtrMain ctrMain;
+	
+	public CtrOcorrenciaJogo(CtrMain ctrMain)
+	{
+		this.ctrMain = ctrMain;
+	}
+	
+	private Ocorrencia registraOcorrencia(GeneralDAO gdao, String min, String seg, Short idJogo)
+	{
+		Ocorrencia oc;
+		Jogo jogo;
+		Time tempo;
+		
+		jogo = ctrMain.getCtrJogo().carregarJogoById(idJogo);
+
+		tempo = new Time(0, Integer.parseInt(min), Integer.parseInt(seg));
+		
+		oc = new Ocorrencia();
+		oc.setInstantetempo(tempo);
+		oc.setJogo(jogo);		
+		
+		gdao.salvar(oc);
+		
+		return oc;
+	}
+	
+	public String registraGol(String min, String seg, Short idJogo, String idJogadorAutor, String idJogadorAssist,
 							String tipoGol, String modoGol)
 	{
-		Time tempo;
+		Short shortIdJogadorAutor;
+		Short shortIdJogadorAssist;
 		GeneralDAO gdao;
 		Transaction tr;
 		Gol g;
 		Ocorrencia o;	
-		Jogo j;
 		Jogador jAutor;
-		Short shortIdJogadorAutor;
+		Jogador jAssist;		
+		String errorMessage;
 		
-		o = new Ocorrencia();
-		j = new Jogo();
+		errorMessage = validaCamposGol(min, seg, idJogo, idJogadorAutor);
 		
-		gdao = new GeneralDAO();
-		j = (Jogo) gdao.carregar(j, idJogo);
+		//se nao tiver erros nos campos faz o cadastro
+		if (errorMessage.equals(""))
+		{
+			gdao = new GeneralDAO();
+			tr = gdao.getSessao().beginTransaction();
+			try
+			{
+				o = registraOcorrencia(gdao, min, seg, idJogo);
+				
+				//carrega o jogador autor
+				shortIdJogadorAutor = Short.parseShort(idJogadorAutor);
+				jAutor = ctrMain.getCtrJogador().carregaJogadorById(shortIdJogadorAutor);
+				
+				//se tiver jogador assistente, ele eh carregado
+				if (!idJogadorAssist.equals(""))
+				{
+					shortIdJogadorAssist = Short.parseShort(idJogadorAssist);
+					jAssist = ctrMain.getCtrJogador().carregaJogadorById(shortIdJogadorAssist);
+					g = new Gol(o.getId(), jAutor, o, jAssist, tipoGol, modoGol);
+				}
+				else
+				{
+					g = new Gol(o.getId(), jAutor, o, tipoGol, modoGol);
+				}
+				
+				//salva o gol e commita
+				gdao.salvar(g);
+				tr.commit();
+			}
+			catch(HibernateException hex)
+			{
+				tr.rollback();
+				System.out.println(hex.getMessage());			
+			}
+		}
 		
-		tempo = new Time(0, Integer.parseInt(min), Integer.parseInt(seg));
-		o.setInstantetempo(tempo);
-		o.setJogo(j);
-		gdao.salvar(o);
-		
-		jAutor = new Jogador();
-		shortIdJogadorAutor = Short.parseShort(idJogadorAutor);
-		jAutor = (Jogador) gdao.carregar(jAutor, shortIdJogadorAutor); 
-		g = new Gol(o.getId(), jAutor, o, tipoGol, modoGol);
-		
-		gdao.salvar(g);
-		
-		tr = gdao.getSessao().beginTransaction();
-		tr.commit();
+		return errorMessage;
+	}
 	
-		gdao.fecharSessao();		
+	private String validaCamposGol(String min, String seg, Short idJogo, String idJogadorAutor)
+	{
+		String errorMessage;
+		
+		errorMessage = "";
+		try
+		{
+			Integer.parseInt(min);
+			Integer.parseInt(seg);
+		}
+		catch (NumberFormatException nfe)
+		{
+			errorMessage = "Instante de tempo: digite números válidos.";
+		}
+		
+		//so faz o outro teste se passou no primeiro teste
+		if (errorMessage.equals(""))		
+		{
+			try
+			{
+				Short.parseShort(idJogadorAutor);
+			}
+			catch(NumberFormatException nfe)
+			{
+				errorMessage = "Jogador autor: é obrigatório selecionar o jogador autor.";
+			}
+		}
+		
+		return errorMessage;
 	}
 	
 	public void removeGol(Short idOc)
@@ -60,15 +136,23 @@ public class CtrOcorrenciaJogo
 		ocParaRemover = new Ocorrencia();
 		
 		gdao= new GeneralDAO();
-		
-		golParaRemover = (Gol) gdao.carregar(golParaRemover, idOc);
-		ocParaRemover = (Ocorrencia) gdao.carregar(ocParaRemover, idOc);
-		
-		gdao.apagar(golParaRemover);
-		gdao.apagar(ocParaRemover);
-		
 		tr = gdao.getSessao().beginTransaction();
-		tr.commit();
+		
+		try
+		{
+			golParaRemover = (Gol) gdao.carregar(golParaRemover, idOc);
+			ocParaRemover = (Ocorrencia) gdao.carregar(ocParaRemover, idOc);
+			
+			gdao.apagar(golParaRemover);
+			gdao.apagar(ocParaRemover);
+			
+			tr.commit();
+		}
+		catch(HibernateException hex)
+		{
+			tr.rollback();
+			System.out.println(hex.getMessage());
+		}
 		
 		gdao.fecharSessao();
 	}
