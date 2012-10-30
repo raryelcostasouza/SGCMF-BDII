@@ -5,14 +5,12 @@
 package sgcmf.view.tecnico;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -25,8 +23,10 @@ import sgcmf.view.UtilView;
  */
 public class PanelCadastrarJogador extends JPanel
 {
+    private LimConsultarSelecao limConsultarSelecao;
     public PanelCadastrarJogador()
     {
+        limConsultarSelecao = new LimConsultarSelecao();
         setLayout(new BorderLayout());
         montaPainel();
     }
@@ -59,6 +59,15 @@ public class PanelCadastrarJogador extends JPanel
         JButton jbCadastrar = new JButton("Cadastrar");
         JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
+        
+        jbPesquisar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                limConsultarSelecao.setVisible(true);
+            }
+        });
 
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNumeroCamisa));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNumeroCamisa, FlowLayout.LEFT));

@@ -28,6 +28,7 @@ public class LimGerenciarJogador extends JDialog
         pRemoverJogador = new PanelRemoverJogador();
         pConsultarJogador = new PanelConsultarJogador();
         setTitle("Gerenciar Jogadores");
+        setResizable(false);
         setModal(true);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
