@@ -56,7 +56,7 @@ public class LimGerDisputaPenalti extends JDialog
 	
 	private JScrollPane montaCenterPanel()
 	{
-		String[] nomesColunas = {"Nº Rodada", "Cobrança I", "Cobrança II"};
+		String[] nomesColunas = {"ID", "Nº Rodada", "Cobrança I", "Cobrança II"};
 		
 		JTableSGCMF jt = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jt,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

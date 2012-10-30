@@ -56,13 +56,14 @@ public class CtrSelecao
 		String[][] dadosSelecoes;
 		Selecao s;
 		
-		dadosSelecoes = new String[alSelecao.size()][3];
+		dadosSelecoes = new String[alSelecao.size()][4];
 		for (int i = 0; i < alSelecao.size(); i++)
 		{
 			s = alSelecao.get(i);
-			dadosSelecoes[i][0] = s.getPais();
-			dadosSelecoes[i][1] = s.getUsuario().getNome();			
-			dadosSelecoes[i][2] = s.getCaminhoimgbandeira();			
+			dadosSelecoes[i][0] = s.getId()+"";
+			dadosSelecoes[i][1] = s.getPais();
+			dadosSelecoes[i][2] = s.getUsuario().getNome();			
+			dadosSelecoes[i][3] = s.getCaminhoimgbandeira();			
 		}
 		
 		return dadosSelecoes;

@@ -110,7 +110,7 @@ public class LimConsultaSelecao extends JDialog
 	
 	private JScrollPane montaCenterPanel()
 	{
-		String[] nomesColunas = {"País", "Técnico", "Bandeira"};
+		String[] nomesColunas = {"ID", "País", "Técnico", "Bandeira"};
 		
 		jt = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jt,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

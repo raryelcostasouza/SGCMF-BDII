@@ -227,7 +227,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 	{
 		JPanel centerPanelFalta = new JPanel(new BorderLayout());
 		
-		String[] nomesColunas = {"Instante de Tempo", "Jogador Autor", "Cartão", "Tipo"};
+		String[] nomesColunas = {"ID", "Instante de Tempo", "Jogador Autor", "Cartão", "Tipo"};
 		jtFalta = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jtFalta,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	
@@ -251,7 +251,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 	{
 		JPanel centerPanelCartao = new JPanel(new BorderLayout());
 		
-		String[] nomesColunas = {"Instante de Tempo", "Jogador", "Cor"};
+		String[] nomesColunas = {"ID","Instante de Tempo", "Jogador", "Cor"};
 		jtCartao = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jtCartao,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	
@@ -275,7 +275,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 	{
 		JPanel centerPanelSubst = new JPanel(new BorderLayout());
 		
-		String[] nomesColunas = {"Instante de Tempo", "Jogador Entrou", "Jogador Saiu", "Motivo"};
+		String[] nomesColunas = {"ID", "Instante de Tempo", "Jogador Entrou", "Jogador Saiu", "Motivo"};
 		jtSubst = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jtSubst,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	
@@ -299,7 +299,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 	{
 		JPanel centerPanelRoubadaBola = new JPanel(new BorderLayout());
 		
-		String[] nomesColunas = {"Instante de Tempo", "Jogador Ladrão"};
+		String[] nomesColunas = {"ID", "Instante de Tempo", "Jogador Ladrão"};
 		jtRoubadaBola = new JTableSGCMF(null, nomesColunas);	
 		JScrollPane jsp = new JScrollPane(jtRoubadaBola,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	
