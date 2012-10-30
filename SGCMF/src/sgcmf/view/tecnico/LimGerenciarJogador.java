@@ -4,6 +4,7 @@
  */
 package sgcmf.view.tecnico;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
@@ -13,7 +14,7 @@ import javax.swing.event.ChangeListener;
  *
  * @author Helio
  */
-public class LimGerenciarJogador extends JFrame
+public class LimGerenciarJogador extends JDialog
 {
     private PanelCadastrarJogador pCadastrarJogador;
     private PanelAlterarJogador pAlterarJogador;
@@ -27,6 +28,7 @@ public class LimGerenciarJogador extends JFrame
         pRemoverJogador = new PanelRemoverJogador();
         pConsultarJogador = new PanelConsultarJogador();
         setTitle("Gerenciar Jogadores");
+        setModal(true);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         add(montaPainel());

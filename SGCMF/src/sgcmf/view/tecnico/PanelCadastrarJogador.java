@@ -6,6 +6,7 @@ package sgcmf.view.tecnico;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -15,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 
 /**
@@ -55,7 +57,8 @@ public class PanelCadastrarJogador extends JPanel
         JTextField jtfSelecao = new JTextField(10);
 
         JButton jbCadastrar = new JButton("Cadastrar");
-        JButton jbPesquisar = new JButton("P");
+        JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
+        UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
 
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNumeroCamisa));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNumeroCamisa, FlowLayout.LEFT));

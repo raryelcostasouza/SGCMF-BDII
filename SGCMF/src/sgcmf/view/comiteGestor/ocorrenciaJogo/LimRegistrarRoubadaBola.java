@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.UtilView;
 
@@ -47,7 +48,9 @@ public class LimRegistrarRoubadaBola extends JDialog
 		JTextField jtfJogador = new JTextField(10);
 		
 		JButton jbRegistrarRoubadaBola = new JButton("Registrar Roubada de Bola");
-		JButton jbPesqJogador = new JButton("P");
+		JButton jbPesqJogador = new JButton(SGCMFIcons.PESQUISAR);
+                UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogador);
+                
 		jbPesqJogador.addActionListener(new ActionListener() {
 
 			@Override

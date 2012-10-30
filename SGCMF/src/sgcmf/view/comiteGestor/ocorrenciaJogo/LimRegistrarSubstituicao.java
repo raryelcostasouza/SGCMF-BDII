@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.UtilView;
 
@@ -60,8 +61,10 @@ public class LimRegistrarSubstituicao extends JDialog
 		jrbMotivoEstrategica.setSelected(true);
 		
 		JButton jbRegistrarSubst = new JButton("Registrar Substituição");
-		JButton jbPesqJogSaiu = new JButton("P");
-		JButton jbPesqJogEntrou = new JButton("P");
+		JButton jbPesqJogSaiu = new JButton(SGCMFIcons.PESQUISAR);
+                UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogSaiu);
+		JButton jbPesqJogEntrou = new JButton(SGCMFIcons.PESQUISAR);
+                UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogEntrou);
 		
 		jbPesqJogSaiu.addActionListener(new ActionListener() {
 

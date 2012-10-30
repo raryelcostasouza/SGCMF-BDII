@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.UtilView;
 
@@ -57,7 +58,9 @@ public class LimRegistrarCartao extends JDialog
 		JRadioButton jrbCartaoVermelho = new JRadioButton("Vermelho");
 				
 		JButton jbRegistrarCartao = new JButton("Registrar Cartão");
-		JButton jbPesqJogador = new JButton("P");
+		JButton jbPesqJogador = new JButton(SGCMFIcons.PESQUISAR);
+                UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogador);
+                
 		jbPesqJogador.addActionListener(new ActionListener() {
 
 			@Override

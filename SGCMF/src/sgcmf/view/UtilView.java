@@ -2,6 +2,7 @@ package sgcmf.view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,5 +28,10 @@ public class UtilView
     public static void alinhaLabel (JLabel jl)
     {
         jl.setPreferredSize(new Dimension(130, 20));
+    }
+    
+    public static void ajustarTamanhoBotaoPesquisar(JButton jb)
+    {
+        jb.setPreferredSize(new Dimension(35, 20));
     }
 }

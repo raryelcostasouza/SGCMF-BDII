@@ -14,5 +14,6 @@ public class SGCMFIcons
 	public static final ImageIcon JOGADOR = new ImageIcon("img/jogador.png");
 	public static final ImageIcon LOGIN = new ImageIcon("img/login.png");
 	public static final ImageIcon USUARIO = new ImageIcon("img/usuario.png");
-	public static final ImageIcon ESCALACAO = new ImageIcon("img/escalacao.png");	
+	public static final ImageIcon ESCALACAO = new ImageIcon("img/escalacao.png");
+        public static final ImageIcon PESQUISAR = new ImageIcon("img/pesquisar.png");
 }

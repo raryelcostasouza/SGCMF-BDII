@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 
@@ -75,7 +76,9 @@ public class LimLancarRodadaPenaltis extends JDialog
 		jrbGolNaoMarcado.setSelected(true);
 		JRadioButton jrbGolMarcado = new JRadioButton("Gol Marcado");
 		
-		JButton jbPesqJogador = new JButton("P");
+		JButton jbPesqJogador = new JButton(SGCMFIcons.PESQUISAR);
+                UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogador);
+                
 		jbPesqJogador.addActionListener(new ActionListener() {
 
 			@Override

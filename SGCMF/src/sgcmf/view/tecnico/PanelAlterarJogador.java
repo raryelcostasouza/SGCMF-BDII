@@ -5,6 +5,7 @@
 package sgcmf.view.tecnico;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
@@ -112,7 +114,8 @@ public class PanelAlterarJogador extends JPanel
         JTextField jtfSelecao = new JTextField(10);
 
         
-        JButton jbPesquisar = new JButton("P");
+        JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
+        UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
         JButton jbAlterar = new JButton("Alterar");
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNumeroCamisa));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNumeroCamisa, FlowLayout.LEFT));

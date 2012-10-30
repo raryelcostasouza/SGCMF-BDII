@@ -1,6 +1,7 @@
 package sgcmf.view.comiteGestor.ocorrenciaJogo;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import sgcmf.control.CtrOcorrenciaJogo;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.model.util.ResultadoOperacao;
 import sgcmf.model.util.TipoResultadoOperacao;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
@@ -121,9 +123,10 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 			}
 		});
 		
-		JButton jbPesqJogadorAutor = new JButton("P");
-		JButton jbPesqJogadorAssist = new JButton("P");
-		
+		JButton jbPesqJogadorAutor = new JButton(SGCMFIcons.PESQUISAR);
+                UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogadorAutor);
+		JButton jbPesqJogadorAssist = new JButton(SGCMFIcons.PESQUISAR);
+		UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogadorAssist);
 		jbPesqJogadorAutor.addActionListener(new ActionListener() {
 
 			@Override
