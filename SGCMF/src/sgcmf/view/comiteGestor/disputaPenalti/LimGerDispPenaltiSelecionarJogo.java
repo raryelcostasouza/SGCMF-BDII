@@ -18,7 +18,6 @@ public class LimGerDispPenaltiSelecionarJogo extends LimConsultarJogo
 		super(ctrJogo);
 		
 		setTitle("Gerenciar Disputa de Pênaltis: Selecione um Jogo");
-		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		limGerDisputaPenalti = new LimGerDisputaPenalti(limBuscarJogador);
 		

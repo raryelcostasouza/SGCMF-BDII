@@ -21,7 +21,6 @@ public class LimGerOcorrSelecionarJogo extends LimConsultarJogo
 		super(ctrJogo);
 		
 		setTitle("Gerenciar Ocorrências de Jogo: Selecione um Jogo");
-		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		limGerenciarOcorrenciasJogo = new LimGerenciarOcorrenciasJogo(ctrOcorrenciaJogo, ctrJogo, limBuscarJogador);
 		mainPanel.add(montaSouthPanel(), BorderLayout.SOUTH);
