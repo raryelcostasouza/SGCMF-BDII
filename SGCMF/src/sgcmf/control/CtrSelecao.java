@@ -1,53 +1,50 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
-import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.SelecaoDAO;
 import sgcmf.model.hibernate.Selecao;
 
 public class CtrSelecao
 {
+	private CtrMain ctrMain;
+	private SelecaoDAO sDAO;
+	
+	public CtrSelecao(CtrMain ctrMain)
+	{
+		this.ctrMain = ctrMain;
+		sDAO = new SelecaoDAO();
+	}	
+	
 	public String[][] querySelecaoTodos()
 	{
-		GeneralDAO<Selecao> gdao;
 		ArrayList<Selecao> alSelecao;
 		String[][] dadosSelecoes;
 		
-		gdao = new GeneralDAO<Selecao>();
-		alSelecao = gdao.listaTodos("Selecao");
-		
+		alSelecao = ctrMain.getGeneralDAO().listaTodos("Selecao");	
 		dadosSelecoes = arrayList2StringMatrix(alSelecao);
-		
-		gdao.fecharSessao();	
+	
 		return dadosSelecoes;
 	}
 	
 	public String[][] querySelecaoByNomePais(String pais)
 	{
-		SelecaoDAO sdao;
 		ArrayList<Selecao> alSelecao;
 		String[][] dadosSelecoes;
 		
-		sdao = new SelecaoDAO();
-		alSelecao = sdao.querySelecaoByNomePais(pais);
-		
+		alSelecao = sDAO.querySelecaoByNomePais(pais);
 		dadosSelecoes = arrayList2StringMatrix(alSelecao);
-
-		sdao.fecharSessao();
+		
 		return dadosSelecoes;
 	}
 	
 	public String[][] querySelecaoByNomeTecnico(String nomeTecnico)
 	{
 		String[][] dadosSelecoes;
-		SelecaoDAO sdao;
 		ArrayList<Selecao> alSelecao;
 		
-		sdao = new SelecaoDAO();
-		alSelecao = sdao.querySelecaoByNomeTecnico(nomeTecnico);
+		alSelecao = sDAO.querySelecaoByNomeTecnico(nomeTecnico);
 		dadosSelecoes = arrayList2StringMatrix(alSelecao);
 		
-		sdao.fecharSessao();
 		return dadosSelecoes;
 	}
 	

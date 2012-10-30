@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 import sgcmf.hibernate.SGCMFHibernateUtil;
 
-public class GeneralDAO<T>
+public class GeneralDAO
 {
 	Session sessao;
 
@@ -24,23 +24,23 @@ public class GeneralDAO<T>
 		this.sessao = sessao;
 	}
 
-	public void salvar(T entidade)
+	public void salvar(Object entidade)
 	{
 		sessao.save(entidade);
 	}
 
-	public T carregar(T entidade, Serializable id)
+	public Object carregar(Object entidade, Serializable id)
 	{
 		sessao.load(entidade, id);
 		return entidade;
 	}
 
-	public void apagar(T entidade)
+	public void apagar(Object entidade)
 	{
 		sessao.delete(entidade);
 	}
 
-	public void atualizar(T entidade)
+	public void atualizar(Object entidade)
 	{
 		sessao.update(entidade);
 	}
@@ -50,8 +50,8 @@ public class GeneralDAO<T>
 		sessao.close();
 	}
 
-	public ArrayList<T> listaTodos(String tabela)
+	public ArrayList listaTodos(String tabela)
 	{
-		 return (ArrayList<T>) sessao.createQuery("from " + tabela).list();
+		 return (ArrayList) sessao.createQuery("from " + tabela).list();
 	}
 }

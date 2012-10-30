@@ -3,7 +3,7 @@ package sgcmf.model.dao;
 import java.util.ArrayList;
 import sgcmf.model.hibernate.Jogador;
 
-public class JogadorDAO extends GeneralDAO<Jogador>
+public class JogadorDAO extends GeneralDAO
 {
 	public ArrayList<Jogador> queryJogadorByNome(String nome)
 	{

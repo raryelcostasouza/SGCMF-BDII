@@ -7,14 +7,21 @@ import sgcmf.model.hibernate.Jogador;
 
 public class CtrJogador
 {
+	private CtrMain ctrMain;
+	private JogadorDAO jDAO;
+
+	public CtrJogador(CtrMain ctrMain)
+	{
+		this.ctrMain = ctrMain;
+		jDAO = new JogadorDAO();
+	}
+	
 	public Jogador carregaJogadorById(Short idJogador)
 	{
-		GeneralDAO<Jogador> gdao;
 		Jogador jogador;
 		
-		gdao = new GeneralDAO<Jogador>();
 		jogador = new Jogador();
-		jogador = gdao.carregar(jogador, idJogador);
+		jogador = (Jogador) ctrMain.getGeneralDAO().carregar(jogador, idJogador);
 		
 		return jogador;
 	}
@@ -22,14 +29,11 @@ public class CtrJogador
 	public String[][] queryJogadorTodos()
 	{
 		String[][] dadosJogadores;
-		ArrayList<Jogador> alJogador;
-		GeneralDAO<Jogador> gdao;
+		ArrayList alJogador;
 		
-		gdao = new GeneralDAO<Jogador>();
-		alJogador = gdao.listaTodos("Jogador");
+		alJogador = ctrMain.getGeneralDAO().listaTodos("Jogador");
 		dadosJogadores = arrayList2StringMatrix(alJogador);
 		
-		gdao.fecharSessao();
 		return dadosJogadores;
 	}
 	
@@ -37,13 +41,10 @@ public class CtrJogador
 	{
 		String[][] dadosJogador;
 		ArrayList<Jogador> alJogador;
-		JogadorDAO jDAO;
 		
-		jDAO = new JogadorDAO();
 		alJogador = jDAO.queryJogadorByNome(nome);
 		dadosJogador = arrayList2StringMatrix(alJogador);
 		
-		jDAO.fecharSessao();
 		return dadosJogador;
 	}
 	

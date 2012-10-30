@@ -1,10 +1,13 @@
 package sgcmf.control;
 
 import javax.swing.JOptionPane;
+import sgcmf.model.dao.GeneralDAO;
 import sgcmf.view.LimLogin;
 
 public class CtrMain
 {
+	private GeneralDAO generalDAO;
+	
     private LimLogin limLogin;
     private CtrAdmin ctrAdmin;
     private CtrComiteGestor ctrComiteGestor;
@@ -17,10 +20,12 @@ public class CtrMain
 
     public CtrMain()
     {
-        ctrJogo = new CtrJogo();
-        ctrSelecao = new CtrSelecao();
+		generalDAO = new GeneralDAO();
+		
+        ctrJogo = new CtrJogo(this);
+        ctrSelecao = new CtrSelecao(this);
         ctrOcorrenciaJogo = new CtrOcorrenciaJogo(this);
-        ctrJogador = new CtrJogador();
+        ctrJogador = new CtrJogador(this);
 
         ctrAdmin = new CtrAdmin(this);
         ctrComiteGestor = new CtrComiteGestor(this);
@@ -83,4 +88,9 @@ public class CtrMain
     {
         return ctrJogador;
     }
+	
+	public GeneralDAO getGeneralDAO()
+	{
+		return generalDAO;
+	}
 }

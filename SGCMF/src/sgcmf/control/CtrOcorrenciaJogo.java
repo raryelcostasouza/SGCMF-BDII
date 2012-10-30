@@ -18,10 +18,10 @@ public class CtrOcorrenciaJogo
 	
 	public CtrOcorrenciaJogo(CtrMain ctrMain)
 	{
-		this.ctrMain = ctrMain;
+		this.ctrMain = ctrMain;		
 	}
 	
-	private Ocorrencia registraOcorrencia(GeneralDAO gdao, String min, String seg, Short idJogo)
+	private Ocorrencia registraOcorrencia(String min, String seg, Short idJogo)
 	{
 		Ocorrencia oc;
 		Jogo jogo;
@@ -35,7 +35,7 @@ public class CtrOcorrenciaJogo
 		oc.setInstantetempo(tempo);
 		oc.setJogo(jogo);		
 		
-		gdao.salvar(oc);
+		ctrMain.getGeneralDAO().salvar(oc);
 		
 		return oc;
 	}
@@ -45,7 +45,6 @@ public class CtrOcorrenciaJogo
 	{
 		Short shortIdJogadorAutor;
 		Short shortIdJogadorAssist;
-		GeneralDAO gdao;
 		Transaction tr;
 		Gol g;
 		Ocorrencia o;	
@@ -59,11 +58,10 @@ public class CtrOcorrenciaJogo
 		//se nao tiver erros nos campos, entao faz o cadastro
 		if (errorMessage.equals(""))
 		{
-			gdao = new GeneralDAO();
-			tr = gdao.getSessao().beginTransaction();
+			tr = ctrMain.getGeneralDAO().getSessao().beginTransaction();
 			try
 			{
-				o = registraOcorrencia(gdao, min, seg, idJogo);
+				o = registraOcorrencia(min, seg, idJogo);
 				
 				//carrega o jogador autor
 				shortIdJogadorAutor = Short.parseShort(idJogadorAutor);
@@ -82,7 +80,7 @@ public class CtrOcorrenciaJogo
 				}
 				
 				//salva o gol e commita
-				gdao.salvar(g);
+				ctrMain.getGeneralDAO().salvar(g);
 				tr.commit();
 				
 				result = new ResultadoOperacao("Gol cadastrado com êxito!", TipoResultadoOperacao.EXITO);
@@ -134,16 +132,15 @@ public class CtrOcorrenciaJogo
 	
 	public void removeGol(Short idOc)
 	{
-		GeneralDAO gdao;
 		Transaction tr;
-		
+		GeneralDAO gdao;
 		Gol golParaRemover;
 		Ocorrencia ocParaRemover;
 		
 		golParaRemover = new Gol();
 		ocParaRemover = new Ocorrencia();
 		
-		gdao= new GeneralDAO();
+		gdao = ctrMain.getGeneralDAO();
 		tr = gdao.getSessao().beginTransaction();
 		
 		try
@@ -161,21 +158,16 @@ public class CtrOcorrenciaJogo
 			tr.rollback();
 			System.out.println(hex.getMessage());
 		}
-		
-		gdao.fecharSessao();
 	}
 	
 	public String[][] queryGolTodos()
 	{
-		GeneralDAO<Gol> gdao;
 		ArrayList<Gol> alGol;
 		String[][] dadosGol;
 		
-		gdao = new GeneralDAO<Gol>();
-		alGol = gdao.listaTodos("Gol");
+		alGol = ctrMain.getGeneralDAO().listaTodos("Gol");
 		dadosGol = arrayList2StringMatrix(alGol);
 		
-		gdao.fecharSessao();
 		return dadosGol;
 	}
 	
