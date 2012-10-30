@@ -9,11 +9,16 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import sgcmf.control.CtrMain;
+import sgcmf.control.CtrTecnico;
+import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 
@@ -24,9 +29,12 @@ import sgcmf.view.UtilView;
 public class PanelCadastrarJogador extends JPanel
 {
     private LimConsultarSelecao limConsultarSelecao;
-    public PanelCadastrarJogador()
+    private CtrTecnico ctrTecnico;
+    
+    public PanelCadastrarJogador(CtrTecnico ctrTecnico)
     {
-        limConsultarSelecao = new LimConsultarSelecao();
+        this.ctrTecnico = ctrTecnico;
+        limConsultarSelecao = new LimConsultarSelecao(ctrTecnico);
         setLayout(new BorderLayout());
         montaPainel();
     }
@@ -49,14 +57,30 @@ public class PanelCadastrarJogador extends JPanel
         JLabel jlSelecao = new JLabel("Seleção:");
         UtilView.alinhaLabel(jlSelecao);
 
-        JTextField jtfNumeroCamisa = new JTextField(10);
-        JTextField jtfNome = new JTextField(10);
-        JTextField jtfDataNascimento = new JTextField(10);
-        JTextField jtfAltura = new JTextField(10);
-        JTextField jtfPosicao = new JTextField(10);
-        JTextField jtfSelecao = new JTextField(10);
+        final JTextField jtfNumeroCamisa = new JTextField(10);
+        final JTextField jtfNome = new JTextField(10);
+        final JTextField jtfDataNascimento = new JTextField(10);
+        final JTextField jtfAltura = new JTextField(10);
+        final JTextField jtfPosicao = new JTextField(10);
+        final JTextField jtfSelecao = new JTextField(10);
 
         JButton jbCadastrar = new JButton("Cadastrar");
+        jbCadastrar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Jogador j;
+                j = new Jogador();
+                j.setNcamisa(Short.parseShort(jtfNumeroCamisa.getText()));
+                j.setNome(jtfNome.getText());
+                j.setDatanasc(new Date(jtfDataNascimento.getText())); //Verificar qual a data sem ser deprecada.
+                j.setAltura(new BigDecimal(jtfAltura.getText()));
+                j.setPosicao(jtfPosicao.getText()); //Tem que mudar pra comboBox eu acho...
+                
+            }
+        });
+        
         JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
         
@@ -84,7 +108,6 @@ public class PanelCadastrarJogador extends JPanel
         jpAux2.add(jbPesquisar);
         jpAux.add(jpAux2);
         jpAux.setBorder(BorderFactory.createEtchedBorder());
-
 
         this.add(jpAux, BorderLayout.CENTER);
         this.add(UtilView.putComponentInFlowLayoutPanel(jbCadastrar), BorderLayout.SOUTH);

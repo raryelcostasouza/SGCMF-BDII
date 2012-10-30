@@ -32,6 +32,6 @@ public class UtilView
     
     public static void ajustarTamanhoBotaoPesquisar(JButton jb)
     {
-        jb.setPreferredSize(new Dimension(35, 20));
+        jb.setPreferredSize(new Dimension(28, 20));
     }
 }

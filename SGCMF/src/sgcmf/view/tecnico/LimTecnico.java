@@ -34,17 +34,17 @@ public class LimTecnico extends JFrame
     public LimTecnico(CtrTecnico ctrTecnico, CtrJogo ctrJogo)
     {
         this.ctrTecnico = ctrTecnico;
-        limGerenciarJogador = new LimGerenciarJogador();
+        limGerenciarJogador = new LimGerenciarJogador(ctrTecnico);
         limGerenciarEscalacao = new LimGerenciarEscalacao(ctrJogo);
 
         setTitle("Usuário Técnico da Seleção");
         add(montaPainel());
-		pack();
+        pack();
         setLocationRelativeTo(null);
         setVisible(false);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-        
+
         addWindowListener(new WindowAdapter()
         {
             @Override
@@ -61,9 +61,9 @@ public class LimTecnico extends JFrame
         JPanel jpAux = new JPanel(new GridLayout(2, 2));
 
         JButton jbGerenciarJogadores = new JButton("Gerenciar Jogadores", SGCMFIcons.JOGADOR);
-		jbGerenciarJogadores.setVerticalTextPosition(JButton.BOTTOM);
-		jbGerenciarJogadores.setHorizontalTextPosition(JButton.CENTER);
-		
+        jbGerenciarJogadores.setVerticalTextPosition(JButton.BOTTOM);
+        jbGerenciarJogadores.setHorizontalTextPosition(JButton.CENTER);
+
         jbGerenciarJogadores.addActionListener(new ActionListener()
         {
             @Override
@@ -74,13 +74,13 @@ public class LimTecnico extends JFrame
         });
 
         JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
-		jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
-		jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
-		
+        jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
+        jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
+
         JButton jbGerenciarEscalacao = new JButton("Gerenciar Escalação", SGCMFIcons.ESCALACAO);
-		jbGerenciarEscalacao.setVerticalTextPosition(JButton.BOTTOM);
-		jbGerenciarEscalacao.setHorizontalTextPosition(JButton.CENTER);
-		
+        jbGerenciarEscalacao.setVerticalTextPosition(JButton.BOTTOM);
+        jbGerenciarEscalacao.setHorizontalTextPosition(JButton.CENTER);
+
         jbGerenciarEscalacao.addActionListener(new ActionListener()
         {
             @Override
@@ -90,8 +90,8 @@ public class LimTecnico extends JFrame
             }
         });
         JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
-		jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
-		jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
+        jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
+        jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
 
         JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
 

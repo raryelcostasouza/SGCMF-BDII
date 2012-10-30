@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import sgcmf.control.CtrTecnico;
 
 /**
  *
@@ -21,9 +22,9 @@ public class LimGerenciarJogador extends JDialog
     private PanelRemoverJogador pRemoverJogador;
     private PanelConsultarJogador pConsultarJogador;
     
-    public LimGerenciarJogador()
+    public LimGerenciarJogador(CtrTecnico ctrTecnico)
     {
-        pCadastrarJogador = new PanelCadastrarJogador();
+        pCadastrarJogador = new PanelCadastrarJogador(ctrTecnico);
         pAlterarJogador = new PanelAlterarJogador();
         pRemoverJogador = new PanelRemoverJogador();
         pConsultarJogador = new PanelConsultarJogador();
