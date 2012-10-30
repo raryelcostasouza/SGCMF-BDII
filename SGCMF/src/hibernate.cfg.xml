@@ -7,7 +7,6 @@
     <property name="hibernate.connection.url">jdbc:postgresql://localhost/sgcmf</property>
     <property name="hibernate.connection.username">javaappsgcmf</property>
     <property name="hibernate.connection.password">java</property>
-    <mapping resource="sgcmf/model/hibernate/Escalacao.hbm.xml"/>
     <mapping resource="sgcmf/model/hibernate/Falta.hbm.xml"/>
     <mapping resource="sgcmf/model/hibernate/Jogo.hbm.xml"/>
     <mapping resource="sgcmf/model/hibernate/Selecao.hbm.xml"/>

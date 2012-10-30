@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated Oct 28, 2012 12:07:10 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 30, 2012 8:06:49 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -15,7 +15,6 @@ public class Selecao  implements java.io.Serializable {
      private Usuario usuario;
      private String pais;
      private String caminhoimgbandeira;
-     private Set escalacaos = new HashSet(0);
      private Set jogosForIdselecaoii = new HashSet(0);
      private Set jogosForIdselecaoi = new HashSet(0);
      private Set jogadors = new HashSet(0);
@@ -30,12 +29,11 @@ public class Selecao  implements java.io.Serializable {
         this.pais = pais;
         this.caminhoimgbandeira = caminhoimgbandeira;
     }
-    public Selecao(short id, Usuario usuario, String pais, String caminhoimgbandeira, Set escalacaos, Set jogosForIdselecaoii, Set jogosForIdselecaoi, Set jogadors) {
+    public Selecao(short id, Usuario usuario, String pais, String caminhoimgbandeira, Set jogosForIdselecaoii, Set jogosForIdselecaoi, Set jogadors) {
        this.id = id;
        this.usuario = usuario;
        this.pais = pais;
        this.caminhoimgbandeira = caminhoimgbandeira;
-       this.escalacaos = escalacaos;
        this.jogosForIdselecaoii = jogosForIdselecaoii;
        this.jogosForIdselecaoi = jogosForIdselecaoi;
        this.jogadors = jogadors;
@@ -68,13 +66,6 @@ public class Selecao  implements java.io.Serializable {
     
     public void setCaminhoimgbandeira(String caminhoimgbandeira) {
         this.caminhoimgbandeira = caminhoimgbandeira;
-    }
-    public Set getEscalacaos() {
-        return this.escalacaos;
-    }
-    
-    public void setEscalacaos(Set escalacaos) {
-        this.escalacaos = escalacaos;
     }
     public Set getJogosForIdselecaoii() {
         return this.jogosForIdselecaoii;

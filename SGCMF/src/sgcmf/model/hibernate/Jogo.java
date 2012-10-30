@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated Oct 28, 2012 12:07:10 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 30, 2012 8:06:49 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -20,7 +20,6 @@ public class Jogo  implements java.io.Serializable {
      private String nomeestadio;
      private boolean prorrogacao;
      private Date datahora;
-     private Set escalacaos = new HashSet(0);
      private Set ocorrencias = new HashSet(0);
 
     public Jogo() {
@@ -35,7 +34,7 @@ public class Jogo  implements java.io.Serializable {
         this.prorrogacao = prorrogacao;
         this.datahora = datahora;
     }
-    public Jogo(short id, Selecao selecaoByIdselecaoi, Selecao selecaoByIdselecaoii, String tipo, String cidade, String nomeestadio, boolean prorrogacao, Date datahora, Set escalacaos, Set ocorrencias) {
+    public Jogo(short id, Selecao selecaoByIdselecaoi, Selecao selecaoByIdselecaoii, String tipo, String cidade, String nomeestadio, boolean prorrogacao, Date datahora, Set ocorrencias) {
        this.id = id;
        this.selecaoByIdselecaoi = selecaoByIdselecaoi;
        this.selecaoByIdselecaoii = selecaoByIdselecaoii;
@@ -44,7 +43,6 @@ public class Jogo  implements java.io.Serializable {
        this.nomeestadio = nomeestadio;
        this.prorrogacao = prorrogacao;
        this.datahora = datahora;
-       this.escalacaos = escalacaos;
        this.ocorrencias = ocorrencias;
     }
    
@@ -103,13 +101,6 @@ public class Jogo  implements java.io.Serializable {
     
     public void setDatahora(Date datahora) {
         this.datahora = datahora;
-    }
-    public Set getEscalacaos() {
-        return this.escalacaos;
-    }
-    
-    public void setEscalacaos(Set escalacaos) {
-        this.escalacaos = escalacaos;
     }
     public Set getOcorrencias() {
         return this.ocorrencias;

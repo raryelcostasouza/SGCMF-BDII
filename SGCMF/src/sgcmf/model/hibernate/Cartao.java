@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated Oct 28, 2012 12:07:10 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 30, 2012 8:06:49 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;

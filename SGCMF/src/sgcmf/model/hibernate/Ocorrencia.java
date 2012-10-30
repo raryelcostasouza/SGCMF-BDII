@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated Oct 28, 2012 12:07:10 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 30, 2012 8:06:49 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -18,7 +18,6 @@ public class Ocorrencia  implements java.io.Serializable {
      private Set cartaos = new HashSet(0);
      private Set faltas = new HashSet(0);
      private Set substituicaos = new HashSet(0);
-     private Set jogadors = new HashSet(0);
      private Set gols = new HashSet(0);
 
     public Ocorrencia() {
@@ -30,14 +29,13 @@ public class Ocorrencia  implements java.io.Serializable {
         this.jogo = jogo;
         this.instantetempo = instantetempo;
     }
-    public Ocorrencia(short id, Jogo jogo, Date instantetempo, Set cartaos, Set faltas, Set substituicaos, Set jogadors, Set gols) {
+    public Ocorrencia(short id, Jogo jogo, Date instantetempo, Set cartaos, Set faltas, Set substituicaos, Set gols) {
        this.id = id;
        this.jogo = jogo;
        this.instantetempo = instantetempo;
        this.cartaos = cartaos;
        this.faltas = faltas;
        this.substituicaos = substituicaos;
-       this.jogadors = jogadors;
        this.gols = gols;
     }
    
@@ -82,13 +80,6 @@ public class Ocorrencia  implements java.io.Serializable {
     
     public void setSubstituicaos(Set substituicaos) {
         this.substituicaos = substituicaos;
-    }
-    public Set getJogadors() {
-        return this.jogadors;
-    }
-    
-    public void setJogadors(Set jogadors) {
-        this.jogadors = jogadors;
     }
     public Set getGols() {
         return this.gols;
