@@ -76,7 +76,7 @@ public class PanelRemoverJogador extends JPanel
     {
         String[] nomeColunas =
         {
-            "Id", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção"
+            "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção"
         };
         JTableSGCMF jt = new JTableSGCMF(null, nomeColunas);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
