@@ -13,10 +13,12 @@ import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import sgcmf.control.CtrMain;
 import sgcmf.control.CtrSelecao;
@@ -53,9 +55,10 @@ public class PanelCadastrarJogador extends JPanel
 
     private void montaPainel()
     {
-        JPanel jpAux = new JPanel(new GridLayout(6, 1));
+        JPanel jpAux = new JPanel(new GridLayout(7, 1));
         JPanel jpAux2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
+        JPanel jpAux3 = new JPanel(new GridLayout(1, 2));
+        
         JLabel jlNumeroCamisa = new JLabel("Número da Camisa:");
         UtilView.alinhaLabel(jlNumeroCamisa);
         JLabel jlNome = new JLabel("Nome:");
@@ -64,16 +67,27 @@ public class PanelCadastrarJogador extends JPanel
         UtilView.alinhaLabel(jlDataNascimento);
         JLabel jlAltura = new JLabel("Altura:");
         UtilView.alinhaLabel(jlAltura);
+        JLabel jlTitular = new JLabel("Titular:");
+        UtilView.alinhaLabel(jlTitular);
         JLabel jlPosicao = new JLabel("Posição:");
         UtilView.alinhaLabel(jlPosicao);
         JLabel jlSelecao = new JLabel("Seleção:");
         UtilView.alinhaLabel(jlSelecao);
+        
+        ButtonGroup bg = new ButtonGroup();
+        JRadioButton jrbSim = new JRadioButton("Sim");
+        jrbSim.setSelected(true);
+        JRadioButton jrbNao = new JRadioButton("Não");
+        bg.add(jrbSim);
+        bg.add(jrbNao);
+        
 
         final JTextField jtfNumeroCamisa = new JTextField(10);
         final JTextField jtfNome = new JTextField(10);
         final JTextField jtfDataNascimento = new JTextField(10);
         final JTextField jtfAltura = new JTextField(10);
         final JTextField jtfSelecao = new JTextField(10);
+        jtfSelecao.setEditable(false);
 
         final JComboBox jcbPosicao = new JComboBox(items);
         jcbPosicao.setEditable(false);
@@ -85,14 +99,7 @@ public class PanelCadastrarJogador extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                Jogador j;
-                j = new Jogador();
-                j.setNcamisa(Short.parseShort(jtfNumeroCamisa.getText()));
-                j.setNome(jtfNome.getText());
-                j.setDatanasc(new Date(jtfDataNascimento.getText())); //Verificar qual a data sem ser deprecada.
-                j.setAltura(new BigDecimal(jtfAltura.getText()));
-                j.setPosicao(jcbPosicao.getSelectedItem().toString()); //Tem que mudar pra comboBox eu acho...
-
+                //TODO
             }
         });
 
@@ -116,6 +123,11 @@ public class PanelCadastrarJogador extends JPanel
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfDataNascimento, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlAltura));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfAltura, FlowLayout.LEFT));
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlTitular));
+        
+        jpAux3.add(UtilView.putComponentInFlowLayoutPanel(jrbSim));
+        jpAux3.add(UtilView.putComponentInFlowLayoutPanel(jrbNao));
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jpAux3, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlPosicao));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jcbPosicao, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSelecao));

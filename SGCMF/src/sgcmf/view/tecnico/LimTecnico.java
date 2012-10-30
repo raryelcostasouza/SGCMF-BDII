@@ -28,14 +28,12 @@ import sgcmf.view.UtilView;
 public class LimTecnico extends JFrame
 {
     private LimGerenciarJogador limGerenciarJogador;
-    private LimGerenciarEscalacao limGerenciarEscalacao;
     private CtrTecnico ctrTecnico;
 
     public LimTecnico(CtrTecnico ctrTecnico, CtrJogo ctrJogo)
     {
         this.ctrTecnico = ctrTecnico;
         limGerenciarJogador = new LimGerenciarJogador(ctrTecnico);
-        limGerenciarEscalacao = new LimGerenciarEscalacao(ctrJogo);
 
         setTitle("Usuário Técnico da Seleção");
         add(montaPainel());
@@ -58,7 +56,7 @@ public class LimTecnico extends JFrame
     private JPanel montaPainel()
     {
         JPanel jpPrincipal = new JPanel(new BorderLayout());
-        JPanel jpAux = new JPanel(new GridLayout(2, 2));
+        JPanel jpAux = new JPanel(new GridLayout(1, 3));
 
         JButton jbGerenciarJogadores = new JButton("Gerenciar Jogadores", SGCMFIcons.JOGADOR);
         jbGerenciarJogadores.setVerticalTextPosition(JButton.BOTTOM);
@@ -76,28 +74,23 @@ public class LimTecnico extends JFrame
         JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
         jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
         jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
-
-        JButton jbGerenciarEscalacao = new JButton("Gerenciar Escalação", SGCMFIcons.ESCALACAO);
-        jbGerenciarEscalacao.setVerticalTextPosition(JButton.BOTTOM);
-        jbGerenciarEscalacao.setHorizontalTextPosition(JButton.CENTER);
-
-        jbGerenciarEscalacao.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                limGerenciarEscalacao.setVisible(true);
-            }
-        });
         JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
         jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
         jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
 
         JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
+        jbLogout.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                acaoLogout();
+            }
+        });
 
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbGerenciarJogadores));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorios));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbGerenciarEscalacao));
+        
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));
 
         jpPrincipal.add(jpAux, BorderLayout.CENTER);
