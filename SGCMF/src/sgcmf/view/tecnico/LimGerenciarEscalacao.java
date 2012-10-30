@@ -13,15 +13,12 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import sgcmf.control.CtrJogo;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
-import sgcmf.view.comiteGestor.LimComiteGestor;
-import sgcmf.view.comiteGestor.LimConsultarJogo;
 
 /**
  *
@@ -29,11 +26,11 @@ import sgcmf.view.comiteGestor.LimConsultarJogo;
  */
 public class LimGerenciarEscalacao extends JDialog
 {
-    private LimConsultarJogo limConsultarJogo;
+    private LimSelecionarJogo limSelecionarJogo;
 	
     public LimGerenciarEscalacao(CtrJogo ctrJogo)
     {
-        limConsultarJogo = new LimConsultarJogo(ctrJogo);
+        limSelecionarJogo = new LimSelecionarJogo(ctrJogo);
         setVisible(false);
         setModal(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -57,7 +54,7 @@ public class LimGerenciarEscalacao extends JDialog
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                limConsultarJogo.setVisible(true);
+                limSelecionarJogo.ativaTela();
             }
         });
         JButton jbEnviarEscalacao = new JButton("Enviar Escalação");

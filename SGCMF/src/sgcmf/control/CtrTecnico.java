@@ -1,8 +1,5 @@
 package sgcmf.control;
 
-import sgcmf.model.dao.GeneralDAO;
-import sgcmf.model.hibernate.Jogador;
-import sgcmf.model.hibernate.Selecao;
 import sgcmf.view.tecnico.LimTecnico;
 
 public class CtrTecnico

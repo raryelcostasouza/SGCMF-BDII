@@ -25,7 +25,7 @@ public class PanelConsultarJogador extends JPanel
         setLayout(new BorderLayout());
         montaPainelPrincipal();
     }
-    
+
     private void montaPainelPrincipal()
     {
         JPanel jpNorth = montaPainelNorte();
@@ -33,7 +33,7 @@ public class PanelConsultarJogador extends JPanel
         this.add(jpNorth, BorderLayout.NORTH);
         this.add(jpCenter, BorderLayout.CENTER);
     }
-    
+
     private JPanel montaPainelNorte()
     {
         JPanel jpNorth = new JPanel(new BorderLayout());
@@ -62,11 +62,12 @@ public class PanelConsultarJogador extends JPanel
 
         return jpNorth;
     }
+
     private JScrollPane montaPainelCentral()
     {
         String[] nomeColunas =
         {
-            "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção"
+            "Id", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção"
         };
         JTableSGCMF jt = new JTableSGCMF(null, nomeColunas);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,

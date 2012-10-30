@@ -78,7 +78,7 @@ public class PanelAlterarJogador extends JPanel
     {
         String[] nomeColunas =
         {
-            "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção"
+            "Id", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção"
         };
         JTableSGCMF jt = new JTableSGCMF(null, nomeColunas);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,

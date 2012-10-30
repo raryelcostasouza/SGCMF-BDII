@@ -21,8 +21,9 @@ public class LimConsultaSelecao extends JDialog
 	
 	private JRadioButton jrbPais;
 	private JRadioButton jrbNomeTecnico;	
-	private JTableSGCMF jt;
+	protected JTableSGCMF jt;
 	private JTextField jtfSearchBox;
+        protected JPanel mainPanel;
 	
 	public LimConsultaSelecao(CtrSelecao ctrSelecao)
 	{
@@ -49,7 +50,7 @@ public class LimConsultaSelecao extends JDialog
 	
 	private JPanel montaMainPanel()
 	{
-		JPanel mainPanel = new JPanel(new BorderLayout());
+		mainPanel = new JPanel(new BorderLayout());
 		
 		mainPanel.add(montaCenterPanel(), BorderLayout.CENTER);
 		mainPanel.add(montaNorthPanel(), BorderLayout.NORTH);
