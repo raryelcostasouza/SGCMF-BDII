@@ -151,6 +151,14 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
 
 
         JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
+        jbPesquisar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                
+            }
+        });
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
         JButton jbAlterar = new JButton("Alterar");
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNumeroCamisa));
