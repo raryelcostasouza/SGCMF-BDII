@@ -7,6 +7,8 @@ import org.hibernate.Transaction;
 import sgcmf.model.util.ResultadoOperacao;
 import sgcmf.model.util.TipoResultadoOperacao;
 import sgcmf.model.dao.GeneralDAO;
+import sgcmf.model.dao.GolDAO;
+import sgcmf.model.dao.JogoDAO;
 import sgcmf.model.hibernate.Gol;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Jogo;
@@ -18,15 +20,17 @@ public class CtrOcorrenciaJogo
 	
 	public CtrOcorrenciaJogo(CtrMain ctrMain)
 	{
-		this.ctrMain = ctrMain;		
-	}
+		this.ctrMain = ctrMain;
+	}		
 	
-	private Ocorrencia registraOcorrencia(String min, String seg, Short idJogo)
+	private Ocorrencia registraOcorrencia(GeneralDAO gdao, String min, String seg, Short idJogo)
 	{
 		Ocorrencia oc;
 		Jogo jogo;
 		Time tempo;
+		JogoDAO jDAO;
 		
+		jDAO = new JogoDAO();		
 		jogo = ctrMain.getCtrJogo().carregarJogoById(idJogo);
 
 		tempo = new Time(0, Integer.parseInt(min), Integer.parseInt(seg));
@@ -35,7 +39,7 @@ public class CtrOcorrenciaJogo
 		oc.setInstantetempo(tempo);
 		oc.setJogo(jogo);		
 		
-		ctrMain.getGeneralDAO().salvar(oc);
+		gdao.salvar(oc);	
 		
 		return oc;
 	}
@@ -43,6 +47,7 @@ public class CtrOcorrenciaJogo
 	public ResultadoOperacao registraGol(String min, String seg, Short idJogo, String idJogadorAutor, String idJogadorAssist,
 							String tipoGol, String modoGol)
 	{
+		GeneralDAO gdao;
 		Short shortIdJogadorAutor;
 		Short shortIdJogadorAssist;
 		Transaction tr;
@@ -58,10 +63,11 @@ public class CtrOcorrenciaJogo
 		//se nao tiver erros nos campos, entao faz o cadastro
 		if (errorMessage.equals(""))
 		{
-			tr = ctrMain.getGeneralDAO().getSessao().beginTransaction();
+			gdao = new GeneralDAO();
+			tr = gdao.getSessao().beginTransaction();
 			try
 			{
-				o = registraOcorrencia(min, seg, idJogo);
+				o = registraOcorrencia(gdao, min, seg, idJogo);
 				
 				//carrega o jogador autor
 				shortIdJogadorAutor = Short.parseShort(idJogadorAutor);
@@ -80,7 +86,7 @@ public class CtrOcorrenciaJogo
 				}
 				
 				//salva o gol e commita
-				ctrMain.getGeneralDAO().salvar(g);
+				gdao.salvar(g);
 				tr.commit();
 				
 				result = new ResultadoOperacao("Gol cadastrado com êxito!", TipoResultadoOperacao.EXITO);
@@ -90,6 +96,7 @@ public class CtrOcorrenciaJogo
 				tr.rollback();
 				result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);			
 			}
+			gdao.fecharSessao();
 		}
 		else
 		{
@@ -140,7 +147,7 @@ public class CtrOcorrenciaJogo
 		golParaRemover = new Gol();
 		ocParaRemover = new Ocorrencia();
 		
-		gdao = ctrMain.getGeneralDAO();
+		gdao = new GeneralDAO();
 		tr = gdao.getSessao().beginTransaction();
 		
 		try
@@ -158,18 +165,37 @@ public class CtrOcorrenciaJogo
 			tr.rollback();
 			System.out.println(hex.getMessage());
 		}
+		gdao.fecharSessao();
 	}
 	
 	public String[][] queryGolTodos()
 	{
+		GeneralDAO<Gol> gdao;
 		ArrayList<Gol> alGol;
 		String[][] dadosGol;
 		
-		alGol = ctrMain.getGeneralDAO().listaTodos("Gol");
+		gdao = new GeneralDAO<Gol>();
+		alGol = gdao.listaTodos("Gol");
 		dadosGol = arrayList2StringMatrix(alGol);
+		
+		gdao.fecharSessao();		
+		return dadosGol;
+	}
+	
+	public String[][] queryGolByIdJogo(Short idJogo)
+	{
+		ArrayList<Gol> alGol;
+		String[][] dadosGol;
+		GolDAO golDAO;
+		
+		golDAO = new GolDAO();
+		alGol = golDAO.queryGolByIdJogo(idJogo);
+		dadosGol = arrayList2StringMatrix(alGol);
+		golDAO.fecharSessao();
 		
 		return dadosGol;
 	}
+	
 	
 	public String[][] arrayList2StringMatrix(ArrayList<Gol> alGol)
 	{

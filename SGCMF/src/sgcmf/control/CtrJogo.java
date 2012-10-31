@@ -1,82 +1,93 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
+import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.JogoDAO;
 import sgcmf.model.hibernate.Jogo;
 
 public class CtrJogo
 {
-	private CtrMain ctrMain;
-	private JogoDAO jDAO;
-	
-	public CtrJogo(CtrMain ctrMain)
-	{
-		this.ctrMain = ctrMain;
-		jDAO = new JogoDAO();
-	}	
-	
+
 	public Jogo carregarJogoById(Short idJogo)
 	{
 		Jogo j;
+		GeneralDAO<Jogo> gdao;
 		
+		gdao = new GeneralDAO<Jogo>();
 		j = new Jogo();
-		j = (Jogo) ctrMain.getGeneralDAO().carregar(j, idJogo);
-	
+		j = gdao.carregar(j, idJogo);
+		gdao.fecharSessao();
+		
 		return j;
 	}
 	
 	public String[][] queryJogoTodos()
 	{
+		GeneralDAO<Jogo> gdao;
 		ArrayList<Jogo> alJogos;
 		String[][] dadosJogos;
 		
-		alJogos = ctrMain.getGeneralDAO().listaTodos("Jogo");
+		gdao = new GeneralDAO<Jogo>();
+		alJogos = gdao.listaTodos("Jogo");
 		dadosJogos = arrayList2StringMatrix(alJogos);
+		gdao.fecharSessao();
 		
 		return dadosJogos;
 	}
 	
 	public String[][] queryJogoBySelecao(String nomeSelecao)
 	{
+		JogoDAO jDAO;
 		String[][] dadosJogos;
 		ArrayList<Jogo> alJogo;
 		
+		jDAO = new JogoDAO();
 		alJogo = jDAO.queryJogoBySelecao(nomeSelecao);
 		dadosJogos = arrayList2StringMatrix(alJogo);
+		jDAO.fecharSessao();
 		
 		return dadosJogos;
 	}
 	
 	public String[][] queryJogoByCidade(String cidade)
 	{
+		JogoDAO jDAO;
 		String[][] dadosJogos;
 		ArrayList<Jogo> alJogo;
 		
+		jDAO = new JogoDAO();
 		alJogo = jDAO.queryJogoByCidade(cidade);
 		dadosJogos = arrayList2StringMatrix(alJogo);
+		jDAO.fecharSessao();
 		
 		return dadosJogos;
 	}
 	
 	public String[][] queryJogoByEstadio(String estadio)
 	{
+		JogoDAO jDAO;
 		String[][] dadosJogos;
 		ArrayList<Jogo> alJogo;
 		
+		jDAO = new JogoDAO();
 		alJogo = jDAO.queryJogoByEstadio(estadio);
 		dadosJogos = arrayList2StringMatrix(alJogo);
-			
+		jDAO.fecharSessao();
+		
 		return dadosJogos;
 	}
 
 	public String[][] queryJogoByTipo(String tipo)
 	{
+		JogoDAO jDAO;
 		String[][] dadosJogos;
 		ArrayList<Jogo> alJogo;
 		
+		jDAO = new JogoDAO();
 		alJogo = jDAO.queryJogoByTipo(tipo);
 		dadosJogos = arrayList2StringMatrix(alJogo);
-			
+		jDAO.fecharSessao();	
+		
 		return dadosJogos;
 	}
 	
@@ -113,6 +124,7 @@ public class CtrJogo
 		
 		infoJogo = j.getDatahora() + " | " + j.getTipo() + " | " + 
 				j.getSelecaoByIdselecaoi().getPais() + " vs " + j.getSelecaoByIdselecaoii().getPais();
+		jDao.fecharSessao();
 		
 		return infoJogo;		
 	}
