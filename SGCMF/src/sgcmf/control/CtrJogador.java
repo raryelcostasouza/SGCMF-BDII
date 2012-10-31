@@ -120,8 +120,9 @@ public class CtrJogador
     {
         String[][] dadosJogadores;
         Jogador j;
+        String titular;
 
-        dadosJogadores = new String[alJogador.size()][7];
+        dadosJogadores = new String[alJogador.size()][8];
         for (int i = 0; i < alJogador.size(); i++)
         {
             j = alJogador.get(i);
@@ -132,6 +133,15 @@ public class CtrJogador
             dadosJogadores[i][4] = String.valueOf(j.getAltura());
             dadosJogadores[i][5] = j.getPosicao();
             dadosJogadores[i][6] = j.getSelecao().getPais();
+            if (j.isTitular())
+            {
+                titular = "Sim";
+            }
+            else
+            {
+                titular = "Não";
+            }
+            dadosJogadores[i][7] = titular;
         }
 
         return dadosJogadores;

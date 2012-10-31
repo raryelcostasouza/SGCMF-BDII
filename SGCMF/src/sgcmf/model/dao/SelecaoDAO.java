@@ -24,4 +24,11 @@ public class SelecaoDAO extends GeneralDAO
 		
 		return (ArrayList<Selecao>)sessao.createQuery(hql).list();
 	}
+        
+        public ArrayList queryIdSelecao(String selecao)
+        {
+            String hql;
+            hql = "select s.id from Selecao s where s.pais = '"+selecao+"'";
+            return (ArrayList) sessao.createQuery(hql).list();
+        }
 }

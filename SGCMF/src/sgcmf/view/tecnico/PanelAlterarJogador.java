@@ -8,26 +8,48 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.control.CtrJogador;
+import sgcmf.control.CtrMain;
+import sgcmf.control.CtrTecnico;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
+import sgcmf.view.table.ReceiveRowDataSGCMF;
 
 /**
  *
  * @author Helio
  */
-public class PanelAlterarJogador extends JPanel
+public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
 {
-    public PanelAlterarJogador()
+    private JTableSGCMF jt;
+    private CtrMain ctrMain;
+    private CtrJogador ctrJogador;
+    private JRadioButton jrbNome;
+    private JRadioButton jrbPosicao;
+    private JTextField jtfPesquisar;
+    private JTextField jtfNumeroCamisa;
+    private JTextField jtfNome;
+    private JTextField jtfDataNascimento;
+    private JTextField jtfAltura;
+    private JTextField jtfSelecao;
+    private JComboBox jcbPosicao;
+
+    public PanelAlterarJogador(CtrTecnico ctrTecnico)
     {
+        ctrMain = ctrTecnico.getCtrMain();
+        ctrJogador = ctrMain.getCtrJogador();
         setLayout(new BorderLayout());
         montaPainelPrincipal();
     }
@@ -39,10 +61,10 @@ public class PanelAlterarJogador extends JPanel
         JScrollPane jpCenter = montaPainelCentral();
         JPanel jpSouth = montaPainelSouth();
 
-        this.add(jpNorth,BorderLayout.NORTH);
-        this.add(jpCenter,BorderLayout.CENTER);
-        this.add(jpSouth,BorderLayout.SOUTH);
-        
+        this.add(jpNorth, BorderLayout.NORTH);
+        this.add(jpCenter, BorderLayout.CENTER);
+        this.add(jpSouth, BorderLayout.SOUTH);
+
     }
 
     private JPanel montaPainelNorte()
@@ -51,11 +73,18 @@ public class PanelAlterarJogador extends JPanel
         JPanel jpEsquerda = new JPanel();
         JPanel jpDireita = new JPanel();
 
-        JTextField jtfPesquisar = new JTextField(15);
-
-        JRadioButton jrbNome = new JRadioButton("Nome");
+        jtfPesquisar = new JTextField(15);
+        jtfPesquisar.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                pesquisar(jtfPesquisar.getText());
+            }
+        });
+        jrbNome = new JRadioButton("Nome");
         jrbNome.setSelected(true);
-        JRadioButton jrbPosicao = new JRadioButton("Posição");
+        jrbPosicao = new JRadioButton("Posição");
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(jrbNome);
@@ -78,9 +107,10 @@ public class PanelAlterarJogador extends JPanel
     {
         String[] nomeColunas =
         {
-            "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção"
+            "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção", "Titular"
         };
-        JTableSGCMF jt = new JTableSGCMF(null, nomeColunas);
+        jt = new JTableSGCMF(null, nomeColunas, this);
+
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -92,6 +122,10 @@ public class PanelAlterarJogador extends JPanel
         JPanel jpPrincipal = new JPanel(new BorderLayout());
         JPanel jpAux = new JPanel(new GridLayout(3, 2));
         JPanel jpAux2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        String[] posicao =
+        {
+            "Goleiro", "Lateral Esquerdo", "Lateral Direito", "Atacante", "Volante", "Zagueiro"
+        };
 
         JLabel jlNumeroCamisa = new JLabel("Número da Camisa:");
         UtilView.alinhaLabel(jlNumeroCamisa);
@@ -106,14 +140,16 @@ public class PanelAlterarJogador extends JPanel
         JLabel jlSelecao = new JLabel("Seleção:");
         UtilView.alinhaLabel(jlSelecao);
 
-        JTextField jtfNumeroCamisa = new JTextField(10);
-        JTextField jtfNome = new JTextField(10);
-        JTextField jtfDataNascimento = new JTextField(10);
-        JTextField jtfAltura = new JTextField(10);
-        JTextField jtfPosicao = new JTextField(10);
-        JTextField jtfSelecao = new JTextField(10);
+        jtfNumeroCamisa = new JTextField(10);
+        jtfNome = new JTextField(10);
+        jtfDataNascimento = new JTextField(10);
+        jtfAltura = new JTextField(10);
+        jcbPosicao = new JComboBox(posicao);
+        jcbPosicao.setPreferredSize(new Dimension(132, 20));
+        jtfSelecao = new JTextField(10);
+        jtfSelecao.setEditable(false);
 
-        
+
         JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
         JButton jbAlterar = new JButton("Alterar");
@@ -124,7 +160,7 @@ public class PanelAlterarJogador extends JPanel
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNome));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNome, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlPosicao));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfPosicao, FlowLayout.LEFT));
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jcbPosicao, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlDataNascimento));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfDataNascimento, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSelecao));
@@ -132,10 +168,51 @@ public class PanelAlterarJogador extends JPanel
         jpAux2.add(jbPesquisar);
         jpAux.add(jpAux2);
         jpAux.setBorder(BorderFactory.createEtchedBorder());
-        
+
         jpPrincipal.add(jpAux, BorderLayout.CENTER);
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbAlterar), BorderLayout.SOUTH);
-        
+
         return jpPrincipal;
+    }
+
+    //Daqui pra baixo é identico ao consultarJogador, tem que arrumar.
+    public void limparCampos()
+    {
+        jrbNome.setSelected(true);
+        jtfPesquisar.setText("");
+    }
+
+    public void ativaTela()
+    {
+        String[][] dadosJogador;
+        dadosJogador = ctrJogador.queryAllDataJogadorTodos();
+        jt.preencheTabela(dadosJogador);
+    }
+
+    private void pesquisar(String chavePesquisa)
+    {
+        String[][] dadosJogador;
+        if (jrbNome.isSelected())
+        {
+            dadosJogador = ctrJogador.queryAllDataJogadorByNome(chavePesquisa);
+        }
+        else
+        {
+            dadosJogador = ctrJogador.queryAllDataJogadorByPosicao(chavePesquisa);
+        }
+        jt.preencheTabela(dadosJogador);
+    }
+
+    @Override
+    public void receiveRowData(String[] dados)
+    {
+        Short idSelecao;
+        jtfNumeroCamisa.setText(dados[1]);
+        jtfNome.setText(dados[2]);
+        jtfDataNascimento.setText(dados[3]);
+        jtfAltura.setText(dados[4]);
+        jcbPosicao.setSelectedItem((String) dados[5]);
+        idSelecao = ctrMain.getCtrSelecao().capturarIdSelecao(dados[6]);
+        jtfSelecao.setText(idSelecao + "");
     }
 }

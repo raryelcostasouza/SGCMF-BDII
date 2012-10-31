@@ -37,10 +37,10 @@ public class PanelRemoverJogador extends JPanel
         JScrollPane jpCenter = montaPainelCentral();
         JPanel jpSouth = montaPainelSouth();
 
-        this.add(jpNorth,BorderLayout.NORTH);
-        this.add(jpCenter,BorderLayout.CENTER);
-        this.add(jpSouth,BorderLayout.SOUTH);
-        
+        this.add(jpNorth, BorderLayout.NORTH);
+        this.add(jpCenter, BorderLayout.CENTER);
+        this.add(jpSouth, BorderLayout.SOUTH);
+
     }
 
     private JPanel montaPainelNorte()
@@ -76,7 +76,7 @@ public class PanelRemoverJogador extends JPanel
     {
         String[] nomeColunas =
         {
-            "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção"
+            "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção", "Titular"
         };
         JTableSGCMF jt = new JTableSGCMF(null, nomeColunas);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -124,10 +124,10 @@ public class PanelRemoverJogador extends JPanel
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSelecao));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfSelecao, FlowLayout.LEFT));
         jpAux.setBorder(BorderFactory.createEtchedBorder());
-        
+
         jpPrincipal.add(jpAux, BorderLayout.CENTER);
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbAlterar), BorderLayout.SOUTH);
-        
+
         return jpPrincipal;
-    }    
+    }
 }

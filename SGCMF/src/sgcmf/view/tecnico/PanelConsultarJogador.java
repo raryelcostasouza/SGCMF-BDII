@@ -31,6 +31,7 @@ public class PanelConsultarJogador extends JPanel
     private JRadioButton jrbNome;
     private JRadioButton jrbPosicao;
     private JTextField jtfPesquisar;
+
     public PanelConsultarJogador(CtrTecnico ctrTecnico)
     {
         ctrMain = ctrTecnico.getCtrMain();
@@ -54,15 +55,15 @@ public class PanelConsultarJogador extends JPanel
         JPanel jpDireita = new JPanel();
 
         jtfPesquisar = new JTextField(15);
-        jtfPesquisar.addActionListener(new ActionListener() {
-
+        jtfPesquisar.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 pesquisa(jtfPesquisar.getText());
             }
         });
-        
+
         jrbNome = new JRadioButton("Nome");
         jrbNome.setSelected(true);
         jrbPosicao = new JRadioButton("Posição");
@@ -88,7 +89,7 @@ public class PanelConsultarJogador extends JPanel
     {
         String[] nomeColunas =
         {
-            "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção"
+            "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção", "Titular"
         };
         jt = new JTableSGCMF(null, nomeColunas);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -96,21 +97,21 @@ public class PanelConsultarJogador extends JPanel
 
         return jsp;
     }
-    
+
     public void ativaTela()
     {
         String[][] dadosJogadores;
-        
+
         dadosJogadores = ctrJogador.queryAllDataJogadorTodos();
         jt.preencheTabela(dadosJogadores);
     }
-    
+
     public void limparCampos()
     {
         jrbNome.setSelected(true);
         jtfPesquisar.setText("");
     }
-    
+
     private void pesquisa(String chavePesquisa)
     {
         String[][] dadosJogadores;

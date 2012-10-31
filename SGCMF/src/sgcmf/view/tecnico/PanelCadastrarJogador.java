@@ -35,7 +35,6 @@ import sgcmf.view.UtilView;
 public class PanelCadastrarJogador extends JPanel
 {
     private LimSelecionarSelecao limSelecionarSelecao;
-    private CtrTecnico ctrTecnico;
     private CtrMain ctrMain;
     private CtrSelecao ctrSelecao;
     private CtrJogador ctrJogador;
@@ -55,7 +54,6 @@ public class PanelCadastrarJogador extends JPanel
 
     public PanelCadastrarJogador(CtrTecnico ctrTecnico)
     {
-        this.ctrTecnico = ctrTecnico;
         ctrMain = ctrTecnico.getCtrMain();
         ctrSelecao = ctrMain.getCtrSelecao();
         ctrJogador = ctrMain.getCtrJogador();
