@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import sgcmf.control.CtrSelecao;
 import sgcmf.view.UtilView;
 import sgcmf.view.comiteGestor.LimConsultaSelecao;
-import sun.nio.cs.ext.PCK;
 
 /**
  *
