@@ -276,16 +276,18 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     public void receiveRowData(String[] dados)
     {
         Short idSelecao;
+        String s;
         jbPesquisar.setEnabled(true);
         jbAlterar.setEnabled(true);
         jtfNumeroCamisa.setText(dados[1]);
         jtfNome.setText(dados[2]);
-        jtfDataNascimento.setText(dados[3]);
+        //Transformando a String de data para o padrao do Java com "/"
+        s = dados[3].replace(dados[3].charAt(4), '/');
+        jtfDataNascimento.setText(s);
         jtfAltura.setText(dados[4]);
         jcbPosicao.setSelectedItem((String) dados[5]);
         idSelecao = ctrMain.getCtrSelecao().capturarIdSelecao(dados[6]);
         jtfSelecao.setText(idSelecao + "");
-        System.out.println("To aqui");
     }
 
     public void selecaoSelecionada(Short idSelecao)
