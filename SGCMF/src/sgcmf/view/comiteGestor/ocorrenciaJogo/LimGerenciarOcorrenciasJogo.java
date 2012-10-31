@@ -302,7 +302,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 	{
 		String[][] dadosGol;
 		
-		dadosGol = ctrOcorrenciaJogo.queryGolTodos();
+		dadosGol = ctrOcorrenciaJogo.queryGolByIdJogo(idJogo);
 		jtGol.preencheTabela(dadosGol);
 		jlInfoJogo.setText(ctrJogo.queryInfoJogoById(idJogo));
 	}
