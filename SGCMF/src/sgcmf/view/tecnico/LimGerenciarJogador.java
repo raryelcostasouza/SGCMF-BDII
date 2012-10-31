@@ -4,6 +4,8 @@
  */
 package sgcmf.view.tecnico;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -32,10 +34,19 @@ public class LimGerenciarJogador extends JDialog
         setResizable(false);
         setModal(true);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
-
+        
         add(montaPainel());
+        
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                pCadastrarJogador.limparCampos();
+            }
+        });
     }
-
+    
     private JTabbedPane montaPainel()
     {
         final JTabbedPane jtp = new JTabbedPane();
@@ -52,24 +63,24 @@ public class LimGerenciarJogador extends JDialog
                 }
                 else if (tituloAba.equals("Alterar"))
                 {
-                    setSize(700,400);
+                    setSize(700, 400);
                     setLocationRelativeTo(null);
                 }
                 else if (tituloAba.equals("Remover"))
                 {
-                    setSize(700,400);
+                    setSize(700, 400);
                     setLocationRelativeTo(null);
                 }
                 else if (tituloAba.equals("Consultar"))
                 {
-                    setSize(700,400);
+                    setSize(700, 400);
                     setLocationRelativeTo(null);
                 }
             }
         });
-
+        
         jtp.add(pCadastrarJogador, "Cadastrar");
-        jtp.add(pAlterarJogador,"Alterar");
+        jtp.add(pAlterarJogador, "Alterar");
         jtp.add(pRemoverJogador, "Remover");
         jtp.add(pConsultarJogador, "Consultar");
         

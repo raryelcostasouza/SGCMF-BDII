@@ -7,6 +7,8 @@ package sgcmf.view.tecnico;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import sgcmf.control.CtrSelecao;
 import sgcmf.view.UtilView;
@@ -19,13 +21,14 @@ import sgcmf.view.comiteGestor.LimConsultaSelecao;
 public class LimSelecionarSelecao extends LimConsultaSelecao
 {
     private int linhaSelecionada;
+
     public LimSelecionarSelecao(CtrSelecao ctrSelecao, final PanelCadastrarJogador pcj)
     {
         super(ctrSelecao);
         setTitle("Selecionar Seleção");
         JButton jbSelecionar = new JButton("Selecionar");
-        jbSelecionar.addActionListener(new ActionListener() {
-
+        jbSelecionar.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -39,9 +42,9 @@ public class LimSelecionarSelecao extends LimConsultaSelecao
                     idSelecao = Short.parseShort(strIdSelecao);
                     pcj.selecaoSelecionada(idSelecao);
                 }
-                
+
             }
         });
-        mainPanel.add(UtilView.putComponentInFlowLayoutPanel(jbSelecionar),BorderLayout.SOUTH);
+        mainPanel.add(UtilView.putComponentInFlowLayoutPanel(jbSelecionar), BorderLayout.SOUTH);
     }
 }

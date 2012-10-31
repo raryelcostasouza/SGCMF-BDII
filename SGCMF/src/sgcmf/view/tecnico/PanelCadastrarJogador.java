@@ -10,8 +10,6 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -63,6 +61,7 @@ public class PanelCadastrarJogador extends JPanel
         ctrJogador = ctrMain.getCtrJogador();
         limSelecionarSelecao = new LimSelecionarSelecao(ctrSelecao, this);
         setLayout(new BorderLayout());
+        
         montaPainel();
     }
 
@@ -182,7 +181,7 @@ public class PanelCadastrarJogador extends JPanel
         jtfSelecao.setText(selecao + "");
     }
     
-    private void limparCampos()
+    public void limparCampos()
     {
         jtfNumeroCamisa.setText("");
         jtfNome.setText("");
