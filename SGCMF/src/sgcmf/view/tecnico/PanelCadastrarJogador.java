@@ -17,6 +17,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -24,7 +25,9 @@ import sgcmf.control.CtrJogador;
 import sgcmf.control.CtrMain;
 import sgcmf.control.CtrSelecao;
 import sgcmf.control.CtrTecnico;
+import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.SGCMFIcons;
+import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
 
 /**
@@ -39,6 +42,13 @@ public class PanelCadastrarJogador extends JPanel
     private CtrSelecao ctrSelecao;
     private CtrJogador ctrJogador;
     private JTextField jtfSelecao;
+    private JTextField jtfNumeroCamisa;
+    private JTextField jtfNome;
+    private JTextField jtfAltura;
+    private JTextField jtfDataNascimento;
+    private JComboBox jcbPosicao;
+    private JRadioButton jrbSim;
+    
     private String[] items =
     {
         "Goleiro", "Lateral Esquerdo", "Lateral Direito",
@@ -78,21 +88,21 @@ public class PanelCadastrarJogador extends JPanel
         UtilView.alinhaLabel(jlSelecao);
 
         ButtonGroup bg = new ButtonGroup();
-        final JRadioButton jrbSim = new JRadioButton("Sim");
+        jrbSim = new JRadioButton("Sim");
         jrbSim.setSelected(true);
         final JRadioButton jrbNao = new JRadioButton("Não");
         bg.add(jrbSim);
         bg.add(jrbNao);
 
 
-        final JTextField jtfNumeroCamisa = new JTextField(10);
-        final JTextField jtfNome = new JTextField(10);
-        final JTextField jtfDataNascimento = new JTextField(10);
-        final JTextField jtfAltura = new JTextField(10);
+        jtfNumeroCamisa = new JTextField(10);
+        jtfNome = new JTextField(10);
+        jtfDataNascimento = new JTextField(10);
+        jtfAltura = new JTextField(10);
         jtfSelecao = new JTextField(10);
         jtfSelecao.setEditable(false);
 
-        final JComboBox jcbPosicao = new JComboBox(items);
+        jcbPosicao = new JComboBox(items);
         jcbPosicao.setEditable(false);
         jcbPosicao.setPreferredSize(new Dimension(132, 20));
 
@@ -107,14 +117,27 @@ public class PanelCadastrarJogador extends JPanel
                 String dataNascimento = jtfDataNascimento.getText();
                 String altura = jtfAltura.getText();
                 boolean titular = false;
+                ResultadoOperacao resultado;
                 String posicao = (String) jcbPosicao.getSelectedItem();
                 String selecao = jtfSelecao.getText();
                 if (jrbSim.isSelected())
                 {
                     titular = true;
                 }
-                ctrJogador.cadastrarJogador(numCamisa, nome, dataNascimento, altura, titular, posicao, selecao);
-            }
+                resultado = ctrJogador.cadastrarJogador(numCamisa, nome, dataNascimento,
+                        altura, titular, posicao, selecao);
+                if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                {
+                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                            + " no Cadastro de Jogador", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Cadastro"
+                            + " bem Sucedido", JOptionPane.INFORMATION_MESSAGE);
+                    limparCampos();
+                }
+            }            
         });
 
         JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
@@ -157,5 +180,16 @@ public class PanelCadastrarJogador extends JPanel
     public void selecaoSelecionada(Short selecao)
     {
         jtfSelecao.setText(selecao + "");
+    }
+    
+    private void limparCampos()
+    {
+        jtfNumeroCamisa.setText("");
+        jtfNome.setText("");
+        jtfDataNascimento.setText("");
+        jtfAltura.setText("");
+        jtfSelecao.setText("");
+        jcbPosicao.setSelectedIndex(0);
+        jrbSim.setSelected(true);
     }
 }

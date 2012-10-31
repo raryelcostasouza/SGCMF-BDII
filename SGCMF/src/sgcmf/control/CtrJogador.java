@@ -3,12 +3,14 @@ package sgcmf.control;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.JogadorDAO;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Selecao;
 import sgcmf.model.other.ResultadoOperacao;
+import sgcmf.model.other.TipoResultadoOperacao;
 
 public class CtrJogador
 {
@@ -81,6 +83,7 @@ public class CtrJogador
         Short aSelecao;
         Transaction tr;
         Selecao s = new Selecao();
+        Jogador j = new Jogador();
         ResultadoOperacao result = null;
         String errorMessege;
         GeneralDAO gdao;
@@ -94,8 +97,29 @@ public class CtrJogador
             aAltura = new BigDecimal(altura);
             aSelecao = Short.parseShort(selecao);
             tr = gdao.getSessao().beginTransaction();
-            
+            gdao.carregar(s, aSelecao);
+            try
+            {
+                j.setNcamisa(nCamisa);
+                j.setNome(nome);
+                j.setDatanasc(dtaNascimento);
+                j.setAltura(aAltura);
+                j.setTitular(titular);
+                j.setPosicao(posicao);
+                j.setSelecao(s);
+                gdao.salvar(j);
+                tr.commit();
+                result = new ResultadoOperacao("Jogador Cadastrado com êxito.", TipoResultadoOperacao.EXITO);
+            }
+            catch (HibernateException he)
+            {
+                result = new ResultadoOperacao("Erro no Hibernate.\n"+he.getMessage(), TipoResultadoOperacao.ERRO);
+            }
             gdao.fecharSessao();
+        }
+        else
+        {
+            result = new ResultadoOperacao("Falha no cadastro de jogador.\n"+errorMessege, TipoResultadoOperacao.ERRO);
         }
         return result;
     }
@@ -110,7 +134,7 @@ public class CtrJogador
         try
         {
             camisa = Short.parseShort(numCamisa);
-            if (camisa.intValue() < 1 && camisa.intValue() > 24)
+            if (camisa < 1 || camisa > 24)
             {
                 errorMessege = "O valor da camisa deve estar entre 1 e 23.";
                 return errorMessege;
@@ -128,7 +152,7 @@ public class CtrJogador
             }
             catch (IllegalArgumentException ilae)
             {
-                errorMessege = "Formato de data é inválido. Deve seguir o padrão AAAA-MM-DD.";
+                errorMessege = "Formato de data é inválido. Deve seguir o padrão AAAA/MM/DD.";
             }
         }
         if (errorMessege.equals(""))
