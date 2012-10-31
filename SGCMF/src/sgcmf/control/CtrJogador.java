@@ -54,7 +54,7 @@ public class CtrJogador
 
         return dadosJogador;
     }
-    
+
     public String[][] queryAllDataJogadorTodos()
     {
         GeneralDAO<Jogador> gdao;
@@ -68,7 +68,7 @@ public class CtrJogador
 
         return dadosJogadores;
     }
-    
+
     public String[][] queryAllDataJogadorByNome(String nome)
     {
         JogadorDAO jDAO;
@@ -88,12 +88,12 @@ public class CtrJogador
         JogadorDAO jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
-        
+
         jDAO = new JogadorDAO();
         alJogador = jDAO.queryJogadorByPosicao(posicao);
         dadosJogador = arrayList2StringMatrixFull(alJogador);
         jDAO.fecharSessao();
-        
+
         return dadosJogador;
     }
 
@@ -115,7 +115,7 @@ public class CtrJogador
 
         return dadosJogadores;
     }
-    
+
     private String[][] arrayList2StringMatrixFull(ArrayList<Jogador> alJogador)
     {
         String[][] dadosJogadores;
@@ -157,7 +157,7 @@ public class CtrJogador
         Transaction tr;
         Selecao s = new Selecao();
         Jogador j = new Jogador();
-        ResultadoOperacao result = null;
+        ResultadoOperacao result;
         String errorMessege;
         GeneralDAO gdao;
 
@@ -193,6 +193,56 @@ public class CtrJogador
         else
         {
             result = new ResultadoOperacao("Falha no cadastro de jogador.\n" + errorMessege, TipoResultadoOperacao.ERRO);
+        }
+        return result;
+    }
+
+    public ResultadoOperacao alterarJogador(String idJogador, String numCamisa, String nome, String dtaNascimento,
+            String altura, String posicao, String selecao)
+    {
+        Short nCamisa;
+        Date dataNascimento;
+        BigDecimal pAltura;
+        Short idSelecao;
+        Selecao s = new Selecao();
+        Jogador j = new Jogador();
+        Transaction tr;
+        GeneralDAO gdao;
+        ResultadoOperacao result;
+        String errorMessege;
+
+        errorMessege = validaCampos(numCamisa, dtaNascimento, altura, selecao);
+        if (errorMessege.equals(""))
+        {
+            gdao = new GeneralDAO();
+            nCamisa = Short.parseShort(numCamisa);
+            dataNascimento = new Date(dtaNascimento);
+            pAltura = new BigDecimal(altura);
+            idSelecao = Short.parseShort(selecao);
+            tr = gdao.getSessao().beginTransaction();
+            gdao.carregar(s, idSelecao);
+            gdao.carregar(j, new Short(idJogador));
+            try
+            {
+                j.setNcamisa(nCamisa);
+                j.setNome(nome);
+                j.setDatanasc(dataNascimento);
+                j.setAltura(pAltura);
+                j.setPosicao(posicao);
+                j.setSelecao(s);
+                gdao.atualizar(j);
+                tr.commit();
+                result = new ResultadoOperacao("Jogador Alterado com êxito.", TipoResultadoOperacao.EXITO);
+            }
+            catch (HibernateException he)
+            {
+                result = new ResultadoOperacao("Erro no Hibernate.\n" + he.getMessage(), TipoResultadoOperacao.ERRO);
+            }
+            gdao.fecharSessao();
+        }
+        else
+        {
+            result = new ResultadoOperacao("Falha na alteracao do jogador.\n" + errorMessege, TipoResultadoOperacao.ERRO);
         }
         return result;
     }

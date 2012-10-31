@@ -7,7 +7,6 @@ package sgcmf.view.tecnico;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -45,7 +44,7 @@ public class LimGerenciarJogador extends JDialog
             {
                 pCadastrarJogador.limparCampos();
                 pConsultarJogador.limparCampos();
-                pAlterarJogador.limparCampos();
+                pAlterarJogador.limparTodosCampos();
                 jtp.setSelectedIndex(0);
                 setLocationRelativeTo(null);
             }

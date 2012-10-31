@@ -47,4 +47,30 @@ public class LimSelecionarSelecao extends LimConsultaSelecao
         });
         mainPanel.add(UtilView.putComponentInFlowLayoutPanel(jbSelecionar), BorderLayout.SOUTH);
     }
+    
+    public LimSelecionarSelecao(CtrSelecao ctrSelecao, final PanelAlterarJogador paj)
+    {
+        super(ctrSelecao);
+        setTitle("Selecionar Seleção");
+        JButton jbSelecionar = new JButton("Selecionar");
+        jbSelecionar.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                linhaSelecionada = jt.getSelectedRow();
+                if (linhaSelecionada != -1)
+                {
+                    setVisible(false);
+                    String strIdSelecao;
+                    Short idSelecao;
+                    strIdSelecao = jt.getValueAt(jt.getSelectedRow(), 0).toString();
+                    idSelecao = Short.parseShort(strIdSelecao);
+                    paj.selecaoSelecionada(idSelecao);
+                }
+
+            }
+        });
+        mainPanel.add(UtilView.putComponentInFlowLayoutPanel(jbSelecionar), BorderLayout.SOUTH);
+    }
 }

@@ -15,14 +15,18 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.control.CtrJogador;
 import sgcmf.control.CtrMain;
+import sgcmf.control.CtrSelecao;
 import sgcmf.control.CtrTecnico;
+import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.SGCMFIcons;
+import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 import sgcmf.view.table.ReceiveRowDataSGCMF;
@@ -36,6 +40,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     private JTableSGCMF jt;
     private CtrMain ctrMain;
     private CtrJogador ctrJogador;
+    private CtrSelecao ctrSelecao;
     private JRadioButton jrbNome;
     private JRadioButton jrbPosicao;
     private JTextField jtfPesquisar;
@@ -45,12 +50,17 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     private JTextField jtfAltura;
     private JTextField jtfSelecao;
     private JComboBox jcbPosicao;
+    private LimSelecionarSelecao limSelecionarSelecao;
+    private JButton jbPesquisar;
+    private JButton jbAlterar;
 
     public PanelAlterarJogador(CtrTecnico ctrTecnico)
     {
         ctrMain = ctrTecnico.getCtrMain();
+        ctrSelecao = ctrMain.getCtrSelecao();
         ctrJogador = ctrMain.getCtrJogador();
         setLayout(new BorderLayout());
+        limSelecionarSelecao = new LimSelecionarSelecao(ctrSelecao, this);
         montaPainelPrincipal();
     }
 
@@ -150,17 +160,49 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         jtfSelecao.setEditable(false);
 
 
-        JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
-        jbPesquisar.addActionListener(new ActionListener() {
-
+        jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
+        jbPesquisar.setEnabled(false);
+        jbPesquisar.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                
+                limSelecionarSelecao.ativaTela();
             }
         });
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
-        JButton jbAlterar = new JButton("Alterar");
+        jbAlterar = new JButton("Alterar");
+        jbAlterar.setEnabled(false);
+        jbAlterar.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String numCamisa = jtfNumeroCamisa.getText();
+                String nome = jtfNome.getText();
+                String dtaNascimento = jtfDataNascimento.getText();
+                String altura = jtfAltura.getText();
+                String posicao = (String) jcbPosicao.getSelectedItem();
+                String selecao = jtfSelecao.getText();
+                ResultadoOperacao result;
+                String idJogador = jt.getValueAt(jt.getSelectedRow(), 0).toString();
+                System.out.println(idJogador);
+                result = ctrJogador.alterarJogador(idJogador, numCamisa, nome, dtaNascimento, altura, posicao, selecao);
+
+                if (result.getTipo().equals(TipoResultadoOperacao.ERRO))
+                {
+                    JOptionPane.showMessageDialog(null, result.getMsg(), "Erro"
+                            + " na Alteração do Jogador", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, result.getMsg(), "Alteração"
+                            + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
+                    limparTodosCampos();
+                    ativaTela();
+                }
+            }
+        });
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNumeroCamisa));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNumeroCamisa, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlAltura));
@@ -184,10 +226,26 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     }
 
     //Daqui pra baixo é identico ao consultarJogador, tem que arrumar.
-    public void limparCampos()
+    public void limparTodosCampos()
     {
         jrbNome.setSelected(true);
+        jcbPosicao.setSelectedIndex(0);
         jtfPesquisar.setText("");
+        jtfDataNascimento.setText("");
+        jtfNumeroCamisa.setText("");
+        jtfNome.setText("");
+        jtfSelecao.setText("");
+        jtfAltura.setText("");
+    }
+
+    public void limparParteCampos()
+    {
+        jcbPosicao.setSelectedIndex(0);
+        jtfDataNascimento.setText("");
+        jtfNumeroCamisa.setText("");
+        jtfNome.setText("");
+        jtfSelecao.setText("");
+        jtfAltura.setText("");
     }
 
     public void ativaTela()
@@ -199,28 +257,39 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
 
     private void pesquisar(String chavePesquisa)
     {
-        String[][] dadosJogador;
+        String[][] dadosJogadores;
         if (jrbNome.isSelected())
         {
-            dadosJogador = ctrJogador.queryAllDataJogadorByNome(chavePesquisa);
+            dadosJogadores = ctrJogador.queryAllDataJogadorByNome(chavePesquisa);
         }
         else
         {
-            dadosJogador = ctrJogador.queryAllDataJogadorByPosicao(chavePesquisa);
+            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicao(chavePesquisa);
+
         }
-        jt.preencheTabela(dadosJogador);
+        limparParteCampos();
+        jbAlterar.setEnabled(false);
+        jbPesquisar.setEnabled(false);
+        jt.preencheTabela(dadosJogadores);
     }
 
     @Override
     public void receiveRowData(String[] dados)
     {
         Short idSelecao;
+        jbPesquisar.setEnabled(true);
+        jbAlterar.setEnabled(true);
         jtfNumeroCamisa.setText(dados[1]);
         jtfNome.setText(dados[2]);
         jtfDataNascimento.setText(dados[3]);
         jtfAltura.setText(dados[4]);
         jcbPosicao.setSelectedItem((String) dados[5]);
         idSelecao = ctrMain.getCtrSelecao().capturarIdSelecao(dados[6]);
+        jtfSelecao.setText(idSelecao + "");
+    }
+
+    public void selecaoSelecionada(Short idSelecao)
+    {
         jtfSelecao.setText(idSelecao + "");
     }
 }
