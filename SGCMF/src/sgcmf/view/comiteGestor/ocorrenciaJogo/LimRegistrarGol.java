@@ -235,6 +235,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 			JOptionPane.showMessageDialog(this, result.getMsg(), "Exito!", JOptionPane.INFORMATION_MESSAGE);
 			
 			setVisible(false);
+			resetCamposInterface();
 			limGerenciarOcorrencias.preencheTabelaGol();
 		}
 		else
