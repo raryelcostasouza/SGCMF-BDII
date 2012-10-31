@@ -186,7 +186,6 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
                 String selecao = jtfSelecao.getText();
                 ResultadoOperacao result;
                 String idJogador = jt.getValueAt(jt.getSelectedRow(), 0).toString();
-                System.out.println(idJogador);
                 result = ctrJogador.alterarJogador(idJogador, numCamisa, nome, dtaNascimento, altura, posicao, selecao);
 
                 if (result.getTipo().equals(TipoResultadoOperacao.ERRO))
@@ -286,6 +285,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         jcbPosicao.setSelectedItem((String) dados[5]);
         idSelecao = ctrMain.getCtrSelecao().capturarIdSelecao(dados[6]);
         jtfSelecao.setText(idSelecao + "");
+        System.out.println("To aqui");
     }
 
     public void selecaoSelecionada(Short idSelecao)

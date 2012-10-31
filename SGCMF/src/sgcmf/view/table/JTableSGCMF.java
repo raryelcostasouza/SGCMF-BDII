@@ -34,18 +34,22 @@ public class JTableSGCMF extends JTable
                     return;
                 }
                 dataModel.getColumnCount();
-                for (int i = 0; i < dataModel.getColumnCount(); i++)
+                //If eh usado para verificar se nao existe nenhuma linha selecionada antes de fazer o listener
+                if (getSelectedRowCount() == 1)
                 {
-                    dadosLinha[i] = getValueAt(getSelectedRow(), i).toString();
+                    for (int i = 0; i < dataModel.getColumnCount(); i++)
+                    {
+                        dadosLinha[i] = getValueAt(getSelectedRow(), i).toString();
+                    }
+                    janela.receiveRowData(dadosLinha);
                 }
-                janela.receiveRowData(dadosLinha);
             }
         });
     }
 
     public void preencheTabela(String[][] dados)
     {
-		DefaultTableModelSGCMF dm = (DefaultTableModelSGCMF) getModel();
-		dm.setDataVector(dados, nomeColunas);	
+        DefaultTableModelSGCMF dm = (DefaultTableModelSGCMF) getModel();
+        dm.setDataVector(dados, nomeColunas);
     }
 }
