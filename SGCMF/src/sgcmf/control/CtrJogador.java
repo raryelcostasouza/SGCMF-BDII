@@ -66,5 +66,82 @@ public class CtrJogador
 		
 		return dadosJogadores;
 	}
+	
+	public ResultadoOperacao cadastrarJogador(String numCamisa, String nome, String dataNascimento,
+            String altura, boolean titular, String posicao, String selecao)
+    {
+        Short nCamisa;
+        Date dtaNascimento;
+        BigDecimal aAltura;
+        Short aSelecao;
+        Transaction tr;
+        Selecao s = new Selecao();
+        ResultadoOperacao result = null;
+        String errorMessege;
+        
+        errorMessege = validaCampos(numCamisa, dataNascimento, altura, selecao);
+        if (errorMessege.equals(""))
+        {
+            nCamisa = Short.parseShort(numCamisa);
+            dtaNascimento = new Date(dataNascimento);
+            aAltura = new BigDecimal(altura);
+            aSelecao = Short.parseShort(selecao);
+            tr = ctrMain.getGeneralDAO().getSessao().beginTransaction();
+            
+        }
+        return result;
+    }
+    
+    public String validaCampos(String numCamisa, String dataNascimento, String altura, String selecao)
+    {
+        String errorMessege = "";
+        Short camisa;
+        Date date;
+        BigDecimal aAltura;
+        //Verificar se o numero da camisa esta valido.
+        try
+        {
+            camisa = Short.parseShort(numCamisa);
+            if (camisa.intValue() < 1 && camisa.intValue() > 24)
+            {
+                errorMessege = "O valor da camisa deve estar entre 1 e 23.";
+                return errorMessege;
+            }
+        }
+        catch (Exception e)
+        {
+            errorMessege = "Digite um número valido para camisa.";
+        }
+        if (errorMessege.equals(""))
+        {
+            try
+            {
+                date = new Date(dataNascimento);
+            }
+            catch (IllegalArgumentException ilae)
+            {
+                errorMessege = "Formato de data é inválido. Deve seguir o padrão AAAA-MM-DD.";
+            }
+        }
+        if (errorMessege.equals(""))
+        {
+            try
+            {
+                aAltura = new BigDecimal(altura);
+            }
+            catch (NumberFormatException nfe)
+            {
+                errorMessege = "Digite um número valido para altura, usando \".\""
+                        + " para separar o metro de centímetro.";
+            }
+        }
+        if (errorMessege.equals(""))
+        {
+            if (selecao.equals(""))
+            {
+                errorMessege = "O campo de seleção é obrigatório.";
+            }
+        }
+        return errorMessege;
+    }
 }
->>>>>>> Correção DAO
