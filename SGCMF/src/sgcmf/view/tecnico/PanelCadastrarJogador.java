@@ -10,8 +10,6 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -23,7 +21,6 @@ import javax.swing.JTextField;
 import sgcmf.control.CtrMain;
 import sgcmf.control.CtrSelecao;
 import sgcmf.control.CtrTecnico;
-import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 
@@ -99,7 +96,7 @@ public class PanelCadastrarJogador extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                //TODO
+                
             }
         });
 

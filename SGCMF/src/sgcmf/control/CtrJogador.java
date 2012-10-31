@@ -67,3 +67,4 @@ public class CtrJogador
 		return dadosJogadores;
 	}
 }
+>>>>>>> Correção DAO
