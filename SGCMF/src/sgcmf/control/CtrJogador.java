@@ -1,9 +1,14 @@
 package sgcmf.control;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.ArrayList;
+import org.hibernate.Transaction;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.JogadorDAO;
 import sgcmf.model.hibernate.Jogador;
+import sgcmf.model.hibernate.Selecao;
+import sgcmf.model.util.ResultadoOperacao;
 
 public class CtrJogador
 {
@@ -78,7 +83,9 @@ public class CtrJogador
         Selecao s = new Selecao();
         ResultadoOperacao result = null;
         String errorMessege;
+		GeneralDAO gdao;
         
+		gdao = new GeneralDAO();
         errorMessege = validaCampos(numCamisa, dataNascimento, altura, selecao);
         if (errorMessege.equals(""))
         {
@@ -86,8 +93,9 @@ public class CtrJogador
             dtaNascimento = new Date(dataNascimento);
             aAltura = new BigDecimal(altura);
             aSelecao = Short.parseShort(selecao);
-            tr = ctrMain.getGeneralDAO().getSessao().beginTransaction();
+            tr = gdao.getSessao().beginTransaction();
             
+			gdao.fecharSessao();
         }
         return result;
     }
