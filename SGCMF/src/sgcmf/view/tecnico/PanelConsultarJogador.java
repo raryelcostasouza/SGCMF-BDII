@@ -5,12 +5,17 @@
 package sgcmf.view.tecnico;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.control.CtrJogador;
+import sgcmf.control.CtrMain;
+import sgcmf.control.CtrTecnico;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
@@ -20,8 +25,16 @@ import sgcmf.view.table.JTableSGCMF;
  */
 public class PanelConsultarJogador extends JPanel
 {
-    public PanelConsultarJogador()
+    private CtrMain ctrMain;
+    private CtrJogador ctrJogador;
+    private JTableSGCMF jt;
+    private JRadioButton jrbNome;
+    private JRadioButton jrbPosicao;
+    private JTextField jtfPesquisar;
+    public PanelConsultarJogador(CtrTecnico ctrTecnico)
     {
+        ctrMain = ctrTecnico.getCtrMain();
+        ctrJogador = ctrMain.getCtrJogador();
         setLayout(new BorderLayout());
         montaPainelPrincipal();
     }
@@ -40,11 +53,19 @@ public class PanelConsultarJogador extends JPanel
         JPanel jpEsquerda = new JPanel();
         JPanel jpDireita = new JPanel();
 
-        JTextField jtfPesquisar = new JTextField(15);
+        jtfPesquisar = new JTextField(15);
+        jtfPesquisar.addActionListener(new ActionListener() {
 
-        JRadioButton jrbNome = new JRadioButton("Nome");
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                pesquisa(jtfPesquisar.getText());
+            }
+        });
+        
+        jrbNome = new JRadioButton("Nome");
         jrbNome.setSelected(true);
-        JRadioButton jrbPosicao = new JRadioButton("Posição");
+        jrbPosicao = new JRadioButton("Posição");
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(jrbNome);
@@ -69,10 +90,38 @@ public class PanelConsultarJogador extends JPanel
         {
             "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção"
         };
-        JTableSGCMF jt = new JTableSGCMF(null, nomeColunas);
+        jt = new JTableSGCMF(null, nomeColunas);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         return jsp;
+    }
+    
+    public void ativaTela()
+    {
+        String[][] dadosJogadores;
+        
+        dadosJogadores = ctrJogador.queryAllDataJogadorTodos();
+        jt.preencheTabela(dadosJogadores);
+    }
+    
+    public void limparCampos()
+    {
+        jrbNome.setSelected(true);
+        jtfPesquisar.setText("");
+    }
+    
+    private void pesquisa(String chavePesquisa)
+    {
+        String[][] dadosJogadores;
+        if (jrbNome.isSelected())
+        {
+            dadosJogadores = ctrJogador.queryAllDataJogadorByNome(chavePesquisa);
+        }
+        else
+        {
+            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicao(chavePesquisa);
+        }
+        jt.preencheTabela(dadosJogadores);
     }
 }

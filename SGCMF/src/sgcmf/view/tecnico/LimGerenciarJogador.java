@@ -23,13 +23,14 @@ public class LimGerenciarJogador extends JDialog
     private PanelAlterarJogador pAlterarJogador;
     private PanelRemoverJogador pRemoverJogador;
     private PanelConsultarJogador pConsultarJogador;
+    private JTabbedPane jtp;
     
     public LimGerenciarJogador(CtrTecnico ctrTecnico)
     {
         pCadastrarJogador = new PanelCadastrarJogador(ctrTecnico);
         pAlterarJogador = new PanelAlterarJogador();
         pRemoverJogador = new PanelRemoverJogador();
-        pConsultarJogador = new PanelConsultarJogador();
+        pConsultarJogador = new PanelConsultarJogador(ctrTecnico);
         setTitle("Gerenciar Jogadores");
         setResizable(false);
         setModal(true);
@@ -43,13 +44,16 @@ public class LimGerenciarJogador extends JDialog
             public void windowClosing(WindowEvent e)
             {
                 pCadastrarJogador.limparCampos();
+                pConsultarJogador.limparCampos();
+                jtp.setSelectedIndex(0);
+                setLocationRelativeTo(null);
             }
         });
     }
     
     private JTabbedPane montaPainel()
     {
-        final JTabbedPane jtp = new JTabbedPane();
+        jtp = new JTabbedPane();
         jtp.addChangeListener(new ChangeListener()
         {
             @Override
@@ -74,6 +78,7 @@ public class LimGerenciarJogador extends JDialog
                 else if (tituloAba.equals("Consultar"))
                 {
                     setSize(700, 400);
+                    pConsultarJogador.ativaTela();
                     setLocationRelativeTo(null);
                 }
             }

@@ -54,6 +54,48 @@ public class CtrJogador
 
         return dadosJogador;
     }
+    
+    public String[][] queryAllDataJogadorTodos()
+    {
+        GeneralDAO<Jogador> gdao;
+        String[][] dadosJogadores;
+        ArrayList alJogador;
+
+        gdao = new GeneralDAO<Jogador>();
+        alJogador = gdao.listaTodos("Jogador");
+        dadosJogadores = arrayList2StringMatrixFull(alJogador);
+        gdao.fecharSessao();
+
+        return dadosJogadores;
+    }
+    
+    public String[][] queryAllDataJogadorByNome(String nome)
+    {
+        JogadorDAO jDAO;
+        String[][] dadosJogador;
+        ArrayList<Jogador> alJogador;
+
+        jDAO = new JogadorDAO();
+        alJogador = jDAO.queryJogadorByNome(nome);
+        dadosJogador = arrayList2StringMatrixFull(alJogador);
+        jDAO.fecharSessao();
+
+        return dadosJogador;
+    }
+
+    public String[][] queryAllDataJogadorByPosicao(String posicao)
+    {
+        JogadorDAO jDAO;
+        String[][] dadosJogador;
+        ArrayList<Jogador> alJogador;
+        
+        jDAO = new JogadorDAO();
+        alJogador = jDAO.queryJogadorByPosicao(posicao);
+        dadosJogador = arrayList2StringMatrixFull(alJogador);
+        jDAO.fecharSessao();
+        
+        return dadosJogador;
+    }
 
     private String[][] arrayList2StringMatrix(ArrayList<Jogador> alJogador)
     {
@@ -69,6 +111,27 @@ public class CtrJogador
             dadosJogadores[i][2] = String.valueOf(j.getNcamisa());
             dadosJogadores[i][3] = j.getNome();
             dadosJogadores[i][4] = j.getPosicao();
+        }
+
+        return dadosJogadores;
+    }
+    
+    private String[][] arrayList2StringMatrixFull(ArrayList<Jogador> alJogador)
+    {
+        String[][] dadosJogadores;
+        Jogador j;
+
+        dadosJogadores = new String[alJogador.size()][7];
+        for (int i = 0; i < alJogador.size(); i++)
+        {
+            j = alJogador.get(i);
+            dadosJogadores[i][0] = String.valueOf(j.getId());
+            dadosJogadores[i][1] = String.valueOf(j.getNcamisa());
+            dadosJogadores[i][2] = j.getNome();
+            dadosJogadores[i][3] = String.valueOf(j.getDatanasc());
+            dadosJogadores[i][4] = String.valueOf(j.getAltura());
+            dadosJogadores[i][5] = j.getPosicao();
+            dadosJogadores[i][6] = j.getSelecao().getPais();
         }
 
         return dadosJogadores;
@@ -113,13 +176,13 @@ public class CtrJogador
             }
             catch (HibernateException he)
             {
-                result = new ResultadoOperacao("Erro no Hibernate.\n"+he.getMessage(), TipoResultadoOperacao.ERRO);
+                result = new ResultadoOperacao("Erro no Hibernate.\n" + he.getMessage(), TipoResultadoOperacao.ERRO);
             }
             gdao.fecharSessao();
         }
         else
         {
-            result = new ResultadoOperacao("Falha no cadastro de jogador.\n"+errorMessege, TipoResultadoOperacao.ERRO);
+            result = new ResultadoOperacao("Falha no cadastro de jogador.\n" + errorMessege, TipoResultadoOperacao.ERRO);
         }
         return result;
     }
