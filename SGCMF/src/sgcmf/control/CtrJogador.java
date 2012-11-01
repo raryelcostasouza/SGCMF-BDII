@@ -247,6 +247,29 @@ public class CtrJogador
         return result;
     }
 
+    public ResultadoOperacao removerJogador(String idJogador)
+    {
+        Jogador j = new Jogador();
+        Transaction tr;
+        GeneralDAO gDAO;
+        ResultadoOperacao resultado;
+        try
+        {
+            gDAO = new GeneralDAO();
+            tr = gDAO.getSessao().beginTransaction();
+            gDAO.carregar(j, new Short(idJogador));
+            gDAO.apagar(j);
+            tr.commit();
+            resultado = new ResultadoOperacao("Jogador excluido com sucesso.", TipoResultadoOperacao.EXITO);
+        }
+        catch (HibernateException he)
+        {
+            resultado = new ResultadoOperacao("Falha na exclusão do jogador.\n"+he.getMessage(),
+                    TipoResultadoOperacao.ERRO);
+        }
+        return resultado;
+    }
+
     public String validaCampos(String numCamisa, String dataNascimento, String altura, String selecao)
     {
         String errorMessege = "";

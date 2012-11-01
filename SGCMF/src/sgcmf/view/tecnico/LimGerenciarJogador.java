@@ -28,7 +28,7 @@ public class LimGerenciarJogador extends JDialog
     {
         pCadastrarJogador = new PanelCadastrarJogador(ctrTecnico);
         pAlterarJogador = new PanelAlterarJogador(ctrTecnico);
-        pRemoverJogador = new PanelRemoverJogador();
+        pRemoverJogador = new PanelRemoverJogador(ctrTecnico);
         pConsultarJogador = new PanelConsultarJogador(ctrTecnico);
         setTitle("Gerenciar Jogadores");
         setResizable(false);
@@ -63,23 +63,30 @@ public class LimGerenciarJogador extends JDialog
                 if (tituloAba.equals("Cadastrar"))
                 {
                     setSize(380, 335);
+                    pAlterarJogador.limparTodosCampos();
+                    pRemoverJogador.limparTodosCampos();
                     setLocationRelativeTo(null);
                 }
                 else if (tituloAba.equals("Alterar"))
                 {
                     setSize(700, 400);
                     pAlterarJogador.ativaTela();
+                    pRemoverJogador.limparTodosCampos();
                     setLocationRelativeTo(null);
                 }
                 else if (tituloAba.equals("Remover"))
                 {
                     setSize(700, 400);
+                    pRemoverJogador.ativaTela();
+                    pAlterarJogador.limparTodosCampos();
                     setLocationRelativeTo(null);
                 }
                 else if (tituloAba.equals("Consultar"))
                 {
                     setSize(700, 400);
                     pConsultarJogador.ativaTela();
+                    pAlterarJogador.limparTodosCampos();
+                    pRemoverJogador.limparTodosCampos();
                     setLocationRelativeTo(null);
                 }
             }

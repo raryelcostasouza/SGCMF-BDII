@@ -159,9 +159,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         jtfSelecao = new JTextField(10);
         jtfSelecao.setEditable(false);
 
-
         jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
-        jbPesquisar.setEnabled(false);
         jbPesquisar.addActionListener(new ActionListener()
         {
             @Override
@@ -172,7 +170,6 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         });
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
         jbAlterar = new JButton("Alterar");
-        jbAlterar.setEnabled(false);
         jbAlterar.addActionListener(new ActionListener()
         {
             @Override
@@ -202,6 +199,9 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
                 }
             }
         });
+        
+        travarBotoes();
+        
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNumeroCamisa));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNumeroCamisa, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlAltura));
@@ -227,6 +227,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     //Daqui pra baixo é identico ao consultarJogador, tem que arrumar.
     public void limparTodosCampos()
     {
+        travarBotoes();
         jrbNome.setSelected(true);
         jcbPosicao.setSelectedIndex(0);
         jtfPesquisar.setText("");
@@ -267,8 +268,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
 
         }
         limparParteCampos();
-        jbAlterar.setEnabled(false);
-        jbPesquisar.setEnabled(false);
+        travarBotoes();
         jt.preencheTabela(dadosJogadores);
     }
 
@@ -293,5 +293,11 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     public void selecaoSelecionada(Short idSelecao)
     {
         jtfSelecao.setText(idSelecao + "");
+    }
+    
+    public void travarBotoes()
+    {
+        jbPesquisar.setEnabled(false);
+        jbAlterar.setEnabled(false);
     }
 }

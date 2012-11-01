@@ -7,25 +7,50 @@ package sgcmf.view.tecnico;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.control.CtrJogador;
+import sgcmf.control.CtrMain;
+import sgcmf.control.CtrTecnico;
+import sgcmf.model.other.ResultadoOperacao;
+import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
+import sgcmf.view.table.ReceiveRowDataSGCMF;
 
 /**
  *
  * @author Helio
  */
-public class PanelRemoverJogador extends JPanel
+public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
 {
-    public PanelRemoverJogador()
+    private CtrMain ctrMain;
+    private CtrJogador ctrJogador;
+    private JTextField jtfNumeroCamisa;
+    private JTextField jtfNome;
+    private JTextField jtfDataNascimento;
+    private JTextField jtfAltura;
+    private JTextField jtfPosicao;
+    private JTextField jtfSelecao;
+    private JTextField jtfPesquisar;
+    private JTableSGCMF jt;
+    private JRadioButton jrbNome;
+    private JRadioButton jrbPosicao;
+    private JButton jbRemover;
+
+    public PanelRemoverJogador(CtrTecnico ctrTecnico)
     {
+        ctrMain = ctrTecnico.getCtrMain();
+        ctrJogador = ctrMain.getCtrJogador();
         setLayout(new BorderLayout());
         montaPainelPrincipal();
     }
@@ -49,11 +74,19 @@ public class PanelRemoverJogador extends JPanel
         JPanel jpEsquerda = new JPanel();
         JPanel jpDireita = new JPanel();
 
-        JTextField jtfPesquisar = new JTextField(15);
+        jtfPesquisar = new JTextField(15);
+        jtfPesquisar.addActionListener(new ActionListener() {
 
-        JRadioButton jrbNome = new JRadioButton("Nome");
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                pesquisar(jtfPesquisar.getText());
+            }
+        });
+
+        jrbNome = new JRadioButton("Nome");
         jrbNome.setSelected(true);
-        JRadioButton jrbPosicao = new JRadioButton("Posição");
+        jrbPosicao = new JRadioButton("Posição");
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(jrbNome);
@@ -78,7 +111,7 @@ public class PanelRemoverJogador extends JPanel
         {
             "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção", "Titular"
         };
-        JTableSGCMF jt = new JTableSGCMF(null, nomeColunas);
+        jt = new JTableSGCMF(null, nomeColunas, this);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -103,14 +136,45 @@ public class PanelRemoverJogador extends JPanel
         JLabel jlSelecao = new JLabel("Seleção:");
         UtilView.alinhaLabel(jlSelecao);
 
-        JTextField jtfNumeroCamisa = new JTextField(10);
-        JTextField jtfNome = new JTextField(10);
-        JTextField jtfDataNascimento = new JTextField(10);
-        JTextField jtfAltura = new JTextField(10);
-        JTextField jtfPosicao = new JTextField(10);
-        JTextField jtfSelecao = new JTextField(10);
+        jtfNumeroCamisa = new JTextField(10);
+        jtfNumeroCamisa.setEditable(false);
+        jtfNome = new JTextField(10);
+        jtfNome.setEditable(false);
+        jtfDataNascimento = new JTextField(10);
+        jtfDataNascimento.setEditable(false);
+        jtfAltura = new JTextField(10);
+        jtfAltura.setEditable(false);
+        jtfPosicao = new JTextField(10);
+        jtfPosicao.setEditable(false);
+        jtfSelecao = new JTextField(10);
+        jtfSelecao.setEditable(false);
 
-        JButton jbAlterar = new JButton("Remover");
+        jbRemover = new JButton("Remover");
+        jbRemover.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String idJogador = jt.getValueAt(jt.getSelectedRow(), 0).toString();
+                ResultadoOperacao result;
+                result = ctrJogador.removerJogador(idJogador);
+                if (result.getTipo().equals(TipoResultadoOperacao.ERRO))
+                {
+                    JOptionPane.showMessageDialog(null, result.getMsg(), "Erro"
+                            + " na Exclusão do Jogador", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, result.getMsg(), "Remoção"
+                            + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
+                    limparTodosCampos();
+                    ativaTela();
+                }
+            }
+        });
+
+        travarBotao();
+
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNumeroCamisa));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNumeroCamisa, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlAltura));
@@ -126,8 +190,77 @@ public class PanelRemoverJogador extends JPanel
         jpAux.setBorder(BorderFactory.createEtchedBorder());
 
         jpPrincipal.add(jpAux, BorderLayout.CENTER);
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbAlterar), BorderLayout.SOUTH);
+        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbRemover), BorderLayout.SOUTH);
 
         return jpPrincipal;
+    }
+
+    public void ativaTela()
+    {
+        String[][] dadosJogadores;
+        dadosJogadores = ctrJogador.queryAllDataJogadorTodos();
+        jt.preencheTabela(dadosJogadores);
+    }
+
+    private void pesquisar(String chavePesquisa)
+    {
+        String[][] dadosJogadores;
+        if (jrbNome.isSelected())
+        {
+            dadosJogadores = ctrJogador.queryAllDataJogadorByNome(chavePesquisa);
+        }
+        else
+        {
+            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicao(chavePesquisa);
+
+        }
+
+        jbRemover.setEnabled(false);
+        jt.preencheTabela(dadosJogadores);
+    }
+
+    @Override
+    public void receiveRowData(String[] dados)
+    {
+        Short idSelecao;
+        String s;
+        jbRemover.setEnabled(true);
+        jtfNumeroCamisa.setText(dados[1]);
+        jtfNome.setText(dados[2]);
+        //Transformando a String de data para o padrao do Java com "/"
+        s = dados[3].replace(dados[3].charAt(4), '/');
+        jtfDataNascimento.setText(s);
+        jtfAltura.setText(dados[4]);
+        jtfPosicao.setText(dados[5]);
+        idSelecao = ctrMain.getCtrSelecao().capturarIdSelecao(dados[6]);
+        jtfSelecao.setText(idSelecao + "");
+    }
+
+    public void travarBotao()
+    {
+        jbRemover.setEnabled(false);
+    }
+
+    public void limparTodosCampos()
+    {
+        travarBotao();
+        jrbNome.setSelected(true);
+        jtfPosicao.setText("");
+        jtfPesquisar.setText("");
+        jtfDataNascimento.setText("");
+        jtfNumeroCamisa.setText("");
+        jtfNome.setText("");
+        jtfSelecao.setText("");
+        jtfAltura.setText("");
+    }
+
+    public void limparParteCampos()
+    {
+        jtfPosicao.setText("");
+        jtfDataNascimento.setText("");
+        jtfNumeroCamisa.setText("");
+        jtfNome.setText("");
+        jtfSelecao.setText("");
+        jtfAltura.setText("");
     }
 }
