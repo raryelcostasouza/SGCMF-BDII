@@ -31,6 +31,7 @@ public class LimTecnico extends JFrame
     public LimTecnico(CtrTecnico ctrTecnico, CtrJogo ctrJogo)
     {
         this.ctrTecnico = ctrTecnico;
+        setIconImage(SGCMFIcons.LOGO.getImage());
         limGerenciarJogador = new LimGerenciarJogador(ctrTecnico);
 
         setTitle("Usuário Técnico da Seleção");

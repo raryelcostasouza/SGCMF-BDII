@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import sgcmf.model.other.SGCMFIcons;
 
 /**
  *
@@ -20,6 +21,7 @@ public class LimGerenciarUsuario extends JFrame {
 
     public LimGerenciarUsuario()
     {
+        setIconImage(SGCMFIcons.USUARIO.getImage());
         pcdu = new PanelCadastrarUsuario();
         pau = new PanelAlterarUsuario();
         pru = new PanelRemoverUsuario();

@@ -35,6 +35,7 @@ public class LimComiteGestor extends JDialog
 							CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrJogador ctrJogador)
 	{
 		this.ctrComiteGestor = ctrComiteGestor;
+                setIconImage(SGCMFIcons.LOGO.getImage());
 		
 		limConsultaSelecao = new LimConsultaSelecao(ctrSelecao);
 		limConsultaJogo = new LimConsultarJogo(ctrJogo);

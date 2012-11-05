@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrOcorrenciaJogo;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.comiteGestor.LimComiteGestor;
 import sgcmf.view.comiteGestor.LimConsultarJogo;
@@ -19,7 +20,7 @@ public class LimGerOcorrSelecionarJogo extends LimConsultarJogo
 	public LimGerOcorrSelecionarJogo(CtrJogo ctrJogo, CtrOcorrenciaJogo ctrOcorrenciaJogo, LimBuscarJogador limBuscarJogador)
 	{
 		super(ctrJogo);
-		
+		setIconImage(SGCMFIcons.OCORRENCIA_JOGO.getImage());
 		setTitle("Gerenciar Ocorrências de Jogo: Selecione um Jogo");
 		
 		limGerenciarOcorrenciasJogo = new LimGerenciarOcorrenciasJogo(ctrOcorrenciaJogo, ctrJogo, limBuscarJogador);

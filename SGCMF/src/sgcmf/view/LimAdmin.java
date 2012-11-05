@@ -1,7 +1,6 @@
 package sgcmf.view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,80 +19,80 @@ import sgcmf.model.other.SGCMFIcons;
  */
 public class LimAdmin extends JFrame
 {
-	private LimGerenciarUsuario limGerenciarUsuario;
-	private CtrAdmin ctrAdmin;
-	
-	public LimAdmin(CtrAdmin ctrAdmin)
-	{
-		this.ctrAdmin = ctrAdmin;
-		
-		setTitle("Usuário Administrador");
-		add(montaPainel());
-		pack();
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		limGerenciarUsuario = new LimGerenciarUsuario();
-		
-		addWindowListener(new WindowAdapter() 
-		{
+    private LimGerenciarUsuario limGerenciarUsuario;
+    private CtrAdmin ctrAdmin;
 
-			@Override
-			public void windowClosing(WindowEvent e)
-			{
-				acaoLogout();
-			}			
-		});
-		
-	}
+    public LimAdmin(CtrAdmin ctrAdmin)
+    {
+        setIconImage(SGCMFIcons.LOGO.getImage());
+        this.ctrAdmin = ctrAdmin;
 
-	private JPanel montaPainel()
-	{
-		JPanel jpPrincipal = new JPanel(new BorderLayout());
-		JPanel jpAux = new JPanel(new GridLayout(1, 1));
+        setTitle("Usuário Administrador");
+        add(montaPainel());
+        pack();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        limGerenciarUsuario = new LimGerenciarUsuario();
 
-		JButton jbGerenciarUsuarios = new JButton("Gerenciar Usuários", SGCMFIcons.USUARIO);
-		jbGerenciarUsuarios.setVerticalTextPosition(JButton.BOTTOM);
-		jbGerenciarUsuarios.setHorizontalTextPosition(JButton.CENTER);
-		
-		jbGerenciarUsuarios.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				limGerenciarUsuario.setVisible(true);
-			}
-		});
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                acaoLogout();
+            }
+        });
 
-		JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
-		jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
-		jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
+    }
 
-		JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
-		jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
-		jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
+    private JPanel montaPainel()
+    {
+        JPanel jpPrincipal = new JPanel(new BorderLayout());
+        JPanel jpAux = new JPanel(new GridLayout(1, 1));
 
-		JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
+        JButton jbGerenciarUsuarios = new JButton("Gerenciar Usuários", SGCMFIcons.USUARIO);
+        jbGerenciarUsuarios.setVerticalTextPosition(JButton.BOTTOM);
+        jbGerenciarUsuarios.setHorizontalTextPosition(JButton.CENTER);
 
-		jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbGerenciarUsuarios));
-		jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorios));
-		jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));
+        jbGerenciarUsuarios.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                limGerenciarUsuario.setVisible(true);
+            }
+        });
 
-		jpPrincipal.add(jpAux, BorderLayout.CENTER);
-		jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbLogout), BorderLayout.SOUTH);
+        JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
+        jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
+        jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
 
-		return jpPrincipal;
-	}
-	
-	private void acaoLogout()
-	{
-		int op;
+        JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
+        jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
+        jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
 
-		op = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja fazer logout do sistema?", "Confirmação de Logout", JOptionPane.YES_NO_OPTION);
+        JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
 
-		if (op == JOptionPane.OK_OPTION)
-		{
-			setVisible(false);
-			ctrAdmin.logout();
-		}
-	}
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbGerenciarUsuarios));
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorios));
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));
+
+        jpPrincipal.add(jpAux, BorderLayout.CENTER);
+        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbLogout), BorderLayout.SOUTH);
+
+        return jpPrincipal;
+    }
+
+    private void acaoLogout()
+    {
+        int op;
+
+        op = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja fazer logout do sistema?", "Confirmação de Logout", JOptionPane.YES_NO_OPTION);
+
+        if (op == JOptionPane.OK_OPTION)
+        {
+            setVisible(false);
+            ctrAdmin.logout();
+        }
+    }
 }

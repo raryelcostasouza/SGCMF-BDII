@@ -6,11 +6,13 @@ package sgcmf.view.tecnico;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import sgcmf.control.CtrTecnico;
+import sgcmf.model.other.SGCMFIcons;
 
 /**
  *
@@ -26,6 +28,7 @@ public class LimGerenciarJogador extends JDialog
     
     public LimGerenciarJogador(CtrTecnico ctrTecnico)
     {
+        setIconImage(SGCMFIcons.JOGADOR.getImage());
         pCadastrarJogador = new PanelCadastrarJogador(ctrTecnico);
         pAlterarJogador = new PanelAlterarJogador(ctrTecnico);
         pRemoverJogador = new PanelRemoverJogador(ctrTecnico);

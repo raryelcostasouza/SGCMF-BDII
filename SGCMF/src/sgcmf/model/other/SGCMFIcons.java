@@ -16,4 +16,5 @@ public class SGCMFIcons
 	public static final ImageIcon USUARIO = new ImageIcon("img/usuario.png");
 	public static final ImageIcon ESCALACAO = new ImageIcon("img/escalacao.png");
         public static final ImageIcon PESQUISAR = new ImageIcon("img/pesquisar.png");
+        public static final ImageIcon LOGO = new ImageIcon("img/logo.png");
 }

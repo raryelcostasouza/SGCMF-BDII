@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import sgcmf.control.CtrJogo;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.comiteGestor.LimConsultarJogo;
 
@@ -16,7 +17,7 @@ public class LimGerDispPenaltiSelecionarJogo extends LimConsultarJogo
 	public LimGerDispPenaltiSelecionarJogo(CtrJogo ctrJogo, LimBuscarJogador limBuscarJogador)
 	{
 		super(ctrJogo);
-		
+		setIconImage(SGCMFIcons.PENALTI.getImage());
 		setTitle("Gerenciar Disputa de Pênaltis: Selecione um Jogo");
 		
 		limGerDisputaPenalti = new LimGerDisputaPenalti(limBuscarJogador);
