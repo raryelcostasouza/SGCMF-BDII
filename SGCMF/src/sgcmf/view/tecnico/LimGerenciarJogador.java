@@ -25,7 +25,7 @@ public class LimGerenciarJogador extends JDialog
     private PanelRemoverJogador pRemoverJogador;
     private PanelConsultarJogador pConsultarJogador;
     private JTabbedPane jtp;
-    
+
     public LimGerenciarJogador(CtrTecnico ctrTecnico)
     {
         setIconImage(SGCMFIcons.JOGADOR.getImage());
@@ -37,9 +37,9 @@ public class LimGerenciarJogador extends JDialog
         setResizable(false);
         setModal(true);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
-        
+
         add(montaPainel());
-        
+
         addWindowListener(new WindowAdapter()
         {
             @Override
@@ -53,7 +53,7 @@ public class LimGerenciarJogador extends JDialog
             }
         });
     }
-    
+
     private JTabbedPane montaPainel()
     {
         jtp = new JTabbedPane();
@@ -68,21 +68,18 @@ public class LimGerenciarJogador extends JDialog
                     setSize(380, 335);
                     pAlterarJogador.limparTodosCampos();
                     pRemoverJogador.limparTodosCampos();
-                    setLocationRelativeTo(null);
                 }
                 else if (tituloAba.equals("Alterar"))
                 {
                     setSize(700, 400);
                     pAlterarJogador.ativaTela();
                     pRemoverJogador.limparTodosCampos();
-                    setLocationRelativeTo(null);
                 }
                 else if (tituloAba.equals("Remover"))
                 {
                     setSize(700, 400);
                     pRemoverJogador.ativaTela();
                     pAlterarJogador.limparTodosCampos();
-                    setLocationRelativeTo(null);
                 }
                 else if (tituloAba.equals("Consultar"))
                 {
@@ -90,16 +87,16 @@ public class LimGerenciarJogador extends JDialog
                     pConsultarJogador.ativaTela();
                     pAlterarJogador.limparTodosCampos();
                     pRemoverJogador.limparTodosCampos();
-                    setLocationRelativeTo(null);
                 }
+                setLocationRelativeTo(null);
             }
         });
-        
+
         jtp.add(pCadastrarJogador, "Cadastrar");
         jtp.add(pAlterarJogador, "Alterar");
         jtp.add(pRemoverJogador, "Remover");
         jtp.add(pConsultarJogador, "Consultar");
-        
+
         return jtp;
     }
 }
