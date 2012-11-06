@@ -29,12 +29,12 @@ public class LimGerenciarRelatorio extends JDialog
         panelRelatorioJogo = new PanelRelatorioJogo();
         setTitle("Relatórios");
         
-        //setModal(true);
-        setVisible(true);
-        
         setResizable(false);
+        //setModal(true);
+        setVisible(false);
+        
+        
         setDefaultCloseOperation(HIDE_ON_CLOSE);
-        setLocationRelativeTo(null);
 
         add(montaPanel());
     }
@@ -63,17 +63,5 @@ public class LimGerenciarRelatorio extends JDialog
         jtp.add(panelRelatorioJogo,"Relatório para Jogo");
 
         return jtp;
-    }
-
-    public static void main(String[] args)
-    {
-        EventQueue.invokeLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                new LimGerenciarRelatorio();
-            }
-        });
     }
 }

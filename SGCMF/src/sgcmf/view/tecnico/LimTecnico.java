@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import sgcmf.control.CtrJogo;
+import sgcmf.control.CtrRelatorio;
 import sgcmf.control.CtrTecnico;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
@@ -27,10 +28,11 @@ public class LimTecnico extends JFrame
 {
     private LimGerenciarJogador limGerenciarJogador;
     private CtrTecnico ctrTecnico;
-
+    private CtrRelatorio ctrRelatorio;
     public LimTecnico(CtrTecnico ctrTecnico, CtrJogo ctrJogo)
     {
         this.ctrTecnico = ctrTecnico;
+        ctrRelatorio = ctrTecnico.getCtrMain().getCtrRelatorio();
         setIconImage(SGCMFIcons.LOGO.getImage());
         limGerenciarJogador = new LimGerenciarJogador(ctrTecnico);
 
@@ -73,6 +75,14 @@ public class LimTecnico extends JFrame
         JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
         jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
         jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
+        jbRelatorios.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrRelatorio.ativaTela();
+            }
+        });
         JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
         jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
         jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);

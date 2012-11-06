@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import sgcmf.control.CtrAdmin;
+import sgcmf.control.CtrRelatorio;
 import sgcmf.model.other.SGCMFIcons;
 
 /**
@@ -21,12 +22,13 @@ public class LimAdmin extends JFrame
 {
     private LimGerenciarUsuario limGerenciarUsuario;
     private CtrAdmin ctrAdmin;
+    private CtrRelatorio ctrRelatorio;
 
     public LimAdmin(CtrAdmin ctrAdmin)
     {
         setIconImage(SGCMFIcons.LOGO.getImage());
         this.ctrAdmin = ctrAdmin;
-
+        ctrRelatorio = ctrAdmin.getCtrMain().getCtrRelatorio();
         setTitle("Usuário Administrador");
         add(montaPainel());
         pack();
@@ -66,7 +68,14 @@ public class LimAdmin extends JFrame
         JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
         jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
         jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
-
+        jbRelatorios.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrRelatorio.ativaTela();
+            }
+        });
         JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
         jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
         jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);

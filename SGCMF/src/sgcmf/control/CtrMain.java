@@ -15,6 +15,7 @@ public class CtrMain
     private CtrSelecao ctrSelecao;
     private CtrOcorrenciaJogo ctrOcorrenciaJogo;
     private CtrJogador ctrJogador;
+    private CtrRelatorio ctrRelatorio;
 
     public CtrMain()
     {
@@ -23,6 +24,7 @@ public class CtrMain
         gdao = null;
 
         ctrJogo = new CtrJogo();
+        ctrRelatorio = new CtrRelatorio();
         ctrSelecao = new CtrSelecao();
         ctrOcorrenciaJogo = new CtrOcorrenciaJogo(this);
         ctrJogador = new CtrJogador();
@@ -32,13 +34,15 @@ public class CtrMain
         ctrTecnico = new CtrTecnico(this);
         ctrEntusiasta = new CtrEntusiasta();
 
+        
+
         limLogin = new LimLogin(this);
 
         //Aqui tem que esperar a thread A(Splash) terminar o trabalho.
-        
+
         limLogin.setVisible(true);
     }
-    
+
     public void ativaTela()
     {
         limLogin.setVisible(true);
@@ -80,6 +84,11 @@ public class CtrMain
     public CtrSelecao getCtrSelecao()
     {
         return ctrSelecao;
+    }
+
+    public CtrRelatorio getCtrRelatorio()
+    {
+        return ctrRelatorio;
     }
 
     public CtrOcorrenciaJogo getCtrOcorrenciaJogo()
