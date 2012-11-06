@@ -264,7 +264,7 @@ public class CtrJogador
         }
         catch (HibernateException he)
         {
-            resultado = new ResultadoOperacao("Falha na exclusão do jogador.\n"+he.getMessage(),
+            resultado = new ResultadoOperacao("Falha na exclusão do jogador.\n" + he.getMessage(),
                     TipoResultadoOperacao.ERRO);
         }
         return resultado;
@@ -319,7 +319,49 @@ public class CtrJogador
             {
                 errorMessege = "O campo de seleção é obrigatório.";
             }
+
+        }
+        if (errorMessege.equals(""))
+        {
+            Short idSelecao = new Short(selecao);
+            int resultado = qtdeTitularesSelecao(idSelecao);
+            if (resultado >= 11)
+            {
+                errorMessege = "É permitido apenas 11 jogadores titulares por seleção.";
+            }
+        }
+        if (errorMessege.equals(""))
+        {
+            Short idSelecao = new Short(selecao);
+            int resultado = qtdeGoleirosSelecao(idSelecao);
+            System.out.println(resultado);
+            if (resultado >= 3)
+            {
+                errorMessege = "É permitido apenas 3 Goleiros por seleção.";
+            }
         }
         return errorMessege;
+    }
+
+    private int qtdeTitularesSelecao(Short idSelecao)
+    {
+        JogadorDAO jogadorDAO = new JogadorDAO();
+        ArrayList array;
+        int qtdeTitulares;
+        array = jogadorDAO.queryQuantidadeJogadorTitularesSelecao(idSelecao);
+        qtdeTitulares = Integer.parseInt(array.get(0).toString());
+        jogadorDAO.fecharSessao();
+        return qtdeTitulares;
+    }
+
+    private int qtdeGoleirosSelecao(Short idSelecao)
+    {
+        JogadorDAO jogadorDAO = new JogadorDAO();
+        ArrayList array;
+        int qtdeGoleiros;
+        array = jogadorDAO.queryQuantidadeGoleirosSelecao(idSelecao);
+        qtdeGoleiros = Integer.parseInt(array.get(0).toString());
+        jogadorDAO.fecharSessao();
+        return qtdeGoleiros;
     }
 }

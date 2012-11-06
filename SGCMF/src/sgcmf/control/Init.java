@@ -7,7 +7,7 @@ public class Init
 {
     public static void main(String[] args)
     {
-        new ShowSplash();
+        //new ShowSplash();
         
         EventQueue.invokeLater(new Runnable()
         {
