@@ -20,17 +20,19 @@ import sgcmf.model.other.SGCMFIcons;
 public class LimGerenciarRelatorio extends JDialog
 {
     private PanelRelatorioSelecao panelRelatorioSelecao;
+    private PanelRelatorioJogo panelRelatorioJogo;
 
     public LimGerenciarRelatorio()
     {
         setIconImage(SGCMFIcons.RELATORIO.getImage());
         panelRelatorioSelecao = new PanelRelatorioSelecao();
+        panelRelatorioJogo = new PanelRelatorioJogo();
         setTitle("Relatórios");
         
         //setModal(true);
         setVisible(true);
         
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -48,17 +50,17 @@ public class LimGerenciarRelatorio extends JDialog
                 String tituloAba = jtp.getTitleAt(jtp.getSelectedIndex());
                 if (tituloAba.equals("Relatório para Seleção"))
                 {
-                    setSize(750, 400);
+                    setSize(600, 300);
                 }
                 else if (tituloAba.equals("Relatório para Jogo"))
                 {
-                    setSize(400, 400);
+                    setSize(590, 400);
                 }
                 setLocationRelativeTo(null);
             }
         });
         jtp.add(panelRelatorioSelecao, "Relatório para Seleção");
-        jtp.add(null,"Relatório para Jogo");
+        jtp.add(panelRelatorioJogo,"Relatório para Jogo");
 
         return jtp;
     }

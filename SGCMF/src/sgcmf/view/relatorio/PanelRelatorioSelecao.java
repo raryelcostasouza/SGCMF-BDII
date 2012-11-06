@@ -30,12 +30,12 @@ public class PanelRelatorioSelecao extends JPanel
         add(panelCentral(), BorderLayout.CENTER);
     }
 
-    public JPanel panelNorte()
+    private JPanel panelNorte()
     {
         JPanel jpPrincipal = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel jlSelecao = new JLabel("Seleção:");
         UtilView.alinhaLabel(jlSelecao);
-        JTextField jtfSelecao = new JTextField(15);
+        JTextField jtfSelecao = new JTextField(10);
         jtfSelecao.setEditable(false);
         JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
@@ -46,7 +46,7 @@ public class PanelRelatorioSelecao extends JPanel
         return jpPrincipal;
     }
 
-    public JPanel panelCentral()
+    private JPanel panelCentral()
     {
         JPanel jpPrincipal = new JPanel(new BorderLayout());
         jpPrincipal.add(panelCentralEsquerda(), BorderLayout.WEST);
@@ -55,7 +55,7 @@ public class PanelRelatorioSelecao extends JPanel
         return jpPrincipal;
     }
 
-    public JPanel panelCentralEsquerda()
+    private JPanel panelCentralEsquerda()
     {
         JPanel jpPrincipal = new JPanel(new GridLayout(6,2));
         
@@ -72,17 +72,17 @@ public class PanelRelatorioSelecao extends JPanel
         JLabel jlAproveitamento = new JLabel("Aproveitamento:");
         UtilView.alinhaLabel(jlAproveitamento);
 
-        JTextField jtfNomeSelecao = new JTextField(15);
+        JTextField jtfNomeSelecao = new JTextField(10);
         jtfNomeSelecao.setEditable(false);
-        JTextField jtfJogosDisputados = new JTextField(15);
+        JTextField jtfJogosDisputados = new JTextField(10);
         jtfJogosDisputados.setEditable(false);
-        JTextField jtfVitorias = new JTextField(15);
+        JTextField jtfVitorias = new JTextField(10);
         jtfVitorias.setEditable(false);
-        JTextField jtfDerrotas = new JTextField(15);
+        JTextField jtfDerrotas = new JTextField(10);
         jtfDerrotas.setEditable(false);
-        JTextField jtfEmpates = new JTextField(15);
+        JTextField jtfEmpates = new JTextField(10);
         jtfEmpates.setEditable(false);
-        JTextField jtfAproveitamento = new JTextField(15);
+        JTextField jtfAproveitamento = new JTextField(10);
         jtfAproveitamento.setEditable(false);
         
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlNomeSelecao));
@@ -101,7 +101,7 @@ public class PanelRelatorioSelecao extends JPanel
         return jpPrincipal;
     }
 
-    public JPanel panelCentralDireita()
+    private JPanel panelCentralDireita()
     {
         JPanel jpPrincipal = new JPanel(new GridLayout(5, 2));
         
@@ -116,15 +116,15 @@ public class PanelRelatorioSelecao extends JPanel
         JLabel jlSaldoGols = new JLabel("Saldo Gols:");
         UtilView.alinhaLabel(jlSaldoGols);
 
-        JTextField jtfFaltas = new JTextField(15);
+        JTextField jtfFaltas = new JTextField(10);
         jtfFaltas.setEditable(false);
-        JTextField jtfCartoes = new JTextField(15);
+        JTextField jtfCartoes = new JTextField(10);
         jtfCartoes.setEditable(false);
-        JTextField jtfGolsPro = new JTextField(15);
+        JTextField jtfGolsPro = new JTextField(10);
         jtfGolsPro.setEditable(false);
-        JTextField jtfGolsContra = new JTextField(15);
+        JTextField jtfGolsContra = new JTextField(10);
         jtfGolsContra.setEditable(false);
-        JTextField jtfSaldoGols = new JTextField(15);
+        JTextField jtfSaldoGols = new JTextField(10);
         jtfSaldoGols.setEditable(false);
         
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlFaltas));
@@ -139,21 +139,5 @@ public class PanelRelatorioSelecao extends JPanel
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfSaldoGols, FlowLayout.LEFT));
         
         return jpPrincipal;
-    }
-     public static void main(String[] args)
-    {
-        EventQueue.invokeLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                JFrame jf = new JFrame();
-                PanelRelatorioSelecao panelRelatorioSelecao = new PanelRelatorioSelecao();
-                jf.setVisible(true);
-                jf.setSize(400,400);
-                jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                jf.add(panelRelatorioSelecao);
-            }
-        });
     }
 }
