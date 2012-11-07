@@ -1,10 +1,12 @@
 package sgcmf.control;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.view.LimLogin;
 
-public class CtrMain
+public class CtrMain extends Thread
 {
     private LimLogin limLogin;
     private CtrAdmin ctrAdmin;
@@ -19,10 +21,6 @@ public class CtrMain
 
     public CtrMain()
     {
-        GeneralDAO gdao = new GeneralDAO();
-        gdao.fecharSessao();
-        gdao = null;
-
         ctrJogo = new CtrJogo();
         ctrRelatorio = new CtrRelatorio();
         ctrSelecao = new CtrSelecao();
@@ -39,8 +37,25 @@ public class CtrMain
         limLogin = new LimLogin(this);
 
         //Aqui tem que esperar a thread A(Splash) terminar o trabalho.
-
-        limLogin.setVisible(true);
+    }
+    
+    @Override
+    public void run()
+    {
+        GeneralDAO gdao = new GeneralDAO();
+        gdao.fecharSessao();
+        gdao = null;
+        try
+        {
+            //Tem que arrumar um jeito de receber um aviso da Thread ShowSplash que terminou e esta pode
+            //setar a tela de limLogin como visivel.
+            Thread.sleep(4000);
+            limLogin.setVisible(true);
+        }
+        catch (InterruptedException ex)
+        {
+            Logger.getLogger(CtrMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void ativaTela()

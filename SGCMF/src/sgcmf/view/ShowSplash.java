@@ -8,11 +8,16 @@ package sgcmf.view;
  *
  * @author Helio
  */
-public class ShowSplash
+public class ShowSplash extends Thread
 {
     private Splash splash;
 
     public ShowSplash()
+    {
+    }
+
+    @Override
+    public void run()
     {
         showSplash();
         while (splash.isVisible())
