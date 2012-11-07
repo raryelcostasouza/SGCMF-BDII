@@ -32,7 +32,7 @@ import sgcmf.view.UtilView;
  *
  * @author Helio
  */
-public class PanelCadastrarJogador extends JPanel
+public class PanelCadastrarJogador extends JPanel implements ISelecionarSelecao
 {
     private LimSelecionarSelecao limSelecionarSelecao;
     private CtrTecnico ctrTecnico;
@@ -46,7 +46,6 @@ public class PanelCadastrarJogador extends JPanel
     private JTextField jtfDataNascimento;
     private JComboBox jcbPosicao;
     private JRadioButton jrbSim;
-    
     private String[] items =
     {
         "Goleiro", "Lateral Esquerdo", "Lateral Direito",
@@ -59,9 +58,9 @@ public class PanelCadastrarJogador extends JPanel
         ctrMain = ctrTecnico.getCtrMain();
         ctrSelecao = ctrMain.getCtrSelecao();
         ctrJogador = ctrMain.getCtrJogador();
-        limSelecionarSelecao = new LimSelecionarSelecao(ctrSelecao, this);
+        limSelecionarSelecao = new LimSelecionarSelecao(ctrSelecao);
         setLayout(new BorderLayout());
-        
+
         montaPainel();
     }
 
@@ -136,7 +135,7 @@ public class PanelCadastrarJogador extends JPanel
                             + " bem Sucedido", JOptionPane.INFORMATION_MESSAGE);
                     limparCampos();
                 }
-            }            
+            }
         });
 
         JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
@@ -147,7 +146,7 @@ public class PanelCadastrarJogador extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                limSelecionarSelecao.ativaTela();
+                ativaTelaSelecionarSelecao();
             }
         });
 
@@ -176,11 +175,16 @@ public class PanelCadastrarJogador extends JPanel
         this.add(UtilView.putComponentInFlowLayoutPanel(jbCadastrar), BorderLayout.SOUTH);
     }
 
-    public void selecaoSelecionada(Short selecao)
+    private void ativaTelaSelecionarSelecao()
     {
-        jtfSelecao.setText(selecao + "");
+        limSelecionarSelecao.ativaTela(this);
     }
-    
+
+    public void selecaoSelecionada(Short idSelecao)
+    {
+        jtfSelecao.setText(idSelecao + "");
+    }
+
     public void limparCampos()
     {
         jtfNumeroCamisa.setText("");

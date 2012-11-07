@@ -35,7 +35,7 @@ import sgcmf.view.table.ReceiveRowDataSGCMF;
  *
  * @author Helio
  */
-public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
+public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF, ISelecionarSelecao
 {
     private JTableSGCMF jt;
     private CtrMain ctrMain;
@@ -60,7 +60,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         ctrSelecao = ctrMain.getCtrSelecao();
         ctrJogador = ctrMain.getCtrJogador();
         setLayout(new BorderLayout());
-        limSelecionarSelecao = new LimSelecionarSelecao(ctrSelecao, this);
+        limSelecionarSelecao = new LimSelecionarSelecao(ctrSelecao);
         montaPainelPrincipal();
     }
 
@@ -165,7 +165,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                limSelecionarSelecao.ativaTela();
+                ativaTelaSelecionarSelecao();
             }
         });
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
@@ -199,9 +199,9 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
                 }
             }
         });
-        
+
         travarBotoes();
-        
+
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNumeroCamisa));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNumeroCamisa, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlAltura));
@@ -222,6 +222,11 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbAlterar), BorderLayout.SOUTH);
 
         return jpPrincipal;
+    }
+
+    private void ativaTelaSelecionarSelecao()
+    {
+        limSelecionarSelecao.ativaTela(this);
     }
 
     //Daqui pra baixo é identico ao consultarJogador, tem que arrumar.
@@ -294,7 +299,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     {
         jtfSelecao.setText(idSelecao + "");
     }
-    
+
     public void travarBotoes()
     {
         jbPesquisar.setEnabled(false);

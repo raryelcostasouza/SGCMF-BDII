@@ -36,6 +36,6 @@ public class ShowSplash extends Thread
     private void showSplash()
     {
         splash = Splash.getInstance();
-        splash.showSplash(5000);
+        splash.showSplash(4000);
     }
 }

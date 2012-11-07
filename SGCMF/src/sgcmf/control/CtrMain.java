@@ -5,8 +5,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.view.LimLogin;
+import sgcmf.view.ShowSplash;
 
-public class CtrMain extends Thread
+public class CtrMain
 {
     private LimLogin limLogin;
     private CtrAdmin ctrAdmin;
@@ -18,6 +19,7 @@ public class CtrMain extends Thread
     private CtrOcorrenciaJogo ctrOcorrenciaJogo;
     private CtrJogador ctrJogador;
     private CtrRelatorio ctrRelatorio;
+    private Thread t;
 
     public CtrMain()
     {
@@ -32,30 +34,34 @@ public class CtrMain extends Thread
         ctrTecnico = new CtrTecnico(this);
         ctrEntusiasta = new CtrEntusiasta();
 
-        
+
 
         limLogin = new LimLogin(this);
 
+        t = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                new ShowSplash().start();
+                GeneralDAO gdao = new GeneralDAO();
+                gdao.fecharSessao();
+                gdao = null;
+                try
+                {
+                    //Tem que arrumar um jeito de receber um aviso da Thread ShowSplash que terminou e esta pode
+                    //setar a tela de limLogin como visivel.
+                    Thread.sleep(4500);
+                    limLogin.setVisible(true);
+                }
+                catch (InterruptedException ex)
+                {
+                    Logger.getLogger(CtrMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        t.start();
         //Aqui tem que esperar a thread A(Splash) terminar o trabalho.
-    }
-    
-    @Override
-    public void run()
-    {
-        GeneralDAO gdao = new GeneralDAO();
-        gdao.fecharSessao();
-        gdao = null;
-        try
-        {
-            //Tem que arrumar um jeito de receber um aviso da Thread ShowSplash que terminou e esta pode
-            //setar a tela de limLogin como visivel.
-            Thread.sleep(4000);
-            limLogin.setVisible(true);
-        }
-        catch (InterruptedException ex)
-        {
-            Logger.getLogger(CtrMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public void ativaTela()
