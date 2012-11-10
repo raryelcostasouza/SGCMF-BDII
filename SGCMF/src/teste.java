@@ -4,6 +4,7 @@ public class teste
     {
         System.out.println("Isso que nós estamos fazendo é um teste.");
         int teste;
+        int a;
     }
     
     public void f2()
