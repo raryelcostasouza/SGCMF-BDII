@@ -162,7 +162,7 @@ public class CtrJogador
         GeneralDAO gdao;
 
         gdao = new GeneralDAO();
-        errorMessege = validaCampos(numCamisa, dataNascimento, altura, selecao);
+        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, selecao, false);
         if (errorMessege.equals(""))
         {
             nCamisa = Short.parseShort(numCamisa);
@@ -197,13 +197,14 @@ public class CtrJogador
         return result;
     }
 
-    public ResultadoOperacao alterarJogador(String idJogador, String numCamisa, String nome, String dtaNascimento,
+    public ResultadoOperacao alterarJogador(String strIdJogador, String numCamisa, String nome, String dtaNascimento,
             String altura, String posicao, String selecao)
     {
         Short nCamisa;
         Date dataNascimento;
         BigDecimal pAltura;
         Short idSelecao;
+        Short shortIdJogador;
         Selecao s = new Selecao();
         Jogador j = new Jogador();
         Transaction tr;
@@ -211,7 +212,11 @@ public class CtrJogador
         ResultadoOperacao result;
         String errorMessege;
 
-        errorMessege = validaCampos(numCamisa, dtaNascimento, altura, selecao);
+        boolean bolGoleiro;
+
+        shortIdJogador = new Short(strIdJogador);
+        bolGoleiro = isJogadorGoleiro(shortIdJogador);
+        errorMessege = validaCampos('a', numCamisa, dtaNascimento, altura, selecao, bolGoleiro);
         if (errorMessege.equals(""))
         {
             gdao = new GeneralDAO();
@@ -221,7 +226,7 @@ public class CtrJogador
             idSelecao = Short.parseShort(selecao);
             tr = gdao.getSessao().beginTransaction();
             gdao.carregar(s, idSelecao);
-            gdao.carregar(j, new Short(idJogador));
+            gdao.carregar(j, shortIdJogador);
             try
             {
                 j.setNcamisa(nCamisa);
@@ -270,7 +275,8 @@ public class CtrJogador
         return resultado;
     }
 
-    public String validaCampos(String numCamisa, String dataNascimento, String altura, String selecao)
+    private String validaCampos(char metodo, String numCamisa, String dataNascimento,
+            String altura, String selecao, boolean bolGoleiro)
     {
         String errorMessege = "";
         Short camisa;
@@ -334,9 +340,22 @@ public class CtrJogador
         {
             Short idSelecao = new Short(selecao);
             int resultado = qtdeGoleirosSelecao(idSelecao);
-            if (resultado >= 3)
+            if (metodo == 'c')
             {
-                errorMessege = "É permitido apenas 3 Goleiros por seleção.";
+                if (resultado >= 3)
+                {
+                    errorMessege = "É permitido apenas 3 Goleiros por seleção.";
+                }
+            }
+            else
+            {
+                if (bolGoleiro == false)
+                {
+                    if (resultado >= 3)
+                    {
+                        errorMessege = "É permitido apenas 3 Goleiros por seleção.";
+                    }
+                }
             }
         }
         return errorMessege;
@@ -345,10 +364,8 @@ public class CtrJogador
     private int qtdeTitularesSelecao(Short idSelecao)
     {
         JogadorDAO jogadorDAO = new JogadorDAO();
-        ArrayList array;
         int qtdeTitulares;
-        array = jogadorDAO.queryQuantidadeJogadorTitularesSelecao(idSelecao);
-        qtdeTitulares = Integer.parseInt(array.get(0).toString());
+        qtdeTitulares = jogadorDAO.queryQuantidadeJogadorTitularesSelecao(idSelecao);
         jogadorDAO.fecharSessao();
         return qtdeTitulares;
     }
@@ -358,9 +375,20 @@ public class CtrJogador
         JogadorDAO jogadorDAO = new JogadorDAO();
         ArrayList array;
         int qtdeGoleiros;
-        array = jogadorDAO.queryQuantidadeGoleirosSelecao(idSelecao);
-        qtdeGoleiros = Integer.parseInt(array.get(0).toString());
+        qtdeGoleiros = jogadorDAO.queryQuantidadeGoleirosSelecao(idSelecao);
         jogadorDAO.fecharSessao();
         return qtdeGoleiros;
+    }
+
+    private boolean isJogadorGoleiro(Short idJogador)
+    {
+        JogadorDAO jogadorDAO = new JogadorDAO();
+        String posicao;
+        posicao = jogadorDAO.queryPosicaoJogador(idJogador);
+        if (posicao.equals("Goleiro"))
+        {
+            return true;
+        }
+        return false;
     }
 }

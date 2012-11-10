@@ -29,18 +29,30 @@ public class JogadorDAO extends GeneralDAO
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
 
-    public ArrayList queryQuantidadeJogadorTitularesSelecao(Short idSelecao)
+    public int queryQuantidadeJogadorTitularesSelecao(Short idSelecao)
     {
         String hql;
+        int qtde;
         hql = "select count(id) from Jogador j where j.selecao.id = " + idSelecao + " and j.titular = true";
-
-        return (ArrayList) sessao.createQuery(hql).list();
+        qtde = Integer.parseInt(sessao.createQuery(hql).uniqueResult().toString());
+        return qtde;
     }
 
-    public ArrayList queryQuantidadeGoleirosSelecao(Short idSelecao)
+    public int queryQuantidadeGoleirosSelecao(Short idSelecao)
     {
         String hql;
+        int qtde;
         hql = "select count(id) from Jogador j where j.selecao.id = " + idSelecao + "and j.posicao = 'Goleiro'";
-        return (ArrayList) sessao.createQuery(hql).list();
+        qtde = Integer.parseInt(sessao.createQuery(hql).uniqueResult().toString());
+        return qtde;
+    }
+
+    public String queryPosicaoJogador(Short idJogador)
+    {
+        String hql;
+        hql = "select j.posicao from Jogador j where j.id = " + idJogador;
+        String posicao = sessao.createQuery(hql).uniqueResult().toString();
+
+        return posicao;
     }
 }
