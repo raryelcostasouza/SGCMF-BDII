@@ -34,18 +34,17 @@ public class LimComiteGestor extends JFrame
     private LimBuscarJogador limBuscarJogador;
     private CtrRelatorio ctrRelatorio;
 
-    public LimComiteGestor(CtrComiteGestor ctrComiteGestor, CtrJogo ctrJogo, CtrGol ctrGol, CtrSelecao ctrSelecao,
-            CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrJogador ctrJogador)
+    public LimComiteGestor(CtrComiteGestor ctrComiteGestor)
     {
         this.ctrComiteGestor = ctrComiteGestor;
         ctrRelatorio = ctrComiteGestor.getCtrMain().getCtrRelatorio();
         setIconImage(SGCMFIcons.LOGO.getImage());
 
-        limConsultaSelecao = new LimConsultaSelecao(ctrSelecao);
-        limConsultaJogo = new LimConsultarJogo(ctrJogo);
-        limBuscarJogador = new LimBuscarJogador(ctrJogador);
-        limGerOcorrSelecionarJogo = new LimGerOcorrSelecionarJogo(ctrJogo, ctrOcorrenciaJogo,ctrGol, limBuscarJogador);
-        limGerDispPenaltiSelecionarJogo = new LimGerDispPenaltiSelecionarJogo(ctrJogo, limBuscarJogador);
+        limConsultaSelecao = new LimConsultaSelecao(ctrComiteGestor.getCtrSelecao());
+        limConsultaJogo = new LimConsultarJogo(ctrComiteGestor.getCtrJogo());
+        limBuscarJogador = new LimBuscarJogador(ctrComiteGestor.getCtrJogador());
+        limGerOcorrSelecionarJogo = new LimGerOcorrSelecionarJogo(ctrComiteGestor, limBuscarJogador);
+        limGerDispPenaltiSelecionarJogo = new LimGerDispPenaltiSelecionarJogo(ctrComiteGestor, limBuscarJogador);
 
         setTitle("SGCMF | Usuário Comitê Gestor");
         setSize(570, 480);

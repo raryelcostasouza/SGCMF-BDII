@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import sgcmf.control.CtrComiteGestor;
 import sgcmf.control.CtrGol;
 import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrOcorrenciaJogo;
@@ -23,9 +24,7 @@ import sgcmf.view.table.JTableSGCMF;
 
 public class LimGerenciarOcorrenciasJogo extends JDialog
 {
-    private CtrOcorrenciaJogo ctrOcorrenciaJogo;
-    private CtrGol ctrGol;
-    private CtrJogo ctrJogo;
+    private CtrComiteGestor ctrComiteGestor;
     private LimRegistrarGol limRegistrarGol;
     private LimRegistrarFalta limRegistrarFalta;
     private LimRegistrarCartao limRegistrarCartao;
@@ -46,14 +45,12 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     private JPanel centerPanel;
     private Short idJogo;
 
-    public LimGerenciarOcorrenciasJogo(CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrGol ctrGol, CtrJogo ctrJogo, LimBuscarJogador limBuscarJogador)
+    public LimGerenciarOcorrenciasJogo(CtrComiteGestor ctrComiteGestor, LimBuscarJogador limBuscarJogador)
     {
-        this.ctrOcorrenciaJogo = ctrOcorrenciaJogo;
-        this.ctrGol = ctrGol;
-        this.ctrJogo = ctrJogo;
-
-        limRegistrarGol = new LimRegistrarGol(ctrGol, limBuscarJogador, this);
-        limRegistrarFalta = new LimRegistrarFalta(ctrOcorrenciaJogo, limBuscarJogador, this);
+        this.ctrComiteGestor = ctrComiteGestor;
+        
+        limRegistrarGol = new LimRegistrarGol(ctrComiteGestor.getCtrGol(), limBuscarJogador, this);
+        limRegistrarFalta = new LimRegistrarFalta(ctrComiteGestor.getCtrOcorrenciaJogo(), limBuscarJogador, this);
         limRegistrarCartao = new LimRegistrarCartao(limBuscarJogador);
         limRegistrarSubstituicao = new LimRegistrarSubstituicao(limBuscarJogador);
 
@@ -302,7 +299,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     public void ativaTela(Short idJogo)
     {
         this.idJogo = idJogo;
-        jlInfoJogo.setText(ctrJogo.queryInfoJogoById(idJogo));
+        jlInfoJogo.setText(ctrComiteGestor.getCtrJogo().queryInfoJogoById(idJogo));
         preencheTabelaGol();
         preencheTabelaFalta();
         setVisible(true);
@@ -312,7 +309,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     {
         String[][] dadosGol;
 
-        dadosGol = ctrGol.queryGolByIdJogo(idJogo);
+        dadosGol = ctrComiteGestor.getCtrGol().queryGolByIdJogo(idJogo);
         jtGol.preencheTabela(dadosGol);
     }
     
@@ -320,7 +317,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     {
         String[][] dadosFalta;
         
-        dadosFalta = ctrOcorrenciaJogo.queryFaltaByIdJogo(idJogo);
+        dadosFalta = ctrComiteGestor.getCtrOcorrenciaJogo().queryFaltaByIdJogo(idJogo);
         jtFalta.preencheTabela(dadosFalta);
     }
 
@@ -341,7 +338,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             if (linhaSelecionada != -1)
             {
                 idOc = Short.parseShort((String) jtGol.getValueAt(linhaSelecionada, 0));
-                ctrGol.removeGol(idOc);
+                ctrComiteGestor.getCtrGol().removeGol(idOc);
 
                 preencheTabelaGol();
             }
