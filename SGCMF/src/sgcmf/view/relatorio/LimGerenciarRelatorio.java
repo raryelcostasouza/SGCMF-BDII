@@ -4,13 +4,13 @@
  */
 package sgcmf.view.relatorio;
 
-import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import sgcmf.control.CtrRelatorio;
 import sgcmf.model.other.SGCMFIcons;
 
 /**
@@ -22,10 +22,10 @@ public class LimGerenciarRelatorio extends JDialog
     private PanelRelatorioSelecao panelRelatorioSelecao;
     private PanelRelatorioJogo panelRelatorioJogo;
 
-    public LimGerenciarRelatorio()
+    public LimGerenciarRelatorio(CtrRelatorio ctrRelatorio)
     {
         setIconImage(SGCMFIcons.RELATORIO.getImage());
-        panelRelatorioSelecao = new PanelRelatorioSelecao();
+        panelRelatorioSelecao = new PanelRelatorioSelecao(ctrRelatorio);
         panelRelatorioJogo = new PanelRelatorioJogo();
         setTitle("Relatórios");
 
@@ -35,6 +35,14 @@ public class LimGerenciarRelatorio extends JDialog
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         add(montaPanel());
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                panelRelatorioSelecao.limparTela();
+            }
+        });
     }
 
     public JTabbedPane montaPanel()

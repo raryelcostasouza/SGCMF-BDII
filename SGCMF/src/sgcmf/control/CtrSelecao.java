@@ -77,4 +77,13 @@ public class CtrSelecao
         idSelecao = (Short) (alIdSelecao.get(0));
         return idSelecao;
     }
+    
+    public String pesquisarNomeSelecao(Short idSelecao)
+    {
+        SelecaoDAO selecaoDAO = new SelecaoDAO();
+        String nomeSelecao;
+        nomeSelecao = selecaoDAO.queryNomeSelecao(idSelecao);
+        selecaoDAO.fecharSessao();
+        return nomeSelecao;
+    }
 }

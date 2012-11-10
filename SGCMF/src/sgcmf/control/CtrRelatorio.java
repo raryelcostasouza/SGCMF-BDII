@@ -13,14 +13,21 @@ import sgcmf.view.relatorio.LimGerenciarRelatorio;
 public class CtrRelatorio
 {
     private LimGerenciarRelatorio limGerenciarRelatorio;
-    
-    public CtrRelatorio()
+    private CtrMain ctrMain;
+
+    public CtrRelatorio(CtrMain ctrMain)
     {
-        limGerenciarRelatorio = new LimGerenciarRelatorio();
+        this.ctrMain = ctrMain;
+        limGerenciarRelatorio = new LimGerenciarRelatorio(this);
     }
-    
+
     public void ativaTela()
     {
         limGerenciarRelatorio.setVisible(true);
+    }
+
+    public CtrMain getCtrMain()
+    {
+        return ctrMain;
     }
 }

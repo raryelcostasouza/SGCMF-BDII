@@ -24,8 +24,8 @@ public class CtrMain
     public CtrMain()
     {
         ctrJogo = new CtrJogo();
-        ctrRelatorio = new CtrRelatorio();
         ctrSelecao = new CtrSelecao();
+        ctrRelatorio = new CtrRelatorio(this);
         ctrOcorrenciaJogo = new CtrOcorrenciaJogo(this);
         ctrJogador = new CtrJogador();
 
