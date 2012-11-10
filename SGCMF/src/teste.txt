@@ -3,6 +3,7 @@ public class teste
     public void f1()
     {
         Grande problema...
+        Continuando pra tentar resolver
     }
     
     public void f2()
