@@ -9,6 +9,6 @@ public class teste
     
     public void f2()
     {
-        
+       int b; 
     }    
 }
