@@ -280,7 +280,7 @@ public class CtrJogador
         try
         {
             camisa = Short.parseShort(numCamisa);
-            if (camisa < 1 || camisa > 24)
+            if (camisa < 1 || camisa > 23)
             {
                 errorMessege = "O valor da camisa deve estar entre 1 e 23.";
                 return errorMessege;
@@ -334,7 +334,6 @@ public class CtrJogador
         {
             Short idSelecao = new Short(selecao);
             int resultado = qtdeGoleirosSelecao(idSelecao);
-            System.out.println(resultado);
             if (resultado >= 3)
             {
                 errorMessege = "É permitido apenas 3 Goleiros por seleção.";
