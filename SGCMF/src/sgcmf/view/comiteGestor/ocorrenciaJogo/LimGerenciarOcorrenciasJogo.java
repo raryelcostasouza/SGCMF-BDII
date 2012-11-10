@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import sgcmf.control.CtrGol;
 import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.view.UtilView;
@@ -23,6 +24,7 @@ import sgcmf.view.table.JTableSGCMF;
 public class LimGerenciarOcorrenciasJogo extends JDialog
 {
     private CtrOcorrenciaJogo ctrOcorrenciaJogo;
+    private CtrGol ctrGol;
     private CtrJogo ctrJogo;
     private LimRegistrarGol limRegistrarGol;
     private LimRegistrarFalta limRegistrarFalta;
@@ -44,12 +46,13 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     private JPanel centerPanel;
     private Short idJogo;
 
-    public LimGerenciarOcorrenciasJogo(CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrJogo ctrJogo, LimBuscarJogador limBuscarJogador)
+    public LimGerenciarOcorrenciasJogo(CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrGol ctrGol, CtrJogo ctrJogo, LimBuscarJogador limBuscarJogador)
     {
         this.ctrOcorrenciaJogo = ctrOcorrenciaJogo;
+        this.ctrGol = ctrGol;
         this.ctrJogo = ctrJogo;
 
-        limRegistrarGol = new LimRegistrarGol(ctrOcorrenciaJogo, limBuscarJogador, this);
+        limRegistrarGol = new LimRegistrarGol(ctrGol, limBuscarJogador, this);
         limRegistrarFalta = new LimRegistrarFalta(ctrOcorrenciaJogo, limBuscarJogador, this);
         limRegistrarCartao = new LimRegistrarCartao(limBuscarJogador);
         limRegistrarSubstituicao = new LimRegistrarSubstituicao(limBuscarJogador);
@@ -309,7 +312,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     {
         String[][] dadosGol;
 
-        dadosGol = ctrOcorrenciaJogo.queryGolByIdJogo(idJogo);
+        dadosGol = ctrGol.queryGolByIdJogo(idJogo);
         jtGol.preencheTabela(dadosGol);
     }
     
@@ -338,7 +341,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             if (linhaSelecionada != -1)
             {
                 idOc = Short.parseShort((String) jtGol.getValueAt(linhaSelecionada, 0));
-                ctrOcorrenciaJogo.removeGol(idOc);
+                ctrGol.removeGol(idOc);
 
                 preencheTabelaGol();
             }

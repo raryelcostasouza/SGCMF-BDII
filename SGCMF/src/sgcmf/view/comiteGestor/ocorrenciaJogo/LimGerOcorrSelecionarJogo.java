@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import sgcmf.control.CtrGol;
 import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.model.other.SGCMFIcons;
@@ -17,13 +18,13 @@ public class LimGerOcorrSelecionarJogo extends LimConsultarJogo
 {
 	private LimGerenciarOcorrenciasJogo limGerenciarOcorrenciasJogo;
 	
-	public LimGerOcorrSelecionarJogo(CtrJogo ctrJogo, CtrOcorrenciaJogo ctrOcorrenciaJogo, LimBuscarJogador limBuscarJogador)
+	public LimGerOcorrSelecionarJogo(CtrJogo ctrJogo, CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrGol ctrGol, LimBuscarJogador limBuscarJogador)
 	{
 		super(ctrJogo);
 		setIconImage(SGCMFIcons.OCORRENCIA_JOGO.getImage());
 		setTitle("Gerenciar Ocorrências de Jogo: Selecione um Jogo");
 		
-		limGerenciarOcorrenciasJogo = new LimGerenciarOcorrenciasJogo(ctrOcorrenciaJogo, ctrJogo, limBuscarJogador);
+		limGerenciarOcorrenciasJogo = new LimGerenciarOcorrenciasJogo(ctrOcorrenciaJogo, ctrGol, ctrJogo, limBuscarJogador);
 		mainPanel.add(montaSouthPanel(), BorderLayout.SOUTH);
 	}
 	

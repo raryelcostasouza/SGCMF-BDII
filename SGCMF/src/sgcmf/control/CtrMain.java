@@ -15,6 +15,7 @@ public class CtrMain
     private CtrTecnico ctrTecnico;
     private CtrEntusiasta ctrEntusiasta;
     private CtrJogo ctrJogo;
+    private CtrGol ctrGol;
     private CtrSelecao ctrSelecao;
     private CtrOcorrenciaJogo ctrOcorrenciaJogo;
     private CtrJogador ctrJogador;
@@ -23,6 +24,7 @@ public class CtrMain
 
     public CtrMain()
     {
+        ctrGol = new CtrGol(this);
         ctrJogo = new CtrJogo();
         ctrSelecao = new CtrSelecao();
         ctrRelatorio = new CtrRelatorio(this);
@@ -120,5 +122,10 @@ public class CtrMain
     public CtrJogador getCtrJogador()
     {
         return ctrJogador;
+    }
+
+    public CtrGol getCtrGol()
+    {
+        return ctrGol;
     }
 }

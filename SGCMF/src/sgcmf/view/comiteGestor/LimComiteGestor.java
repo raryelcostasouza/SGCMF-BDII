@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import sgcmf.control.CtrComiteGestor;
+import sgcmf.control.CtrGol;
 import sgcmf.control.CtrJogador;
 import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrOcorrenciaJogo;
@@ -34,7 +35,7 @@ public class LimComiteGestor extends JFrame
     private LimBuscarJogador limBuscarJogador;
     private CtrRelatorio ctrRelatorio;
 
-    public LimComiteGestor(CtrComiteGestor ctrComiteGestor, CtrJogo ctrJogo, CtrSelecao ctrSelecao,
+    public LimComiteGestor(CtrComiteGestor ctrComiteGestor, CtrJogo ctrJogo, CtrGol ctrGol, CtrSelecao ctrSelecao,
             CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrJogador ctrJogador)
     {
         this.ctrComiteGestor = ctrComiteGestor;
@@ -44,7 +45,7 @@ public class LimComiteGestor extends JFrame
         limConsultaSelecao = new LimConsultaSelecao(ctrSelecao);
         limConsultaJogo = new LimConsultarJogo(ctrJogo);
         limBuscarJogador = new LimBuscarJogador(ctrJogador);
-        limGerOcorrSelecionarJogo = new LimGerOcorrSelecionarJogo(ctrJogo, ctrOcorrenciaJogo, limBuscarJogador);
+        limGerOcorrSelecionarJogo = new LimGerOcorrSelecionarJogo(ctrJogo, ctrOcorrenciaJogo,ctrGol, limBuscarJogador);
         limGerDispPenaltiSelecionarJogo = new LimGerDispPenaltiSelecionarJogo(ctrJogo, limBuscarJogador);
 
         setTitle("SGCMF | Usuário Comitê Gestor");

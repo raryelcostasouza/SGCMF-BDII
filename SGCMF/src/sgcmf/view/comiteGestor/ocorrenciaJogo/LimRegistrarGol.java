@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import sgcmf.control.CtrGol;
 import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.model.other.ResultadoOperacao;
@@ -28,7 +29,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 {
     private LimBuscarJogador limBuscarJogador;
     private LimGerenciarOcorrenciasJogo limGerenciarOcorrencias;
-    private CtrOcorrenciaJogo ctrOcorrenciaJogo;
+    private CtrGol ctrGol;
     private JTextField jtfInstanteTempoMin;
     private JTextField jtfInstateTempoSeg;
     private JTextField jtfJogador;
@@ -43,9 +44,9 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
     private JRadioButton jrbModoPenalti;
     private Short idJogo;
 
-    public LimRegistrarGol(CtrOcorrenciaJogo ctrOcorrenciaJogo, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
+    public LimRegistrarGol(CtrGol ctrGol, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
     {
-        this.ctrOcorrenciaJogo = ctrOcorrenciaJogo;
+        this.ctrGol = ctrGol;
         this.limBuscarJogador = limBuscarJogador;
         this.limGerenciarOcorrencias = limGerenciarOcorrencias;
 
@@ -217,7 +218,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
             modo = jrbModoPenalti.getText();
         }
 
-        result = ctrOcorrenciaJogo.registraGol(jtfInstanteTempoMin.getText(),
+        result = ctrGol.registraGol(jtfInstanteTempoMin.getText(),
                 jtfInstateTempoSeg.getText(),
                 idJogo,
                 jtfJogador.getText(),
