@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -23,7 +24,7 @@ import sgcmf.view.UtilView;
 import sgcmf.view.comiteGestor.disputaPenalti.LimGerDispPenaltiSelecionarJogo;
 import sgcmf.view.comiteGestor.ocorrenciaJogo.LimGerOcorrSelecionarJogo;
 
-public class LimComiteGestor extends JDialog
+public class LimComiteGestor extends JFrame
 {
     private CtrComiteGestor ctrComiteGestor;
     private LimConsultaSelecao limConsultaSelecao;

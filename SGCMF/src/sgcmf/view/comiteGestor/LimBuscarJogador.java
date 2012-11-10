@@ -27,7 +27,7 @@ public class LimBuscarJogador extends JDialog
 	{
 		this.ctrJogador = ctrJogador;
 		
-		setTitle("Buscar jogador");
+		setTitle("Selecionar Jogador");
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		
 		add(montaMainPanel());

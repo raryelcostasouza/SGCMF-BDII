@@ -22,312 +22,326 @@ import sgcmf.view.table.JTableSGCMF;
 
 public class LimGerenciarOcorrenciasJogo extends JDialog
 {
-	private CtrOcorrenciaJogo ctrOcorrenciaJogo;
-	private CtrJogo ctrJogo;
-	
-	private LimRegistrarGol limRegistrarGol;
-	private LimRegistrarFalta limRegistrarFalta;
-	private LimRegistrarCartao limRegistrarCartao;
-	private LimRegistrarSubstituicao limRegistrarSubstituicao;
-	
-	private final String nameCardPanelGol = "GOL";
-	private final String nameCardPanelFalta = "FALTA";
-	private final String nameCardPanelCartao = "CARTAO";
-	private final String nameCardPanelSubst = "SUBST";
-	
-	private JTableSGCMF jtGol;
-	private JTableSGCMF jtFalta;
-	private JTableSGCMF jtCartao;
-	private JTableSGCMF jtSubst;
-	
-	private JRadioButton jrbGol;
-	private JRadioButton jrbFalta;
-	private JRadioButton jrbCartao;
-	private JRadioButton jrbSubst;
-	
-	private JLabel jlInfoJogo;
-	
-	private JPanel centerPanel;
-	
-	private Short idJogo;
-	
-	public LimGerenciarOcorrenciasJogo(CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrJogo ctrJogo, LimBuscarJogador limBuscarJogador)
-	{
-		this.ctrOcorrenciaJogo = ctrOcorrenciaJogo;
-		this.ctrJogo = ctrJogo;
-		
-		limRegistrarGol = new LimRegistrarGol(ctrOcorrenciaJogo, limBuscarJogador, this);
-		limRegistrarFalta = new LimRegistrarFalta(limBuscarJogador);
-		limRegistrarCartao = new LimRegistrarCartao(limBuscarJogador);
-		limRegistrarSubstituicao = new LimRegistrarSubstituicao(limBuscarJogador);
-		
-		setTitle("Gerenciar Ocorrências para o Jogo Selecionado");
-		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		add(montaMainPanel());
-		
-		setModal(true);
-		setSize(600,500);
-		setLocationRelativeTo(null);
-		
-		addWindowListener(new WindowAdapter() 
-		{
-			@Override
-			public void windowClosing(WindowEvent e)
-			{
-				resetCamposInterface();
-			}
-		});
-	}
-	
-	private JPanel montaMainPanel()
-	{
-		JPanel mainPanel = new JPanel(new BorderLayout());
-		
-		mainPanel.add(montaNorthPanel(), BorderLayout.NORTH);
-		mainPanel.add(montaCenterPanel(), BorderLayout.CENTER);
-		mainPanel.add(montaSouthPanel(), BorderLayout.SOUTH);
-		
-		return mainPanel;
-	}
-	
-	private JPanel montaNorthPanel()
-	{
-		JPanel northPanel = new JPanel(new BorderLayout());
-		JPanel rotuloJogoPanel = new JPanel();
-		rotuloJogoPanel.setBorder(BorderFactory.createTitledBorder("Informações do jogo selecionado:"));
-		
-		jlInfoJogo = new JLabel("", JLabel.CENTER);
-		rotuloJogoPanel.add(jlInfoJogo);		
-		
-		JPanel radioButtonPanel = new JPanel();
-		radioButtonPanel.setBorder(BorderFactory.createTitledBorder("Ver ocorrências do tipo:"));
-		
-		ButtonGroup bg = new ButtonGroup();
-		jrbGol = new JRadioButton("Gol");
-		jrbGol.setSelected(true);
-		jrbFalta = new JRadioButton("Falta");
-		jrbCartao = new JRadioButton("Cartão");
-		jrbSubst = new JRadioButton("Substituição");
-		
-		bg.add(jrbGol);
-		bg.add(jrbFalta);
-		bg.add(jrbCartao);
-		bg.add(jrbSubst);
-		
-		jrbGol.addActionListener(new ActionListener() {
+    private CtrOcorrenciaJogo ctrOcorrenciaJogo;
+    private CtrJogo ctrJogo;
+    private LimRegistrarGol limRegistrarGol;
+    private LimRegistrarFalta limRegistrarFalta;
+    private LimRegistrarCartao limRegistrarCartao;
+    private LimRegistrarSubstituicao limRegistrarSubstituicao;
+    private final String nameCardPanelGol = "GOL";
+    private final String nameCardPanelFalta = "FALTA";
+    private final String nameCardPanelCartao = "CARTAO";
+    private final String nameCardPanelSubst = "SUBST";
+    private JTableSGCMF jtGol;
+    private JTableSGCMF jtFalta;
+    private JTableSGCMF jtCartao;
+    private JTableSGCMF jtSubst;
+    private JRadioButton jrbGol;
+    private JRadioButton jrbFalta;
+    private JRadioButton jrbCartao;
+    private JRadioButton jrbSubst;
+    private JLabel jlInfoJogo;
+    private JPanel centerPanel;
+    private Short idJogo;
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				CardLayout cl = (CardLayout) centerPanel.getLayout();
-				cl.show(centerPanel, nameCardPanelGol);
-			}
-		});
-		
-		jrbFalta.addActionListener(new ActionListener() {
+    public LimGerenciarOcorrenciasJogo(CtrOcorrenciaJogo ctrOcorrenciaJogo, CtrJogo ctrJogo, LimBuscarJogador limBuscarJogador)
+    {
+        this.ctrOcorrenciaJogo = ctrOcorrenciaJogo;
+        this.ctrJogo = ctrJogo;
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				CardLayout cl = (CardLayout) centerPanel.getLayout();
-				cl.show(centerPanel, nameCardPanelFalta);
-			}
-		});
-		
-		jrbCartao.addActionListener(new ActionListener() {
+        limRegistrarGol = new LimRegistrarGol(ctrOcorrenciaJogo, limBuscarJogador, this);
+        limRegistrarFalta = new LimRegistrarFalta(ctrOcorrenciaJogo, limBuscarJogador, this);
+        limRegistrarCartao = new LimRegistrarCartao(limBuscarJogador);
+        limRegistrarSubstituicao = new LimRegistrarSubstituicao(limBuscarJogador);
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				CardLayout cl = (CardLayout) centerPanel.getLayout();
-				cl.show(centerPanel, nameCardPanelCartao);
-			}
-		});
-		
-		jrbSubst.addActionListener(new ActionListener() {
+        setTitle("Gerenciar Ocorrências para o Jogo Selecionado");
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
+        add(montaMainPanel());
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				CardLayout cl = (CardLayout) centerPanel.getLayout();
-				cl.show(centerPanel, nameCardPanelSubst);
-			}
-		});
-		
-		radioButtonPanel.add(jrbGol);
-		radioButtonPanel.add(jrbFalta);
-		radioButtonPanel.add(jrbCartao);
-		radioButtonPanel.add(jrbSubst);		
-		
-		northPanel.add(rotuloJogoPanel, BorderLayout.NORTH);
-		northPanel.add(radioButtonPanel, BorderLayout.CENTER);
-		
-		return northPanel;
-	}
-	
-	private JPanel montaCenterPanel()
-	{
-		centerPanel = new JPanel(new CardLayout());		
-		
-		centerPanel.add(nameCardPanelGol, montaCenterPanelGol());
-		centerPanel.add(nameCardPanelFalta, montaCenterPanelFalta());
-		centerPanel.add(nameCardPanelCartao, montaCenterPanelCartao());
-		centerPanel.add(nameCardPanelSubst, montaCenterPanelSubst());
-		
-		return centerPanel;
-	}
-	
-	private JPanel montaCenterPanelGol()
-	{
-		JPanel centerPanelGol = new JPanel(new BorderLayout());
-		
-		String[] nomesColunas = {"ID", "Instante de Tempo", "Jogador Autor", "Jogador Assistência", "Tipo Gol", "Modo"};
-		jtGol = new JTableSGCMF(null, nomesColunas);	
-		JScrollPane jsp = new JScrollPane(jtGol,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	
-		centerPanelGol.add(jsp,BorderLayout.CENTER);
-		
-		JButton jbRegistrarGol = new JButton("Registrar Novo Gol");
-		jbRegistrarGol.addActionListener(new ActionListener() {
+        setModal(true);
+        setSize(600, 500);
+        setLocationRelativeTo(null);
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				limRegistrarGol.ativaTela(idJogo);
-			}
-		});
-		centerPanelGol.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarGol), BorderLayout.SOUTH);
-			
-		return centerPanelGol;
-	}
-	
-	private JPanel montaCenterPanelFalta()
-	{
-		JPanel centerPanelFalta = new JPanel(new BorderLayout());
-		
-		String[] nomesColunas = {"ID", "Instante de Tempo", "Jogador Autor", "Cartão", "Tipo"};
-		jtFalta = new JTableSGCMF(null, nomesColunas);	
-		JScrollPane jsp = new JScrollPane(jtFalta,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	
-		centerPanelFalta.add(jsp,BorderLayout.CENTER);
-		
-		JButton jbRegistrarFalta = new JButton("Registrar Nova Falta");
-		jbRegistrarFalta.addActionListener(new ActionListener() {
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                resetCamposInterface();
+            }
+        });
+    }
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				limRegistrarFalta.setVisible(true);
-			}
-		});
-		centerPanelFalta.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarFalta), BorderLayout.SOUTH);
-			
-		return centerPanelFalta;
-	}
-	
-	private JPanel montaCenterPanelCartao()
-	{
-		JPanel centerPanelCartao = new JPanel(new BorderLayout());
-		
-		String[] nomesColunas = {"ID","Instante de Tempo", "Jogador", "Cor"};
-		jtCartao = new JTableSGCMF(null, nomesColunas);	
-		JScrollPane jsp = new JScrollPane(jtCartao,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	
-		centerPanelCartao.add(jsp,BorderLayout.CENTER);
-		
-		JButton jbRegistrarCartao = new JButton("Registrar Novo Cartão");
-		jbRegistrarCartao.addActionListener(new ActionListener() {
+    private JPanel montaMainPanel()
+    {
+        JPanel mainPanel = new JPanel(new BorderLayout());
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				limRegistrarCartao.setVisible(true);
-			}
-		});
-		centerPanelCartao.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarCartao), BorderLayout.SOUTH);
-			
-		return centerPanelCartao;
-	}
-	
-	private JPanel montaCenterPanelSubst()
-	{
-		JPanel centerPanelSubst = new JPanel(new BorderLayout());
-		
-		String[] nomesColunas = {"ID", "Instante de Tempo", "Jogador Entrou", "Jogador Saiu", "Motivo"};
-		jtSubst = new JTableSGCMF(null, nomesColunas);	
-		JScrollPane jsp = new JScrollPane(jtSubst,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	
-		centerPanelSubst.add(jsp,BorderLayout.CENTER);
-		
-		JButton jbRegistrarSubst = new JButton("Registrar Nova Substituição");
-		jbRegistrarSubst.addActionListener(new ActionListener() {
+        mainPanel.add(montaNorthPanel(), BorderLayout.NORTH);
+        mainPanel.add(montaCenterPanel(), BorderLayout.CENTER);
+        mainPanel.add(montaSouthPanel(), BorderLayout.SOUTH);
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				limRegistrarSubstituicao.setVisible(true);
-			}
-		});
-		centerPanelSubst.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarSubst), BorderLayout.SOUTH);
-			
-		return centerPanelSubst;
-	}
-	
-	private JPanel montaSouthPanel()
-	{
-		JPanel southPanel = new JPanel();
-		
-		JButton jbRemoverOcorrencia = new JButton("Remover Ocorrência");
-		jbRemoverOcorrencia.addActionListener(new ActionListener() {
+        return mainPanel;
+    }
 
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				removerOcorrencia();
-			}
-		});
-		southPanel.add(jbRemoverOcorrencia);
-		
-		return southPanel;
-	}
-	
-	public void ativaTela(Short idJogo)
-	{
-		this.idJogo = idJogo;
-		preencheTabelaGol();
-		setVisible(true);
-	}
-	
-	public void preencheTabelaGol()
-	{
-		String[][] dadosGol;
-		
-		dadosGol = ctrOcorrenciaJogo.queryGolByIdJogo(idJogo);
-		jtGol.preencheTabela(dadosGol);
-		jlInfoJogo.setText(ctrJogo.queryInfoJogoById(idJogo));
-	}
-	
-	private void resetCamposInterface()
-	{
-		jlInfoJogo.setText("");
-		jrbGol.setSelected(true);
-	}
-	
-	private void removerOcorrencia()
-	{
-		Short idOc;
-		int linhaSelecionada;
+    private JPanel montaNorthPanel()
+    {
+        JPanel northPanel = new JPanel(new BorderLayout());
+        JPanel rotuloJogoPanel = new JPanel();
+        rotuloJogoPanel.setBorder(BorderFactory.createTitledBorder("Informações do jogo selecionado:"));
 
-		if(jrbGol.isSelected())
-		{
-			linhaSelecionada = jtGol.getSelectedRow();
-			if (linhaSelecionada != -1)
-			{
-				idOc = Short.parseShort((String)jtGol.getValueAt(linhaSelecionada, 0));
-				ctrOcorrenciaJogo.removeGol(idOc);
-				
-				preencheTabelaGol();				
-			}
-		}
-	}
+        jlInfoJogo = new JLabel("", JLabel.CENTER);
+        rotuloJogoPanel.add(jlInfoJogo);
+
+        JPanel radioButtonPanel = new JPanel();
+        radioButtonPanel.setBorder(BorderFactory.createTitledBorder("Ver ocorrências do tipo:"));
+
+        ButtonGroup bg = new ButtonGroup();
+        jrbGol = new JRadioButton("Gol");
+        jrbGol.setSelected(true);
+        jrbFalta = new JRadioButton("Falta");
+        jrbCartao = new JRadioButton("Cartão");
+        jrbSubst = new JRadioButton("Substituição");
+
+        bg.add(jrbGol);
+        bg.add(jrbFalta);
+        bg.add(jrbCartao);
+        bg.add(jrbSubst);
+
+        jrbGol.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                CardLayout cl = (CardLayout) centerPanel.getLayout();
+                cl.show(centerPanel, nameCardPanelGol);
+            }
+        });
+
+        jrbFalta.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                CardLayout cl = (CardLayout) centerPanel.getLayout();
+                cl.show(centerPanel, nameCardPanelFalta);
+            }
+        });
+
+        jrbCartao.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                CardLayout cl = (CardLayout) centerPanel.getLayout();
+                cl.show(centerPanel, nameCardPanelCartao);
+            }
+        });
+
+        jrbSubst.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                CardLayout cl = (CardLayout) centerPanel.getLayout();
+                cl.show(centerPanel, nameCardPanelSubst);
+            }
+        });
+
+        radioButtonPanel.add(jrbGol);
+        radioButtonPanel.add(jrbFalta);
+        radioButtonPanel.add(jrbCartao);
+        radioButtonPanel.add(jrbSubst);
+
+        northPanel.add(rotuloJogoPanel, BorderLayout.NORTH);
+        northPanel.add(radioButtonPanel, BorderLayout.CENTER);
+
+        return northPanel;
+    }
+
+    private JPanel montaCenterPanel()
+    {
+        centerPanel = new JPanel(new CardLayout());
+
+        centerPanel.add(nameCardPanelGol, montaCenterPanelGol());
+        centerPanel.add(nameCardPanelFalta, montaCenterPanelFalta());
+        centerPanel.add(nameCardPanelCartao, montaCenterPanelCartao());
+        centerPanel.add(nameCardPanelSubst, montaCenterPanelSubst());
+
+        return centerPanel;
+    }
+
+    private JPanel montaCenterPanelGol()
+    {
+        JPanel centerPanelGol = new JPanel(new BorderLayout());
+
+        String[] nomesColunas =
+        {
+            "ID", "Instante de Tempo", "Jogador Autor", "Jogador Assistência", "Tipo Gol", "Modo"
+        };
+        jtGol = new JTableSGCMF(null, nomesColunas);
+        JScrollPane jsp = new JScrollPane(jtGol, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        centerPanelGol.add(jsp, BorderLayout.CENTER);
+
+        JButton jbRegistrarGol = new JButton("Registrar Novo Gol");
+        jbRegistrarGol.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                limRegistrarGol.ativaTela(idJogo);
+            }
+        });
+        centerPanelGol.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarGol), BorderLayout.SOUTH);
+
+        return centerPanelGol;
+    }
+
+    private JPanel montaCenterPanelFalta()
+    {
+        JPanel centerPanelFalta = new JPanel(new BorderLayout());
+
+        String[] nomesColunas =
+        {
+            "ID", "Instante de Tempo", "Jogador Autor", "Cartão", "Tipo"
+        };
+        jtFalta = new JTableSGCMF(null, nomesColunas);
+        JScrollPane jsp = new JScrollPane(jtFalta, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        centerPanelFalta.add(jsp, BorderLayout.CENTER);
+
+        JButton jbRegistrarFalta = new JButton("Registrar Nova Falta");
+        jbRegistrarFalta.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                limRegistrarFalta.ativaTela(idJogo);
+            }
+        });
+        centerPanelFalta.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarFalta), BorderLayout.SOUTH);
+
+        return centerPanelFalta;
+    }
+
+    private JPanel montaCenterPanelCartao()
+    {
+        JPanel centerPanelCartao = new JPanel(new BorderLayout());
+
+        String[] nomesColunas =
+        {
+            "ID", "Instante de Tempo", "Jogador", "Cor"
+        };
+        jtCartao = new JTableSGCMF(null, nomesColunas);
+        JScrollPane jsp = new JScrollPane(jtCartao, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        centerPanelCartao.add(jsp, BorderLayout.CENTER);
+
+        JButton jbRegistrarCartao = new JButton("Registrar Novo Cartão");
+        jbRegistrarCartao.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                limRegistrarCartao.setVisible(true);
+            }
+        });
+        centerPanelCartao.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarCartao), BorderLayout.SOUTH);
+
+        return centerPanelCartao;
+    }
+
+    private JPanel montaCenterPanelSubst()
+    {
+        JPanel centerPanelSubst = new JPanel(new BorderLayout());
+
+        String[] nomesColunas =
+        {
+            "ID", "Instante de Tempo", "Jogador Entrou", "Jogador Saiu", "Motivo"
+        };
+        jtSubst = new JTableSGCMF(null, nomesColunas);
+        JScrollPane jsp = new JScrollPane(jtSubst, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        centerPanelSubst.add(jsp, BorderLayout.CENTER);
+
+        JButton jbRegistrarSubst = new JButton("Registrar Nova Substituição");
+        jbRegistrarSubst.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                limRegistrarSubstituicao.setVisible(true);
+            }
+        });
+        centerPanelSubst.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarSubst), BorderLayout.SOUTH);
+
+        return centerPanelSubst;
+    }
+
+    private JPanel montaSouthPanel()
+    {
+        JPanel southPanel = new JPanel();
+
+        JButton jbRemoverOcorrencia = new JButton("Remover Ocorrência");
+        jbRemoverOcorrencia.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                removerOcorrencia();
+            }
+        });
+        southPanel.add(jbRemoverOcorrencia);
+
+        return southPanel;
+    }
+
+    public void ativaTela(Short idJogo)
+    {
+        this.idJogo = idJogo;
+        jlInfoJogo.setText(ctrJogo.queryInfoJogoById(idJogo));
+        preencheTabelaGol();
+        preencheTabelaFalta();
+        setVisible(true);
+    }
+
+    public void preencheTabelaGol()
+    {
+        String[][] dadosGol;
+
+        dadosGol = ctrOcorrenciaJogo.queryGolByIdJogo(idJogo);
+        jtGol.preencheTabela(dadosGol);
+    }
+    
+    public void preencheTabelaFalta()
+    {
+        String[][] dadosFalta;
+        
+        dadosFalta = ctrOcorrenciaJogo.queryFaltaByIdJogo(idJogo);
+        jtFalta.preencheTabela(dadosFalta);
+    }
+
+    private void resetCamposInterface()
+    {
+        jlInfoJogo.setText("");
+        jrbGol.setSelected(true);
+    }
+
+    private void removerOcorrencia()
+    {
+        Short idOc;
+        int linhaSelecionada;
+
+        if (jrbGol.isSelected())
+        {
+            linhaSelecionada = jtGol.getSelectedRow();
+            if (linhaSelecionada != -1)
+            {
+                idOc = Short.parseShort((String) jtGol.getValueAt(linhaSelecionada, 0));
+                ctrOcorrenciaJogo.removeGol(idOc);
+
+                preencheTabelaGol();
+            }
+        }
+    }
 }
