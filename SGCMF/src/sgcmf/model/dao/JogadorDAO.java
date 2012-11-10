@@ -2,16 +2,20 @@ package sgcmf.model.dao;
 
 import java.util.ArrayList;
 import sgcmf.model.hibernate.Jogador;
-import sgcmf.model.hibernate.Selecao;
 
 public class JogadorDAO extends GeneralDAO
 {
+    public ArrayList<Jogador> listaTodos()
+    {
+        return (ArrayList<Jogador>) sessao.createQuery("from Jogador j order by j.ncamisa").list();
+    }
+
     public ArrayList<Jogador> queryJogadorByNome(String nome)
     {
         String hql;
 
         hql = "from Jogador j "
-                + "where lower(j.nome) like lower('%" + nome + "%')";
+                + "where lower(j.nome) like lower('%" + nome + "%') order by j.id";
 
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
@@ -21,14 +25,14 @@ public class JogadorDAO extends GeneralDAO
         String hql;
 
         hql = "from Jogador j "
-                + "where lower(j.posicao) like lower('%" + posicao + "%')";
+                + "where lower(j.posicao) like lower('%" + posicao + "%') order by j.id";
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
 
     public ArrayList queryQuantidadeJogadorTitularesSelecao(Short idSelecao)
     {
         String hql;
-        hql = "select count(id) from Jogador j where j.selecao.id = " + idSelecao + "and j.titular = true";
+        hql = "select count(id) from Jogador j where j.selecao.id = " + idSelecao + " and j.titular = true";
 
         return (ArrayList) sessao.createQuery(hql).list();
     }

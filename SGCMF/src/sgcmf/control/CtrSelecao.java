@@ -9,14 +9,14 @@ public class CtrSelecao
 {
     public String[][] querySelecaoTodos()
     {
-        GeneralDAO<Selecao> gdao;
+        SelecaoDAO sdao;
         ArrayList<Selecao> alSelecao;
         String[][] dadosSelecoes;
 
-        gdao = new GeneralDAO<Selecao>();
-        alSelecao = gdao.listaTodos("Selecao");
+        sdao = new SelecaoDAO();
+        alSelecao = sdao.listaTodos();
         dadosSelecoes = arrayList2StringMatrix(alSelecao);
-        gdao.fecharSessao();
+        sdao.fecharSessao();
 
         return dadosSelecoes;
     }

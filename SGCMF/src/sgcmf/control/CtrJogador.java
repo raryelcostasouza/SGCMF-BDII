@@ -29,14 +29,14 @@ public class CtrJogador
 
     public String[][] queryJogadorTodos()
     {
-        GeneralDAO<Jogador> gdao;
+        JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
-        gdao = new GeneralDAO<Jogador>();
-        alJogador = gdao.listaTodos("Jogador");
+        jDAO = new JogadorDAO();
+        alJogador = jDAO.listaTodos();
         dadosJogadores = arrayList2StringMatrix(alJogador);
-        gdao.fecharSessao();
+        jDAO.fecharSessao();
 
         return dadosJogadores;
     }
@@ -57,14 +57,14 @@ public class CtrJogador
 
     public String[][] queryAllDataJogadorTodos()
     {
-        GeneralDAO<Jogador> gdao;
+        JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
-        gdao = new GeneralDAO<Jogador>();
-        alJogador = gdao.listaTodos("Jogador");
+        jDAO = new JogadorDAO();
+        alJogador = jDAO.listaTodos();
         dadosJogadores = arrayList2StringMatrixFull(alJogador);
-        gdao.fecharSessao();
+        jDAO.fecharSessao();
 
         return dadosJogadores;
     }

@@ -49,9 +49,4 @@ public class GeneralDAO<T>
 	{
 		sessao.close();
 	}
-
-	public ArrayList<T> listaTodos(String tabela)
-	{
-		 return (ArrayList<T>) sessao.createQuery("from " + tabela).list();
-	}
 }

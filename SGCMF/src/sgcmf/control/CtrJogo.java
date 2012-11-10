@@ -2,6 +2,7 @@ package sgcmf.control;
 
 import java.util.ArrayList;
 import sgcmf.model.dao.GeneralDAO;
+import sgcmf.model.dao.JogadorDAO;
 import sgcmf.model.dao.JogoDAO;
 import sgcmf.model.hibernate.Jogo;
 
@@ -23,14 +24,14 @@ public class CtrJogo
 	
 	public String[][] queryJogoTodos()
 	{
-		GeneralDAO<Jogo> gdao;
+		JogoDAO jDAO;
 		ArrayList<Jogo> alJogos;
 		String[][] dadosJogos;
 		
-		gdao = new GeneralDAO<Jogo>();
-		alJogos = gdao.listaTodos("Jogo");
+		jDAO = new JogoDAO();
+		alJogos = jDAO.listaTodos();
 		dadosJogos = arrayList2StringMatrix(alJogos);
-		gdao.fecharSessao();
+		jDAO.fecharSessao();
 		
 		return dadosJogos;
 	}

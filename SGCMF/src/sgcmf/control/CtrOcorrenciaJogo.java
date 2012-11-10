@@ -170,12 +170,12 @@ public class CtrOcorrenciaJogo
 	
 	public String[][] queryGolTodos()
 	{
-		GeneralDAO<Gol> gdao;
+		GolDAO gdao;
 		ArrayList<Gol> alGol;
 		String[][] dadosGol;
 		
-		gdao = new GeneralDAO<Gol>();
-		alGol = gdao.listaTodos("Gol");
+		gdao = new GolDAO();
+		alGol = gdao.listaTodos();
 		dadosGol = arrayList2StringMatrix(alGol);
 		
 		gdao.fecharSessao();		
