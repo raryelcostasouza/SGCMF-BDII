@@ -1,5 +1,9 @@
-package sgcmf.view;
+package sgcmf.view.admin;
 
+import sgcmf.view.admin.PanelAlterarUsuario;
+import sgcmf.view.admin.PanelRemoverUsuario;
+import sgcmf.view.admin.PanelConsultarUsuario;
+import sgcmf.view.admin.PanelCadastrarUsuario;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

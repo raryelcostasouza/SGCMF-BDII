@@ -1,4 +1,4 @@
-package sgcmf.view;
+package sgcmf.view.admin;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import sgcmf.view.UtilView;
 
 /**
  *

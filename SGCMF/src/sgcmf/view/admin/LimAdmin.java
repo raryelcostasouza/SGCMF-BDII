@@ -1,4 +1,4 @@
-package sgcmf.view;
+package sgcmf.view.admin;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import sgcmf.control.CtrAdmin;
 import sgcmf.control.CtrRelatorio;
 import sgcmf.model.other.SGCMFIcons;
+import sgcmf.view.UtilView;
 
 /**
  *

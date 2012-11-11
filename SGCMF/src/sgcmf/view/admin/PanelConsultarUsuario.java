@@ -1,4 +1,4 @@
-package sgcmf.view;
+package sgcmf.view.admin;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
 /**

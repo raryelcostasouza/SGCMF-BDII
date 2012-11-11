@@ -1,4 +1,4 @@
-package sgcmf.view;
+package sgcmf.view.admin;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -11,16 +11,17 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
 /**
  *
  * @author Thatiane
  */
-public class PanelRemoverUsuario extends JPanel {
+public class PanelAlterarUsuario extends JPanel {
 
 
-    public PanelRemoverUsuario()
+    public PanelAlterarUsuario()
     {
         setLayout(new BorderLayout());
         montaPainelPrincipal();
@@ -112,9 +113,8 @@ public class PanelRemoverUsuario extends JPanel {
         JTextField jtfNome = new JTextField(10);
         JTextField jtfEmail = new JTextField(10);
         JTextField jtfCPF = new JTextField(10);
-
-
-        JButton jbAlterar = new JButton("Remover");
+		
+        JButton jbAlterar = new JButton("Alterar");
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfLogin, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));

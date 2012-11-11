@@ -1,6 +1,6 @@
 package sgcmf.control;
 
-import sgcmf.view.LimAdmin;
+import sgcmf.view.admin.LimAdmin;
 
 public class CtrAdmin
 {
