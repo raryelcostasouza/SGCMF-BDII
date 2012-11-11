@@ -85,16 +85,30 @@ public class CtrGol
     private String validaCamposGol(String min, String seg, Short idJogo, String idJogadorAutor)
     {
         String errorMessage;
+        int intMin = 0;
+        int intSeg = 0;
 
         errorMessage = "";
         try
         {
-            Integer.parseInt(min);
-            Integer.parseInt(seg);
+            intMin = Integer.parseInt(min);
+            intSeg = Integer.parseInt(seg);
         }
         catch (NumberFormatException nfe)
         {
             errorMessage = "Instante de tempo: digite números válidos.";
+        }
+
+        if (errorMessage.equals(""))
+        {
+            if (intSeg > 59 || intSeg < 0)
+            {
+                errorMessage = "Instante de tempo: os segundos devem ser um número de 0 a 59";
+            }
+            if (intMin < 0 || intMin > 120)
+            {
+                errorMessage = "Instante de tempo: os minutos devem ser um número de 0 a 120";
+            }
         }
 
         //so faz o outro teste se passou no primeiro teste
@@ -113,8 +127,9 @@ public class CtrGol
         return errorMessage;
     }
 
-    public void removeGol(Short idOc)
+    public ResultadoOperacao removeGol(Short idOc)
     {
+        ResultadoOperacao result;
         Transaction tr;
         GeneralDAO gdao;
         Gol golParaRemover;
@@ -135,13 +150,16 @@ public class CtrGol
             gdao.apagar(ocParaRemover);
 
             tr.commit();
+            result = new ResultadoOperacao("Gol removido com êxito!", TipoResultadoOperacao.EXITO);
         }
         catch (HibernateException hex)
         {
             tr.rollback();
-            System.out.println(hex.getMessage());
+            result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
         }
         gdao.fecharSessao();
+
+        return result;
     }
 
     public String[][] queryGolByIdJogo(Short idJogo)
