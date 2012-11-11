@@ -42,7 +42,6 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
     private JRadioButton jrbModoComum;
     private JRadioButton jrbModoFalta;
     private JRadioButton jrbModoPenalti;
-    private Short idJogo;
 
     public LimRegistrarGol(CtrGol ctrGol, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
     {
@@ -184,12 +183,6 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         return mainPanel;
     }
 
-    public void ativaTela(Short idJogo)
-    {
-        this.idJogo = idJogo;
-        setVisible(true);
-    }
-
     private void registrarGol()
     {
         String tipo;
@@ -220,7 +213,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 
         result = ctrGol.registraGol(jtfInstanteTempoMin.getText(),
                 jtfInstateTempoSeg.getText(),
-                idJogo,
+                limGerenciarOcorrencias.getIdJogo(),
                 jtfJogador.getText(),
                 jtfJogadorAssist.getText(),
                 tipo,

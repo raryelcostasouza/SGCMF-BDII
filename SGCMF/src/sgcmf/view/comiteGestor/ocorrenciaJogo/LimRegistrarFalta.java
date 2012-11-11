@@ -37,7 +37,6 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
     private JRadioButton jrbCartaoVermelho;
     private JRadioButton jrbTipoComum;
     private JRadioButton jrbTipoPenalti;
-    private Short idJogo;
 
     public LimRegistrarFalta(CtrFalta ctrFalta, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
     {
@@ -158,12 +157,6 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
         return mainPanel;
     }
 
-    public void ativaTela(Short idJogo)
-    {
-        this.idJogo = idJogo;
-        setVisible(true);
-    }
-
     private void ativaTelaBuscarJogador()
     {
         limBuscarJogador.ativaTela(this);
@@ -199,7 +192,7 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
 
         result = ctrFalta.registrarFalta(jtfInstanteTempoMin.getText(),
                                                   jtfInstanteTempoSeg.getText(),
-                                                  idJogo,
+                                                  limGerenciarOcorrencias.getIdJogo(),
                                                   jtfJogador.getText(), tipo, cartao);
 
         if (result.getTipo() == TipoResultadoOperacao.EXITO)

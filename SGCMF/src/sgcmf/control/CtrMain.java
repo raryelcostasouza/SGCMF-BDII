@@ -12,6 +12,7 @@ public class CtrMain
     private LimLogin limLogin;
     private CtrAdmin ctrAdmin;
     private CtrFalta ctrFalta;
+    private CtrCartao ctrCartao;
     private CtrComiteGestor ctrComiteGestor;
     private CtrTecnico ctrTecnico;
     private CtrEntusiasta ctrEntusiasta;
@@ -25,6 +26,7 @@ public class CtrMain
 
     public CtrMain()
     {
+        ctrCartao = new CtrCartao(this);
         ctrFalta = new CtrFalta(this);
         ctrGol = new CtrGol(this);
         ctrJogo = new CtrJogo();
@@ -38,8 +40,6 @@ public class CtrMain
         ctrTecnico = new CtrTecnico(this);
         ctrEntusiasta = new CtrEntusiasta();
 
-
-
         limLogin = new LimLogin(this);
 
         t = new Thread(new Runnable()
@@ -51,6 +51,7 @@ public class CtrMain
                 GeneralDAO gdao = new GeneralDAO();
                 gdao.fecharSessao();
                 gdao = null;
+                
                 try
                 {
                     //Tem que arrumar um jeito de receber um aviso da Thread ShowSplash que terminou e esta pode
@@ -134,5 +135,10 @@ public class CtrMain
     public CtrFalta getCtrFalta()
     {
         return ctrFalta;
+    }
+
+    public CtrCartao getCtrCartao()
+    {
+        return ctrCartao;
     }
 }

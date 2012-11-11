@@ -54,7 +54,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         limRegistrarGol = new LimRegistrarGol(ctrComiteGestor.getCtrGol(), limBuscarJogador, this);
         limRegistrarFalta = new LimRegistrarFalta(ctrComiteGestor.getCtrFalta(), limBuscarJogador, this);
-        limRegistrarCartao = new LimRegistrarCartao(limBuscarJogador);
+        limRegistrarCartao = new LimRegistrarCartao(ctrComiteGestor.getCtrCartao(), limBuscarJogador, this);
         limRegistrarSubstituicao = new LimRegistrarSubstituicao(limBuscarJogador);
 
         setTitle("Gerenciar Ocorrências para o Jogo Selecionado");
@@ -196,7 +196,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                limRegistrarGol.ativaTela(idJogo);
+                limRegistrarGol.setVisible(true);
             }
         });
         centerPanelGol.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarGol), BorderLayout.SOUTH);
@@ -223,7 +223,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                limRegistrarFalta.ativaTela(idJogo);
+                limRegistrarFalta.setVisible(true);
             }
         });
         centerPanelFalta.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarFalta), BorderLayout.SOUTH);
@@ -374,5 +374,10 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             JOptionPane.showMessageDialog(this, result.getMsg(), "Erro!", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+    
+    public Short getIdJogo()
+    {
+        return idJogo;
     }
 }

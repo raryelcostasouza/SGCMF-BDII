@@ -57,4 +57,9 @@ public class CtrComiteGestor
     {
         return ctrMain.getCtrFalta();
     }
+    
+    public CtrCartao getCtrCartao()
+    {
+        return ctrMain.getCtrCartao();
+    }
 }
