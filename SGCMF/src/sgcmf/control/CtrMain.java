@@ -13,6 +13,7 @@ public class CtrMain
     private CtrAdmin ctrAdmin;
     private CtrFalta ctrFalta;
     private CtrCartao ctrCartao;
+    private CtrSubstituicao ctrSubstituicao;
     private CtrComiteGestor ctrComiteGestor;
     private CtrTecnico ctrTecnico;
     private CtrEntusiasta ctrEntusiasta;
@@ -27,6 +28,7 @@ public class CtrMain
     public CtrMain()
     {
         ctrCartao = new CtrCartao(this);
+        ctrSubstituicao = new CtrSubstituicao(this);
         ctrFalta = new CtrFalta(this);
         ctrGol = new CtrGol(this);
         ctrJogo = new CtrJogo();
@@ -141,4 +143,9 @@ public class CtrMain
     {
         return ctrCartao;
     }
+
+    public CtrSubstituicao getCtrSubstituicao()
+    {
+        return ctrSubstituicao;
+    }    
 }

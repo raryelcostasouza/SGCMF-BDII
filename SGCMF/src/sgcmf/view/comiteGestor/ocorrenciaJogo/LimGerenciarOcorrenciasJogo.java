@@ -55,7 +55,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         limRegistrarGol = new LimRegistrarGol(ctrComiteGestor.getCtrGol(), limBuscarJogador, this);
         limRegistrarFalta = new LimRegistrarFalta(ctrComiteGestor.getCtrFalta(), limBuscarJogador, this);
         limRegistrarCartao = new LimRegistrarCartao(ctrComiteGestor.getCtrCartao(), limBuscarJogador, this);
-        limRegistrarSubstituicao = new LimRegistrarSubstituicao(limBuscarJogador);
+        limRegistrarSubstituicao = new LimRegistrarSubstituicao(ctrComiteGestor.getCtrSubstituicao(), limBuscarJogador, this);
 
         setTitle("Gerenciar Ocorrências para o Jogo Selecionado");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -264,7 +264,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         String[] nomesColunas =
         {
-            "ID", "Instante de Tempo", "Jogador Entrou", "Jogador Saiu", "Motivo"
+            "ID", "Instante de Tempo", "Seleção", "Jogador Entrou", "Jogador Saiu", "Motivo"
         };
         jtSubst = new JTableSGCMF(null, nomesColunas);
         JScrollPane jsp = new JScrollPane(jtSubst, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -310,6 +310,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         preencheTabelaGol();
         preencheTabelaFalta();
         preencheTabelaCartao();
+        preencheTabelaSubstituicao();
         
         setVisible(true);
     }
@@ -336,6 +337,14 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         
         dadosCartao = ctrComiteGestor.getCtrCartao().queryCartaoByIdJogo(idJogo);
         jtCartao.preencheTabela(dadosCartao);
+    }
+    
+    public void preencheTabelaSubstituicao()
+    {
+        String[][] dadosSubst;
+        
+        dadosSubst = ctrComiteGestor.getCtrSubstituicao().querySubstByIdJogo(idJogo);
+        jtSubst.preencheTabela(dadosSubst);
     }
 
     private void resetCamposInterface()
