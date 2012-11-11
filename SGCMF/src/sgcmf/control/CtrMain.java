@@ -11,6 +11,7 @@ public class CtrMain
 {
     private LimLogin limLogin;
     private CtrAdmin ctrAdmin;
+    private CtrFalta ctrFalta;
     private CtrComiteGestor ctrComiteGestor;
     private CtrTecnico ctrTecnico;
     private CtrEntusiasta ctrEntusiasta;
@@ -24,6 +25,7 @@ public class CtrMain
 
     public CtrMain()
     {
+        ctrFalta = new CtrFalta(this);
         ctrGol = new CtrGol(this);
         ctrJogo = new CtrJogo();
         ctrSelecao = new CtrSelecao();
@@ -127,5 +129,10 @@ public class CtrMain
     public CtrGol getCtrGol()
     {
         return ctrGol;
+    }
+
+    public CtrFalta getCtrFalta()
+    {
+        return ctrFalta;
     }
 }

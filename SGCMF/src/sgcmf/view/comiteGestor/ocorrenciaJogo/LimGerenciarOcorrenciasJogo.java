@@ -51,7 +51,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         this.ctrComiteGestor = ctrComiteGestor;
 
         limRegistrarGol = new LimRegistrarGol(ctrComiteGestor.getCtrGol(), limBuscarJogador, this);
-        limRegistrarFalta = new LimRegistrarFalta(ctrComiteGestor.getCtrOcorrenciaJogo(), limBuscarJogador, this);
+        limRegistrarFalta = new LimRegistrarFalta(ctrComiteGestor.getCtrFalta(), limBuscarJogador, this);
         limRegistrarCartao = new LimRegistrarCartao(limBuscarJogador);
         limRegistrarSubstituicao = new LimRegistrarSubstituicao(limBuscarJogador);
 
@@ -318,7 +318,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     {
         String[][] dadosFalta;
 
-        dadosFalta = ctrComiteGestor.getCtrOcorrenciaJogo().queryFaltaByIdJogo(idJogo);
+        dadosFalta = ctrComiteGestor.getCtrFalta().queryFaltaByIdJogo(idJogo);
         jtFalta.preencheTabela(dadosFalta);
     }
 
@@ -353,7 +353,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             if (linhaSelecionada != -1)
             {
                 idOc = Short.parseShort((String) jtFalta.getValueAt(linhaSelecionada, 0));
-                result = ctrComiteGestor.getCtrOcorrenciaJogo().removeFalta(idOc);
+                result = ctrComiteGestor.getCtrFalta().removeFalta(idOc);
                 preencheTabelaFalta();
             }
         }

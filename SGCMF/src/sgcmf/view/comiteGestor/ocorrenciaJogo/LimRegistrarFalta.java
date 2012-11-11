@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import sgcmf.control.CtrFalta;
 import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.SGCMFIcons;
@@ -27,7 +28,7 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
 {
     private LimGerenciarOcorrenciasJogo limGerenciarOcorrencias;
     private LimBuscarJogador limBuscarJogador;
-    private CtrOcorrenciaJogo ctrOcorrenciaJogo;
+    private CtrFalta ctrFalta;
     private JTextField jtfInstanteTempoMin;
     private JTextField jtfInstanteTempoSeg;
     private JTextField jtfJogador;
@@ -38,9 +39,9 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
     private JRadioButton jrbTipoPenalti;
     private Short idJogo;
 
-    public LimRegistrarFalta(CtrOcorrenciaJogo ctrOcorrenciaJogo, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
+    public LimRegistrarFalta(CtrFalta ctrFalta, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
     {
-        this.ctrOcorrenciaJogo = ctrOcorrenciaJogo;
+        this.ctrFalta = ctrFalta;
         this.limBuscarJogador = limBuscarJogador;
         this.limGerenciarOcorrencias = limGerenciarOcorrencias;
 
@@ -196,7 +197,7 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
             cartao = jrbCartaoVermelho.getText();
         }
 
-        result = ctrOcorrenciaJogo.registrarFalta(jtfInstanteTempoMin.getText(),
+        result = ctrFalta.registrarFalta(jtfInstanteTempoMin.getText(),
                                                   jtfInstanteTempoSeg.getText(),
                                                   idJogo,
                                                   jtfJogador.getText(), tipo, cartao);

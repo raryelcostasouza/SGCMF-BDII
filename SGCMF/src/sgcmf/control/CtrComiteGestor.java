@@ -52,4 +52,9 @@ public class CtrComiteGestor
     {
         return ctrMain.getCtrOcorrenciaJogo();                
     }
+    
+    public CtrFalta getCtrFalta()
+    {
+        return ctrMain.getCtrFalta();
+    }
 }
