@@ -1,15 +1,15 @@
 package sgcmf.view.comiteGestor.ocorrenciaJogo;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -50,6 +50,15 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
         setModal(true);
         setSize(370, 230);
         setLocationRelativeTo(null);
+
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                resetCamposInterface();
+            }
+        });
     }
 
     private JPanel montaMainPanel()
@@ -84,9 +93,9 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
         jrbCartaoAmarelo = new JRadioButton("Amarelo");
         jrbCartaoVermelho = new JRadioButton("Vermelho");
 
-        jrbTipoComum = new JRadioButton("Falta comum");
+        jrbTipoComum = new JRadioButton("Falta Comum");
         jrbTipoComum.setSelected(true);
-        jrbTipoPenalti = new JRadioButton("Pênalti");
+        jrbTipoPenalti = new JRadioButton("Penalti");
 
         JButton jbRegistrarFalta = new JButton("Registrar Falta");
         jbRegistrarFalta.addActionListener(new ActionListener()
@@ -94,7 +103,7 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                //registrarFalta();
+                registrarFalta();
             }
         });
 
@@ -176,7 +185,7 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
 
         if (jrbCartaoNenhum.isSelected())
         {
-            cartao = jrbTipoComum.getText();
+            cartao = jrbCartaoNenhum.getText();
         }
         else if (jrbCartaoAmarelo.isSelected())
         {
@@ -196,12 +205,22 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
         {
             JOptionPane.showMessageDialog(this, result.getMsg(), "Exito!", JOptionPane.INFORMATION_MESSAGE);
             setVisible(false);
+            resetCamposInterface();
             limGerenciarOcorrencias.preencheTabelaFalta();
         }
         else
         {
             JOptionPane.showMessageDialog(this, result.getMsg(), "Erro!", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void resetCamposInterface()
+    {
+        jtfInstanteTempoMin.setText("");
+        jtfInstanteTempoSeg.setText("");
+        jtfJogador.setText("");
+        jrbTipoComum.setSelected(true);
+        jrbCartaoNenhum.setSelected(true);
     }
 
     @Override
