@@ -37,6 +37,8 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
     private JRadioButton jrbCartaoVermelho;
     private JRadioButton jrbTipoComum;
     private JRadioButton jrbTipoPenalti;
+    private ButtonGroup bgCartao;
+    private ButtonGroup bgTipo;
 
     public LimRegistrarFalta(CtrFalta ctrFalta, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
     {
@@ -89,13 +91,22 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
         jtfJogador.setEditable(false);
 
         jrbCartaoNenhum = new JRadioButton("Nenhum");
+        jrbCartaoNenhum.setActionCommand("Nenhum");
         jrbCartaoNenhum.setSelected(true);
+        
         jrbCartaoAmarelo = new JRadioButton("Amarelo");
+        jrbCartaoAmarelo.setActionCommand("Amarelo");
+        
         jrbCartaoVermelho = new JRadioButton("Vermelho");
+        jrbCartaoVermelho.setActionCommand("Vermelho");
+        
 
         jrbTipoComum = new JRadioButton("Falta Comum");
+        jrbTipoComum.setActionCommand("Falta Comum");     
         jrbTipoComum.setSelected(true);
-        jrbTipoPenalti = new JRadioButton("Penalti");
+        
+        jrbTipoPenalti = new JRadioButton("Pênalti");
+        jrbTipoPenalti.setActionCommand("Penalti");
 
         JButton jbRegistrarFalta = new JButton("Registrar Falta");
         jbRegistrarFalta.addActionListener(new ActionListener()
@@ -120,12 +131,12 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
             }
         });
 
-        ButtonGroup bgCartao = new ButtonGroup();
+        bgCartao = new ButtonGroup();
         bgCartao.add(jrbCartaoNenhum);
         bgCartao.add(jrbCartaoAmarelo);
         bgCartao.add(jrbCartaoVermelho);
 
-        ButtonGroup bgTipo = new ButtonGroup();
+        bgTipo = new ButtonGroup();
         bgTipo.add(jrbTipoComum);
         bgTipo.add(jrbTipoPenalti);
 
@@ -168,27 +179,8 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
         String cartao;
         ResultadoOperacao result;
 
-        if (jrbTipoComum.isSelected())
-        {
-            tipo = jrbTipoComum.getText();
-        }
-        else
-        {
-            tipo = jrbTipoPenalti.getText();
-        }
-
-        if (jrbCartaoNenhum.isSelected())
-        {
-            cartao = jrbCartaoNenhum.getText();
-        }
-        else if (jrbCartaoAmarelo.isSelected())
-        {
-            cartao = jrbCartaoAmarelo.getText();
-        }
-        else
-        {
-            cartao = jrbCartaoVermelho.getText();
-        }
+        tipo = bgTipo.getSelection().getActionCommand();
+        cartao = bgCartao.getSelection().getActionCommand();
 
         result = ctrFalta.registrarFalta(jtfInstanteTempoMin.getText(),
                                                   jtfInstanteTempoSeg.getText(),
