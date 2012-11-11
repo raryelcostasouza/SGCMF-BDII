@@ -15,12 +15,12 @@ import sgcmf.model.other.TipoResultadoOperacao;
 public class CtrFalta
 {
     private CtrMain ctrMain;
-    
+
     public CtrFalta(CtrMain ctrMain)
     {
         this.ctrMain = ctrMain;
     }
-    
+
     public String[][] queryFaltaByIdJogo(Short idJogo)
     {
         ArrayList<Falta> alFalta;
@@ -89,7 +89,7 @@ public class CtrFalta
 
                 //carrega o jogador autor
                 shortIdJogador = Short.parseShort(idJogador);
-                objJogador = ctrMain.getCtrJogador().carregaJogadorById(shortIdJogador);
+                objJogador = ctrMain.getCtrJogador().carregaJogadorById(gdao, shortIdJogador);
 
                 //se tiver jogador assistente, ele eh carregado
                 if (cartao.equals("Nenhum"))
@@ -103,7 +103,6 @@ public class CtrFalta
                     objFalta = new Falta(objOcorrencia.getId(), objCartao, objOcorrencia, objJogador, tipo);
                 }
 
-                //salva o gol e commita
                 gdao.salvar(objFalta);
                 tr.commit();
 
@@ -139,7 +138,7 @@ public class CtrFalta
             }
             catch (NumberFormatException nfe)
             {
-                errorMessage = "Jogador autor: é obrigatório selecionar o jogador autor.";
+                errorMessage = "Jogador: é obrigatório selecionar o jogador que realizou a falta.";
             }
         }
 

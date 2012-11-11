@@ -47,13 +47,13 @@ public class CtrGol
 
                 //carrega o jogador autor
                 shortIdJogadorAutor = Short.parseShort(idJogadorAutor);
-                jAutor = ctrMain.getCtrJogador().carregaJogadorById(shortIdJogadorAutor);
+                jAutor = ctrMain.getCtrJogador().carregaJogadorById(gdao, shortIdJogadorAutor);
 
                 //se tiver jogador assistente, ele eh carregado
                 if (!idJogadorAssist.equals(""))
                 {
                     shortIdJogadorAssist = Short.parseShort(idJogadorAssist);
-                    jAssist = ctrMain.getCtrJogador().carregaJogadorById(shortIdJogadorAssist);
+                    jAssist = ctrMain.getCtrJogador().carregaJogadorById(gdao, shortIdJogadorAssist);
                     g = new Gol(o.getId(), jAutor, o, jAssist, tipoGol, modoGol);
                 }
                 else

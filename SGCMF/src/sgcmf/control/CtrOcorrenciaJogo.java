@@ -22,8 +22,7 @@ public class CtrOcorrenciaJogo
         Jogo jogo;
         GregorianCalendar gc;
 
-        jogo = new Jogo();
-        gdao.carregar(jogo, idJogo);
+        jogo = ctrMain.getCtrJogo().carregaJogoById(gdao, idJogo);
 
         gc = new GregorianCalendar(0, 0, 0, 0, Integer.parseInt(min), Integer.parseInt(seg));
 
