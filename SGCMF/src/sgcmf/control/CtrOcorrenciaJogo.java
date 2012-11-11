@@ -31,7 +31,7 @@ public class CtrOcorrenciaJogo
         Ocorrencia oc;
         Jogo jogo;
         Time tempo;
-        
+
         jogo = new Jogo();
         gdao.carregar(jogo, idJogo);
 
@@ -44,7 +44,7 @@ public class CtrOcorrenciaJogo
         gdao.salvar(oc);
 
         return oc;
-    }    
+    }
 
     public String[][] queryFaltaByIdJogo(Short idJogo)
     {
@@ -148,7 +148,7 @@ public class CtrOcorrenciaJogo
 
         return result;
     }
-    
+
     private String validaCamposFalta(String min, String seg, Short idJogo, String idJogador)
     {
         String errorMessage;
@@ -180,5 +180,52 @@ public class CtrOcorrenciaJogo
         return errorMessage;
     }
 
-   
+    public ResultadoOperacao removeFalta(Short idOc)
+    {
+        ResultadoOperacao result;
+        Transaction tr;
+        GeneralDAO gdao;
+        Falta faltaParaRemover;
+        Cartao cartaoParaRemover;
+        Ocorrencia ocParaRemover;
+
+        cartaoParaRemover = new Cartao();
+        faltaParaRemover = new Falta();
+        ocParaRemover = new Ocorrencia();
+
+        gdao = new GeneralDAO();
+        tr = gdao.getSessao().beginTransaction();
+
+        try
+        {
+            gdao.carregar(faltaParaRemover, idOc);
+            gdao.carregar(ocParaRemover, idOc);
+            if (faltaParaRemover.getCartao() != null)
+            {
+                gdao.carregar(cartaoParaRemover, idOc);
+            }
+            else
+            {
+                cartaoParaRemover = null;
+            }
+
+            if (cartaoParaRemover != null)
+            {
+                gdao.apagar(cartaoParaRemover);
+            }
+            gdao.apagar(faltaParaRemover);
+            gdao.apagar(ocParaRemover);
+
+            tr.commit();
+            result = new ResultadoOperacao("Falta e cartão associado removidos com êxito!", TipoResultadoOperacao.EXITO);
+        }
+        catch (HibernateException hex)
+        {
+            tr.rollback();
+            result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
+        }
+        gdao.fecharSessao();
+
+        return result;
+    }
 }

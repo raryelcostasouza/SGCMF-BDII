@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import sgcmf.control.CtrComiteGestor;
+import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
@@ -48,7 +49,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     public LimGerenciarOcorrenciasJogo(CtrComiteGestor ctrComiteGestor, LimBuscarJogador limBuscarJogador)
     {
         this.ctrComiteGestor = ctrComiteGestor;
-        
+
         limRegistrarGol = new LimRegistrarGol(ctrComiteGestor.getCtrGol(), limBuscarJogador, this);
         limRegistrarFalta = new LimRegistrarFalta(ctrComiteGestor.getCtrOcorrenciaJogo(), limBuscarJogador, this);
         limRegistrarCartao = new LimRegistrarCartao(limBuscarJogador);
@@ -312,11 +313,11 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         dadosGol = ctrComiteGestor.getCtrGol().queryGolByIdJogo(idJogo);
         jtGol.preencheTabela(dadosGol);
     }
-    
+
     public void preencheTabelaFalta()
     {
         String[][] dadosFalta;
-        
+
         dadosFalta = ctrComiteGestor.getCtrOcorrenciaJogo().queryFaltaByIdJogo(idJogo);
         jtFalta.preencheTabela(dadosFalta);
     }
@@ -325,13 +326,16 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     {
         jlInfoJogo.setText("");
         jrbGol.setSelected(true);
+
+        CardLayout cl = (CardLayout) centerPanel.getLayout();
+        cl.show(centerPanel, nameCardPanelGol);
     }
 
     private void removerOcorrencia()
     {
         Short idOc;
         int linhaSelecionada;
-        ResultadoOperacao result;
+        ResultadoOperacao result = null;
 
         if (jrbGol.isSelected())
         {
@@ -340,16 +344,29 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             {
                 idOc = Short.parseShort((String) jtGol.getValueAt(linhaSelecionada, 0));
                 result = ctrComiteGestor.getCtrGol().removeGol(idOc);
-                if (result.getTipo() == TipoResultadoOperacao.EXITO)
-                {
-                    JOptionPane.showMessageDialog(this, result.getMsg(), "Êxito!", JOptionPane.INFORMATION_MESSAGE);
-                    preencheTabelaGol();
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(this, result.getMsg(), "Erro!", JOptionPane.ERROR_MESSAGE);
-                }
+                preencheTabelaGol();
             }
         }
+        else if (jrbFalta.isSelected())
+        {
+            linhaSelecionada = jtFalta.getSelectedRow();
+            if (linhaSelecionada != -1)
+            {
+                idOc = Short.parseShort((String) jtFalta.getValueAt(linhaSelecionada, 0));
+                result = ctrComiteGestor.getCtrOcorrenciaJogo().removeFalta(idOc);
+                preencheTabelaFalta();
+            }
+        }
+
+        if (result.getTipo() == TipoResultadoOperacao.EXITO)
+        {
+            JOptionPane.showMessageDialog(this, result.getMsg(), "Êxito!", JOptionPane.INFORMATION_MESSAGE);
+            
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, result.getMsg(), "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 }
