@@ -10,7 +10,7 @@ public class GolDAO extends GeneralDAO<Gol>
         String hql;
 
         hql = "from Gol g "
-                + "where g.ocorrencia.jogo.id = " + idJogo;
+                + "where g.ocorrencia.jogo.id = " + idJogo + " order by g.ocorrencia.instantetempo";
 
         return (ArrayList<Gol>) sessao.createQuery(hql).list();
     }

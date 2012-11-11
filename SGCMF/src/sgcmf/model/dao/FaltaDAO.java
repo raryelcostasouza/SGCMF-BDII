@@ -10,7 +10,7 @@ public class FaltaDAO extends GeneralDAO<Falta>
         String hql;
 
         hql = "from Falta f "
-                + "where f.ocorrencia.jogo.id = " + idJogo;
+                + "where f.ocorrencia.jogo.id = " + idJogo + " order by f.ocorrencia.instantetempo";
         
         return (ArrayList<Falta>) sessao.createQuery(hql).list();
     }
