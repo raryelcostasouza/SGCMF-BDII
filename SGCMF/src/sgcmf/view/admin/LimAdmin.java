@@ -82,6 +82,14 @@ public class LimAdmin extends JFrame
         jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
 
         JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
+        jbLogout.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                acaoLogout();
+            }
+        });
 
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbGerenciarUsuarios));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorios));
