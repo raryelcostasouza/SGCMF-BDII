@@ -11,12 +11,14 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import sgcmf.control.CtrCartao;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.SGCMFIcons;
+import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.UtilView;
 import sgcmf.view.tecnico.ISelecionarJogador;
@@ -167,6 +169,22 @@ public class LimRegistrarCartao extends JDialog implements ISelecionarJogador
             cor = jrbCartaoVermelho.getText();
         }
         
-        result = ctrCartao.registraCartao();
+        result = ctrCartao.registraCartao(jtfInstanteTempoMin.getText(),
+                                          jtfInstateTempoSeg.getText(),
+                                          limGerenciarOcorrencias.getIdJogo(),
+                                          jtfJogador.getText(),
+                                          cor);
+        
+        if (result.getTipo() == TipoResultadoOperacao.EXITO)
+        {
+            JOptionPane.showMessageDialog(this, result.getMsg(), "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            setVisible(false);
+            resetCamposInterface();
+            limGerenciarOcorrencias.preencheTabelaCartao();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, result.getMsg(), "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

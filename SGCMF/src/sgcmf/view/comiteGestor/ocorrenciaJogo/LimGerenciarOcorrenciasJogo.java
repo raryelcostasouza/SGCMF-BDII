@@ -309,6 +309,8 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         jlInfoJogo.setText(ctrComiteGestor.getCtrJogo().queryInfoJogoById(idJogo));
         preencheTabelaGol();
         preencheTabelaFalta();
+        preencheTabelaCartao();
+        
         setVisible(true);
     }
 
@@ -326,6 +328,14 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         dadosFalta = ctrComiteGestor.getCtrFalta().queryFaltaByIdJogo(idJogo);
         jtFalta.preencheTabela(dadosFalta);
+    }
+    
+    public void preencheTabelaCartao()
+    {
+        String [][] dadosCartao;
+        
+        dadosCartao = ctrComiteGestor.getCtrCartao().queryCartaoByIdJogo(idJogo);
+        jtCartao.preencheTabela(dadosCartao);
     }
 
     private void resetCamposInterface()
@@ -379,5 +389,5 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     public Short getIdJogo()
     {
         return idJogo;
-    }
+    }   
 }

@@ -14,15 +14,12 @@ import sgcmf.model.other.TipoResultadoOperacao;
 
 public class CtrJogador
 {
-    public Jogador carregaJogadorById(Short idJogador)
+    public Jogador carregaJogadorById(GeneralDAO gdao, Short idJogador)
     {
         Jogador jogador;
-        JogadorDAO jdao;
 
         jogador = new Jogador();
-        jdao = new JogadorDAO();
-        jdao.carregar(jogador, idJogador);
-        jdao.fecharSessao();
+        gdao.carregar(jogador, idJogador);
 
         return jogador;
     }

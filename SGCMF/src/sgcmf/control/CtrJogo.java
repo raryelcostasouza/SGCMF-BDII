@@ -12,6 +12,16 @@ import sgcmf.model.other.SGCMFDate;
 
 public class CtrJogo
 {
+    public Jogo carregaJogoById(GeneralDAO gdao, Short idJogo)
+    {
+        Jogo j;
+        
+        j = new Jogo();        
+        gdao.carregar(j, idJogo);
+        
+        return j;
+    }
+    
     public String[][] queryJogoTodos()
     {
         JogoDAO jDAO;
