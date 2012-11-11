@@ -383,6 +383,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
                 result = ctrComiteGestor.getCtrCartao().removerCartao(idOc);
                 
                 preencheTabelaFalta();
+                preencheTabelaCartao();
             }
         }
 
