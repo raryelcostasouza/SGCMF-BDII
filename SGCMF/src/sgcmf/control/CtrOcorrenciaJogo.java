@@ -2,13 +2,20 @@ package sgcmf.control;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import org.hibernate.HibernateException;
+import org.hibernate.Transaction;
 import sgcmf.model.dao.FaltaDAO;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.dao.GeneralDAO;
+import sgcmf.model.dao.GolDAO;
 import sgcmf.model.dao.JogoDAO;
+import sgcmf.model.hibernate.Cartao;
 import sgcmf.model.hibernate.Falta;
+import sgcmf.model.hibernate.Gol;
+import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.hibernate.Ocorrencia;
+import sgcmf.model.other.TipoResultadoOperacao;
 
 public class CtrOcorrenciaJogo
 {
@@ -24,10 +31,9 @@ public class CtrOcorrenciaJogo
         Ocorrencia oc;
         Jogo jogo;
         Time tempo;
-        JogoDAO jDAO;
-
-        jDAO = new JogoDAO();
-        jogo = ctrMain.getCtrJogo().carregarJogoById(idJogo);
+        
+        jogo = new Jogo();
+        gdao.carregar(jogo, idJogo);
 
         tempo = new Time(0, Integer.parseInt(min), Integer.parseInt(seg));
 
@@ -38,9 +44,7 @@ public class CtrOcorrenciaJogo
         gdao.salvar(oc);
 
         return oc;
-    }
-
-    
+    }    
 
     public String[][] queryFaltaByIdJogo(Short idJogo)
     {
@@ -50,13 +54,13 @@ public class CtrOcorrenciaJogo
 
         faltaDAO = new FaltaDAO();
         alFalta = faltaDAO.queryFaltaByIdJogo(idJogo);
-        dadosFalta = arrayListFalta2StringMatrix(alFalta);
+        dadosFalta = arrayList2StringMatrix(alFalta);
         faltaDAO.fecharSessao();
 
         return dadosFalta;
     }
 
-    public String[][] arrayListFalta2StringMatrix(ArrayList<Falta> alFalta)
+    public String[][] arrayList2StringMatrix(ArrayList<Falta> alFalta)
     {
         String[][] dadosFalta;
         Falta f;
@@ -87,8 +91,94 @@ public class CtrOcorrenciaJogo
     public ResultadoOperacao registrarFalta(String min, String seg, Short idJogo, String idJogador,
                                             String tipo, String cartao)
     {
-        
-        
-        return null;
+        GeneralDAO gdao;
+        Short shortIdJogador;
+        Transaction tr;
+        Falta objFalta;
+        Ocorrencia objOcorrencia;
+        Cartao objCartao;
+        Jogador objJogador;
+        String errorMessage;
+        ResultadoOperacao result;
+
+        errorMessage = validaCamposFalta(min, seg, idJogo, idJogador);
+
+        //se nao tiver erros nos campos, entao faz o cadastro
+        if (errorMessage.equals(""))
+        {
+            gdao = new GeneralDAO();
+            tr = gdao.getSessao().beginTransaction();
+            try
+            {
+                objOcorrencia = ctrMain.getCtrOcorrenciaJogo().registraOcorrencia(gdao, min, seg, idJogo);
+
+                //carrega o jogador autor
+                shortIdJogador = Short.parseShort(idJogador);
+                objJogador = ctrMain.getCtrJogador().carregaJogadorById(shortIdJogador);
+
+                //se tiver jogador assistente, ele eh carregado
+                if (cartao.equals("Nenhum"))
+                {
+                    objFalta = new Falta(objOcorrencia.getId(), objOcorrencia, objJogador, tipo);
+                }
+                else
+                {
+                    objCartao = new Cartao(objOcorrencia.getId(), objOcorrencia, objJogador, cartao);
+                    gdao.salvar(objCartao);
+                    objFalta = new Falta(objOcorrencia.getId(), objCartao, objOcorrencia, objJogador, tipo);
+                }
+
+                //salva o gol e commita
+                gdao.salvar(objFalta);
+                tr.commit();
+
+                result = new ResultadoOperacao("Falta cadastrada com êxito!", TipoResultadoOperacao.EXITO);
+            }
+            catch (HibernateException hex)
+            {
+                tr.rollback();
+                result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
+            }
+            gdao.fecharSessao();
+        }
+        else
+        {
+            result = new ResultadoOperacao(errorMessage, TipoResultadoOperacao.ERRO);
+        }
+
+        return result;
     }
+    
+    private String validaCamposFalta(String min, String seg, Short idJogo, String idJogador)
+    {
+        String errorMessage;
+
+        errorMessage = "";
+        try
+        {
+            Integer.parseInt(min);
+            Integer.parseInt(seg);
+        }
+        catch (NumberFormatException nfe)
+        {
+            errorMessage = "Instante de tempo: digite números válidos.";
+        }
+
+        //so faz o outro teste se passou no primeiro teste
+        if (errorMessage.equals(""))
+        {
+            try
+            {
+                Short.parseShort(idJogador);
+            }
+            catch (NumberFormatException nfe)
+            {
+                errorMessage = "Jogador autor: é obrigatório selecionar o jogador autor.";
+            }
+        }
+
+        return errorMessage;
+    }
+
+   
 }
