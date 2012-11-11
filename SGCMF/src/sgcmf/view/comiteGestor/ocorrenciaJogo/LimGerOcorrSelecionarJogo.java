@@ -1,14 +1,11 @@
 package sgcmf.view.comiteGestor.ocorrenciaJogo;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import sgcmf.control.CtrComiteGestor;
-import sgcmf.control.CtrGol;
-import sgcmf.control.CtrJogo;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.comiteGestor.LimConsultarJogo;
