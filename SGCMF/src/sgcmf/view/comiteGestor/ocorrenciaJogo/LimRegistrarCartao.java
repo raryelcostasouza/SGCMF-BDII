@@ -19,8 +19,8 @@ import sgcmf.control.CtrCartao;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.model.other.TipoResultadoOperacao;
-import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.UtilView;
+import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.tecnico.ISelecionarJogador;
 
 public class LimRegistrarCartao extends JDialog implements ISelecionarJogador
@@ -34,6 +34,7 @@ public class LimRegistrarCartao extends JDialog implements ISelecionarJogador
     private JTextField jtfInstateTempoSeg;
     private JRadioButton jrbCartaoAmarelo;
     private JRadioButton jrbCartaoVermelho;
+    private ButtonGroup bgCartao;
 
     public LimRegistrarCartao(CtrCartao ctrCartao, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
     {
@@ -84,8 +85,11 @@ public class LimRegistrarCartao extends JDialog implements ISelecionarJogador
         jtfJogador.setEditable(false);
 
         jrbCartaoAmarelo = new JRadioButton("Amarelo");
+        jrbCartaoAmarelo.setActionCommand("Amarelo");
         jrbCartaoAmarelo.setSelected(true);
+        
         jrbCartaoVermelho = new JRadioButton("Vermelho");
+        jrbCartaoVermelho.setActionCommand("Vermelho");
 
         JButton jbRegistrarCartao = new JButton("Registrar Cartão");
         jbRegistrarCartao.addActionListener(new ActionListener() {
@@ -109,7 +113,7 @@ public class LimRegistrarCartao extends JDialog implements ISelecionarJogador
             }
         });
 
-        ButtonGroup bgCartao = new ButtonGroup();
+        bgCartao = new ButtonGroup();
         bgCartao.add(jrbCartaoAmarelo);
         bgCartao.add(jrbCartaoVermelho);
 
@@ -160,14 +164,7 @@ public class LimRegistrarCartao extends JDialog implements ISelecionarJogador
         String cor;
         ResultadoOperacao result;
         
-        if (jrbCartaoAmarelo.isSelected())
-        {
-            cor = jrbCartaoAmarelo.getText();
-        }
-        else
-        {
-            cor = jrbCartaoVermelho.getText();
-        }
+        cor = bgCartao.getSelection().getActionCommand();
         
         result = ctrCartao.registraCartao(jtfInstanteTempoMin.getText(),
                                           jtfInstateTempoSeg.getText(),
