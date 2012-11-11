@@ -100,14 +100,22 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         jtfJogadorAssist.setEditable(false);
 
         jrbTipoAFavor = new JRadioButton("A Favor");
+        jrbTipoAFavor.setActionCommand("A Favor");
         jrbTipoAFavor.setSelected(true);
+        
         jrbTipoContra = new JRadioButton("Contra");
+        jrbTipoContra.setActionCommand("Contra");
 
         jrbModoComum = new JRadioButton("Comum");
-        jrbModoFalta = new JRadioButton("Falta");
-        jrbModoPenalti = new JRadioButton("Penalti");
+        jrbModoComum.setActionCommand("Comum");
         jrbModoComum.setSelected(true);
-
+        
+        jrbModoFalta = new JRadioButton("Falta");
+        jrbModoFalta.setActionCommand("Falta");
+        
+        jrbModoPenalti = new JRadioButton("Pênalti");
+        jrbModoPenalti.setActionCommand("Penalti");
+        
         JButton jbRegistrarGol = new JButton("Registrar Gol");
         jbRegistrarGol.addActionListener(new ActionListener()
         {
@@ -189,27 +197,8 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         String modo;
         ResultadoOperacao result;
 
-        if (jrbTipoAFavor.isSelected())
-        {
-            tipo = jrbTipoAFavor.getText();
-        }
-        else
-        {
-            tipo = jrbTipoContra.getText();
-        }
-
-        if (jrbModoComum.isSelected())
-        {
-            modo = jrbModoComum.getText();
-        }
-        else if (jrbModoFalta.isSelected())
-        {
-            modo = jrbModoFalta.getText();
-        }
-        else
-        {
-            modo = jrbModoPenalti.getText();
-        }
+        tipo = bgTipo.getSelection().getActionCommand();
+        modo = bgModo.getSelection().getActionCommand();
 
         result = ctrGol.registraGol(jtfInstanteTempoMin.getText(),
                 jtfInstateTempoSeg.getText(),
