@@ -11,13 +11,13 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import sgcmf.control.CtrComiteGestor;
-import sgcmf.control.CtrGol;
-import sgcmf.control.CtrJogo;
-import sgcmf.control.CtrOcorrenciaJogo;
+import sgcmf.model.other.ResultadoOperacao;
+import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.table.JTableSGCMF;
@@ -331,6 +331,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     {
         Short idOc;
         int linhaSelecionada;
+        ResultadoOperacao result;
 
         if (jrbGol.isSelected())
         {
@@ -338,9 +339,16 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             if (linhaSelecionada != -1)
             {
                 idOc = Short.parseShort((String) jtGol.getValueAt(linhaSelecionada, 0));
-                ctrComiteGestor.getCtrGol().removeGol(idOc);
-
-                preencheTabelaGol();
+                result = ctrComiteGestor.getCtrGol().removeGol(idOc);
+                if (result.getTipo() == TipoResultadoOperacao.EXITO)
+                {
+                    JOptionPane.showMessageDialog(this, result.getMsg(), "Êxito!", JOptionPane.INFORMATION_MESSAGE);
+                    preencheTabelaGol();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this, result.getMsg(), "Erro!", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
