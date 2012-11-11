@@ -264,7 +264,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         String[] nomesColunas =
         {
-            "ID", "Instante de Tempo", "Seleção", "Jogador Entrou", "Jogador Saiu", "Motivo"
+            "ID", "Instante de Tempo", "Seleção", "Jogador Saiu", "Jogador Entrou", "Motivo"
         };
         jtSubst = new JTableSGCMF(null, nomesColunas);
         JScrollPane jsp = new JScrollPane(jtSubst, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -393,6 +393,17 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
                 
                 preencheTabelaFalta();
                 preencheTabelaCartao();
+            }
+        }
+        else
+        {
+            linhaSelecionada = jtSubst.getSelectedRow();
+            if (linhaSelecionada != -1)
+            {
+                idOc = Short.parseShort((String) jtSubst.getValueAt(linhaSelecionada, 0));
+                result = ctrComiteGestor.getCtrSubstituicao().removeSubstituicao(idOc);
+                
+                preencheTabelaSubstituicao();
             }
         }
 

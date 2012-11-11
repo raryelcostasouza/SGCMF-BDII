@@ -5,15 +5,20 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import sgcmf.control.CtrSubstituicao;
+import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.SGCMFIcons;
+import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.UtilView;
 import sgcmf.view.tecnico.ISelecionarJogador;
@@ -45,6 +50,15 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
         setModal(true);
         setSize(360, 220);
         setLocationRelativeTo(null);
+        
+        addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                resetCamposInterface();
+            }
+        });
     }
     
     private JPanel montaMainPanel()
@@ -171,8 +185,35 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
     public void registrarSubst()
     {
         String tipo;
+        ResultadoOperacao result;
         
         tipo = bgMotivo.getSelection().getActionCommand();
-        System.out.println(tipo);
+        
+        result = ctrSubstituicao.registraSubstituicao(jtfInstanteTempoMin.getText(), 
+                                                      jtfInstanteTempoSeg.getText(), 
+                                                      limGerenciarOcorrencias.getIdJogo(),
+                                                      jtfJogadorSaiu.getText(),
+                                                      jtfJogadorEntrou.getText(), tipo);
+        if (result.getTipo() == TipoResultadoOperacao.EXITO)
+        {
+            JOptionPane.showMessageDialog(this, result.getMsg(), "Êxito!", JOptionPane.INFORMATION_MESSAGE);
+            setVisible(false);
+            resetCamposInterface();
+            limGerenciarOcorrencias.preencheTabelaSubstituicao();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, result.getMsg(), "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
+    
+    public void resetCamposInterface()
+    {
+        jtfInstanteTempoMin.setText("");
+        jtfInstanteTempoSeg.setText("");
+        jtfJogadorEntrou.setText("");
+        jtfJogadorSaiu.setText("");
+        jrbMotivoEstrategica.setSelected(true);
     }
 }

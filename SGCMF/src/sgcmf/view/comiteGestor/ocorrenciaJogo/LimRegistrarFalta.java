@@ -197,7 +197,7 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
 
         if (result.getTipo() == TipoResultadoOperacao.EXITO)
         {
-            JOptionPane.showMessageDialog(this, result.getMsg(), "Exito!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, result.getMsg(), "Êxito!", JOptionPane.INFORMATION_MESSAGE);
             setVisible(false);
             resetCamposInterface();
             limGerenciarOcorrencias.preencheTabelaFalta();
