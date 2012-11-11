@@ -76,7 +76,7 @@ public class CtrFalta
         String errorMessage;
         ResultadoOperacao result;
 
-        errorMessage = validaCamposFalta(min, seg, idJogo, idJogador);
+        errorMessage = validaCampos(min, seg, idJogador);
 
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
@@ -124,20 +124,11 @@ public class CtrFalta
         return result;
     }
 
-    private String validaCamposFalta(String min, String seg, Short idJogo, String idJogador)
+    private String validaCampos(String min, String seg, String idJogador)
     {
         String errorMessage;
 
-        errorMessage = "";
-        try
-        {
-            Integer.parseInt(min);
-            Integer.parseInt(seg);
-        }
-        catch (NumberFormatException nfe)
-        {
-            errorMessage = "Instante de tempo: digite números válidos.";
-        }
+        errorMessage = ctrMain.getCtrOcorrenciaJogo().validaCampos(min, seg);
 
         //so faz o outro teste se passou no primeiro teste
         if (errorMessage.equals(""))

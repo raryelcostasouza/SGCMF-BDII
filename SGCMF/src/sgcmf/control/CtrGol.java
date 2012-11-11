@@ -34,7 +34,7 @@ public class CtrGol
         String errorMessage;
         ResultadoOperacao result;
 
-        errorMessage = validaCamposGol(min, seg, idJogo, idJogadorAutor);
+        errorMessage = validaCamposGol(min, seg, idJogadorAutor);
 
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
@@ -82,34 +82,11 @@ public class CtrGol
         return result;
     }
 
-    private String validaCamposGol(String min, String seg, Short idJogo, String idJogadorAutor)
+    private String validaCamposGol(String min, String seg, String idJogadorAutor)
     {
         String errorMessage;
-        int intMin = 0;
-        int intSeg = 0;
 
-        errorMessage = "";
-        try
-        {
-            intMin = Integer.parseInt(min);
-            intSeg = Integer.parseInt(seg);
-        }
-        catch (NumberFormatException nfe)
-        {
-            errorMessage = "Instante de tempo: digite números válidos.";
-        }
-
-        if (errorMessage.equals(""))
-        {
-            if (intSeg > 59 || intSeg < 0)
-            {
-                errorMessage = "Instante de tempo: os segundos devem ser um número de 0 a 59";
-            }
-            if (intMin < 0 || intMin > 120)
-            {
-                errorMessage = "Instante de tempo: os minutos devem ser um número de 0 a 120";
-            }
-        }
+        errorMessage = ctrMain.getCtrOcorrenciaJogo().validaCampos(min, seg);
 
         //so faz o outro teste se passou no primeiro teste
         if (errorMessage.equals(""))

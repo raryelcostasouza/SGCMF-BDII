@@ -33,4 +33,33 @@ public class CtrOcorrenciaJogo
 
         return oc;
     }
+
+    public String validaCampos(String min, String seg)
+    {
+        int intMin;
+        int intSeg;
+        String errorMessage;
+
+        errorMessage = "";
+        try
+        {
+            intMin = Integer.parseInt(min);
+            intSeg = Integer.parseInt(seg);
+            
+            if (intSeg > 59 || intSeg < 0)
+            {
+                errorMessage = "Instante de tempo: os segundos devem ser um número de 0 a 59";
+            }
+            if (intMin < 0 || intMin > 120)
+            {
+                errorMessage = "Instante de tempo: os minutos devem ser um número de 0 a 120";
+            }
+        }
+        catch (NumberFormatException nfe)
+        {
+            errorMessage = "Instante de tempo: digite números válidos.";
+        }
+        
+        return errorMessage;
+    }
 }
