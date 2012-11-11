@@ -1,10 +1,14 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.JogadorDAO;
 import sgcmf.model.dao.JogoDAO;
 import sgcmf.model.hibernate.Jogo;
+import sgcmf.model.other.SGCMFDate;
 
 public class CtrJogo
 {
@@ -89,7 +93,7 @@ public class CtrJogo
             j = alJogo.get(i);
             dadosJogos[i][0] = String.valueOf(j.getId());
             dadosJogos[i][1] = String.valueOf(j.getTipo());
-            dadosJogos[i][2] = String.valueOf(j.getDatahora());
+            dadosJogos[i][2] = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora());
             dadosJogos[i][3] = j.getCidade();
             dadosJogos[i][4] = j.getNomeestadio();
             dadosJogos[i][5] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
@@ -105,11 +109,11 @@ public class CtrJogo
         String infoJogo;
         JogoDAO jDao;
         Jogo j;
-
+             
         jDao = new JogoDAO();
         j = jDao.queryInfoJogoById(idJogo);
-
-        infoJogo = j.getDatahora() + " | " + j.getTipo() + " | "
+        
+        infoJogo = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora()) + " | " + j.getTipo() + " | "
                 + j.getSelecaoByIdselecaoi().getPais() + " vs " + j.getSelecaoByIdselecaoii().getPais();
         jDao.fecharSessao();
 

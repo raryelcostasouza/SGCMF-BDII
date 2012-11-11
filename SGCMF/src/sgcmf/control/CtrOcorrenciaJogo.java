@@ -1,6 +1,8 @@
 package sgcmf.control;
 
 import java.sql.Time;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.hibernate.Ocorrencia;
@@ -18,15 +20,15 @@ public class CtrOcorrenciaJogo
     {
         Ocorrencia oc;
         Jogo jogo;
-        Time tempo;
+        GregorianCalendar gc;
 
         jogo = new Jogo();
         gdao.carregar(jogo, idJogo);
 
-        tempo = new Time(0, Integer.parseInt(min), Integer.parseInt(seg));
+        gc = new GregorianCalendar(0, 0, 0, 0, Integer.parseInt(min), Integer.parseInt(seg));
 
         oc = new Ocorrencia();
-        oc.setInstantetempo(tempo);
+        oc.setInstantetempo(gc.getTime());
         oc.setJogo(jogo);
 
         gdao.salvar(oc);
