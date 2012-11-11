@@ -2,6 +2,8 @@ package sgcmf.view.comiteGestor.ocorrenciaJogo;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -91,6 +93,10 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         rotuloJogoPanel.setBorder(BorderFactory.createTitledBorder("Informações do jogo selecionado:"));
 
         jlInfoJogo = new JLabel("", JLabel.CENTER);
+        Font f = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
+        jlInfoJogo.setForeground(Color.blue.darker());
+        jlInfoJogo.setFont(f);
+        
         rotuloJogoPanel.add(jlInfoJogo);
 
         JPanel radioButtonPanel = new JPanel();
