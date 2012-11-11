@@ -371,6 +371,18 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
                 idOc = Short.parseShort((String) jtFalta.getValueAt(linhaSelecionada, 0));
                 result = ctrComiteGestor.getCtrFalta().removeFalta(idOc);
                 preencheTabelaFalta();
+                preencheTabelaCartao();
+            }
+        }
+        else if (jrbCartao.isSelected())
+        {
+            linhaSelecionada = jtCartao.getSelectedRow();
+            if (linhaSelecionada != -1)
+            {
+                idOc = Short.parseShort((String) jtCartao.getValueAt(linhaSelecionada, 0));
+                result = ctrComiteGestor.getCtrCartao().removerCartao(idOc);
+                
+                preencheTabelaFalta();
             }
         }
 

@@ -1,11 +1,13 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.model.dao.CartaoDAO;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.hibernate.Cartao;
+import sgcmf.model.hibernate.Falta;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Ocorrencia;
 import sgcmf.model.other.ResultadoOperacao;
@@ -120,5 +122,51 @@ public class CtrCartao
         }
 
         return errorMessage;
+    }
+    
+    public ResultadoOperacao removerCartao(Short idOc)
+    {
+        ResultadoOperacao result;
+        Transaction tr;
+        GeneralDAO gdao;
+        Falta faltaParaRemover;
+        Cartao cartaoParaRemover;
+        Ocorrencia ocParaRemover;
+
+        cartaoParaRemover = new Cartao();
+        ocParaRemover = new Ocorrencia();
+
+        gdao = new GeneralDAO();
+        tr = gdao.getSessao().beginTransaction();
+
+        try
+        {
+            gdao.carregar(ocParaRemover, idOc);
+            gdao.carregar(cartaoParaRemover, idOc);
+            
+            //se  houver faltas associadas com o cartao
+            if (!cartaoParaRemover.getFaltas().isEmpty())
+            {
+                Iterator it = cartaoParaRemover.getFaltas().iterator();
+                
+                //remove a falta associada primeiro
+                faltaParaRemover = (Falta) it.next();
+                gdao.apagar(faltaParaRemover);
+            }
+            
+            gdao.apagar(cartaoParaRemover);
+            gdao.apagar(ocParaRemover);
+
+            tr.commit();
+            result = new ResultadoOperacao("Cartão e faltas associadas removidos com êxito!", TipoResultadoOperacao.EXITO);
+        }
+        catch (HibernateException hex)
+        {
+            tr.rollback();
+            result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
+        }
+        gdao.fecharSessao();
+
+        return result;
     }
 }
