@@ -5,6 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.GolDAO;
+import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.hibernate.Gol;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Ocorrencia;
@@ -34,7 +35,7 @@ public class CtrGol
         String errorMessage;
         ResultadoOperacao result;
 
-        errorMessage = validaCamposGol(min, seg, idJogadorAutor);
+        errorMessage = validaCamposGol(min, seg, idJogadorAutor, idJogo);
 
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
@@ -43,6 +44,8 @@ public class CtrGol
             tr = gdao.getSessao().beginTransaction();
             try
             {
+                OcorrenciaDAO oDao = new OcorrenciaDAO();
+                
                 o = ctrMain.getCtrOcorrenciaJogo().registraOcorrencia(gdao, min, seg, idJogo);
 
                 //carrega o jogador autor
@@ -82,11 +85,11 @@ public class CtrGol
         return result;
     }
 
-    private String validaCamposGol(String min, String seg, String idJogadorAutor)
+    private String validaCamposGol(String min, String seg, String idJogadorAutor, Short idJogo)
     {
         String errorMessage;
 
-        errorMessage = ctrMain.getCtrOcorrenciaJogo().validaCampos(min, seg);
+        errorMessage = ctrMain.getCtrOcorrenciaJogo().validaCampos(min, seg, idJogo);
 
         //so faz o outro teste se passou no primeiro teste
         if (errorMessage.equals(""))

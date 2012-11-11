@@ -65,7 +65,7 @@ public class CtrCartao
         String errorMessage;
         ResultadoOperacao result;
 
-        errorMessage = validaCampos(min, seg, idJogador);
+        errorMessage = validaCampos(min, seg, idJogador, idJogo);
 
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
@@ -102,11 +102,11 @@ public class CtrCartao
         return result;
     }
 
-    private String validaCampos(String min, String seg, String idJogador)
+    private String validaCampos(String min, String seg, String idJogador, Short idJogo)
     {
         String errorMessage;
 
-        errorMessage = ctrMain.getCtrOcorrenciaJogo().validaCampos(min, seg);
+        errorMessage = ctrMain.getCtrOcorrenciaJogo().validaCampos(min, seg, idJogo);
 
         //so faz o outro teste se passou no primeiro teste
         if (errorMessage.equals(""))

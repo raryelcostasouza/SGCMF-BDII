@@ -74,7 +74,7 @@ public class CtrSubstituicao
         String errorMessage;
         ResultadoOperacao result;
 
-        errorMessage = validaCampos(min, seg, idJogadorSaiu, idJogadorEntrou);
+        errorMessage = validaCampos(min, seg, idJogadorSaiu, idJogadorEntrou, idJogo);
 
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
@@ -112,11 +112,11 @@ public class CtrSubstituicao
         return result;
     }
 
-    private String validaCampos(String min, String seg, String idJogadorSaiu, String idJogadorEntrou)
+    private String validaCampos(String min, String seg, String idJogadorSaiu, String idJogadorEntrou, Short idJogo)
     {
         String errorMessage;
 
-        errorMessage = ctrMain.getCtrOcorrenciaJogo().validaCampos(min, seg);
+        errorMessage = ctrMain.getCtrOcorrenciaJogo().validaCampos(min, seg, idJogo);
 
         //so faz o outro teste se passou no primeiro teste
         if (errorMessage.equals(""))
