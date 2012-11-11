@@ -36,6 +36,7 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
     private JRadioButton jrbMotivoEstrategica;
     private JRadioButton jrbMotivoContusao;
     private ButtonGroup bgMotivo;
+    private JButton jbPesqJogEntrou;
     
     public LimRegistrarSubstituicao(CtrSubstituicao ctrSubstituicao, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
     {
@@ -74,7 +75,7 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
         UtilView.alinhaLabel(jlInstanteTempo);
         JLabel jlJogadorSaiu = new JLabel("Jogador Saiu:");
         UtilView.alinhaLabel(jlJogadorSaiu);
-        JLabel jlJogadorEntrou = new JLabel("Jogador Entrou:");
+        JLabel jlJogadorEntrou = new JLabel("Jogador Entrou:");        
         UtilView.alinhaLabel(jlJogadorEntrou);
         JLabel jlMotivo = new JLabel("Motivo:");
         UtilView.alinhaLabel(jlMotivo);
@@ -108,9 +109,10 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
         });
         
         JButton jbPesqJogSaiu = new JButton(SGCMFIcons.PESQUISAR);
-        UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogSaiu);
-        JButton jbPesqJogEntrou = new JButton(SGCMFIcons.PESQUISAR);
+        UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogSaiu);        
+        jbPesqJogEntrou = new JButton(SGCMFIcons.PESQUISAR);
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogEntrou);
+        jbPesqJogEntrou.setEnabled(false);
         
         jbPesqJogSaiu.addActionListener(new ActionListener()
         {
@@ -175,6 +177,7 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
         {
             jtfJogadorSaiu.setText(idJogador + "");
             selecaoJogadorSaiu = false;
+            jbPesqJogEntrou.setEnabled(true);
         }
         else
         {
@@ -215,5 +218,6 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
         jtfJogadorEntrou.setText("");
         jtfJogadorSaiu.setText("");
         jrbMotivoEstrategica.setSelected(true);
+        jbPesqJogEntrou.setEnabled(false);
     }
 }
