@@ -19,7 +19,7 @@ public class UsuarioDAO extends GeneralDAO{
         String hql;
 
         hql = "from Usuario u "
-                + "where login = " + login + " and senha = " + senha + " ";
+                + "where login = '" + login + "' and senha = '" + senha + "' ";
 
         return (ArrayList<Usuario>) sessao.createQuery(hql).list();
     }
