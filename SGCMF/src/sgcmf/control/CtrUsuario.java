@@ -22,7 +22,7 @@ public class CtrUsuario {
     public Usuario loginUsuario(String login, String senha){
 
         ArrayList<Usuario> usuarios = usuarioDAO.queryUsuarioByLogin(login, senha);
-        if(usuarios.size() > 0){
+        if(usuarios.size() < 0){
             return null;
         }
         Usuario u = usuarioDAO.queryUsuarioByLogin(login, senha).get(0);
