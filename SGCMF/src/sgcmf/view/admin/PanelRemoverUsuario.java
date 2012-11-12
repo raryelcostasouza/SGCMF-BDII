@@ -115,7 +115,8 @@ public class PanelRemoverUsuario extends JPanel {
         JTextField jtfCPF = new JTextField(10);
 
 
-        JButton jbAlterar = new JButton("Remover");
+        //travarBotao();
+        JButton jbRemover = new JButton("Remover");
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfLogin, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));
@@ -131,8 +132,36 @@ public class PanelRemoverUsuario extends JPanel {
         jpAux.setBorder(BorderFactory.createEtchedBorder());
 
         jpPrincipal.add(jpAux, BorderLayout.CENTER);
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbAlterar), BorderLayout.SOUTH);
+        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbRemover), BorderLayout.SOUTH);
 
         return jpPrincipal;
     }
+
+  /*   public void travarBotao()
+    {
+        jbRemover.setEnabled(false);
+    }
+
+    public void limparTodosCampos()
+    {
+        travarBotao();
+        jrbNome.setSelected(true);
+        jtfPosicao.setText("");
+        jtfPesquisar.setText("");
+        jtfDataNascimento.setText("");
+        jtfNumeroCamisa.setText("");
+        jtfNome.setText("");
+        jtfSelecao.setText("");
+        jtfAltura.setText("");
+    }
+
+    public void limparParteCampos()
+    {
+        jtfPosicao.setText("");
+        jtfDataNascimento.setText("");
+        jtfNumeroCamisa.setText("");
+        jtfNome.setText("");
+        jtfSelecao.setText("");
+        jtfAltura.setText("");
+    }*/
 }

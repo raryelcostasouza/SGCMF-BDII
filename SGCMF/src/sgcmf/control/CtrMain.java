@@ -1,3 +1,4 @@
+
 package sgcmf.control;
 
 import java.util.logging.Level;
@@ -6,6 +7,7 @@ import javax.swing.JOptionPane;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.view.LimLogin;
 import sgcmf.view.ShowSplash;
+import sgcmf.model.hibernate.Usuario;
 
 public class CtrMain
 {
@@ -24,6 +26,7 @@ public class CtrMain
     private CtrJogador ctrJogador;
     private CtrRelatorio ctrRelatorio;
     private Thread t;
+    private CtrUsuario ctrUsuario;
 
     public CtrMain()
     {
@@ -36,6 +39,7 @@ public class CtrMain
         ctrRelatorio = new CtrRelatorio(this);
         ctrOcorrenciaJogo = new CtrOcorrenciaJogo(this);
         ctrJogador = new CtrJogador();
+        ctrUsuario = new CtrUsuario();
 
         ctrAdmin = new CtrAdmin(this);
         ctrComiteGestor = new CtrComiteGestor(this);
@@ -76,31 +80,37 @@ public class CtrMain
         limLogin.setVisible(true);
     }
 
-    public void login(String login, char[] senha)
+    public void login(String login, char[] senhaBD)
     {
-        if (login.equals("a"))
-        {
-            limLogin.setVisible(false);
-            ctrAdmin.ativaTela();
-        }
-        else if (login.equals("c"))
-        {
-            limLogin.setVisible(false);
-            ctrComiteGestor.ativaTela();
-        }
-        else if (login.equals("t"))
-        {
-            limLogin.setVisible(false);
-            ctrTecnico.ativaTela();
-        }
-        else if (login.equals("e"))
-        {
-            limLogin.setVisible(false);
-            ctrEntusiasta.ativaTela();
-        }
-        else
+        String senha = new String(senhaBD);
+
+        Usuario u = ctrUsuario.loginUsuario(login, senha);
+
+        if(u == null)
         {
             JOptionPane.showMessageDialog(null, "Login inválido!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else{
+           
+            if (u.getPerfil().equals("Administrador"))
+            {
+                limLogin.setVisible(false);
+                ctrAdmin.ativaTela();
+            }
+            else if (u.getPerfil().equals("Membro Comite"))
+            {
+                limLogin.setVisible(false);
+                ctrComiteGestor.ativaTela();
+            }
+            else if (u.getPerfil().equals("Tecnico da Selecao"))
+            {
+                limLogin.setVisible(false);
+                ctrTecnico.ativaTela();
+            }
+            else if (u.getPerfil().equals("Entusiasta"))
+            {
+                limLogin.setVisible(false);
+                ctrEntusiasta.ativaTela();
+            }
         }
     }
 
@@ -149,3 +159,4 @@ public class CtrMain
         return ctrSubstituicao;
     }    
 }
+

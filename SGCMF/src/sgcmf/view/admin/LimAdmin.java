@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import sgcmf.control.CtrAdmin;
 import sgcmf.control.CtrRelatorio;
+import sgcmf.control.CtrUsuario;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 
@@ -35,7 +36,7 @@ public class LimAdmin extends JFrame
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        limGerenciarUsuario = new LimGerenciarUsuario();
+        limGerenciarUsuario = new LimGerenciarUsuario(ctrAdmin);
 
         addWindowListener(new WindowAdapter()
         {

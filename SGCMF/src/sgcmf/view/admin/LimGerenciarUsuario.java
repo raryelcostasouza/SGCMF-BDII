@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import sgcmf.control.CtrAdmin;
+import sgcmf.control.CtrUsuario;
 import sgcmf.model.other.SGCMFIcons;
 
 /**
@@ -23,10 +25,10 @@ public class LimGerenciarUsuario extends JFrame {
     private PanelRemoverUsuario pru;
     private PanelConsultarUsuario pcnu;
 
-    public LimGerenciarUsuario()
+    public LimGerenciarUsuario(CtrAdmin ctrAdmin)
     {
         setIconImage(SGCMFIcons.USUARIO.getImage());
-        pcdu = new PanelCadastrarUsuario();
+        pcdu = new PanelCadastrarUsuario(ctrAdmin);
         pau = new PanelAlterarUsuario();
         pru = new PanelRemoverUsuario();
         pcnu = new PanelConsultarUsuario();

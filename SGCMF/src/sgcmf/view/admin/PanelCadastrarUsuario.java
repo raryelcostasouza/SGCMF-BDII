@@ -11,6 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import sgcmf.control.CtrAdmin;
+import sgcmf.control.CtrMain;
+import sgcmf.control.CtrUsuario;
 import sgcmf.view.UtilView;
 
 /**
@@ -19,9 +22,16 @@ import sgcmf.view.UtilView;
  */
 public class PanelCadastrarUsuario extends JPanel {
 
-     public PanelCadastrarUsuario()
+    private CtrAdmin ctrAdmin;
+    private CtrMain ctrMain;
+   
+     public PanelCadastrarUsuario(CtrAdmin ctrAdmin)
     {
+
+        this.ctrAdmin = ctrAdmin;
+        ctrMain = ctrAdmin.getCtrMain();
         setLayout(new BorderLayout());
+
         montaPainel();
     }
 
