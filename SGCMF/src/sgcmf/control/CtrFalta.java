@@ -153,6 +153,7 @@ public class CtrFalta
         Falta faltaParaRemover;
         Cartao cartaoParaRemover;
         Ocorrencia ocParaRemover;
+        String errorMessage;
 
         cartaoParaRemover = new Cartao();
         faltaParaRemover = new Falta();
@@ -163,26 +164,35 @@ public class CtrFalta
 
         try
         {
-            gdao.carregar(faltaParaRemover, idOc);
-            gdao.carregar(ocParaRemover, idOc);
-            if (faltaParaRemover.getCartao() != null)
+            errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(gdao, ocParaRemover, idOc);
+            if (errorMessage.equals(""))
             {
-                gdao.carregar(cartaoParaRemover, idOc);
+                gdao.carregar(faltaParaRemover, idOc);
+
+                if (faltaParaRemover.getCartao() != null)
+                {
+                    gdao.carregar(cartaoParaRemover, idOc);
+                }
+                else
+                {
+                    cartaoParaRemover = null;
+                }
+
+                if (cartaoParaRemover != null)
+                {
+                    gdao.apagar(cartaoParaRemover);
+                }
+                gdao.apagar(faltaParaRemover);
+                gdao.apagar(ocParaRemover);
+
+                tr.commit();
+                result = new ResultadoOperacao("Falta e cartão associado removidos com êxito!", TipoResultadoOperacao.EXITO);
             }
             else
             {
-                cartaoParaRemover = null;
+                result = new ResultadoOperacao(errorMessage, TipoResultadoOperacao.ERRO);
             }
 
-            if (cartaoParaRemover != null)
-            {
-                gdao.apagar(cartaoParaRemover);
-            }
-            gdao.apagar(faltaParaRemover);
-            gdao.apagar(ocParaRemover);
-
-            tr.commit();
-            result = new ResultadoOperacao("Falta e cartão associado removidos com êxito!", TipoResultadoOperacao.EXITO);
         }
         catch (HibernateException hex)
         {
