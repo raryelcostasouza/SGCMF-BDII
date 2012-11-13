@@ -55,7 +55,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         limRegistrarGol = new LimRegistrarGol(ctrComiteGestor, limBuscarJogador, this);
         limRegistrarFalta = new LimRegistrarFalta(ctrComiteGestor.getCtrFalta(), limBuscarJogador, this);
         limRegistrarCartao = new LimRegistrarCartao(ctrComiteGestor.getCtrCartao(), limBuscarJogador, this);
-        limRegistrarSubstituicao = new LimRegistrarSubstituicao(ctrComiteGestor.getCtrSubstituicao(), limBuscarJogador, this);
+        limRegistrarSubstituicao = new LimRegistrarSubstituicao(ctrComiteGestor, limBuscarJogador, this);
 
         setTitle("Gerenciar Ocorrências para o Jogo Selecionado");
         setDefaultCloseOperation(HIDE_ON_CLOSE);

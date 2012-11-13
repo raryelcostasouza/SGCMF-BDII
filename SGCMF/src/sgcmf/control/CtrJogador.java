@@ -65,6 +65,20 @@ public class CtrJogador
 
         return dadosJogadores;
     }
+    
+    public String[][] queryJogadoresReservaMesmaSelecao(Short idJogo, Short idSelecao)
+    {
+        JogadorDAO jDAO;
+        String[][] dadosJogadores;
+        ArrayList alJogador;
+
+        jDAO = new JogadorDAO();
+        alJogador = jDAO.queryJogadoresReservaMesmaSelecao(idJogo, idSelecao);
+        dadosJogadores = arrayList2StringMatrix(alJogador);
+        jDAO.fecharSessao();
+
+        return dadosJogadores;
+    }
 
     public Short queryIdSelecaoJogador(Short idJogador)
     {

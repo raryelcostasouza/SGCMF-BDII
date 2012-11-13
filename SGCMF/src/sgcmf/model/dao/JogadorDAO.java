@@ -110,24 +110,44 @@ public class JogadorDAO extends GeneralDAO
 
         hql = "from Jogador jgdr "
                 + "where ("
-                //jogadores titulares, de uma das selecoes que disputam o jogo, que nao sairam de campo
+                //jogadores titulares, da seleção passada como parâmetro, que nao sairam de campo
                 + "jgdr.selecao.id = " + idSelecao + " "
                 + "and jgdr.titular = true and jgdr.id not in " + queryJogadoresSairamNoJogo + ") "
-                //jogadores reservas, de uma das selecoes que disputam o jogo, que entraram em campo
+                //jogadores reservas, da seleção passada como parâmetro, que entraram em campo
                 + "or ("
                 + "jgdr.id in " + queryJogadoresEntraramJogo + ")";
 
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
-    
+
     public Short queryIdSelecaoJogador(Short idJogador)
     {
         String hql;
-        
+
         hql = "select j.selecao.id "
                 + "from Jogador j "
-                + "where j.id = " +idJogador;
-        
+                + "where j.id = " + idJogador;
+
         return Short.parseShort(String.valueOf(sessao.createQuery(hql).uniqueResult()));
+    }
+
+    public ArrayList<Jogador> queryJogadoresReservaMesmaSelecao(Short idJogo, Short idSelecao)
+    {
+        String hql;
+        String queryJogadoresMesmaSelecaoEntraramCampo;
+        
+        //jogadores reservas, da mesma seleção passada como parâmetro, que entraram em campo
+        queryJogadoresMesmaSelecaoEntraramCampo = "(select s.jogadorByIdjogadorentrou.id "
+                + "from Substituicao s "
+                + "where s.ocorrencia.jogo.id = " + idJogo + " "
+                + "and s.jogadorByIdjogadorentrou.selecao.id = " + idSelecao + ")";
+
+        hql = "from Jogador jgdr "
+                //reservas da seleção
+                + "where jgdr.selecao.id = " + idSelecao + " and jgdr.titular = false and "
+                //menos os reservas que entraram em campo
+                + "jgdr.id not in " +queryJogadoresMesmaSelecaoEntraramCampo;
+        
+        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
 }

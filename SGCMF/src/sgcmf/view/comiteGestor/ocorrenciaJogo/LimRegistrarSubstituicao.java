@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import sgcmf.control.CtrComiteGestor;
 import sgcmf.control.CtrSubstituicao;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.SGCMFIcons;
@@ -27,7 +28,7 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
 {
     private LimBuscarJogador limBuscarJogador;
     private LimGerenciarOcorrenciasJogo limGerenciarOcorrencias;
-    private CtrSubstituicao ctrSubstituicao;
+    private CtrComiteGestor ctrComiteGestor;
     private boolean selecaoJogadorSaiu;
     private JTextField jtfInstanteTempoMin;
     private JTextField jtfInstanteTempoSeg;
@@ -38,9 +39,9 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
     private ButtonGroup bgMotivo;
     private JButton jbPesqJogEntrou;
     
-    public LimRegistrarSubstituicao(CtrSubstituicao ctrSubstituicao, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
+    public LimRegistrarSubstituicao(CtrComiteGestor ctrComiteGestor, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
     {
-        this.ctrSubstituicao = ctrSubstituicao;        
+        this.ctrComiteGestor = ctrComiteGestor;        
         this.limGerenciarOcorrencias = limGerenciarOcorrencias;
         this.limBuscarJogador = limBuscarJogador;
         
@@ -129,7 +130,7 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                ativaTelaBuscarJogador();
+                ativaTelaBuscarJogadorReservaMesmaSelecao();
             }
         });
         
@@ -170,6 +171,16 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
         limBuscarJogador.ativaTela(this, limGerenciarOcorrencias.getIdJogo());
     }
     
+    private void ativaTelaBuscarJogadorReservaMesmaSelecao()
+    {
+        Short idSelecao;
+        Short idJogadorSaiu;
+        
+        idJogadorSaiu = Short.parseShort(jtfJogadorSaiu.getText());
+        idSelecao = ctrComiteGestor.getCtrJogador().queryIdSelecaoJogador(idJogadorSaiu);
+        limBuscarJogador.ativaTelaSelecionaJogadorReservaMesmaSelecao(this, limGerenciarOcorrencias.getIdJogo(), idSelecao);
+    }
+    
     @Override
     public void jogadorSelecionado(Short idJogador)
     {
@@ -192,7 +203,7 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
         
         tipo = bgMotivo.getSelection().getActionCommand();
         
-        result = ctrSubstituicao.registraSubstituicao(jtfInstanteTempoMin.getText(), 
+        result = ctrComiteGestor.getCtrSubstituicao().registraSubstituicao(jtfInstanteTempoMin.getText(), 
                                                       jtfInstanteTempoSeg.getText(), 
                                                       limGerenciarOcorrencias.getIdJogo(),
                                                       jtfJogadorSaiu.getText(),
