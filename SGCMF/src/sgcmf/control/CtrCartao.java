@@ -123,7 +123,7 @@ public class CtrCartao
 
         return errorMessage;
     }
-    
+
     public ResultadoOperacao removerCartao(Short idOc)
     {
         ResultadoOperacao result;
@@ -132,6 +132,7 @@ public class CtrCartao
         Falta faltaParaRemover;
         Cartao cartaoParaRemover;
         Ocorrencia ocParaRemover;
+        String errorMessage;
 
         cartaoParaRemover = new Cartao();
         ocParaRemover = new Ocorrencia();
@@ -141,24 +142,31 @@ public class CtrCartao
 
         try
         {
-            gdao.carregar(ocParaRemover, idOc);
-            gdao.carregar(cartaoParaRemover, idOc);
-            
-            //se  houver faltas associadas com o cartao
-            if (!cartaoParaRemover.getFaltas().isEmpty())
+            errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(gdao, ocParaRemover, idOc);
+            if (errorMessage.equals(""))
             {
-                Iterator it = cartaoParaRemover.getFaltas().iterator();
-                
-                //remove a falta associada primeiro
-                faltaParaRemover = (Falta) it.next();
-                gdao.apagar(faltaParaRemover);
-            }
-            
-            gdao.apagar(cartaoParaRemover);
-            gdao.apagar(ocParaRemover);
+                gdao.carregar(cartaoParaRemover, idOc);
 
-            tr.commit();
-            result = new ResultadoOperacao("Cartão e faltas associadas removidos com êxito!", TipoResultadoOperacao.EXITO);
+                //se  houver faltas associadas com o cartao
+                if (!cartaoParaRemover.getFaltas().isEmpty())
+                {
+                    Iterator it = cartaoParaRemover.getFaltas().iterator();
+
+                    //remove a falta associada primeiro
+                    faltaParaRemover = (Falta) it.next();
+                    gdao.apagar(faltaParaRemover);
+                }
+
+                gdao.apagar(cartaoParaRemover);
+                gdao.apagar(ocParaRemover);
+
+                tr.commit();
+                result = new ResultadoOperacao("Cartão e faltas associadas removidos com êxito!", TipoResultadoOperacao.EXITO);
+            }
+            else
+            {
+                result = new ResultadoOperacao(errorMessage, TipoResultadoOperacao.ERRO);
+            }
         }
         catch (HibernateException hex)
         {
