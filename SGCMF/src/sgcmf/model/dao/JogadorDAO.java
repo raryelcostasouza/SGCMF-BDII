@@ -55,7 +55,7 @@ public class JogadorDAO extends GeneralDAO
 
         return posicao;
     }
-    
+
     public ArrayList<Jogador> queryJogadoresEmCampo(Short idJogo)
     {
         String hql;
@@ -63,21 +63,71 @@ public class JogadorDAO extends GeneralDAO
         String querySelecaoIIJogo;
         String queryJogadoresSairamNoJogo;
         String queryJogadoresEntraramJogo;
-        
-        querySelecaoIJogo = "(select jg.selecaoByIdselecaoi.id from Jogo jg where jg.id = " + idJogo + ")";
-        querySelecaoIIJogo = "(select jg.selecaoByIdselecaoii.id from Jogo jg where jg.id = " + idJogo + ")";
-        queryJogadoresSairamNoJogo = "(select s.jogadorByIdjogadorsaiu.id from Substituicao s where s.ocorrencia.jogo.id = "+idJogo+")";
-        queryJogadoresEntraramJogo = "(select s.jogadorByIdjogadorentrou.id from Substituicao s where s.ocorrencia.jogo.id = " +idJogo+")";
-        
+
+        querySelecaoIJogo = "(select jg.selecaoByIdselecaoi.id "
+                + "from Jogo jg "
+                + "where jg.id = " + idJogo + ")";
+
+        querySelecaoIIJogo = "(select jg.selecaoByIdselecaoii.id "
+                + "from Jogo jg "
+                + "where jg.id = " + idJogo + ")";
+
+        queryJogadoresSairamNoJogo = "(select s.jogadorByIdjogadorsaiu.id "
+                + "from Substituicao s "
+                + "where s.ocorrencia.jogo.id = " + idJogo + ")";
+
+        queryJogadoresEntraramJogo = "(select s.jogadorByIdjogadorentrou.id "
+                + "from Substituicao s "
+                + "where s.ocorrencia.jogo.id = " + idJogo + ")";
+
         hql = "from Jogador jgdr "
                 + "where ("
                 //jogadores titulares, de uma das selecoes que disputam o jogo, que nao sairam de campo
-                + "(jgdr.selecao.id = "+querySelecaoIJogo + " or jgdr.selecao.id = " + querySelecaoIIJogo + ") " +
-                "and jgdr.titular = true and jgdr.id not in " + queryJogadoresSairamNoJogo + ") "
+                + "(jgdr.selecao.id = " + querySelecaoIJogo + " or jgdr.selecao.id = " + querySelecaoIIJogo + ") "
+                + "and jgdr.titular = true and jgdr.id not in " + queryJogadoresSairamNoJogo + ") "
                 //jogadores reservas, de uma das selecoes que disputam o jogo, que entraram em campo
                 + "or ("
-                + "jgdr.id in " +queryJogadoresEntraramJogo + ")";
-                
+                + "jgdr.id in " + queryJogadoresEntraramJogo + ")";
+
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+    }
+
+    public ArrayList queryJogadoresEmCampoMesmaSelecao(Short idJogo, Short idSelecao)
+    {
+        String hql;
+        String queryJogadoresSairamNoJogo;
+        String queryJogadoresEntraramJogo;
+
+        queryJogadoresSairamNoJogo = "(select s.jogadorByIdjogadorsaiu.id "
+                + "from Substituicao s "
+                + "where s.ocorrencia.jogo.id = " + idJogo + " "
+                + "and s.jogadorByIdjogadorsaiu.selecao.id = " + idSelecao + ")";
+
+        queryJogadoresEntraramJogo = "(select s.jogadorByIdjogadorentrou.id "
+                + "from Substituicao s "
+                + "where s.ocorrencia.jogo.id = " + idJogo + " "
+                + "and s.jogadorByIdjogadorentrou.selecao.id = " + idSelecao + ")";
+
+        hql = "from Jogador jgdr "
+                + "where ("
+                //jogadores titulares, de uma das selecoes que disputam o jogo, que nao sairam de campo
+                + "jgdr.selecao.id = " + idSelecao + " "
+                + "and jgdr.titular = true and jgdr.id not in " + queryJogadoresSairamNoJogo + ") "
+                //jogadores reservas, de uma das selecoes que disputam o jogo, que entraram em campo
+                + "or ("
+                + "jgdr.id in " + queryJogadoresEntraramJogo + ")";
+
+        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+    }
+    
+    public Short queryIdSelecaoJogador(Short idJogador)
+    {
+        String hql;
+        
+        hql = "select j.selecao.id "
+                + "from Jogador j "
+                + "where j.id = " +idJogador;
+        
+        return Short.parseShort(String.valueOf(sessao.createQuery(hql).uniqueResult()));
     }
 }

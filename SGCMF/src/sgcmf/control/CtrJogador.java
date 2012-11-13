@@ -37,7 +37,7 @@ public class CtrJogador
 
         return dadosJogadores;
     }
-    
+
     public String[][] queryJogadoresEmCampo(Short idJogo)
     {
         JogadorDAO jDAO;
@@ -49,9 +49,30 @@ public class CtrJogador
         dadosJogadores = arrayList2StringMatrix(alJogador);
         jDAO.fecharSessao();
 
-        return dadosJogadores;       
+        return dadosJogadores;
     }
-            
+
+    public String[][] queryJogadoresEmCampoMesmaSelecao(Short idJogo, Short idSelecao)
+    {
+        JogadorDAO jDAO;
+        String[][] dadosJogadores;
+        ArrayList alJogador;
+
+        jDAO = new JogadorDAO();
+        alJogador = jDAO.queryJogadoresEmCampoMesmaSelecao(idJogo, idSelecao);
+        dadosJogadores = arrayList2StringMatrix(alJogador);
+        jDAO.fecharSessao();
+
+        return dadosJogadores;
+    }
+
+    public Short queryIdSelecaoJogador(Short idJogador)
+    {
+        JogadorDAO jDAO;
+        jDAO = new JogadorDAO();
+
+        return jDAO.queryIdSelecaoJogador(idJogador);
+    }
 
     public String[][] queryJogadorByNome(String nome)
     {
@@ -160,7 +181,7 @@ public class CtrJogador
     }
 
     public ResultadoOperacao cadastrarJogador(String numCamisa, String nome, String dataNascimento,
-            String altura, boolean titular, String posicao, String selecao)
+                                              String altura, boolean titular, String posicao, String selecao)
     {
         Short nCamisa;
         Date dtaNascimento;
@@ -210,7 +231,7 @@ public class CtrJogador
     }
 
     public ResultadoOperacao alterarJogador(String strIdJogador, String numCamisa, String nome, String dtaNascimento,
-            String altura, String posicao, String selecao)
+                                            String altura, String posicao, String selecao)
     {
         Short nCamisa;
         Date dataNascimento;
@@ -282,13 +303,13 @@ public class CtrJogador
         catch (HibernateException he)
         {
             resultado = new ResultadoOperacao("Falha na exclusão do jogador.\n" + he.getMessage(),
-                    TipoResultadoOperacao.ERRO);
+                                              TipoResultadoOperacao.ERRO);
         }
         return resultado;
     }
 
     private String validaCampos(char metodo, String numCamisa, String dataNascimento,
-            String altura, String selecao, boolean bolGoleiro)
+                                String altura, String selecao, boolean bolGoleiro)
     {
         String errorMessege = "";
         Short camisa;

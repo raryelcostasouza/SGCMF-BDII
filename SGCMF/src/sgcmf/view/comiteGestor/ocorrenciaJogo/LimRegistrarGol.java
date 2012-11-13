@@ -20,6 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import sgcmf.control.CtrComiteGestor;
 import sgcmf.control.CtrGol;
 import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.model.other.SGCMFIcons;
@@ -33,7 +34,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 {
     private LimBuscarJogador limBuscarJogador;
     private LimGerenciarOcorrenciasJogo limGerenciarOcorrencias;
-    private CtrGol ctrGol;
+    private CtrComiteGestor ctrComiteGestor;
     private JTextField jtfInstanteTempoMin;
     private JTextField jtfInstateTempoSeg;
     private JTextField jtfJogador;
@@ -48,9 +49,9 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
     private JRadioButton jrbModoPenalti;
     private JButton jbPesqJogadorAssist;
 
-    public LimRegistrarGol(CtrGol ctrGol, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
+    public LimRegistrarGol(CtrComiteGestor ctrComiteGestor, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
     {
-        this.ctrGol = ctrGol;
+        this.ctrComiteGestor = ctrComiteGestor;
         this.limBuscarJogador = limBuscarJogador;
         this.limGerenciarOcorrencias = limGerenciarOcorrencias;
 
@@ -215,7 +216,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                ativaTelaBuscarJogador();
+                ativaTelaBuscarJogadorMesmaSelecao();
             }
         });
 
@@ -271,7 +272,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         tipo = bgTipo.getSelection().getActionCommand();
         modo = bgModo.getSelection().getActionCommand();
 
-        result = ctrGol.registraGol(jtfInstanteTempoMin.getText(),
+        result = ctrComiteGestor.getCtrGol().registraGol(jtfInstanteTempoMin.getText(),
                                     jtfInstateTempoSeg.getText(),
                                     limGerenciarOcorrencias.getIdJogo(),
                                     jtfJogador.getText(),
@@ -296,6 +297,16 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
     private void ativaTelaBuscarJogador()
     {
         limBuscarJogador.ativaTela(this, limGerenciarOcorrencias.getIdJogo());
+    }
+    
+    private void ativaTelaBuscarJogadorMesmaSelecao()
+    {
+        Short idSelecao;
+        Short idJogadorAutor;
+        
+        idJogadorAutor = Short.parseShort(jtfJogador.getText());
+        idSelecao = ctrComiteGestor.getCtrJogador().queryIdSelecaoJogador(idJogadorAutor);
+        limBuscarJogador.ativaTelaSelecionaJogadorMesmaSelecao(this, limGerenciarOcorrencias.getIdJogo(), idSelecao);
     }
 
     private void resetCamposInterface()

@@ -52,7 +52,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     {
         this.ctrComiteGestor = ctrComiteGestor;
 
-        limRegistrarGol = new LimRegistrarGol(ctrComiteGestor.getCtrGol(), limBuscarJogador, this);
+        limRegistrarGol = new LimRegistrarGol(ctrComiteGestor, limBuscarJogador, this);
         limRegistrarFalta = new LimRegistrarFalta(ctrComiteGestor.getCtrFalta(), limBuscarJogador, this);
         limRegistrarCartao = new LimRegistrarCartao(ctrComiteGestor.getCtrCartao(), limBuscarJogador, this);
         limRegistrarSubstituicao = new LimRegistrarSubstituicao(ctrComiteGestor.getCtrSubstituicao(), limBuscarJogador, this);
