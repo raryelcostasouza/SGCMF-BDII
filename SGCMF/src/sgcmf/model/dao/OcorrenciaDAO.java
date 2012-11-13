@@ -13,7 +13,7 @@ public class OcorrenciaDAO extends GeneralDAO<Ocorrencia>
         
         hql = "select count (o.id) "
                 + "from Ocorrencia o " +
-                "where o.instantetempo > :it";
+                "where o.jogo.id = " +idJogo + " and o.instantetempo > :it";
         Query q = sessao.createQuery(hql);
         q.setParameter("it", instanteTempo);
         
