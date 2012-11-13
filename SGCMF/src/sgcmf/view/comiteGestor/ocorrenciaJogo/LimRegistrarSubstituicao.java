@@ -167,7 +167,7 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
     
     private void ativaTelaBuscarJogador()
     {
-        limBuscarJogador.ativaTela(this);
+        limBuscarJogador.ativaTela(this, limGerenciarOcorrencias.getIdJogo());
     }
     
     @Override

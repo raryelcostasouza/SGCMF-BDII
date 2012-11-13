@@ -22,6 +22,7 @@ public class LimBuscarJogador extends JDialog
 	private CtrJogador ctrJogador;
 	private JTableSGCMF jt;
 	private ISelecionarJogador isj;
+        private Short idJogo;
 	
 	public LimBuscarJogador(CtrJogador ctrJogador)
 	{
@@ -98,13 +99,14 @@ public class LimBuscarJogador extends JDialog
 		return southPanel;
 	}
 	
-	public void ativaTela(ISelecionarJogador isj)
+	public void ativaTela(ISelecionarJogador isj, Short idJogo)
 	{
 		String[][] dadosJogador;
 		
 		this.isj = isj;
+                this.idJogo = idJogo;
 		
-		dadosJogador = ctrJogador.queryJogadorTodos();
+		dadosJogador = ctrJogador.queryJogadoresEmCampo(idJogo);
 		jt.preencheTabela(dadosJogador);
 		
 		setVisible(true);

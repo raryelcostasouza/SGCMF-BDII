@@ -170,7 +170,7 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
 
     private void ativaTelaBuscarJogador()
     {
-        limBuscarJogador.ativaTela(this);
+        limBuscarJogador.ativaTela(this, limGerenciarOcorrencias.getIdJogo());
     }
 
     private void registrarFalta()
