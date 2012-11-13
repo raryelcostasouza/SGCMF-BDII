@@ -63,6 +63,7 @@ public class JogadorDAO extends GeneralDAO
         String querySelecaoIIJogo;
         String queryJogadoresSairamNoJogo;
         String queryJogadoresEntraramJogo;
+        String queryExpulsos;
 
         querySelecaoIJogo = "(select jg.selecaoByIdselecaoi.id "
                 + "from Jogo jg "
@@ -80,14 +81,20 @@ public class JogadorDAO extends GeneralDAO
                 + "from Substituicao s "
                 + "where s.ocorrencia.jogo.id = " + idJogo + ")";
 
+        queryExpulsos = "(select c.jogador.id "
+                + "from Cartao c "
+                + "where c.ocorrencia.jogo.id = " + idJogo + " and c.cor = 'Vermelho')";
+
         hql = "from Jogador jgdr "
-                + "where ("
+                + "where (("
                 //jogadores titulares, de uma das selecoes que disputam o jogo, que nao sairam de campo
                 + "(jgdr.selecao.id = " + querySelecaoIJogo + " or jgdr.selecao.id = " + querySelecaoIIJogo + ") "
                 + "and jgdr.titular = true and jgdr.id not in " + queryJogadoresSairamNoJogo + ") "
                 //jogadores reservas, de uma das selecoes que disputam o jogo, que entraram em campo
                 + "or ("
-                + "jgdr.id in " + queryJogadoresEntraramJogo + ")";
+                + "jgdr.id in " + queryJogadoresEntraramJogo + ")) "
+                //menos os jogadores expulsos
+                + "and jgdr.id not in " + queryExpulsos;
 
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
@@ -97,6 +104,7 @@ public class JogadorDAO extends GeneralDAO
         String hql;
         String queryJogadoresSairamNoJogo;
         String queryJogadoresEntraramJogo;
+        String queryExpulsos;
 
         queryJogadoresSairamNoJogo = "(select s.jogadorByIdjogadorsaiu.id "
                 + "from Substituicao s "
@@ -108,14 +116,22 @@ public class JogadorDAO extends GeneralDAO
                 + "where s.ocorrencia.jogo.id = " + idJogo + " "
                 + "and s.jogadorByIdjogadorentrou.selecao.id = " + idSelecao + ")";
 
+        queryExpulsos = "(select c.jogador.id "
+                + "from Cartao c "
+                + "where c.ocorrencia.jogo.id = " + idJogo + " "
+                + "and c.cor = 'Vermelho' "
+                + "and c.jogador.selecao.id = "+ idSelecao + ")";
+
         hql = "from Jogador jgdr "
-                + "where ("
+                + "where (("
                 //jogadores titulares, da seleção passada como parâmetro, que nao sairam de campo
                 + "jgdr.selecao.id = " + idSelecao + " "
                 + "and jgdr.titular = true and jgdr.id not in " + queryJogadoresSairamNoJogo + ") "
                 //jogadores reservas, da seleção passada como parâmetro, que entraram em campo
                 + "or ("
-                + "jgdr.id in " + queryJogadoresEntraramJogo + ")";
+                + "jgdr.id in " + queryJogadoresEntraramJogo + ")) "
+                //menos os jogadores expulsos
+                + "and jgdr.id not in " + queryExpulsos;
 
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
@@ -135,7 +151,7 @@ public class JogadorDAO extends GeneralDAO
     {
         String hql;
         String queryJogadoresMesmaSelecaoEntraramCampo;
-        
+
         //jogadores reservas, da mesma seleção passada como parâmetro, que entraram em campo
         queryJogadoresMesmaSelecaoEntraramCampo = "(select s.jogadorByIdjogadorentrou.id "
                 + "from Substituicao s "
@@ -146,8 +162,8 @@ public class JogadorDAO extends GeneralDAO
                 //reservas da seleção
                 + "where jgdr.selecao.id = " + idSelecao + " and jgdr.titular = false and "
                 //menos os reservas que entraram em campo
-                + "jgdr.id not in " +queryJogadoresMesmaSelecaoEntraramCampo;
-        
+                + "jgdr.id not in " + queryJogadoresMesmaSelecaoEntraramCampo;
+
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
 }
