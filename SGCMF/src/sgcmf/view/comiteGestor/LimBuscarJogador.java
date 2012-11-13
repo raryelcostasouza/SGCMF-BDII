@@ -115,14 +115,14 @@ public class LimBuscarJogador extends JDialog
         setVisible(true);
     }
 
-    public void ativaTelaSelecionaJogadorMesmaSelecao(ISelecionarJogador isj, Short idJogo, Short idSelecao)
+    public void ativaTelaSelecionaOutroJogadorSelecao(ISelecionarJogador isj, Short idJogo, Short idSelecao, Short idJogador)
     { 
         String[][] dadosJogador;
 
         this.isj = isj;
         this.idJogo = idJogo;
 
-        dadosJogador = ctrJogador.queryJogadoresEmCampoMesmaSelecao(idJogo, idSelecao);
+        dadosJogador = ctrJogador.queryOutrosJogadoresEmCampoSelecao(idJogo, idSelecao, idJogador);
         jt.preencheTabela(dadosJogador);
 
         setVisible(true);

@@ -310,7 +310,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         
         idJogadorAutor = Short.parseShort(jtfJogador.getText());
         idSelecao = ctrComiteGestor.getCtrJogador().queryIdSelecaoJogador(idJogadorAutor);
-        limBuscarJogador.ativaTelaSelecionaJogadorMesmaSelecao(this, limGerenciarOcorrencias.getIdJogo(), idSelecao);
+        limBuscarJogador.ativaTelaSelecionaOutroJogadorSelecao(this, limGerenciarOcorrencias.getIdJogo(), idSelecao, idJogadorAutor);
     }
 
     private void resetCamposInterface()

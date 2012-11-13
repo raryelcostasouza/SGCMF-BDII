@@ -99,7 +99,8 @@ public class JogadorDAO extends GeneralDAO
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
 
-    public ArrayList queryJogadoresEmCampoMesmaSelecao(Short idJogo, Short idSelecao)
+    //outros jogadores, da mesma seleção, em campo, diferentes do jogador passado como parâmetro
+    public ArrayList queryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
     {
         String hql;
         String queryJogadoresSairamNoJogo;
@@ -131,7 +132,8 @@ public class JogadorDAO extends GeneralDAO
                 + "or ("
                 + "jgdr.id in " + queryJogadoresEntraramJogo + ")) "
                 //menos os jogadores expulsos
-                + "and jgdr.id not in " + queryExpulsos;
+                + "and jgdr.id not in " + queryExpulsos + " "
+                + "and jgdr.id != " + idJogador;
 
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }

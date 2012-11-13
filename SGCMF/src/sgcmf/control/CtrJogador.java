@@ -52,14 +52,14 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public String[][] queryJogadoresEmCampoMesmaSelecao(Short idJogo, Short idSelecao)
+    public String[][] queryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
     {
         JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
         jDAO = new JogadorDAO();
-        alJogador = jDAO.queryJogadoresEmCampoMesmaSelecao(idJogo, idSelecao);
+        alJogador = jDAO.queryOutrosJogadoresEmCampoSelecao(idJogo, idSelecao, idJogador);
         dadosJogadores = arrayList2StringMatrix(alJogador);
         jDAO.fecharSessao();
 
