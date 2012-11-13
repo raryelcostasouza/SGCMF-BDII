@@ -52,8 +52,8 @@ public class CtrSubstituicao
             dadosSubst[i][0] = String.valueOf(s.getIdoc());
             dadosSubst[i][1] = String.valueOf(s.getOcorrencia().getInstantetempo());
             dadosSubst[i][2] = String.valueOf(s.getJogadorByIdjogadorsaiu().getSelecao().getPais());
-            dadosSubst[i][3] = "("+jSaiu.getNcamisa() + ") " + jSaiu.getNome();
-            dadosSubst[i][4] = "("+jEntrou.getNcamisa() + ") " + jEntrou.getNome();
+            dadosSubst[i][3] = "(" + jSaiu.getNcamisa() + ") " + jSaiu.getNome();
+            dadosSubst[i][4] = "(" + jEntrou.getNcamisa() + ") " + jEntrou.getNome();
             dadosSubst[i][5] = s.getMotivo();
         }
 
@@ -145,7 +145,7 @@ public class CtrSubstituicao
 
         return errorMessage;
     }
-    
+
     public ResultadoOperacao removeSubstituicao(Short idOc)
     {
         ResultadoOperacao result;
@@ -153,6 +153,7 @@ public class CtrSubstituicao
         GeneralDAO gdao;
         Substituicao substParaRemover;
         Ocorrencia ocParaRemover;
+        String errorMessage;
 
         substParaRemover = new Substituicao();
         ocParaRemover = new Ocorrencia();
@@ -162,14 +163,22 @@ public class CtrSubstituicao
 
         try
         {
-            gdao.carregar(substParaRemover, idOc);
-            gdao.carregar(ocParaRemover, idOc);
+            errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(gdao, ocParaRemover, idOc);
+            if (errorMessage.equals(""))
+            {
+                gdao.carregar(substParaRemover, idOc);
 
-            gdao.apagar(substParaRemover);
-            gdao.apagar(ocParaRemover);
+                gdao.apagar(substParaRemover);
+                gdao.apagar(ocParaRemover);
 
-            tr.commit();
-            result = new ResultadoOperacao("Substituição removida com êxito!", TipoResultadoOperacao.EXITO);
+                tr.commit();
+                result = new ResultadoOperacao("Substituição removida com êxito!", TipoResultadoOperacao.EXITO);
+            }
+            else
+            {
+                result = new ResultadoOperacao(errorMessage, TipoResultadoOperacao.ERRO);
+            }
+
         }
         catch (HibernateException hex)
         {
