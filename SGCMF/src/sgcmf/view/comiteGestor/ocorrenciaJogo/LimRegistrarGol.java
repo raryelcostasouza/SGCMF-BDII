@@ -116,7 +116,10 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
             {
                 if (jrbTipoAFavor.isSelected())
                 {
-                    jbPesqJogadorAssist.setEnabled(true);
+                    if (!jtfJogador.getText().equals(""))
+                    {
+                        jbPesqJogadorAssist.setEnabled(true);
+                    }                    
                     jrbModoComum.setSelected(true);
                     jrbModoFalta.setEnabled(true);
                     jrbModoPenalti.setEnabled(true);
@@ -150,7 +153,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
             @Override
             public void itemStateChanged(ItemEvent e)
             {
-                if (jrbModoComum.isSelected())
+                if (jrbModoComum.isSelected() && jrbTipoAFavor.isSelected() && !jtfJogador.getText().equals(""))
                 {
                     jbPesqJogadorAssist.setEnabled(true);
                 }
@@ -201,6 +204,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogadorAutor);
         
         jbPesqJogadorAssist = new JButton(SGCMFIcons.PESQUISAR);
+        jbPesqJogadorAssist.setEnabled(false);
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogadorAssist);
         jbPesqJogadorAutor.addActionListener(new ActionListener()
         {
@@ -317,6 +321,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         jtfJogadorAssist.setText("");
         jrbTipoAFavor.setSelected(true);
         jrbModoComum.setSelected(true);
+        jbPesqJogadorAssist.setEnabled(false);
     }
 
     @Override
@@ -326,6 +331,10 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         {
             jtfJogador.setText(idJogador + "");
             selecaoJogadorAutor = false;
+            if (jrbTipoAFavor.isSelected() && jrbModoComum.isSelected())
+            {
+                jbPesqJogadorAssist.setEnabled(true);
+            }            
         }
         else
         {
