@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.ButtonGroup;
@@ -16,6 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import sgcmf.control.CtrGol;
 import sgcmf.control.CtrOcorrenciaJogo;
 import sgcmf.model.other.SGCMFIcons;
@@ -42,6 +46,7 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
     private JRadioButton jrbModoComum;
     private JRadioButton jrbModoFalta;
     private JRadioButton jrbModoPenalti;
+    private JButton jbPesqJogadorAssist;
 
     public LimRegistrarGol(CtrGol ctrGol, LimBuscarJogador limBuscarJogador, LimGerenciarOcorrenciasJogo limGerenciarOcorrencias)
     {
@@ -102,20 +107,85 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         jrbTipoAFavor = new JRadioButton("A Favor");
         jrbTipoAFavor.setActionCommand("A Favor");
         jrbTipoAFavor.setSelected(true);
-        
+
+        jrbTipoAFavor.addItemListener(new ItemListener()
+        {
+            @Override
+            public void itemStateChanged(ItemEvent e)
+            {
+                if (jrbTipoAFavor.isSelected())
+                {
+                    jbPesqJogadorAssist.setEnabled(true);
+                    jrbModoComum.setSelected(true);
+                    jrbModoFalta.setEnabled(true);
+                    jrbModoPenalti.setEnabled(true);
+                }
+            }
+        });
+
         jrbTipoContra = new JRadioButton("Contra");
         jrbTipoContra.setActionCommand("Contra");
+        jrbTipoContra.addItemListener(new ItemListener()
+        {
+            @Override
+            public void itemStateChanged(ItemEvent e)
+            {
+                if (jrbTipoContra.isSelected())
+                {
+                    jbPesqJogadorAssist.setEnabled(false);
+                    jrbModoComum.setSelected(true);
+                    jrbModoFalta.setEnabled(false);
+                    jrbModoPenalti.setEnabled(false);
+                    jtfJogadorAssist.setText("");
+                }
+            }
+        });
 
         jrbModoComum = new JRadioButton("Comum");
         jrbModoComum.setActionCommand("Comum");
         jrbModoComum.setSelected(true);
-        
+        jrbModoComum.addItemListener(new ItemListener()
+        {
+            @Override
+            public void itemStateChanged(ItemEvent e)
+            {
+                if (jrbModoComum.isSelected())
+                {
+                    jbPesqJogadorAssist.setEnabled(true);
+                }
+            }
+        });
+
         jrbModoFalta = new JRadioButton("Falta");
         jrbModoFalta.setActionCommand("Falta");
-        
+        jrbModoFalta.addItemListener(new ItemListener()
+        {
+            @Override
+            public void itemStateChanged(ItemEvent e)
+            {
+                if (jrbModoFalta.isSelected())
+                {
+                    jbPesqJogadorAssist.setEnabled(false);
+                    jtfJogadorAssist.setText("");
+                }
+            }
+        });
+
         jrbModoPenalti = new JRadioButton("Pênalti");
         jrbModoPenalti.setActionCommand("Penalti");
-        
+        jrbModoPenalti.addItemListener(new ItemListener()
+        {
+            @Override
+            public void itemStateChanged(ItemEvent e)
+            {
+                if (jrbModoPenalti.isSelected())
+                {
+                    jbPesqJogadorAssist.setEnabled(false);
+                    jtfJogadorAssist.setText("");
+                }
+            }
+        });
+
         JButton jbRegistrarGol = new JButton("Registrar Gol");
         jbRegistrarGol.addActionListener(new ActionListener()
         {
@@ -128,7 +198,8 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
 
         JButton jbPesqJogadorAutor = new JButton(SGCMFIcons.PESQUISAR);
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogadorAutor);
-        JButton jbPesqJogadorAssist = new JButton(SGCMFIcons.PESQUISAR);
+        
+        jbPesqJogadorAssist = new JButton(SGCMFIcons.PESQUISAR);
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesqJogadorAssist);
         jbPesqJogadorAutor.addActionListener(new ActionListener()
         {
@@ -169,11 +240,6 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         jpAuxJogadorAutor.add(jbPesqJogadorAutor);
         formPanel.add(jpAuxJogadorAutor);
 
-        formPanel.add(UtilView.putComponentInFlowLayoutPanel(jlJogadorAssist));
-        jpAuxJogadorAssist.add(jtfJogadorAssist);
-        jpAuxJogadorAssist.add(jbPesqJogadorAssist);
-        formPanel.add(jpAuxJogadorAssist);
-
         formPanel.add(UtilView.putComponentInFlowLayoutPanel(jlTipo));
         panelJRBTipo.add(jrbTipoAFavor);
         panelJRBTipo.add(jrbTipoContra);
@@ -184,6 +250,11 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         panelJRBModo.add(jrbModoFalta);
         panelJRBModo.add(jrbModoPenalti);
         formPanel.add(panelJRBModo);
+
+        formPanel.add(UtilView.putComponentInFlowLayoutPanel(jlJogadorAssist));
+        jpAuxJogadorAssist.add(jtfJogadorAssist);
+        jpAuxJogadorAssist.add(jbPesqJogadorAssist);
+        formPanel.add(jpAuxJogadorAssist);
 
         mainPanel.add(formPanel, BorderLayout.CENTER);
         mainPanel.add(UtilView.putComponentInFlowLayoutPanel(jbRegistrarGol), BorderLayout.SOUTH);
@@ -201,12 +272,12 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
         modo = bgModo.getSelection().getActionCommand();
 
         result = ctrGol.registraGol(jtfInstanteTempoMin.getText(),
-                jtfInstateTempoSeg.getText(),
-                limGerenciarOcorrencias.getIdJogo(),
-                jtfJogador.getText(),
-                jtfJogadorAssist.getText(),
-                tipo,
-                modo);
+                                    jtfInstateTempoSeg.getText(),
+                                    limGerenciarOcorrencias.getIdJogo(),
+                                    jtfJogador.getText(),
+                                    jtfJogadorAssist.getText(),
+                                    tipo,
+                                    modo);
 
         if (result.getTipo() == TipoResultadoOperacao.EXITO)
         {
