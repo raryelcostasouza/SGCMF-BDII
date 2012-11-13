@@ -170,25 +170,26 @@ public class CtrGol
         String[][] dadosGol;
         Gol g;
 
-        dadosGol = new String[alGol.size()][6];
+        dadosGol = new String[alGol.size()][7];
         for (int i = 0; i < alGol.size(); i++)
         {
             g = alGol.get(i);
             dadosGol[i][0] = String.valueOf(g.getIdoc());
             dadosGol[i][1] = String.valueOf(g.getOcorrencia().getInstantetempo());
-            dadosGol[i][2] = g.getJogadorByIdjogadorautor().getNome();
+            dadosGol[i][2] = g.getJogadorByIdjogadorautor().getSelecao().getPais();
+            dadosGol[i][3] = g.getJogadorByIdjogadorautor().getNome();
 
             if (g.getJogadorByIdjogadorassistencia() != null)
             {
-                dadosGol[i][3] = g.getJogadorByIdjogadorassistencia().getNome();
+                dadosGol[i][4] = g.getJogadorByIdjogadorassistencia().getNome();
             }
             else
             {
-                dadosGol[i][3] = "";
+                dadosGol[i][4] = "";
             }
 
-            dadosGol[i][4] = g.getTipo();
-            dadosGol[i][5] = g.getModo();
+            dadosGol[i][5] = g.getTipo();
+            dadosGol[i][6] = g.getModo();
         }
 
         return dadosGol;

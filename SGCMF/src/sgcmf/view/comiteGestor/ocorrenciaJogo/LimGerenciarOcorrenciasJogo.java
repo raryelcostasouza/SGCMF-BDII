@@ -183,7 +183,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         String[] nomesColunas =
         {
-            "ID", "Instante de Tempo", "Jogador Autor", "Jogador Assistência", "Tipo Gol", "Modo"
+            "ID", "Instante de Tempo", "Seleção", "Jogador Autor", "Jogador Assistência", "Tipo Gol", "Modo"
         };
         jtGol = new JTableSGCMF(null, nomesColunas);
         JScrollPane jsp = new JScrollPane(jtGol, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
