@@ -40,24 +40,25 @@ public class CtrFalta
         String[][] dadosFalta;
         Falta f;
 
-        dadosFalta = new String[alFalta.size()][5];
+        dadosFalta = new String[alFalta.size()][6];
         for (int i = 0; i < alFalta.size(); i++)
         {
             f = alFalta.get(i);
             dadosFalta[i][0] = String.valueOf(f.getIdoc());
             dadosFalta[i][1] = String.valueOf(f.getOcorrencia().getInstantetempo());
-            dadosFalta[i][2] = f.getJogador().getNome();
+            dadosFalta[i][2] = f.getJogador().getSelecao().getPais();
+            dadosFalta[i][3] = f.getJogador().getNome();
 
             if (f.getCartao() != null)
             {
-                dadosFalta[i][3] = f.getCartao().getCor();
+                dadosFalta[i][4] = f.getCartao().getCor();
             }
             else
             {
-                dadosFalta[i][3] = "";
+                dadosFalta[i][4] = "";
             }
 
-            dadosFalta[i][4] = f.getTipo();
+            dadosFalta[i][5] = f.getTipo();
         }
 
         return dadosFalta;
