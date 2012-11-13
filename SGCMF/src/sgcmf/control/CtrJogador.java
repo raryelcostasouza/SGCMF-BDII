@@ -80,14 +80,42 @@ public class CtrJogador
         return dadosJogadores;
     }
     
-    public String[][] queryJogadoresReservaMesmaSelecao(Short idJogo, Short idSelecao)
+    public String[][] queryOutrosJogadoresEmCampoSelecaoByNome(Short idJogo, Short idSelecao, Short idJogador, String nome)
     {
         JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
         jDAO = new JogadorDAO();
-        alJogador = jDAO.queryJogadoresReservaMesmaSelecao(idJogo, idSelecao);
+        alJogador = jDAO.queryOutrosJogadoresEmCampoSelecaoByNome(idJogo, idSelecao, idJogador, nome);
+        dadosJogadores = arrayList2StringMatrix(alJogador);
+        jDAO.fecharSessao();
+
+        return dadosJogadores;
+    }
+    
+    public String[][] queryReservasSelecao(Short idJogo, Short idSelecao)
+    {
+        JogadorDAO jDAO;
+        String[][] dadosJogadores;
+        ArrayList alJogador;
+
+        jDAO = new JogadorDAO();
+        alJogador = jDAO.queryReservasSelecao(idJogo, idSelecao);
+        dadosJogadores = arrayList2StringMatrix(alJogador);
+        jDAO.fecharSessao();
+
+        return dadosJogadores;
+    }
+    
+    public String[][]queryReservasSelecaoByNome(Short idJogo, Short idSelecao, String nome)
+    {
+        JogadorDAO jDAO;
+        String[][] dadosJogadores;
+        ArrayList alJogador;
+
+        jDAO = new JogadorDAO();
+        alJogador = jDAO.queryReservasSelecaoByNome(idJogo, idSelecao, nome);
         dadosJogadores = arrayList2StringMatrix(alJogador);
         jDAO.fecharSessao();
 

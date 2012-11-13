@@ -55,55 +55,7 @@ public class JogadorDAO extends GeneralDAO
 
         return posicao;
     }
-
-    //jogadores em campo para um certo jogo
-    public ArrayList<Jogador> queryJogadoresEmCampo(Short idJogo)
-    {
-        String hql;
-        hql = auxQueryJogadoresEmCampo(idJogo);
-
-        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
-    }
-
-    //outros jogadores, da mesma seleção, em campo, diferentes do jogador passado como parâmetro
-    public ArrayList queryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
-    {
-        String hql;
-        String queryJogadoresSairamNoJogo;
-        String queryJogadoresEntraramJogo;
-        String queryExpulsos;
-
-        queryJogadoresSairamNoJogo = "(select s.jogadorByIdjogadorsaiu.id "
-                + "from Substituicao s "
-                + "where s.ocorrencia.jogo.id = " + idJogo + " "
-                + "and s.jogadorByIdjogadorsaiu.selecao.id = " + idSelecao + ")";
-
-        queryJogadoresEntraramJogo = "(select s.jogadorByIdjogadorentrou.id "
-                + "from Substituicao s "
-                + "where s.ocorrencia.jogo.id = " + idJogo + " "
-                + "and s.jogadorByIdjogadorentrou.selecao.id = " + idSelecao + ")";
-
-        queryExpulsos = "(select c.jogador.id "
-                + "from Cartao c "
-                + "where c.ocorrencia.jogo.id = " + idJogo + " "
-                + "and c.cor = 'Vermelho' "
-                + "and c.jogador.selecao.id = "+ idSelecao + ")";
-
-        hql = "from Jogador jgdr "
-                + "where (("
-                //jogadores titulares, da seleção passada como parâmetro, que nao sairam de campo
-                + "jgdr.selecao.id = " + idSelecao + " "
-                + "and jgdr.titular = true and jgdr.id not in " + queryJogadoresSairamNoJogo + ") "
-                //jogadores reservas, da seleção passada como parâmetro, que entraram em campo
-                + "or ("
-                + "jgdr.id in " + queryJogadoresEntraramJogo + ")) "
-                //menos os jogadores expulsos
-                + "and jgdr.id not in " + queryExpulsos + " "
-                + "and jgdr.id != " + idJogador;
-
-        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
-    }
-
+    
     public Short queryIdSelecaoJogador(Short idJogador)
     {
         String hql;
@@ -115,58 +67,83 @@ public class JogadorDAO extends GeneralDAO
         return Short.parseShort(String.valueOf(sessao.createQuery(hql).uniqueResult()));
     }
     
-    //reservas disponíveis, num dado jogo, para uma dada seleção
-    public ArrayList<Jogador> queryJogadoresReservaMesmaSelecao(Short idJogo, Short idSelecao)
+    public ArrayList<Jogador> queryJogadoresEmCampo(Short idJogo)
     {
         String hql;
-        String queryJogadoresMesmaSelecaoEntraramCampo;
-
-        //jogadores reservas, da mesma seleção passada como parâmetro, que entraram em campo
-        queryJogadoresMesmaSelecaoEntraramCampo = "(select s.jogadorByIdjogadorentrou.id "
-                + "from Substituicao s "
-                + "where s.ocorrencia.jogo.id = " + idJogo + " "
-                + "and s.jogadorByIdjogadorentrou.selecao.id = " + idSelecao + ")";
-
-        hql = "from Jogador jgdr "
-                //reservas da seleção
-                + "where jgdr.selecao.id = " + idSelecao + " and jgdr.titular = false and "
-                //menos os reservas que entraram em campo
-                + "jgdr.id not in " + queryJogadoresMesmaSelecaoEntraramCampo;
+        hql = auxQueryJogadoresEmCampo(idJogo);
 
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
-    
+
     public ArrayList<Jogador> queryJogadoresEmCampoByNome(Short idJogo, String nome)
     {
         String hql;
 
         hql = auxQueryJogadoresEmCampo(idJogo) + " "
-                + "and lower(jgdr.nome) like lower('%" +nome+"%')";
+                + "and lower(jgdr.nome) like lower('%" + nome + "%')";
+
+        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+    }
+
+    
+    public ArrayList queryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
+    {
+        String hql;
+
+        hql = auxQueryOutrosJogadoresEmCampoSelecao(idJogo, idSelecao, idJogador);
 
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
     
+    public ArrayList queryOutrosJogadoresEmCampoSelecaoByNome(Short idJogo, Short idSelecao, Short idJogador, String nome)
+    {
+        String hql;
+
+        hql = auxQueryOutrosJogadoresEmCampoSelecao(idJogo, idSelecao, idJogador) + " "
+                + "and lower(jgdr.nome) like lower('%" +nome + "%')";
+
+        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+    }
+    
+    public ArrayList<Jogador> queryReservasSelecao(Short idJogo, Short idSelecao)
+    {
+        String hql;
+        hql = auxQueryJogadoresReservaSelecao(idJogo, idSelecao);
+        
+        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+    }
+    
+    public ArrayList<Jogador> queryReservasSelecaoByNome(Short idJogo, Short idSelecao, String nome)
+    {
+        String hql;
+
+        hql = auxQueryJogadoresReservaSelecao(idJogo, idSelecao) + " "
+                + "and lower(jgdr.nome) like lower('%" +nome+"%')";
+
+        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+    }
+
     private String auxQuerySelecaoIJogo(Short idJogo)
     {
         return "(select jg.selecaoByIdselecaoi.id "
                 + "from Jogo jg "
                 + "where jg.id = " + idJogo + ")";
     }
-    
+
     private String auxQuerySelecaoIIJogo(Short idJogo)
     {
         return "(select jg.selecaoByIdselecaoii.id "
                 + "from Jogo jg "
                 + "where jg.id = " + idJogo + ")";
     }
-    
+
     private String auxQueryJogadoresSairamJogo(Short idJogo)
     {
         return "(select s.jogadorByIdjogadorsaiu.id "
                 + "from Substituicao s "
                 + "where s.ocorrencia.jogo.id = " + idJogo + ")";
     }
-    
+
     private String auxQueryJogadoresEntraramJogo(Short idJogo)
     {
         return "(select s.jogadorByIdjogadorentrou.id "
@@ -174,13 +151,24 @@ public class JogadorDAO extends GeneralDAO
                 + "where s.ocorrencia.jogo.id = " + idJogo + ")";
     }
     
+    private String auxQueryJogadoresEntraramJogoSelecao(Short idJogo, Short idSelecao)
+    {
+        String querySemParentesesNoFinal;
+        String queryBase = auxQueryJogadoresEntraramJogo(idJogo);
+
+        querySemParentesesNoFinal = queryBase.substring(0, queryBase.length() - 1);
+        return querySemParentesesNoFinal + " "
+                + "and s.jogadorByIdjogadorentrou.selecao.id = " + idSelecao + ")";
+    }
+
     private String auxQueryJogadoresExpulsosJogo(Short idJogo)
     {
         return "(select c.jogador.id "
                 + "from Cartao c "
                 + "where c.ocorrencia.jogo.id = " + idJogo + " and c.cor = 'Vermelho')";
-    } 
-    
+    }
+
+    //jogadores em campo para um certo jogo
     private String auxQueryJogadoresEmCampo(Short idJogo)
     {
         return "from Jogador jgdr "
@@ -194,4 +182,30 @@ public class JogadorDAO extends GeneralDAO
                 //menos os jogadores expulsos
                 + "and jgdr.id not in " + auxQueryJogadoresExpulsosJogo(idJogo);
     }
+    
+    //outros jogadores, da mesma seleção, em campo, diferentes do jogador passado como parâmetro
+    private String auxQueryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
+    {
+        return "from Jogador jgdr "
+                + "where (("
+                //jogadores titulares, da seleção passada como parâmetro, que nao sairam de campo
+                + "jgdr.selecao.id = " + idSelecao + " "
+                + "and jgdr.titular = true and jgdr.id not in " + auxQueryJogadoresSairamJogo(idJogo) + ") "
+                //jogadores reservas, da seleção passada como parâmetro, que entraram em campo
+                + "or ("
+                + "jgdr.id in " + auxQueryJogadoresEntraramJogoSelecao(idJogo, idSelecao) + ")) "
+                //menos os jogadores expulsos
+                + "and jgdr.id not in " + auxQueryJogadoresExpulsosJogo(idJogo) + " "
+                + "and jgdr.id != " + idJogador;
+    }
+    
+    //reservas disponíveis, num dado jogo, para uma dada seleção
+    private String auxQueryJogadoresReservaSelecao(Short idJogo, Short idSelecao)
+    {
+        return "from Jogador jgdr "
+                //reservas da seleção
+                + "where jgdr.selecao.id = " + idSelecao + " and jgdr.titular = false and "
+                //menos os reservas que entraram em campo
+                + "jgdr.id not in " + auxQueryJogadoresEntraramJogoSelecao(idJogo, idSelecao);
+    }  
 }

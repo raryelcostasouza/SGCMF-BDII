@@ -23,6 +23,8 @@ public class LimBuscarJogador extends JDialog
     private JTableSGCMF jt;
     private ISelecionarJogador isj;
     private Short idJogo;
+    private Short idSelecao;
+    private Short idJogador;
     private static final int SELECIONA_JOGADOR = 0;
     private static final int SELECIONA_JOGADOR_MESMA_SELECAO = 1;
     private static final int SELECIONA_RESERVA_SELECAO = 2;
@@ -127,6 +129,8 @@ public class LimBuscarJogador extends JDialog
         
         this.isj = isj;
         this.idJogo = idJogo;
+        this.idSelecao = idSelecao;
+        this.idJogador = idJogador;
 
         dadosJogador = ctrJogador.queryOutrosJogadoresEmCampoSelecao(idJogo, idSelecao, idJogador);
         jt.preencheTabela(dadosJogador);
@@ -141,8 +145,9 @@ public class LimBuscarJogador extends JDialog
         
         this.isj = isj;
         this.idJogo = idJogo;
+        this.idSelecao = idSelecao;
 
-        dadosJogador = ctrJogador.queryJogadoresReservaMesmaSelecao(idJogo, idSelecao);
+        dadosJogador = ctrJogador.queryReservasSelecao(idJogo, idSelecao);
         jt.preencheTabela(dadosJogador);
 
         setVisible(true);
@@ -152,7 +157,19 @@ public class LimBuscarJogador extends JDialog
     {
         String[][] dadosJogador;
 
-        dadosJogador = ctrJogador.queryJogadoresEmCampoByNome(idJogo, chave);
+        if (tipoTela == SELECIONA_JOGADOR)
+        {
+            dadosJogador = ctrJogador.queryJogadoresEmCampoByNome(idJogo, chave);
+        }
+        else if(tipoTela == SELECIONA_JOGADOR_MESMA_SELECAO)
+        {
+            dadosJogador = ctrJogador.queryOutrosJogadoresEmCampoSelecaoByNome(idJogo, idSelecao, idJogador, chave);
+        }
+        else
+        {
+            dadosJogador = ctrJogador.queryReservasSelecaoByNome(idJogo, idSelecao, chave);
+        }       
+        
         jt.preencheTabela(dadosJogador);
     }
 
