@@ -74,7 +74,7 @@ public class CtrOcorrenciaJogo
             numOcorrenciasDepois = oDAO.queryNumOcorrenciasComInstanteTempoMaior(idJogo, new Date(0, 0, 0, 0, Integer.parseInt(min), Integer.parseInt(seg)));
             if (numOcorrenciasDepois > 0)
             {
-                errorMessage = "As ocorrências só podem ser lançadas de forma sequencial pelo instante de tempo.\n" +
+                errorMessage = "As ocorrências só podem ser lançadas de forma sequencial crescentepelo instante de tempo.\n" +
                                 "Para esse jogo já existem ocorrências registradas para instantes de tempo posteriores.\n"
                                 + "Caso queira adicionar essa ocorrência é necessário antes remover todas as ocorrências posteriores.";
             }
@@ -82,5 +82,28 @@ public class CtrOcorrenciaJogo
         }
 
         return errorMessage;
+    }
+    
+    public String validaRemocao(GeneralDAO gdao, Ocorrencia oc, Short idOc)
+    {
+        OcorrenciaDAO ocDAO;
+        int numOcDepois;
+        
+        gdao.carregar(oc, idOc);
+        
+        ocDAO = new OcorrenciaDAO();
+        numOcDepois = ocDAO.queryNumOcorrenciasComInstanteTempoMaior(oc.getJogo().getId(), oc.getInstantetempo());
+        
+        
+        if (numOcDepois == 0)
+        {
+            return "";
+        }
+        else
+        {
+           return "As ocorrências só podem ser removidas de forma sequencial descrescente pelo instante de tempo.\n" +
+                                "Para esse jogo já existem ocorrências registradas para instantes de tempo posteriores.\n"
+                                + "Caso queira remover essa ocorrência é necessário antes remover todas as ocorrências posteriores.";
+        }
     }
 }

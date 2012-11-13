@@ -45,7 +45,7 @@ public class CtrGol
             try
             {
                 OcorrenciaDAO oDao = new OcorrenciaDAO();
-                
+
                 o = ctrMain.getCtrOcorrenciaJogo().registraOcorrencia(gdao, min, seg, idJogo);
 
                 //carrega o jogador autor
@@ -114,6 +114,7 @@ public class CtrGol
         GeneralDAO gdao;
         Gol golParaRemover;
         Ocorrencia ocParaRemover;
+        String errorMessage;
 
         golParaRemover = new Gol();
         ocParaRemover = new Ocorrencia();
@@ -123,14 +124,22 @@ public class CtrGol
 
         try
         {
-            golParaRemover = (Gol) gdao.carregar(golParaRemover, idOc);
-            ocParaRemover = (Ocorrencia) gdao.carregar(ocParaRemover, idOc);
+            errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(gdao, ocParaRemover, idOc);
+            //se a remocao for possivel de acordo com as regras de negocio
+            if (errorMessage.equals(""))
+            {
+                golParaRemover = (Gol) gdao.carregar(golParaRemover, idOc);
 
-            gdao.apagar(golParaRemover);
-            gdao.apagar(ocParaRemover);
+                gdao.apagar(golParaRemover);
+                gdao.apagar(ocParaRemover);
 
-            tr.commit();
-            result = new ResultadoOperacao("Gol removido com êxito!", TipoResultadoOperacao.EXITO);
+                tr.commit();
+                result = new ResultadoOperacao("Gol removido com êxito!", TipoResultadoOperacao.EXITO);
+            }
+            else
+            {
+                result = new ResultadoOperacao(errorMessage, TipoResultadoOperacao.ERRO);
+            }
         }
         catch (HibernateException hex)
         {
