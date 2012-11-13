@@ -41,14 +41,15 @@ public class CtrCartao
         String[][] dadosCartao;
         Cartao c;
 
-        dadosCartao = new String[alCartao.size()][4];
+        dadosCartao = new String[alCartao.size()][5];
         for (int i = 0; i < alCartao.size(); i++)
         {
             c = alCartao.get(i);
             dadosCartao[i][0] = String.valueOf(c.getIdoc());
             dadosCartao[i][1] = String.valueOf(c.getOcorrencia().getInstantetempo());
-            dadosCartao[i][2] = c.getJogador().getNome();
-            dadosCartao[i][3] = c.getCor();
+            dadosCartao[i][2] = c.getJogador().getSelecao().getPais();
+            dadosCartao[i][3] = c.getJogador().getNome();
+            dadosCartao[i][4] = c.getCor();
         }
 
         return dadosCartao;
