@@ -23,6 +23,10 @@ public class LimBuscarJogador extends JDialog
     private JTableSGCMF jt;
     private ISelecionarJogador isj;
     private Short idJogo;
+    private static final int SELECIONA_JOGADOR = 0;
+    private static final int SELECIONA_JOGADOR_MESMA_SELECAO = 1;
+    private static final int SELECIONA_RESERVA_SELECAO = 2;
+    private int tipoTela;    
 
     public LimBuscarJogador(CtrJogador ctrJogador)
     {
@@ -102,10 +106,11 @@ public class LimBuscarJogador extends JDialog
         return southPanel;
     }
 
-    public void ativaTela(ISelecionarJogador isj, Short idJogo)
+    public void ativaTelaSelecionaJogador(ISelecionarJogador isj, Short idJogo)
     {
         String[][] dadosJogador;
-
+        tipoTela = SELECIONA_JOGADOR;
+        
         this.isj = isj;
         this.idJogo = idJogo;
 
@@ -118,7 +123,8 @@ public class LimBuscarJogador extends JDialog
     public void ativaTelaSelecionaOutroJogadorSelecao(ISelecionarJogador isj, Short idJogo, Short idSelecao, Short idJogador)
     { 
         String[][] dadosJogador;
-
+        tipoTela = SELECIONA_JOGADOR_MESMA_SELECAO;
+        
         this.isj = isj;
         this.idJogo = idJogo;
 
@@ -128,10 +134,11 @@ public class LimBuscarJogador extends JDialog
         setVisible(true);
     }
     
-    public void ativaTelaSelecionaJogadorReservaMesmaSelecao(ISelecionarJogador isj, Short idJogo, Short idSelecao)
+    public void ativaTelaSelecionaJogadorReservaSelecao(ISelecionarJogador isj, Short idJogo, Short idSelecao)
     {
         String[][] dadosJogador;
-
+        tipoTela = SELECIONA_RESERVA_SELECAO;
+        
         this.isj = isj;
         this.idJogo = idJogo;
 
@@ -145,7 +152,7 @@ public class LimBuscarJogador extends JDialog
     {
         String[][] dadosJogador;
 
-        dadosJogador = ctrJogador.queryJogadorByNome(chave);
+        dadosJogador = ctrJogador.queryJogadoresEmCampoByNome(idJogo, chave);
         jt.preencheTabela(dadosJogador);
     }
 

@@ -168,7 +168,7 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
     
     private void ativaTelaBuscarJogador()
     {
-        limBuscarJogador.ativaTela(this, limGerenciarOcorrencias.getIdJogo());
+        limBuscarJogador.ativaTelaSelecionaJogador(this, limGerenciarOcorrencias.getIdJogo());
     }
     
     private void ativaTelaBuscarJogadorReservaMesmaSelecao()
@@ -178,7 +178,7 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
         
         idJogadorSaiu = Short.parseShort(jtfJogadorSaiu.getText());
         idSelecao = ctrComiteGestor.getCtrJogador().queryIdSelecaoJogador(idJogadorSaiu);
-        limBuscarJogador.ativaTelaSelecionaJogadorReservaMesmaSelecao(this, limGerenciarOcorrencias.getIdJogo(), idSelecao);
+        limBuscarJogador.ativaTelaSelecionaJogadorReservaSelecao(this, limGerenciarOcorrencias.getIdJogo(), idSelecao);
     }
     
     @Override
