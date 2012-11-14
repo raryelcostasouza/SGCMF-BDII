@@ -143,13 +143,13 @@ public class PrimeiraFase extends JPanel
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel1.setText("A");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/imgx/selecoes/grupoa/South-Africa.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoa/South-Africa.png"))); // NOI18N
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/imgx/selecoes/grupoa/France.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoa/France.png"))); // NOI18N
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/imgx/selecoes/grupoa/Mexico.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoa/Mexico.png"))); // NOI18N
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/imgx/selecoes/grupoa/Uruguay.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoa/Uruguay.png"))); // NOI18N
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -236,13 +236,13 @@ public class PrimeiraFase extends JPanel
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel8.setText("B");
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoB/Argentina.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupob/Argentina.png"))); // NOI18N
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoB/Greece.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupob/Greece.png"))); // NOI18N
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoB/Nigeria.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupob/Nigeria.png"))); // NOI18N
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoB/South-Korea.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupob/South-Korea.png"))); // NOI18N
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -297,7 +297,7 @@ public class PrimeiraFase extends JPanel
                             .addComponent(jLabel11)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel12)))
-                    .addContainerGap(18, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelGrupoBLayout.setVerticalGroup(
             panelGrupoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +320,7 @@ public class PrimeiraFase extends JPanel
                         .addComponent(jLabel12))
                     .addGap(1, 1, 1)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(54, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         panelGrupoC.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -329,13 +329,13 @@ public class PrimeiraFase extends JPanel
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel24.setText("C");
 
-        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoC/Algeria.png"))); // NOI18N
+        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoc/Algeria.png"))); // NOI18N
 
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoC/England.png"))); // NOI18N
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoc/England.png"))); // NOI18N
 
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoC/Slovenia.png"))); // NOI18N
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoc/Slovenia.png"))); // NOI18N
 
-        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoC/United-States.png"))); // NOI18N
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoc/United-States.png"))); // NOI18N
 
         jScrollPane5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -390,7 +390,7 @@ public class PrimeiraFase extends JPanel
                             .addComponent(jLabel27)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel28)))
-                    .addContainerGap(262, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelGrupoCLayout.setVerticalGroup(
             panelGrupoCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,7 +413,7 @@ public class PrimeiraFase extends JPanel
                         .addComponent(jLabel28))
                     .addGap(1, 1, 1)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(54, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         panelGrupoD.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -422,13 +422,13 @@ public class PrimeiraFase extends JPanel
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel31.setText("D");
 
-        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoD/Australia.png"))); // NOI18N
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupod/Australia.png"))); // NOI18N
 
-        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoD/Germany.png"))); // NOI18N
+        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupod/Germany.png"))); // NOI18N
 
-        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoD/Ghana.png"))); // NOI18N
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupod/Serbia.png"))); // NOI18N
 
-        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoD/Serbia.png"))); // NOI18N
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupod/Ghana.png"))); // NOI18N
 
         jScrollPane6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -483,7 +483,7 @@ public class PrimeiraFase extends JPanel
                             .addComponent(jLabel34)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel35)))
-                    .addContainerGap(18, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelGrupoDLayout.setVerticalGroup(
             panelGrupoDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -506,7 +506,7 @@ public class PrimeiraFase extends JPanel
                         .addComponent(jLabel35))
                     .addGap(1, 1, 1)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(54, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         panelGrupoE.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -515,13 +515,13 @@ public class PrimeiraFase extends JPanel
         jLabel38.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel38.setText("E");
 
-        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoE/Cameroon.png"))); // NOI18N
+        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoe/Cameroon.png"))); // NOI18N
 
-        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoE/Denmark.png"))); // NOI18N
+        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoe/Denmark.png"))); // NOI18N
 
-        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoE/Japan.png"))); // NOI18N
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoe/Japan.png"))); // NOI18N
 
-        jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoE/Netherlands.png"))); // NOI18N
+        jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoe/Netherlands.png"))); // NOI18N
 
         jScrollPane7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -576,7 +576,7 @@ public class PrimeiraFase extends JPanel
                             .addComponent(jLabel41)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel42)))
-                    .addContainerGap(262, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelGrupoELayout.setVerticalGroup(
             panelGrupoELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -599,7 +599,7 @@ public class PrimeiraFase extends JPanel
                         .addComponent(jLabel42))
                     .addGap(1, 1, 1)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(54, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         panelGrupoF.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -608,13 +608,13 @@ public class PrimeiraFase extends JPanel
         jLabel45.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel45.setText("F");
 
-        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoF/Italy.png"))); // NOI18N
+        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupof/Italy.png"))); // NOI18N
 
-        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoF/New-Zealand.png"))); // NOI18N
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupof/New-Zealand.png"))); // NOI18N
 
-        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoF/Paraguay.png"))); // NOI18N
+        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupof/Paraguay.png"))); // NOI18N
 
-        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoF/Slovakia.png"))); // NOI18N
+        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupof/Slovakia.png"))); // NOI18N
 
         jScrollPane8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -669,7 +669,7 @@ public class PrimeiraFase extends JPanel
                             .addComponent(jLabel48)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel49)))
-                    .addContainerGap(18, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelGrupoFLayout.setVerticalGroup(
             panelGrupoFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -692,7 +692,7 @@ public class PrimeiraFase extends JPanel
                         .addComponent(jLabel49))
                     .addGap(1, 1, 1)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(54, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         panelGrupoG.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -701,13 +701,13 @@ public class PrimeiraFase extends JPanel
         jLabel52.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel52.setText("G");
 
-        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoG/Brazil.png"))); // NOI18N
+        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupog/Brazil.png"))); // NOI18N
 
-        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoG/Cote-DIvoire.png"))); // NOI18N
+        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupog/Cote-DIvoire.png"))); // NOI18N
 
-        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoG/North-Korea.png"))); // NOI18N
+        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupog/North-Korea.png"))); // NOI18N
 
-        jLabel56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoG/Portugal.png"))); // NOI18N
+        jLabel56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupog/Portugal.png"))); // NOI18N
 
         jScrollPane9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -762,7 +762,7 @@ public class PrimeiraFase extends JPanel
                             .addComponent(jLabel55)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel56)))
-                    .addContainerGap(262, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelGrupoGLayout.setVerticalGroup(
             panelGrupoGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -785,7 +785,7 @@ public class PrimeiraFase extends JPanel
                         .addComponent(jLabel56))
                     .addGap(1, 1, 1)
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(54, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         panelGrupoH.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -794,13 +794,13 @@ public class PrimeiraFase extends JPanel
         jLabel59.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel59.setText("H");
 
-        jLabel60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoH/Chile.png"))); // NOI18N
+        jLabel60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoh/Chile.png"))); // NOI18N
 
-        jLabel61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoH/Ecuador.png"))); // NOI18N
+        jLabel61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoh/Ecuador.png"))); // NOI18N
 
-        jLabel62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoH/Honduras.png"))); // NOI18N
+        jLabel62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoh/Honduras.png"))); // NOI18N
 
-        jLabel63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgcmf/img/Selecoes/GrupoH/Spain.png"))); // NOI18N
+        jLabel63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecoes/grupoh/Spain.png"))); // NOI18N
 
         jScrollPane10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -855,7 +855,7 @@ public class PrimeiraFase extends JPanel
                             .addComponent(jLabel62)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel63)))
-                    .addContainerGap(18, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelGrupoHLayout.setVerticalGroup(
             panelGrupoHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -878,7 +878,7 @@ public class PrimeiraFase extends JPanel
                         .addComponent(jLabel63))
                     .addGap(1, 1, 1)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(54, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

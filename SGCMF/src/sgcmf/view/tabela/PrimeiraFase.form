@@ -181,28 +181,28 @@
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/imgx/selecoes/grupoa/South-Africa.png"/>
+                      <Image iconType="3" name="/selecoes/grupoa/South-Africa.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/imgx/selecoes/grupoa/France.png"/>
+                      <Image iconType="3" name="/selecoes/grupoa/France.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/imgx/selecoes/grupoa/Mexico.png"/>
+                      <Image iconType="3" name="/selecoes/grupoa/Mexico.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/imgx/selecoes/grupoa/Uruguay.png"/>
+                      <Image iconType="3" name="/selecoes/grupoa/Uruguay.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -327,7 +327,7 @@
                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -356,7 +356,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Component id="jScrollPane3" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace pref="54" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -374,28 +374,28 @@
                 <Component class="javax.swing.JLabel" name="jLabel9">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoB/Argentina.png"/>
+                      <Image iconType="3" name="/selecoes/grupob/Argentina.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel10">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoB/Greece.png"/>
+                      <Image iconType="3" name="/selecoes/grupob/Greece.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel11">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoB/Nigeria.png"/>
+                      <Image iconType="3" name="/selecoes/grupob/Nigeria.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel12">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoB/South-Korea.png"/>
+                      <Image iconType="3" name="/selecoes/grupob/South-Korea.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -520,7 +520,7 @@
                                       <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="262" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -549,7 +549,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Component id="jScrollPane5" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace pref="54" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -567,28 +567,28 @@
                 <Component class="javax.swing.JLabel" name="jLabel25">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoC/Algeria.png"/>
+                      <Image iconType="3" name="/selecoes/grupoc/Algeria.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel26">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoC/England.png"/>
+                      <Image iconType="3" name="/selecoes/grupoc/England.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel27">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoC/Slovenia.png"/>
+                      <Image iconType="3" name="/selecoes/grupoc/Slovenia.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel28">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoC/United-States.png"/>
+                      <Image iconType="3" name="/selecoes/grupoc/United-States.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -713,7 +713,7 @@
                                       <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -742,7 +742,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Component id="jScrollPane6" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace pref="54" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -760,28 +760,28 @@
                 <Component class="javax.swing.JLabel" name="jLabel32">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoD/Australia.png"/>
+                      <Image iconType="3" name="/selecoes/grupod/Australia.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel33">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoD/Germany.png"/>
+                      <Image iconType="3" name="/selecoes/grupod/Germany.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel34">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoD/Ghana.png"/>
+                      <Image iconType="3" name="/selecoes/grupod/Serbia.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel35">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoD/Serbia.png"/>
+                      <Image iconType="3" name="/selecoes/grupod/Ghana.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -906,7 +906,7 @@
                                       <Component id="jLabel42" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="262" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -935,7 +935,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Component id="jScrollPane7" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace pref="54" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -953,28 +953,28 @@
                 <Component class="javax.swing.JLabel" name="jLabel39">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoE/Cameroon.png"/>
+                      <Image iconType="3" name="/selecoes/grupoe/Cameroon.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel40">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoE/Denmark.png"/>
+                      <Image iconType="3" name="/selecoes/grupoe/Denmark.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel41">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoE/Japan.png"/>
+                      <Image iconType="3" name="/selecoes/grupoe/Japan.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel42">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoE/Netherlands.png"/>
+                      <Image iconType="3" name="/selecoes/grupoe/Netherlands.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -1099,7 +1099,7 @@
                                       <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1128,7 +1128,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Component id="jScrollPane8" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace pref="54" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1146,28 +1146,28 @@
                 <Component class="javax.swing.JLabel" name="jLabel46">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoF/Italy.png"/>
+                      <Image iconType="3" name="/selecoes/grupof/Italy.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel47">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoF/New-Zealand.png"/>
+                      <Image iconType="3" name="/selecoes/grupof/New-Zealand.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel48">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoF/Paraguay.png"/>
+                      <Image iconType="3" name="/selecoes/grupof/Paraguay.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel49">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoF/Slovakia.png"/>
+                      <Image iconType="3" name="/selecoes/grupof/Slovakia.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -1292,7 +1292,7 @@
                                       <Component id="jLabel56" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="262" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1321,7 +1321,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Component id="jScrollPane9" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace pref="54" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1339,28 +1339,28 @@
                 <Component class="javax.swing.JLabel" name="jLabel53">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoG/Brazil.png"/>
+                      <Image iconType="3" name="/selecoes/grupog/Brazil.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel54">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoG/Cote-DIvoire.png"/>
+                      <Image iconType="3" name="/selecoes/grupog/Cote-DIvoire.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel55">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoG/North-Korea.png"/>
+                      <Image iconType="3" name="/selecoes/grupog/North-Korea.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel56">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoG/Portugal.png"/>
+                      <Image iconType="3" name="/selecoes/grupog/Portugal.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -1485,7 +1485,7 @@
                                       <Component id="jLabel63" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1514,7 +1514,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Component id="jScrollPane10" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace pref="54" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1532,28 +1532,28 @@
                 <Component class="javax.swing.JLabel" name="jLabel60">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoH/Chile.png"/>
+                      <Image iconType="3" name="/selecoes/grupoh/Chile.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel61">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoH/Ecuador.png"/>
+                      <Image iconType="3" name="/selecoes/grupoh/Ecuador.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel62">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoH/Honduras.png"/>
+                      <Image iconType="3" name="/selecoes/grupoh/Honduras.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel63">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/sgcmf/img/Selecoes/GrupoH/Spain.png"/>
+                      <Image iconType="3" name="/selecoes/grupoh/Spain.png"/>
                     </Property>
                   </Properties>
                 </Component>
