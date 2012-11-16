@@ -29,7 +29,7 @@ public class RodandoPainel
                 jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 jf.setLocationRelativeTo(null);
                 
-                jf.add(new PrimeiraFase());
+                jf.add(new SegundaFasev2());
                 jf.setSize(800,400);
                 jf.setLocationRelativeTo(null);
             }
