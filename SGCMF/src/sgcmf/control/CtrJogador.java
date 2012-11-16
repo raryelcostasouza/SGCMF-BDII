@@ -228,29 +228,28 @@ public class CtrJogador
     }
 
     public ResultadoOperacao cadastrarJogador(String numCamisa, String nome, String dataNascimento,
-            String altura, boolean titular, String posicao, String selecao)
+            String altura, boolean titular, String posicao, Usuario user)
     {
         Short nCamisa;
         Date dtaNascimento;
         BigDecimal aAltura;
-        Short aSelecao;
         Transaction tr;
-        Selecao s = new Selecao();
         Jogador j = new Jogador();
         ResultadoOperacao result;
         String errorMessege;
         GeneralDAO gdao;
+        Iterator iterator = user.getSelecaos().iterator();
+        Selecao s;
+        s = (Selecao) iterator.next();
 
         gdao = new GeneralDAO();
-        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, false);
+        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, false, s.getId());
         if (errorMessege.equals(""))
         {
             nCamisa = Short.parseShort(numCamisa);
             dtaNascimento = new Date(dataNascimento);
             aAltura = new BigDecimal(altura);
-            aSelecao = Short.parseShort(selecao);
             tr = gdao.getSessao().beginTransaction();
-            gdao.carregar(s, aSelecao);
             try
             {
                 j.setNcamisa(nCamisa);
@@ -370,7 +369,7 @@ public class CtrJogador
                 return errorMessege;
             }
         }
-        catch (Exception e)
+        catch (NumberFormatException nfe)
         {
             errorMessege = "Digite um número valido para camisa.";
         }

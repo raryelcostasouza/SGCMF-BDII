@@ -37,7 +37,6 @@ public class PanelCadastrarJogador extends JPanel
     private CtrMain ctrMain;
     private CtrSelecao ctrSelecao;
     private CtrJogador ctrJogador;
-    private JTextField jtfSelecao;
     private JTextField jtfNumeroCamisa;
     private JTextField jtfNome;
     private JTextField jtfAltura;
@@ -91,8 +90,6 @@ public class PanelCadastrarJogador extends JPanel
         jtfNome = new JTextField(10);
         jtfDataNascimento = new JTextField(10);
         jtfAltura = new JTextField(10);
-        jtfSelecao = new JTextField(10);
-        jtfSelecao.setEditable(false);
 
         jcbPosicao = new JComboBox(items);
         jcbPosicao.setEditable(false);
@@ -111,13 +108,12 @@ public class PanelCadastrarJogador extends JPanel
                 boolean titular = false;
                 ResultadoOperacao resultado;
                 String posicao = (String) jcbPosicao.getSelectedItem();
-                String selecao = jtfSelecao.getText();
                 if (jrbSim.isSelected())
                 {
                     titular = true;
                 }
                 resultado = ctrJogador.cadastrarJogador(numCamisa, nome, dataNascimento,
-                        altura, titular, posicao, selecao);
+                        altura, titular, posicao, ctrTecnico.getUser());
                 if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
                 {
                     JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
@@ -159,7 +155,6 @@ public class PanelCadastrarJogador extends JPanel
         jtfNome.setText("");
         jtfDataNascimento.setText("");
         jtfAltura.setText("");
-        jtfSelecao.setText("");
         jcbPosicao.setSelectedIndex(0);
         jrbSim.setSelected(true);
     }
