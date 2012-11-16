@@ -251,7 +251,7 @@ public class CtrJogador
         GeneralDAO gdao;
 
         gdao = new GeneralDAO();
-        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, selecao, false);
+        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, false);
         if (errorMessege.equals(""))
         {
             nCamisa = Short.parseShort(numCamisa);
@@ -287,7 +287,7 @@ public class CtrJogador
     }
 
     public ResultadoOperacao alterarJogador(String strIdJogador, String numCamisa, String nome, String dtaNascimento,
-                                            String altura, String posicao, String selecao)
+                                            String altura, String posicao)
     {
         Short nCamisa;
         Date dataNascimento;
@@ -305,16 +305,14 @@ public class CtrJogador
 
         shortIdJogador = new Short(strIdJogador);
         bolGoleiro = isJogadorGoleiro(shortIdJogador);
-        errorMessege = validaCampos('a', numCamisa, dtaNascimento, altura, selecao, bolGoleiro);
+        errorMessege = validaCampos('a', numCamisa, dtaNascimento, altura, bolGoleiro);
         if (errorMessege.equals(""))
         {
             gdao = new GeneralDAO();
             nCamisa = Short.parseShort(numCamisa);
             dataNascimento = new Date(dtaNascimento);
             pAltura = new BigDecimal(altura);
-            idSelecao = Short.parseShort(selecao);
             tr = gdao.getSessao().beginTransaction();
-            gdao.carregar(s, idSelecao);
             gdao.carregar(j, shortIdJogador);
             try
             {
@@ -365,7 +363,7 @@ public class CtrJogador
     }
 
     private String validaCampos(char metodo, String numCamisa, String dataNascimento,
-                                String altura, String selecao, boolean bolGoleiro)
+                                String altura, boolean bolGoleiro)
     {
         String errorMessege = "";
         Short camisa;
@@ -408,45 +406,37 @@ public class CtrJogador
                         + " para separar o metro de centímetro.";
             }
         }
-        if (errorMessege.equals(""))
-        {
-            if (selecao.equals(""))
-            {
-                errorMessege = "O campo de seleção é obrigatório.";
-            }
-
-        }
-        if (errorMessege.equals(""))
-        {
-            Short idSelecao = new Short(selecao);
-            int resultado = qtdeTitularesSelecao(idSelecao);
-            if (resultado >= 11)
-            {
-                errorMessege = "É permitido apenas 11 jogadores titulares por seleção.";
-            }
-        }
-        if (errorMessege.equals(""))
-        {
-            Short idSelecao = new Short(selecao);
-            int resultado = qtdeGoleirosSelecao(idSelecao);
-            if (metodo == 'c')
-            {
-                if (resultado >= 3)
-                {
-                    errorMessege = "É permitido apenas 3 Goleiros por seleção.";
-                }
-            }
-            else
-            {
-                if (bolGoleiro == false)
-                {
-                    if (resultado >= 3)
-                    {
-                        errorMessege = "É permitido apenas 3 Goleiros por seleção.";
-                    }
-                }
-            }
-        }
+//        if (errorMessege.equals(""))
+//        {
+//            Short idSelecao = new Short(selecao);
+//            int resultado = qtdeTitularesSelecao(idSelecao);
+//            if (resultado >= 11)
+//            {
+//                errorMessege = "É permitido apenas 11 jogadores titulares por seleção.";
+//            }
+//        }
+//        if (errorMessege.equals(""))
+//        {
+//            Short idSelecao = new Short(selecao);
+//            int resultado = qtdeGoleirosSelecao(idSelecao);
+//            if (metodo == 'c')
+//            {
+//                if (resultado >= 3)
+//                {
+//                    errorMessege = "É permitido apenas 3 Goleiros por seleção.";
+//                }
+//            }
+//            else
+//            {
+//                if (bolGoleiro == false)
+//                {
+//                    if (resultado >= 3)
+//                    {
+//                        errorMessege = "É permitido apenas 3 Goleiros por seleção.";
+//                    }
+//                }
+//            }
+//        }
         return errorMessege;
     }
 

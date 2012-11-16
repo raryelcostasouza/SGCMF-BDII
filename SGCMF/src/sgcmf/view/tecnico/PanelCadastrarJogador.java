@@ -66,8 +66,7 @@ public class PanelCadastrarJogador extends JPanel implements ISelecionarSelecao
 
     private void montaPainel()
     {
-        JPanel jpAux = new JPanel(new GridLayout(7, 1));
-        JPanel jpAux2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel jpAux = new JPanel(new GridLayout(6, 1));
         JPanel jpAux3 = new JPanel(new GridLayout(1, 2));
 
         JLabel jlNumeroCamisa = new JLabel("Número da Camisa:");
@@ -82,8 +81,6 @@ public class PanelCadastrarJogador extends JPanel implements ISelecionarSelecao
         UtilView.alinhaLabel(jlTitular);
         JLabel jlPosicao = new JLabel("Posição:");
         UtilView.alinhaLabel(jlPosicao);
-        JLabel jlSelecao = new JLabel("Seleção:");
-        UtilView.alinhaLabel(jlSelecao);
 
         ButtonGroup bg = new ButtonGroup();
         jrbSim = new JRadioButton("Sim");
@@ -138,18 +135,6 @@ public class PanelCadastrarJogador extends JPanel implements ISelecionarSelecao
             }
         });
 
-        JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
-        UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
-
-        jbPesquisar.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                ativaTelaSelecionarSelecao();
-            }
-        });
-
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNumeroCamisa));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNumeroCamisa, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNome));
@@ -165,19 +150,10 @@ public class PanelCadastrarJogador extends JPanel implements ISelecionarSelecao
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jpAux3, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlPosicao));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jcbPosicao, FlowLayout.LEFT));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSelecao));
-        jpAux2.add(jtfSelecao);
-        jpAux2.add(jbPesquisar);
-        jpAux.add(jpAux2);
         jpAux.setBorder(BorderFactory.createEtchedBorder());
 
         this.add(jpAux, BorderLayout.CENTER);
         this.add(UtilView.putComponentInFlowLayoutPanel(jbCadastrar), BorderLayout.SOUTH);
-    }
-
-    private void ativaTelaSelecionarSelecao()
-    {
-        limSelecionarSelecao.ativaTela(this);
     }
 
     public void selecaoSelecionada(Short idSelecao)
