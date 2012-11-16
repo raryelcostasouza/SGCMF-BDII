@@ -40,7 +40,6 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
     private JTextField jtfDataNascimento;
     private JTextField jtfAltura;
     private JTextField jtfPosicao;
-    private JTextField jtfSelecao;
     private JTextField jtfPesquisar;
     private JTableSGCMF jt;
     private JRadioButton jrbNome;
@@ -133,8 +132,6 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
         UtilView.alinhaLabel(jlAltura);
         JLabel jlPosicao = new JLabel("Posição:");
         UtilView.alinhaLabel(jlPosicao);
-        JLabel jlSelecao = new JLabel("Seleção:");
-        UtilView.alinhaLabel(jlSelecao);
 
         jtfNumeroCamisa = new JTextField(10);
         jtfNumeroCamisa.setEditable(false);
@@ -146,8 +143,6 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
         jtfAltura.setEditable(false);
         jtfPosicao = new JTextField(10);
         jtfPosicao.setEditable(false);
-        jtfSelecao = new JTextField(10);
-        jtfSelecao.setEditable(false);
 
         jbRemover = new JButton("Remover");
         jbRemover.addActionListener(new ActionListener() {
@@ -185,8 +180,6 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfPosicao, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlDataNascimento));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfDataNascimento, FlowLayout.LEFT));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSelecao));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfSelecao, FlowLayout.LEFT));
         jpAux.setBorder(BorderFactory.createEtchedBorder());
 
         jpPrincipal.add(jpAux, BorderLayout.CENTER);
@@ -222,7 +215,6 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
     @Override
     public void receiveRowData(String[] dados)
     {
-        Short idSelecao;
         String s;
         jbRemover.setEnabled(true);
         jtfNumeroCamisa.setText(dados[1]);
@@ -232,8 +224,6 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
         jtfDataNascimento.setText(s);
         jtfAltura.setText(dados[4]);
         jtfPosicao.setText(dados[5]);
-        idSelecao = ctrMain.getCtrSelecao().capturarIdSelecao(dados[6]);
-        jtfSelecao.setText(idSelecao + "");
     }
 
     public void travarBotao()
@@ -250,7 +240,6 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
         jtfDataNascimento.setText("");
         jtfNumeroCamisa.setText("");
         jtfNome.setText("");
-        jtfSelecao.setText("");
         jtfAltura.setText("");
     }
 
@@ -260,7 +249,6 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
         jtfDataNascimento.setText("");
         jtfNumeroCamisa.setText("");
         jtfNome.setText("");
-        jtfSelecao.setText("");
         jtfAltura.setText("");
     }
 }
