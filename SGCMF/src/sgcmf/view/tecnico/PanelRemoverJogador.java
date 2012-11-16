@@ -34,6 +34,7 @@ import sgcmf.view.table.ReceiveRowDataSGCMF;
 public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
 {
     private CtrMain ctrMain;
+    private CtrTecnico ctrTecnico;
     private CtrJogador ctrJogador;
     private JTextField jtfNumeroCamisa;
     private JTextField jtfNome;
@@ -48,6 +49,7 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
 
     public PanelRemoverJogador(CtrTecnico ctrTecnico)
     {
+        this.ctrTecnico = ctrTecnico;
         ctrMain = ctrTecnico.getCtrMain();
         ctrJogador = ctrMain.getCtrJogador();
         setLayout(new BorderLayout());
@@ -191,8 +193,8 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
     public void ativaTela()
     {
         String[][] dadosJogadores;
-//        dadosJogadores = ctrJogador.queryAllDataJogadorTecnico();
-//        jt.preencheTabela(dadosJogadores);
+        dadosJogadores = ctrJogador.queryAllDataJogadorTecnico(ctrTecnico.getUser());
+        jt.preencheTabela(dadosJogadores);
     }
 
     private void pesquisar(String chavePesquisa)
