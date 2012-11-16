@@ -24,7 +24,6 @@ import sgcmf.control.CtrMain;
 import sgcmf.control.CtrSelecao;
 import sgcmf.control.CtrTecnico;
 import sgcmf.model.other.ResultadoOperacao;
-import sgcmf.model.other.SGCMFIcons;
 import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
 
@@ -32,9 +31,8 @@ import sgcmf.view.UtilView;
  *
  * @author Helio
  */
-public class PanelCadastrarJogador extends JPanel implements ISelecionarSelecao
+public class PanelCadastrarJogador extends JPanel
 {
-    private LimSelecionarSelecao limSelecionarSelecao;
     private CtrTecnico ctrTecnico;
     private CtrMain ctrMain;
     private CtrSelecao ctrSelecao;
@@ -58,7 +56,6 @@ public class PanelCadastrarJogador extends JPanel implements ISelecionarSelecao
         ctrMain = ctrTecnico.getCtrMain();
         ctrSelecao = ctrMain.getCtrSelecao();
         ctrJogador = ctrMain.getCtrJogador();
-        limSelecionarSelecao = new LimSelecionarSelecao(ctrSelecao);
         setLayout(new BorderLayout());
 
         montaPainel();
@@ -154,11 +151,6 @@ public class PanelCadastrarJogador extends JPanel implements ISelecionarSelecao
 
         this.add(jpAux, BorderLayout.CENTER);
         this.add(UtilView.putComponentInFlowLayoutPanel(jbCadastrar), BorderLayout.SOUTH);
-    }
-
-    public void selecaoSelecionada(Short idSelecao)
-    {
-        jtfSelecao.setText(idSelecao + "");
     }
 
     public void limparCampos()
