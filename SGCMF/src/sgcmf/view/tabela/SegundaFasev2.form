@@ -83,30 +83,15 @@
                                       <Component id="jPanel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
-                                      <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                      <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jPanel15" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPanel14" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="jPanel27" min="-2" pref="154" max="-2" attributes="0"/>
-                                      <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel99" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
@@ -114,6 +99,17 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel100" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPanel16" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jPanel27" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -159,7 +155,6 @@
                                       <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -2711,7 +2706,7 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel131" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -2726,9 +2721,9 @@
                                           <Component id="jLabel129" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jTextField98" min="-2" pref="109" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -2770,12 +2765,14 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField98">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField89"/>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="columns" type="int" value="8"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField99">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField89"/>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="columns" type="int" value="8"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel129">
@@ -2795,7 +2792,8 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField100">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField89"/>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="columns" type="int" value="8"/>
                   </Properties>
                 </Component>
               </SubComponents>
