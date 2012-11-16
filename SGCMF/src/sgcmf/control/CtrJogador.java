@@ -278,25 +278,26 @@ public class CtrJogador
     }
 
     public ResultadoOperacao alterarJogador(String strIdJogador, String numCamisa, String nome, String dtaNascimento,
-            String altura, String posicao)
+            String altura, String posicao, Usuario user)
     {
         Short nCamisa;
         Date dataNascimento;
         BigDecimal pAltura;
-        Short idSelecao;
         Short shortIdJogador;
-        Selecao s = new Selecao();
         Jogador j = new Jogador();
         Transaction tr;
         GeneralDAO gdao;
         ResultadoOperacao result;
         String errorMessege;
-
         boolean bolGoleiro;
-
+        Iterator iterator;
+        iterator = user.getSelecaos().iterator();
+        Selecao s = (Selecao) iterator.next();
+        
+        
         shortIdJogador = new Short(strIdJogador);
         bolGoleiro = isJogadorGoleiro(shortIdJogador);
-        errorMessege = validaCampos('a', numCamisa, dtaNascimento, altura, bolGoleiro);
+        errorMessege = validaCampos('a', numCamisa, dtaNascimento, altura, bolGoleiro, s.getId());
         if (errorMessege.equals(""))
         {
             gdao = new GeneralDAO();
@@ -312,7 +313,6 @@ public class CtrJogador
                 j.setDatanasc(dataNascimento);
                 j.setAltura(pAltura);
                 j.setPosicao(posicao);
-                j.setSelecao(s);
                 gdao.atualizar(j);
                 tr.commit();
                 result = new ResultadoOperacao("Jogador Alterado com êxito.", TipoResultadoOperacao.EXITO);
@@ -354,7 +354,7 @@ public class CtrJogador
     }
 
     private String validaCampos(char metodo, String numCamisa, String dataNascimento,
-            String altura, boolean bolGoleiro)
+            String altura, boolean bolGoleiro, Short idSelecao)
     {
         String errorMessege = "";
         Short camisa;
@@ -397,37 +397,35 @@ public class CtrJogador
                         + " para separar o metro de centímetro.";
             }
         }
-//        if (errorMessege.equals(""))
-//        {
-//            Short idSelecao = new Short(selecao);
-//            int resultado = qtdeTitularesSelecao(idSelecao);
-//            if (resultado >= 11)
-//            {
-//                errorMessege = "É permitido apenas 11 jogadores titulares por seleção.";
-//            }
-//        }
-//        if (errorMessege.equals(""))
-//        {
-//            Short idSelecao = new Short(selecao);
-//            int resultado = qtdeGoleirosSelecao(idSelecao);
-//            if (metodo == 'c')
-//            {
-//                if (resultado >= 3)
-//                {
-//                    errorMessege = "É permitido apenas 3 Goleiros por seleção.";
-//                }
-//            }
-//            else
-//            {
-//                if (bolGoleiro == false)
-//                {
-//                    if (resultado >= 3)
-//                    {
-//                        errorMessege = "É permitido apenas 3 Goleiros por seleção.";
-//                    }
-//                }
-//            }
-//        }
+        if (errorMessege.equals(""))
+        {
+            int resultado = qtdeTitularesSelecao(idSelecao);
+            if (resultado >= 11)
+            {
+                errorMessege = "É permitido apenas 11 jogadores titulares por seleção.";
+            }
+        }
+        if (errorMessege.equals(""))
+        {
+            int resultado = qtdeGoleirosSelecao(idSelecao);
+            if (metodo == 'c')
+            {
+                if (resultado >= 3)
+                {
+                    errorMessege = "É permitido apenas 3 Goleiros por seleção.";
+                }
+            }
+            else
+            {
+                if (bolGoleiro == false)
+                {
+                    if (resultado >= 3)
+                    {
+                        errorMessege = "É permitido apenas 3 Goleiros por seleção.";
+                    }
+                }
+            }
+        }
         return errorMessege;
     }
 

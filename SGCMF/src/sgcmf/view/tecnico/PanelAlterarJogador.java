@@ -25,7 +25,6 @@ import sgcmf.control.CtrMain;
 import sgcmf.control.CtrSelecao;
 import sgcmf.control.CtrTecnico;
 import sgcmf.model.other.ResultadoOperacao;
-import sgcmf.model.other.SGCMFIcons;
 import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
@@ -39,6 +38,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
 {
     private JTableSGCMF jt;
     private CtrMain ctrMain;
+    private CtrTecnico ctrTecnico;
     private CtrJogador ctrJogador;
     private CtrSelecao ctrSelecao;
     private JRadioButton jrbNome;
@@ -53,6 +53,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
 
     public PanelAlterarJogador(CtrTecnico ctrTecnico)
     {
+        this.ctrTecnico = ctrTecnico;
         ctrMain = ctrTecnico.getCtrMain();
         ctrSelecao = ctrMain.getCtrSelecao();
         ctrJogador = ctrMain.getCtrJogador();
@@ -162,7 +163,8 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
                 String posicao = (String) jcbPosicao.getSelectedItem();
                 ResultadoOperacao result;
                 String idJogador = jt.getValueAt(jt.getSelectedRow(), 0).toString();
-                result = ctrJogador.alterarJogador(idJogador, numCamisa, nome, dtaNascimento, altura, posicao);
+                result = ctrJogador.alterarJogador(idJogador, numCamisa, nome, dtaNascimento,
+                        altura, posicao, ctrTecnico.getUser());
 
                 if (result.getTipo().equals(TipoResultadoOperacao.ERRO))
                 {
@@ -224,8 +226,8 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     public void ativaTela()
     {
         String[][] dadosJogador;
-        //dadosJogador = ctrJogador.queryAllDataJogadorTecnico();
-        //jt.preencheTabela(dadosJogador);
+        dadosJogador = ctrJogador.queryAllDataJogadorTecnico(ctrTecnico.getUser());
+        jt.preencheTabela(dadosJogador);
     }
 
     private void pesquisar(String chavePesquisa)
