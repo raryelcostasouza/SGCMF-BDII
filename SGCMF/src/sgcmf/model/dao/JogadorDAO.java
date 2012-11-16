@@ -5,9 +5,9 @@ import sgcmf.model.hibernate.Jogador;
 
 public class JogadorDAO extends GeneralDAO
 {
-    public ArrayList<Jogador> listaTodos()
+    public ArrayList<Jogador> listaTodosBySelecao(Short idSelecao)
     {
-        return (ArrayList<Jogador>) sessao.createQuery("from Jogador j order by j.ncamisa").list();
+        return (ArrayList<Jogador>) sessao.createQuery("from Jogador j where j.selecao.id = "+idSelecao +" order by j.ncamisa").list();
     }
 
     public ArrayList<Jogador> queryJogadorByNome(String nome)

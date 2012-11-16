@@ -26,6 +26,7 @@ import sgcmf.view.table.JTableSGCMF;
 public class PanelConsultarJogador extends JPanel
 {
     private CtrMain ctrMain;
+    private CtrTecnico ctrTecnico;
     private CtrJogador ctrJogador;
     private JTableSGCMF jt;
     private JRadioButton jrbNome;
@@ -34,6 +35,7 @@ public class PanelConsultarJogador extends JPanel
 
     public PanelConsultarJogador(CtrTecnico ctrTecnico)
     {
+        this.ctrTecnico = ctrTecnico;
         ctrMain = ctrTecnico.getCtrMain();
         ctrJogador = ctrMain.getCtrJogador();
         setLayout(new BorderLayout());
@@ -102,7 +104,7 @@ public class PanelConsultarJogador extends JPanel
     {
         String[][] dadosJogadores;
 
-        dadosJogadores = ctrJogador.queryAllDataJogadorTodos();
+        dadosJogadores = ctrJogador.queryAllDataJogadorTecnico(ctrTecnico.getUser());
         jt.preencheTabela(dadosJogadores);
     }
 

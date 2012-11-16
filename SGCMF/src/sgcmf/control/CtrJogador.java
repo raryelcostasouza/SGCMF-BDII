@@ -3,12 +3,14 @@ package sgcmf.control;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.JogadorDAO;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Selecao;
+import sgcmf.model.hibernate.Usuario;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
 
@@ -24,20 +26,6 @@ public class CtrJogador
         return jogador;
     }
 
-    public String[][] queryJogadorTodos()
-    {
-        JogadorDAO jDAO;
-        String[][] dadosJogadores;
-        ArrayList alJogador;
-
-        jDAO = new JogadorDAO();
-        alJogador = jDAO.listaTodos();
-        dadosJogadores = arrayList2StringMatrix(alJogador);
-        jDAO.fecharSessao();
-
-        return dadosJogadores;
-    }
-
     public String[][] queryJogadoresEmCampo(Short idJogo)
     {
         JogadorDAO jDAO;
@@ -51,7 +39,7 @@ public class CtrJogador
 
         return dadosJogadores;
     }
-    
+
     public String[][] queryJogadoresEmCampoByNome(Short idJogo, String nome)
     {
         JogadorDAO jDAO;
@@ -79,7 +67,7 @@ public class CtrJogador
 
         return dadosJogadores;
     }
-    
+
     public String[][] queryOutrosJogadoresEmCampoSelecaoByNome(Short idJogo, Short idSelecao, Short idJogador, String nome)
     {
         JogadorDAO jDAO;
@@ -93,7 +81,7 @@ public class CtrJogador
 
         return dadosJogadores;
     }
-    
+
     public String[][] queryReservasSelecao(Short idJogo, Short idSelecao)
     {
         JogadorDAO jDAO;
@@ -107,8 +95,8 @@ public class CtrJogador
 
         return dadosJogadores;
     }
-    
-    public String[][]queryReservasSelecaoByNome(Short idJogo, Short idSelecao, String nome)
+
+    public String[][] queryReservasSelecaoByNome(Short idJogo, Short idSelecao, String nome)
     {
         JogadorDAO jDAO;
         String[][] dadosJogadores;
@@ -144,14 +132,17 @@ public class CtrJogador
         return dadosJogador;
     }
 
-    public String[][] queryAllDataJogadorTodos()
+    public String[][] queryAllDataJogadorTecnico(Usuario u)
     {
         JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
-
+        Selecao s;
         jDAO = new JogadorDAO();
-        alJogador = jDAO.listaTodos();
+        Iterator iterator = u.getSelecaos().iterator();
+        
+        s = (Selecao) iterator.next();
+        alJogador = jDAO.listaTodosBySelecao(s.getId());
         dadosJogadores = arrayList2StringMatrixFull(alJogador);
         jDAO.fecharSessao();
 
@@ -237,7 +228,7 @@ public class CtrJogador
     }
 
     public ResultadoOperacao cadastrarJogador(String numCamisa, String nome, String dataNascimento,
-                                              String altura, boolean titular, String posicao, String selecao)
+            String altura, boolean titular, String posicao, String selecao)
     {
         Short nCamisa;
         Date dtaNascimento;
@@ -287,7 +278,7 @@ public class CtrJogador
     }
 
     public ResultadoOperacao alterarJogador(String strIdJogador, String numCamisa, String nome, String dtaNascimento,
-                                            String altura, String posicao)
+            String altura, String posicao)
     {
         Short nCamisa;
         Date dataNascimento;
@@ -357,13 +348,13 @@ public class CtrJogador
         catch (HibernateException he)
         {
             resultado = new ResultadoOperacao("Falha na exclusão do jogador.\n" + he.getMessage(),
-                                              TipoResultadoOperacao.ERRO);
+                    TipoResultadoOperacao.ERRO);
         }
         return resultado;
     }
 
     private String validaCampos(char metodo, String numCamisa, String dataNascimento,
-                                String altura, boolean bolGoleiro)
+            String altura, boolean bolGoleiro)
     {
         String errorMessege = "";
         Short camisa;

@@ -191,8 +191,8 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
     public void ativaTela()
     {
         String[][] dadosJogadores;
-        dadosJogadores = ctrJogador.queryAllDataJogadorTodos();
-        jt.preencheTabela(dadosJogadores);
+//        dadosJogadores = ctrJogador.queryAllDataJogadorTecnico();
+//        jt.preencheTabela(dadosJogadores);
     }
 
     private void pesquisar(String chavePesquisa)

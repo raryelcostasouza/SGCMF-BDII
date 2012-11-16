@@ -14,24 +14,26 @@ import sgcmf.model.other.TipoResultadoOperacao;
  *
  * @author Thatiane
  */
-public class CtrUsuario {
-
+public class CtrUsuario
+{
     UsuarioDAO usuarioDAO = new UsuarioDAO();
     String[][] dadosUsuarios;
 
-    public Usuario loginUsuario(String login, String senha){
+    public Usuario loginUsuario(String login, String senha)
+    {
 
         ArrayList<Usuario> usuarios = usuarioDAO.queryUsuarioByLogin(login, senha);
-        if(usuarios.size() < 0){
+        if (usuarios.size() < 0)
+        {
             return null;
         }
         Usuario u = usuarioDAO.queryUsuarioByLogin(login, senha).get(0);
         return u;
     }
 
-     public String[][] queryJogadorTodos()
+    public String[][] queryJogadorTodos()
     {
-       
+
         ArrayList alUsuario;
 
         alUsuario = usuarioDAO.listaTodos();
@@ -73,7 +75,7 @@ public class CtrUsuario {
         return dadosUsuarios;
     }
 
-     public ResultadoOperacao cadastrarUsuario(String cpf, String nome, String email,
+    public ResultadoOperacao cadastrarUsuario(String cpf, String nome, String email,
             String login, String senha, String perfil)
     {
         Transaction tr;
@@ -112,7 +114,7 @@ public class CtrUsuario {
         return result;
     }
 
-    public ResultadoOperacao alterarJogador(String strIdUsuario, String cpf , String nome, String email, String login,
+    public ResultadoOperacao alterarJogador(String strIdUsuario, String cpf, String nome, String email, String login,
             String senha, String perfil)
     {
         Short shortIdUsuario;
@@ -154,7 +156,6 @@ public class CtrUsuario {
         }
         return result;
     }
-
 
     public ResultadoOperacao removerJogador(String idUsuario)
     {
@@ -200,6 +201,4 @@ public class CtrUsuario {
 
         return errorMessege;
     }
-
-
 }

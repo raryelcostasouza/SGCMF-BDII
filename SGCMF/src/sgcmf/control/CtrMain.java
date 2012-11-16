@@ -1,13 +1,12 @@
-
 package sgcmf.control;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import sgcmf.model.dao.GeneralDAO;
+import sgcmf.model.hibernate.Usuario;
 import sgcmf.view.LimLogin;
 import sgcmf.view.ShowSplash;
-import sgcmf.model.hibernate.Usuario;
 
 public class CtrMain
 {
@@ -57,7 +56,7 @@ public class CtrMain
                 GeneralDAO gdao = new GeneralDAO();
                 gdao.fecharSessao();
                 gdao = null;
-                
+
                 try
                 {
                     //Tem que arrumar um jeito de receber um aviso da Thread ShowSplash que terminou e esta pode
@@ -86,11 +85,13 @@ public class CtrMain
 
         Usuario u = ctrUsuario.loginUsuario(login, senha);
 
-        if(u == null)
+        if (u == null)
         {
             JOptionPane.showMessageDialog(null, "Login inválido!", "Erro!", JOptionPane.ERROR_MESSAGE);
-        } else{
-           
+        }
+        else
+        {
+
             if (u.getPerfil().equals("Administrador"))
             {
                 limLogin.setVisible(false);
@@ -104,7 +105,7 @@ public class CtrMain
             else if (u.getPerfil().equals("Tecnico da Selecao"))
             {
                 limLogin.setVisible(false);
-                ctrTecnico.ativaTela();
+                ctrTecnico.ativaTela(u);
             }
             else if (u.getPerfil().equals("Entusiasta"))
             {
@@ -157,6 +158,5 @@ public class CtrMain
     public CtrSubstituicao getCtrSubstituicao()
     {
         return ctrSubstituicao;
-    }    
+    }
 }
-
