@@ -155,8 +155,11 @@ public class CtrCartao
         GeneralDAO gdao;
         Falta faltaParaRemover;
         Cartao cartaoParaRemover;
+        Cartao cartaoAssociado;
         Ocorrencia ocParaRemover;
         String errorMessage;
+        Iterator<Falta> itFalta;
+        Iterator<Cartao> itCartao;
         
         cartaoParaRemover = new Cartao();
         ocParaRemover = new Ocorrencia();
@@ -170,18 +173,28 @@ public class CtrCartao
             if (errorMessage.equals(""))
             {
                 gdao.carregar(cartaoParaRemover, idCartao);
-
-                //se  houver faltas associadas com o cartao
-                if (!cartaoParaRemover.getFaltas().isEmpty())
+                ocParaRemover = cartaoParaRemover.getOcorrencia();
+                
+                //apaga faltas associadas
+                if (!ocParaRemover.getFaltas().isEmpty())
                 {
-                    Iterator it = cartaoParaRemover.getFaltas().iterator();
-
-                    //remove a falta associada primeiro
-                    faltaParaRemover = (Falta) it.next();
+                    itFalta = ocParaRemover.getFaltas().iterator();
+                    faltaParaRemover = itFalta.next();
                     gdao.apagar(faltaParaRemover);
                 }
                 
-                gdao.apagar(cartaoParaRemover);
+                //remove todos os cartoes associados
+                if (!ocParaRemover.getCartaos().isEmpty())
+                {
+                    itCartao = ocParaRemover.getCartaos().iterator();
+                    
+                    while(itCartao.hasNext())
+                    {
+                        cartaoAssociado = itCartao.next();
+                        gdao.apagar(cartaoAssociado);
+                    }
+                }
+                //remove a ocorrência
                 gdao.apagar(ocParaRemover);
                 
                 tr.commit();
