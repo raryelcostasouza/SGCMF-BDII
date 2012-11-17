@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated Oct 30, 2012 8:06:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 17/11/2012 16:51:03 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -11,36 +11,40 @@ import java.util.Set;
 public class Cartao  implements java.io.Serializable {
 
 
-     private short idoc;
+     private short id;
      private Ocorrencia ocorrencia;
+     private Cartao cartao;
      private Jogador jogador;
      private String cor;
      private Set faltas = new HashSet(0);
+     private Set cartaos = new HashSet(0);
 
     public Cartao() {
     }
 
 	
-    public Cartao(short idoc, Ocorrencia ocorrencia, Jogador jogador, String cor) {
-        this.idoc = idoc;
+    public Cartao(short id, Ocorrencia ocorrencia, Jogador jogador, String cor) {
+        this.id = id;
         this.ocorrencia = ocorrencia;
         this.jogador = jogador;
         this.cor = cor;
     }
-    public Cartao(short idoc, Ocorrencia ocorrencia, Jogador jogador, String cor, Set faltas) {
-       this.idoc = idoc;
+    public Cartao(short id, Ocorrencia ocorrencia, Cartao cartao, Jogador jogador, String cor, Set faltas, Set cartaos) {
+       this.id = id;
        this.ocorrencia = ocorrencia;
+       this.cartao = cartao;
        this.jogador = jogador;
        this.cor = cor;
        this.faltas = faltas;
+       this.cartaos = cartaos;
     }
    
-    public short getIdoc() {
-        return this.idoc;
+    public short getId() {
+        return this.id;
     }
     
-    public void setIdoc(short idoc) {
-        this.idoc = idoc;
+    public void setId(short id) {
+        this.id = id;
     }
     public Ocorrencia getOcorrencia() {
         return this.ocorrencia;
@@ -48,6 +52,13 @@ public class Cartao  implements java.io.Serializable {
     
     public void setOcorrencia(Ocorrencia ocorrencia) {
         this.ocorrencia = ocorrencia;
+    }
+    public Cartao getCartao() {
+        return this.cartao;
+    }
+    
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
     }
     public Jogador getJogador() {
         return this.jogador;
@@ -69,6 +80,13 @@ public class Cartao  implements java.io.Serializable {
     
     public void setFaltas(Set faltas) {
         this.faltas = faltas;
+    }
+    public Set getCartaos() {
+        return this.cartaos;
+    }
+    
+    public void setCartaos(Set cartaos) {
+        this.cartaos = cartaos;
     }
 
 

@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated Oct 30, 2012 8:06:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 17/11/2012 16:51:03 by Hibernate Tools 3.2.1.GA
 
 
 

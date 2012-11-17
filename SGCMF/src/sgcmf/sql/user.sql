@@ -17,3 +17,4 @@ grant select, update on sequence jogo_id_seq to javaAppSGCMF;
 grant select, update on sequence rodadadepenaltis_id_seq to javaAppSGCMF;
 grant select, update on sequence selecao_id_seq to javaAppSGCMF;
 grant select, update on sequence usuario_id_seq to javaAppSGCMF;
+grant select, update on sequence cartao_id_seq to javaAppSGCMF;

@@ -1,15 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 30, 2012 8:06:50 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 17/11/2012 16:51:03 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="sgcmf.model.hibernate.Cartao" table="cartao" schema="public">
-        <id name="idoc" type="short">
-            <column name="idoc" />
-            <generator class="assigned" />
+        <id name="id" type="short">
+            <column name="id" />
+            <generator class="identity" />
         </id>
-        <many-to-one name="ocorrencia" class="sgcmf.model.hibernate.Ocorrencia" update="false" insert="false" fetch="select">
-            <column name="idoc" not-null="true" unique="true" />
+        <many-to-one name="ocorrencia" class="sgcmf.model.hibernate.Ocorrencia" fetch="select">
+            <column name="idoc" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cartao" class="sgcmf.model.hibernate.Cartao" fetch="select">
+            <column name="cartaovermderivado" />
         </many-to-one>
         <many-to-one name="jogador" class="sgcmf.model.hibernate.Jogador" fetch="select">
             <column name="idjogador" not-null="true" />
@@ -22,6 +25,12 @@
                 <column name="idcartao" />
             </key>
             <one-to-many class="sgcmf.model.hibernate.Falta" />
+        </set>
+        <set name="cartaos" inverse="true">
+            <key>
+                <column name="cartaovermderivado" />
+            </key>
+            <one-to-many class="sgcmf.model.hibernate.Cartao" />
         </set>
     </class>
 </hibernate-mapping>

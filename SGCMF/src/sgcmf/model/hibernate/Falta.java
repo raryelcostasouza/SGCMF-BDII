@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated Oct 30, 2012 8:06:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 17/11/2012 16:51:03 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -10,8 +10,8 @@ public class Falta  implements java.io.Serializable {
 
 
      private short idoc;
-     private Cartao cartao;
      private Ocorrencia ocorrencia;
+     private Cartao cartao;
      private Jogador jogador;
      private String tipo;
 
@@ -25,10 +25,10 @@ public class Falta  implements java.io.Serializable {
         this.jogador = jogador;
         this.tipo = tipo;
     }
-    public Falta(short idoc, Cartao cartao, Ocorrencia ocorrencia, Jogador jogador, String tipo) {
+    public Falta(short idoc, Ocorrencia ocorrencia, Cartao cartao, Jogador jogador, String tipo) {
        this.idoc = idoc;
-       this.cartao = cartao;
        this.ocorrencia = ocorrencia;
+       this.cartao = cartao;
        this.jogador = jogador;
        this.tipo = tipo;
     }
@@ -40,19 +40,19 @@ public class Falta  implements java.io.Serializable {
     public void setIdoc(short idoc) {
         this.idoc = idoc;
     }
-    public Cartao getCartao() {
-        return this.cartao;
-    }
-    
-    public void setCartao(Cartao cartao) {
-        this.cartao = cartao;
-    }
     public Ocorrencia getOcorrencia() {
         return this.ocorrencia;
     }
     
     public void setOcorrencia(Ocorrencia ocorrencia) {
         this.ocorrencia = ocorrencia;
+    }
+    public Cartao getCartao() {
+        return this.cartao;
+    }
+    
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
     }
     public Jogador getJogador() {
         return this.jogador;
