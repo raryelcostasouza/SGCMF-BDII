@@ -99,12 +99,7 @@ public class CtrFalta
                 }
                 else
                 {
-                    objCartao = new Cartao();
-                    objCartao.setOcorrencia(objOcorrencia);
-                    objCartao.setJogador(objJogador);
-                    objCartao.setCor(cartao);
-                    
-                    gdao.salvar(objCartao);
+                    objCartao = ctrMain.getCtrCartao().registraCartao(gdao, objOcorrencia, objJogador, cartao);
                     objFalta = new Falta(objOcorrencia.getId(), objOcorrencia, objCartao, objJogador, tipo);
                 }
 

@@ -166,7 +166,7 @@ public class LimRegistrarCartao extends JDialog implements ISelecionarJogador
         
         cor = bgCartao.getSelection().getActionCommand();
         
-        result = ctrCartao.registraCartao(jtfInstanteTempoMin.getText(),
+        result = ctrCartao.registraCartaoUI(jtfInstanteTempoMin.getText(),
                                           jtfInstateTempoSeg.getText(),
                                           limGerenciarOcorrencias.getIdJogo(),
                                           jtfJogador.getText(),
