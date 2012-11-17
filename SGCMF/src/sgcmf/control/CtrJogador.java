@@ -118,19 +118,19 @@ public class CtrJogador
         return jDAO.queryIdSelecaoJogador(idJogador);
     }
 
-    public String[][] queryJogadorByNome(String nome)
-    {
-        JogadorDAO jDAO;
-        String[][] dadosJogador;
-        ArrayList<Jogador> alJogador;
-
-        jDAO = new JogadorDAO();
-        alJogador = jDAO.queryJogadorByNome(nome);
-        dadosJogador = arrayList2StringMatrix(alJogador);
-        jDAO.fecharSessao();
-
-        return dadosJogador;
-    }
+//    public String[][] queryJogadorByNome(String nome)
+//    {
+//        JogadorDAO jDAO;
+//        String[][] dadosJogador;
+//        ArrayList<Jogador> alJogador;
+//
+//        jDAO = new JogadorDAO();
+//        alJogador = jDAO.queryJogadorByNome(nome);
+//        dadosJogador = arrayList2StringMatrix(alJogador);
+//        jDAO.fecharSessao();
+//
+//        return dadosJogador;
+//    }
 
     public String[][] queryAllDataJogadorTecnico(Usuario u)
     {
@@ -149,28 +149,33 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public String[][] queryAllDataJogadorByNome(String nome)
+    public String[][] queryAllDataJogadorByNomeAndByUser(String nome, Usuario u)
     {
         JogadorDAO jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
-
+        Iterator iterator = u.getSelecaos().iterator();
+        Selecao s;
+        s = (Selecao) iterator.next();
         jDAO = new JogadorDAO();
-        alJogador = jDAO.queryJogadorByNome(nome);
+        alJogador = jDAO.queryJogadorByNomeAndByUser(nome, s.getId());
         dadosJogador = arrayList2StringMatrixFull(alJogador);
         jDAO.fecharSessao();
 
         return dadosJogador;
     }
 
-    public String[][] queryAllDataJogadorByPosicao(String posicao)
+    public String[][] queryAllDataJogadorByPosicaoAndByUser(String posicao, Usuario u)
     {
         JogadorDAO jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
+        Iterator iterator = u.getSelecaos().iterator();
+        Selecao s;
+        s = (Selecao) iterator.next();
 
         jDAO = new JogadorDAO();
-        alJogador = jDAO.queryJogadorByPosicao(posicao);
+        alJogador = jDAO.queryJogadorByPosicaoAndByUser(posicao, s.getId());
         dadosJogador = arrayList2StringMatrixFull(alJogador);
         jDAO.fecharSessao();
 
@@ -471,9 +476,6 @@ public class CtrJogador
         jogadorDAO.fecharSessao();
         return false;
     }
-    //Verificar na hora da alteracao por exemplo: se o nCamisa for = 1 e
-    //tentar alterar qualquer dado do jogador nao funciona, o nCamisa teria que ser
-    // diferente, ou seja, o nCamisa se manter inalterado vale.
 
     private int verificarNumeroCamisaExistente(Short camisa, Short idSelecao)
     {
