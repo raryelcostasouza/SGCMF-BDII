@@ -77,7 +77,7 @@ Create Table Gol
 	idJogadorAssistencia smallint,
 	tipo text check(tipo in('Contra', 'A Favor')) not null,
 	modo text check(modo in('Falta', 'Penalti', 'Comum')) not null,
-	foreign key(idOc) references Ocorrencia(id) on delete cascade,
+	foreign key(idOc) references Ocorrencia(id),
 	foreign key(idJogadorAutor) references Jogador(id),
 	foreign key(idJogadorAssistencia) references Jogador(id)
 );
@@ -90,8 +90,8 @@ Create Table Cartao
         cartaoVermDerivado smallint,
 	cor text check(cor in('Vermelho', 'Amarelo')) not null,
         unique(idOc, cor),
-	foreign key (cartaoVermDerivado) references Cartao(id) on delete cascade,
-        foreign key (idOc) references Ocorrencia(id) on delete cascade,
+	foreign key (cartaoVermDerivado) references Cartao(id),
+        foreign key (idOc) references Ocorrencia(id),
 	foreign key(idJogador) references Jogador(id)
 );
 
@@ -101,9 +101,9 @@ Create Table Falta
 	idCartao smallint,
 	idJogador smallint not null,
 	tipo text check(tipo in('Penalti', 'Falta Comum')) not null,
-	foreign key(idOc) references Ocorrencia(id) on delete cascade,
+	foreign key(idOc) references Ocorrencia(id),
 	foreign key(idJogador) references Jogador(id),
-	foreign key (idCartao) references Cartao(id) on delete cascade
+	foreign key (idCartao) references Cartao(id)
 );
 
 Create Table Substituicao 
@@ -112,7 +112,7 @@ Create Table Substituicao
 	idJogadorEntrou smallint not null,
 	idJogadorSaiu smallint not null,
 	motivo text check(motivo in ('Estrategica', 'Contusao')) not null,
-	foreign key (idOc) references Ocorrencia (id) on delete cascade, 
+	foreign key (idOc) references Ocorrencia (id), 
 	foreign key(idJogadorEntrou) references Jogador(id),
 	foreign key(idJogadorSaiu) references Jogador(id)
 );
