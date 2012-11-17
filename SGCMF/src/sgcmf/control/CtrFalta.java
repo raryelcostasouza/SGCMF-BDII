@@ -99,9 +99,13 @@ public class CtrFalta
                 }
                 else
                 {
-                    objCartao = new Cartao(objOcorrencia.getId(), objOcorrencia, objJogador, cartao);
+                    objCartao = new Cartao();
+                    objCartao.setOcorrencia(objOcorrencia);
+                    objCartao.setJogador(objJogador);
+                    objCartao.setCor(cartao);
+                    
                     gdao.salvar(objCartao);
-                    objFalta = new Falta(objOcorrencia.getId(), objCartao, objOcorrencia, objJogador, tipo);
+                    objFalta = new Falta(objOcorrencia.getId(), objOcorrencia, objCartao, objJogador, tipo);
                 }
 
                 gdao.salvar(objFalta);
@@ -172,7 +176,7 @@ public class CtrFalta
 
                 if (faltaParaRemover.getCartao() != null)
                 {
-                    gdao.carregar(cartaoParaRemover, idOc);
+                    cartaoParaRemover = faltaParaRemover.getCartao();
                 }
                 else
                 {

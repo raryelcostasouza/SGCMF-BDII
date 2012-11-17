@@ -237,7 +237,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         String[] nomesColunas =
         {
-            "ID", "Instante de Tempo", "Seleção" ,"Jogador", "Cor"
+            "ID", "IDOc", "Instante de Tempo", "Seleção" ,"Jogador", "Cor"
         };
         jtCartao = new JTableSGCMF(null, nomesColunas);
         JScrollPane jsp = new JScrollPane(jtCartao, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -359,6 +359,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     private void removerOcorrencia()
     {
         Short idOc;
+        Short idCartao;
         int linhaSelecionada;
         ResultadoOperacao result = null;
 
@@ -388,8 +389,9 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             linhaSelecionada = jtCartao.getSelectedRow();
             if (linhaSelecionada != -1)
             {
-                idOc = Short.parseShort((String) jtCartao.getValueAt(linhaSelecionada, 0));
-                result = ctrComiteGestor.getCtrCartao().removerCartao(idOc);
+                idOc = Short.parseShort((String) jtCartao.getValueAt(linhaSelecionada, 1));
+                idCartao = Short.parseShort((String) jtCartao.getValueAt(linhaSelecionada, 0));
+                result = ctrComiteGestor.getCtrCartao().removerCartao(idOc, idCartao);
                 
                 preencheTabelaFalta();
                 preencheTabelaCartao();
