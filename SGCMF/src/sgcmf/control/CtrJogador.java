@@ -118,20 +118,6 @@ public class CtrJogador
         return jDAO.queryIdSelecaoJogador(idJogador);
     }
 
-//    public String[][] queryJogadorByNome(String nome)
-//    {
-//        JogadorDAO jDAO;
-//        String[][] dadosJogador;
-//        ArrayList<Jogador> alJogador;
-//
-//        jDAO = new JogadorDAO();
-//        alJogador = jDAO.queryJogadorByNome(nome);
-//        dadosJogador = arrayList2StringMatrix(alJogador);
-//        jDAO.fecharSessao();
-//
-//        return dadosJogador;
-//    }
-
     public String[][] queryAllDataJogadorTecnico(Usuario u)
     {
         JogadorDAO jDAO;
@@ -379,7 +365,7 @@ public class CtrJogador
             resultadoCamisaExistente = verificarNumeroCamisaExistente(camisa, idSelecao);
             if (resultadoCamisaExistente != 0 && bolNumCamisaIguais == false)
             {
-                errorMessege = "Já existe um jogador cadastrado com este número de camisa";
+                errorMessege = "Já existe um jogador cadastrado com este número de camisa.";
             }
             if (camisa < 1 || camisa > 23)
             {
