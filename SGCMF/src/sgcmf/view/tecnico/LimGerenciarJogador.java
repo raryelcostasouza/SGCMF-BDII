@@ -6,7 +6,6 @@ package sgcmf.view.tecnico;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
@@ -66,28 +65,26 @@ public class LimGerenciarJogador extends JDialog
                 if (tituloAba.equals("Cadastrar"))
                 {
                     setSize(380, 335);
-                    pAlterarJogador.limparTodosCampos();
-                    pRemoverJogador.limparTodosCampos();
                 }
                 else if (tituloAba.equals("Alterar"))
                 {
                     setSize(700, 400);
                     pAlterarJogador.ativaTela();
-                    pRemoverJogador.limparTodosCampos();
+
                 }
                 else if (tituloAba.equals("Remover"))
                 {
                     setSize(700, 400);
                     pRemoverJogador.ativaTela();
-                    pAlterarJogador.limparTodosCampos();
                 }
                 else if (tituloAba.equals("Consultar"))
                 {
                     setSize(700, 400);
                     pConsultarJogador.ativaTela();
-                    pAlterarJogador.limparTodosCampos();
-                    pRemoverJogador.limparTodosCampos();
                 }
+                pAlterarJogador.limparTodosCampos();
+                pConsultarJogador.limparCampos();
+                pRemoverJogador.limparTodosCampos();
                 setLocationRelativeTo(null);
             }
         });

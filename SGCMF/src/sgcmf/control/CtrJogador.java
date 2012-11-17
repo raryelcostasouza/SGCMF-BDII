@@ -420,9 +420,9 @@ public class CtrJogador
             }
             else
             {
-                if (bolGoleiro == false)
+                if (bolGoleiro == true)
                 {
-                    if (resultado >= 3)
+                    if (resultado > 3)
                     {
                         errorMessege = "É permitido apenas 3 Goleiros por seleção.";
                     }
@@ -457,6 +457,7 @@ public class CtrJogador
         posicao = jogadorDAO.queryPosicaoJogador(idJogador);
         if (posicao.equals("Goleiro"))
         {
+            System.out.println(posicao);
             return true;
         }
         jogadorDAO.fecharSessao();
