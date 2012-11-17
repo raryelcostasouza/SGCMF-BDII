@@ -156,14 +156,15 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                String numCamisa = jtfNumeroCamisa.getText();
+                String numCamisaNovo = jtfNumeroCamisa.getText();
+                String numCamisaAtual = jtfNumeroCamisa.getText();
                 String nome = jtfNome.getText();
                 String dtaNascimento = jtfDataNascimento.getText();
                 String altura = jtfAltura.getText();
                 String posicao = (String) jcbPosicao.getSelectedItem();
                 ResultadoOperacao result;
                 String idJogador = jt.getValueAt(jt.getSelectedRow(), 0).toString();
-                result = ctrJogador.alterarJogador(idJogador, numCamisa, nome, dtaNascimento,
+                result = ctrJogador.alterarJogador(idJogador, numCamisaNovo, numCamisaAtual, nome, dtaNascimento,
                         altura, posicao, ctrTecnico.getUser());
 
                 if (result.getTipo().equals(TipoResultadoOperacao.ERRO))

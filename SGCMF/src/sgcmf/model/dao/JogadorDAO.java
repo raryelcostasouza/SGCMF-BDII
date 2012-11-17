@@ -7,7 +7,7 @@ public class JogadorDAO extends GeneralDAO
 {
     public ArrayList<Jogador> listaTodosBySelecao(Short idSelecao)
     {
-        return (ArrayList<Jogador>) sessao.createQuery("from Jogador j where j.selecao.id = "+idSelecao +" order by j.ncamisa").list();
+        return (ArrayList<Jogador>) sessao.createQuery("from Jogador j where j.selecao.id = " + idSelecao + " order by j.ncamisa").list();
     }
 
     public ArrayList<Jogador> queryJogadorByNome(String nome)
@@ -55,7 +55,7 @@ public class JogadorDAO extends GeneralDAO
 
         return posicao;
     }
-    
+
     public Short queryIdSelecaoJogador(Short idJogador)
     {
         String hql;
@@ -66,7 +66,7 @@ public class JogadorDAO extends GeneralDAO
 
         return Short.parseShort(String.valueOf(sessao.createQuery(hql).uniqueResult()));
     }
-    
+
     public ArrayList<Jogador> queryJogadoresEmCampo(Short idJogo)
     {
         String hql;
@@ -85,7 +85,6 @@ public class JogadorDAO extends GeneralDAO
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
 
-    
     public ArrayList queryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
     {
         String hql;
@@ -94,31 +93,31 @@ public class JogadorDAO extends GeneralDAO
 
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
-    
+
     public ArrayList queryOutrosJogadoresEmCampoSelecaoByNome(Short idJogo, Short idSelecao, Short idJogador, String nome)
     {
         String hql;
 
         hql = auxQueryOutrosJogadoresEmCampoSelecao(idJogo, idSelecao, idJogador) + " "
-                + "and lower(jgdr.nome) like lower('%" +nome + "%')";
+                + "and lower(jgdr.nome) like lower('%" + nome + "%')";
 
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
-    
+
     public ArrayList<Jogador> queryReservasSelecao(Short idJogo, Short idSelecao)
     {
         String hql;
         hql = auxQueryJogadoresReservaSelecao(idJogo, idSelecao);
-        
+
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
-    
+
     public ArrayList<Jogador> queryReservasSelecaoByNome(Short idJogo, Short idSelecao, String nome)
     {
         String hql;
 
         hql = auxQueryJogadoresReservaSelecao(idJogo, idSelecao) + " "
-                + "and lower(jgdr.nome) like lower('%" +nome+"%')";
+                + "and lower(jgdr.nome) like lower('%" + nome + "%')";
 
         return (ArrayList<Jogador>) sessao.createQuery(hql).list();
     }
@@ -150,7 +149,7 @@ public class JogadorDAO extends GeneralDAO
                 + "from Substituicao s "
                 + "where s.ocorrencia.jogo.id = " + idJogo + ")";
     }
-    
+
     private String auxQueryJogadoresEntraramJogoSelecao(Short idJogo, Short idSelecao)
     {
         String querySemParentesesNoFinal;
@@ -182,7 +181,7 @@ public class JogadorDAO extends GeneralDAO
                 //menos os jogadores expulsos
                 + "and jgdr.id not in " + auxQueryJogadoresExpulsosJogo(idJogo);
     }
-    
+
     //outros jogadores, da mesma seleção, em campo, diferentes do jogador passado como parâmetro
     private String auxQueryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
     {
@@ -198,7 +197,7 @@ public class JogadorDAO extends GeneralDAO
                 + "and jgdr.id not in " + auxQueryJogadoresExpulsosJogo(idJogo) + " "
                 + "and jgdr.id != " + idJogador;
     }
-    
+
     //reservas disponíveis, num dado jogo, para uma dada seleção
     private String auxQueryJogadoresReservaSelecao(Short idJogo, Short idSelecao)
     {
@@ -207,5 +206,14 @@ public class JogadorDAO extends GeneralDAO
                 + "where jgdr.selecao.id = " + idSelecao + " and jgdr.titular = false and "
                 //menos os reservas que entraram em campo
                 + "jgdr.id not in " + auxQueryJogadoresEntraramJogoSelecao(idJogo, idSelecao);
-    }  
+    }
+
+    public int queryVerificarCamisaExistente(Short camisa, Short idSelecao)
+    {
+        String hql;
+        int resultado;
+        hql = "select count(j.id) from Jogador j where j.ncamisa = " + camisa + " and j.selecao.id = " + idSelecao;
+        resultado = Integer.parseInt(sessao.createQuery(hql).uniqueResult().toString());
+        return resultado;
+    }
 }

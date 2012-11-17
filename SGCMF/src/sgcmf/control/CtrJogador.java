@@ -140,7 +140,7 @@ public class CtrJogador
         Selecao s;
         jDAO = new JogadorDAO();
         Iterator iterator = u.getSelecaos().iterator();
-        
+
         s = (Selecao) iterator.next();
         alJogador = jDAO.listaTodosBySelecao(s.getId());
         dadosJogadores = arrayList2StringMatrixFull(alJogador);
@@ -243,7 +243,7 @@ public class CtrJogador
         s = (Selecao) iterator.next();
 
         gdao = new GeneralDAO();
-        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, false, s.getId());
+        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, false, false, s.getId());
         if (errorMessege.equals(""))
         {
             nCamisa = Short.parseShort(numCamisa);
@@ -261,23 +261,27 @@ public class CtrJogador
                 j.setSelecao(s);
                 gdao.salvar(j);
                 tr.commit();
-                result = new ResultadoOperacao("Jogador Cadastrado com êxito.", TipoResultadoOperacao.EXITO);
+                result = new ResultadoOperacao("Jogador Cadastrado com êxito.",
+                        TipoResultadoOperacao.EXITO);
             }
             catch (HibernateException he)
             {
-                result = new ResultadoOperacao("Erro no Hibernate.\n" + he.getMessage(), TipoResultadoOperacao.ERRO);
+                result = new ResultadoOperacao("Erro no Hibernate.\n" + he.getMessage(),
+                        TipoResultadoOperacao.ERRO);
             }
             gdao.fecharSessao();
         }
         else
         {
-            result = new ResultadoOperacao("Falha no cadastro de jogador.\n" + errorMessege, TipoResultadoOperacao.ERRO);
+            result = new ResultadoOperacao("Falha no cadastro de jogador.\n" + errorMessege,
+                    TipoResultadoOperacao.ERRO);
         }
         return result;
     }
 
-    public ResultadoOperacao alterarJogador(String strIdJogador, String numCamisa, String nome, String dtaNascimento,
-            String altura, String posicao, Usuario user)
+    public ResultadoOperacao alterarJogador(String strIdJogador, String numCamisaNovo,
+            String numCamisaAtual, String nome, String dtaNascimento, String altura,
+            String posicao, Usuario user)
     {
         Short nCamisa;
         Date dataNascimento;
@@ -289,18 +293,21 @@ public class CtrJogador
         ResultadoOperacao result;
         String errorMessege;
         boolean bolGoleiro;
+        boolean bolNumCamisaJogador;
         Iterator iterator;
         iterator = user.getSelecaos().iterator();
         Selecao s = (Selecao) iterator.next();
-        
-        
+
+
         shortIdJogador = new Short(strIdJogador);
+        bolNumCamisaJogador = isNumCamisaVelhaIgualCamisaNova(numCamisaNovo, numCamisaAtual);
         bolGoleiro = isJogadorGoleiro(shortIdJogador);
-        errorMessege = validaCampos('a', numCamisa, dtaNascimento, altura, bolGoleiro, s.getId());
+        errorMessege = validaCampos('a', numCamisaNovo, dtaNascimento, altura,
+                bolGoleiro, bolNumCamisaJogador, s.getId());
         if (errorMessege.equals(""))
         {
             gdao = new GeneralDAO();
-            nCamisa = Short.parseShort(numCamisa);
+            nCamisa = Short.parseShort(numCamisaNovo);
             dataNascimento = new Date(dtaNascimento);
             pAltura = new BigDecimal(altura);
             tr = gdao.getSessao().beginTransaction();
@@ -353,16 +360,22 @@ public class CtrJogador
     }
 
     private String validaCampos(char metodo, String numCamisa, String dataNascimento,
-            String altura, boolean bolGoleiro, Short idSelecao)
+            String altura, boolean bolGoleiro, boolean bolNumCamisaIguais, Short idSelecao)
     {
         String errorMessege = "";
         Short camisa;
         Date date;
         BigDecimal aAltura;
-        //Verificar se o numero da camisa esta valido.
+        int resultadoCamisaExistente;
+
         try
         {
             camisa = Short.parseShort(numCamisa);
+            resultadoCamisaExistente = verificarNumeroCamisaExistente(camisa, idSelecao);
+            if (resultadoCamisaExistente != 0 && bolNumCamisaIguais == false)
+            {
+                errorMessege = "Já existe um jogador cadastrado com este número de camisa";
+            }
             if (camisa < 1 || camisa > 23)
             {
                 errorMessege = "O valor da camisa deve estar entre 1 e 23.";
@@ -440,7 +453,6 @@ public class CtrJogador
     private int qtdeGoleirosSelecao(Short idSelecao)
     {
         JogadorDAO jogadorDAO = new JogadorDAO();
-        ArrayList array;
         int qtdeGoleiros;
         qtdeGoleiros = jogadorDAO.queryQuantidadeGoleirosSelecao(idSelecao);
         jogadorDAO.fecharSessao();
@@ -453,6 +465,28 @@ public class CtrJogador
         String posicao;
         posicao = jogadorDAO.queryPosicaoJogador(idJogador);
         if (posicao.equals("Goleiro"))
+        {
+            return true;
+        }
+        jogadorDAO.fecharSessao();
+        return false;
+    }
+    //Verificar na hora da alteracao por exemplo: se o nCamisa for = 1 e
+    //tentar alterar qualquer dado do jogador nao funciona, o nCamisa teria que ser
+    // diferente, ou seja, o nCamisa se manter inalterado vale.
+
+    private int verificarNumeroCamisaExistente(Short camisa, Short idSelecao)
+    {
+        JogadorDAO jDAO = new JogadorDAO();
+        int resultado;
+        resultado = jDAO.queryVerificarCamisaExistente(camisa, idSelecao);
+        jDAO.fecharSessao();
+        return resultado;
+    }
+
+    private boolean isNumCamisaVelhaIgualCamisaNova(String numCamisaNovo, String numCamisaAtual)
+    {
+        if (numCamisaNovo.equals(numCamisaAtual))
         {
             return true;
         }
