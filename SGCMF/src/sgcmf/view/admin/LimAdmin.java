@@ -37,6 +37,7 @@ public class LimAdmin extends JFrame
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         limGerenciarUsuario = new LimGerenciarUsuario(ctrAdmin);
+        setResizable(false);
 
         addWindowListener(new WindowAdapter()
         {

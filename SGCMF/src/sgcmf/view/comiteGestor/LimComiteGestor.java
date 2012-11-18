@@ -43,6 +43,7 @@ public class LimComiteGestor extends JFrame
 
         setTitle("SGCMF | Usuário Comitê Gestor");
         setSize(570, 480);
+        setResizable(false);
         setLocationRelativeTo(null);
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

@@ -42,6 +42,7 @@ public class LimTecnico extends JFrame
         setLocationRelativeTo(null);
         setVisible(false);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setResizable(false);
 
 
         addWindowListener(new WindowAdapter()

@@ -32,6 +32,7 @@ public class LimLogin extends JFrame
         add(montaPainel());
         pack();
         setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     private JPanel montaPainel()
