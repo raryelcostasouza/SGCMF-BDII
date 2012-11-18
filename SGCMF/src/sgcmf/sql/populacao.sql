@@ -21,21 +21,25 @@ insert into Usuario values (19,'Usuario 19','785.456.781-10', 'usuario19@sgcmf.c
 insert into Usuario values (20,'Usuario 20','785.456.781-20', 'usuario20@sgcmf.com', 'Entusiasta','user20','user20');
 
 -- Insercao das Selecoes
-insert into Selecao  values (1,'Espanha','\img\Espanha.png',3);
-insert into Selecao  values (2,'Alemanha','\img\Alemanha.png',4);
-insert into Selecao  values (3,'Inglaterra','\img\Inglaterra.png',5);
-insert into Selecao  values (4,'Portugal','\img\Portugal.png',6);
-insert into Selecao  values (5,'Uruguai','\img\Uruguai.png',7);
-insert into Selecao  values (6,'Italia','\img\Italia.png',8);
-insert into Selecao  values (7,'Argentina','\img\Argentina.png',9);
-insert into Selecao  values (8,'Holanda','\img\Holanda.png',10);
-insert into Selecao  values (9,'Croacia','\img\Croacia.png',11);
-insert into Selecao  values (10,'Dinamarca','\img\Dinamarca.png',12);
-insert into Selecao  values (11,'Grecia','\img\Grecia.png',13);
-insert into Selecao  values (12,'Brasil','\img\Brasil.png',14);
-insert into Selecao  values (13,'Russia','\img\Russia.png',15);
-insert into Selecao  values (14,'Chile','\img\Chile.png',16);
-insert into Selecao  values (15,'Franca','\img\Franca.png',17);
+insert into Selecao  values (1,'Franca','img/selecoes32/grupoa/France.png',3);
+insert into Selecao  values (2,'Mexico','img/selecoes32/grupoa/Mexico.png',4);
+insert into Selecao  values (3,'Africa do Sul','img/selecoes32/grupoa/South-Africa.png',5);
+insert into Selecao  values (4,'Uruguai','img/selecoes32/grupoa/Uruguay.png',6);
+
+insert into Selecao  values (5,'Argentina','img/selecoes32/grupob/Argentina.png',7);
+insert into Selecao  values (6,'Grecia','img/selecoes32/grupob/Greece.png',8);
+insert into Selecao  values (7,'Nigeria','img/selecoes32/grupob/Nigeria.png',9);
+insert into Selecao  values (8,'Coreia do sul','img/selecoes32/grupob/South-Korea.png',10);
+
+insert into Selecao  values (9,'Algeria','img/selecoes32/grupoc/Algeria.png',11);
+insert into Selecao  values (10,'Inglaterra','img/selecoes32/grupoc/England.png',12);
+insert into Selecao  values (11,'Eslovenia','img/selecoes32/grupoc/Slovenia.png',13);
+insert into Selecao  values (12,'Estados Unidos','img/selecoes32/grupoc/United-States.png',14);
+
+insert into Selecao  values (13,'Australia','img/selecoes32/grupod/Australia.png',15);
+insert into Selecao  values (14,'Alemanha','img/selecoes32/grupod/Germany.png',16);
+insert into Selecao  values (15,'Gana','img/selecoes32/grupod/Ghana.png',17);
+insert into Selecao  values (16,'Servia','img/selecoes32/grupod/Serbia.png',17);
 
 -- Insercao dos Jogos
 insert into Jogo  values (1,'Primeira Fase', 'Rio de Janeiro', 'Maracana', 1,2,false,'2012-08-10 10:20:00 +02');
