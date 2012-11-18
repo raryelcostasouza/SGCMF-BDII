@@ -25,6 +25,27 @@ public class CtrCartao
         this.ctrMain = ctrMain;
     }
 
+    //se o jogador ja levou um cartao amarelo no jogo
+    // ele nao pode receber um vermelho. Ele pode receber um novo amarelo
+    //e automaticamente o sistema gera um vermelho derivado.
+    public boolean isOpcaoCartaoVermelhoAtivada(Short idJogo, Short idJogador)
+    {
+        int numCartaoAmarelo;
+        
+        SGCMFSessionManager.abrirSessao();
+        numCartaoAmarelo = CartaoDAO.getInstance().queryNumCartaoAmareloJogadorJogo(idJogo, idJogador);
+        SGCMFSessionManager.fecharSessao();
+        
+        if (numCartaoAmarelo == 1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    
     public String[][] queryCartaoByIdJogo(Short idJogo)
     {
         ArrayList<Cartao> alCartao;

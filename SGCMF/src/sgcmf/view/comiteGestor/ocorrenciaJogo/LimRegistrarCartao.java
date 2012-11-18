@@ -149,6 +149,16 @@ public class LimRegistrarCartao extends JDialog implements ISelecionarJogador
     public void jogadorSelecionado(Short idJogador)
     {
        jtfJogador.setText(idJogador+""); 
+       
+       if (ctrCartao.isOpcaoCartaoVermelhoAtivada(limGerenciarOcorrencias.getIdJogo(), idJogador))
+       {
+           jrbCartaoVermelho.setEnabled(true);
+       }
+       else
+       {
+           jrbCartaoAmarelo.setSelected(true);
+           jrbCartaoVermelho.setEnabled(false);
+       }
     }
     
     private void resetCamposInterface()
@@ -156,7 +166,8 @@ public class LimRegistrarCartao extends JDialog implements ISelecionarJogador
         jtfInstanteTempoMin.setText("");
         jtfInstateTempoSeg.setText("");
         jtfJogador.setText("");
-        jrbCartaoAmarelo.setSelected(true);                
+        jrbCartaoAmarelo.setSelected(true);
+        jrbCartaoVermelho.setEnabled(true);
     }
     
     private void registrarCartao()

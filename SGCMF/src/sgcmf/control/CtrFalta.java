@@ -207,4 +207,9 @@ public class CtrFalta
 
         return result;
     }
+    
+    public CtrCartao getCtrCartao()
+    {
+        return ctrMain.getCtrCartao();
+    }
 }
