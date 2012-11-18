@@ -1,6 +1,5 @@
 package sgcmf.control;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.JogoDAO;
@@ -41,8 +40,10 @@ public class CtrOcorrenciaJogo
         int intMin;
         int intSeg;
         int numOcorrenciasDepois;
+        int numOcorrenciasMesmoInstante;
         String errorMessage;
         OcorrenciaDAO oDAO;
+        GregorianCalendar gc;
 
         errorMessage = "";
         try
@@ -71,12 +72,31 @@ public class CtrOcorrenciaJogo
             //quer inserir ele não poderá inseri-la...
             SGCMFSessionManager.abrirSessao();
             oDAO = OcorrenciaDAO.getInstance();
-            numOcorrenciasDepois = oDAO.queryNumOcorrenciasComInstanteTempoMaior(idJogo, new Date(0, 0, 0, 0, Integer.parseInt(min), Integer.parseInt(seg)));
+            
+            gc = new GregorianCalendar(0, 0, 0, 0, Integer.parseInt(min), Integer.parseInt(seg));
+            numOcorrenciasDepois = oDAO.queryNumOcorrenciasComInstanteTempoMaior(idJogo, gc.getTime());
+            
             if (numOcorrenciasDepois > 0)
             {
                 errorMessage = "As ocorrências só podem ser lançadas de forma sequencial crescentepelo instante de tempo.\n" +
                                 "Para esse jogo já existem ocorrências registradas para instantes de tempo posteriores.\n"
                                 + "Caso queira adicionar essa ocorrência é necessário antes remover todas as ocorrências posteriores.";
+            }
+            SGCMFSessionManager.fecharSessao();
+        }
+        
+        if (errorMessage.equals(""))
+        {
+            //a combinação de Jogo e instante de tempo é UNIQUE
+            SGCMFSessionManager.abrirSessao();
+            oDAO = OcorrenciaDAO.getInstance();
+            
+            gc = new GregorianCalendar(0, 0, 0, 0, Integer.parseInt(min), Integer.parseInt(seg));
+            numOcorrenciasMesmoInstante = oDAO.queryNumOcorrenciaMesmoInstanteTempoNoJogo(idJogo, gc.getTime());
+            
+            if (numOcorrenciasMesmoInstante == 1)
+            {
+                errorMessage = "Já há uma ocorrência cadastrada com o mesmo instante de tempo para esse jogo.";
             }
             SGCMFSessionManager.fecharSessao();
         }

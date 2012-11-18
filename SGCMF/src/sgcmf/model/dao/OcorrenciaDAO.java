@@ -54,4 +54,19 @@ public class OcorrenciaDAO
         resultado = String.valueOf(q.uniqueResult());
         return Integer.parseInt(resultado);
     }
+    
+    public int queryNumOcorrenciaMesmoInstanteTempoNoJogo(Short idJogo, Date instanteTempo)
+    {
+        String hql;
+        String resultado;
+
+        hql = "select count (o.id) "
+                + "from Ocorrencia o "
+                + "where o.jogo.id = " + idJogo + " and o.instantetempo = :it";
+        Query q = SGCMFSessionManager.getCurrentSession().createQuery(hql);
+        q.setParameter("it", instanteTempo);
+
+        resultado = String.valueOf(q.uniqueResult());
+        return Integer.parseInt(resultado);
+    }
 }
