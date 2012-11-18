@@ -1,13 +1,30 @@
 package sgcmf.model.dao;
 
 import java.util.ArrayList;
+import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Selecao;
 
-public class SelecaoDAO extends GeneralDAO
+public class SelecaoDAO
 {
+    private static SelecaoDAO instance;
+    
+    private SelecaoDAO()
+    {
+        
+    }
+    
+    public static SelecaoDAO getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new SelecaoDAO();
+        }
+        return instance;
+    }
+    
     public ArrayList<Selecao> listaTodos()
     {
-        return (ArrayList<Selecao>) sessao.createQuery("from Selecao s order by s.id").list();
+        return (ArrayList<Selecao>) SGCMFSessionManager.getCurrentSession().createQuery("from Selecao s order by s.id").list();
     }
 
     public ArrayList<Selecao> querySelecaoByNomePais(String pais)
@@ -17,7 +34,7 @@ public class SelecaoDAO extends GeneralDAO
         hql = "from Selecao s "
                 + "where lower(s.pais) like lower('%" + pais + "%')";
 
-        return (ArrayList<Selecao>) sessao.createQuery(hql).list();
+        return (ArrayList<Selecao>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public ArrayList<Selecao> querySelecaoByNomeTecnico(String tecnico)
@@ -27,14 +44,14 @@ public class SelecaoDAO extends GeneralDAO
         hql = "from Selecao s "
                 + "where lower(s.usuario.nome) like lower('%" + tecnico + "%')";
 
-        return (ArrayList<Selecao>) sessao.createQuery(hql).list();
+        return (ArrayList<Selecao>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public ArrayList queryIdSelecao(String selecao)
     {
         String hql;
         hql = "select s.id from Selecao s where s.pais = '" + selecao + "'";
-        return (ArrayList) sessao.createQuery(hql).list();
+        return (ArrayList) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public String queryNomeSelecao(Short idSelecao)
@@ -42,7 +59,7 @@ public class SelecaoDAO extends GeneralDAO
         String hql;
         String nomeSelecao;
         hql = "select s.pais from Selecao s where s.id = " + idSelecao;
-        nomeSelecao = sessao.createQuery(hql).uniqueResult().toString();
+        nomeSelecao = SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString();
         return nomeSelecao;
     }
 }

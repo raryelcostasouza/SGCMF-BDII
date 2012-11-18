@@ -1,17 +1,50 @@
 package sgcmf.model.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Substituicao;
 
-public class SubstituicaoDAO extends GeneralDAO<Substituicao>
+public class SubstituicaoDAO
 {
+    private static SubstituicaoDAO instance;
+
+    private SubstituicaoDAO()
+    {
+    }
+
+    public static SubstituicaoDAO getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new SubstituicaoDAO();
+        }
+        return instance;
+    }
+
+    public void salvar(Substituicao entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().save(entidade);
+    }
+
+    public Substituicao carregar(Substituicao entidade, Serializable id)
+    {
+        SGCMFSessionManager.getCurrentSession().load(entidade, id);
+        return entidade;
+    }
+
+    public void apagar(Substituicao entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().delete(entidade);
+    }
+
     public ArrayList<Substituicao> querySubstByIdJogo(Short idJogo)
     {
         String hql;
 
         hql = "from Substituicao s "
                 + "where s.ocorrencia.jogo.id = " + idJogo + " order by s.ocorrencia.instantetempo";
-        
-        return (ArrayList<Substituicao>) sessao.createQuery(hql).list();
+
+        return (ArrayList<Substituicao>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 }

@@ -3,7 +3,9 @@ package sgcmf.control;
 import java.util.ArrayList;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
-import sgcmf.model.dao.GeneralDAO;
+import sgcmf.hibernate.SGCMFSessionManager;
+import sgcmf.model.dao.JogadorDAO;
+import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.dao.SubstituicaoDAO;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Ocorrencia;
@@ -24,12 +26,11 @@ public class CtrSubstituicao
     {
         ArrayList<Substituicao> alSubst;
         String[][] dadosCartao;
-        SubstituicaoDAO substDAO;
 
-        substDAO = new SubstituicaoDAO();
-        alSubst = substDAO.querySubstByIdJogo(idJogo);
+        SGCMFSessionManager.abrirSessao();
+        alSubst = SubstituicaoDAO.getInstance().querySubstByIdJogo(idJogo);
         dadosCartao = arrayList2StringMatrix(alSubst);
-        substDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosCartao;
     }
@@ -63,7 +64,6 @@ public class CtrSubstituicao
     public ResultadoOperacao registraSubstituicao(String min, String seg, Short idJogo, String idJogadorSaiu,
                                                   String idJogadorEntrou, String motivo)
     {
-        GeneralDAO gdao;
         Short shortIdJogadorSaiu;
         Short shortIdJogadorEntrou;
         Transaction tr;
@@ -79,20 +79,22 @@ public class CtrSubstituicao
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
         {
-            gdao = new GeneralDAO();
-            tr = gdao.getSessao().beginTransaction();
+            SGCMFSessionManager.abrirSessao();
+            tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             try
             {
-                objOcorrencia = ctrMain.getCtrOcorrenciaJogo().registraOcorrencia(gdao, min, seg, idJogo);
+                objOcorrencia = ctrMain.getCtrOcorrenciaJogo().registraOcorrencia(min, seg, idJogo);
 
                 shortIdJogadorSaiu = Short.parseShort(idJogadorSaiu);
                 shortIdJogadorEntrou = Short.parseShort(idJogadorEntrou);
 
-                objJogadorSaiu = ctrMain.getCtrJogador().carregaJogadorById(gdao, shortIdJogadorSaiu);
-                objJogadorEntrou = ctrMain.getCtrJogador().carregaJogadorById(gdao, shortIdJogadorEntrou);
+                objJogadorSaiu = new Jogador();
+                objJogadorEntrou = new Jogador();
+                JogadorDAO.getInstance().carregar(objJogadorSaiu, shortIdJogadorSaiu);
+                JogadorDAO.getInstance().carregar(objJogadorEntrou, shortIdJogadorEntrou);
 
                 objSubst = new Substituicao(objOcorrencia.getId(), objJogadorEntrou, objJogadorSaiu, objOcorrencia, motivo);
-                gdao.salvar(objSubst);
+                SubstituicaoDAO.getInstance().salvar(objSubst);
                 tr.commit();
 
                 result = new ResultadoOperacao("Substituição registrada com êxito!", TipoResultadoOperacao.EXITO);
@@ -102,7 +104,7 @@ public class CtrSubstituicao
                 tr.rollback();
                 result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
             }
-            gdao.fecharSessao();
+            SGCMFSessionManager.fecharSessao();
         }
         else
         {
@@ -150,7 +152,6 @@ public class CtrSubstituicao
     {
         ResultadoOperacao result;
         Transaction tr;
-        GeneralDAO gdao;
         Substituicao substParaRemover;
         Ocorrencia ocParaRemover;
         String errorMessage;
@@ -158,18 +159,17 @@ public class CtrSubstituicao
         substParaRemover = new Substituicao();
         ocParaRemover = new Ocorrencia();
 
-        gdao = new GeneralDAO();
-        tr = gdao.getSessao().beginTransaction();
+        SGCMFSessionManager.abrirSessao();
+        tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
 
         try
         {
-            errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(gdao, ocParaRemover, idOc);
+            errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(ocParaRemover, idOc);
             if (errorMessage.equals(""))
             {
-                gdao.carregar(substParaRemover, idOc);
-
-                gdao.apagar(substParaRemover);
-                gdao.apagar(ocParaRemover);
+                SubstituicaoDAO.getInstance().carregar(substParaRemover, idOc);
+                SubstituicaoDAO.getInstance().apagar(substParaRemover);
+                OcorrenciaDAO.getInstance().apagar(ocParaRemover);
 
                 tr.commit();
                 result = new ResultadoOperacao("Substituição removida com êxito!", TipoResultadoOperacao.EXITO);
@@ -185,7 +185,7 @@ public class CtrSubstituicao
             tr.rollback();
             result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
         }
-        gdao.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return result;
     }

@@ -1,37 +1,26 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import sgcmf.model.dao.GeneralDAO;
-import sgcmf.model.dao.JogadorDAO;
+import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.JogoDAO;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.other.SGCMFDate;
 
 public class CtrJogo
-{
-    public Jogo carregaJogoById(GeneralDAO gdao, Short idJogo)
-    {
-        Jogo j;
-        
-        j = new Jogo();        
-        gdao.carregar(j, idJogo);
-        
-        return j;
-    }
-    
+{    
     public String[][] queryJogoTodos()
     {
         JogoDAO jDAO;
         ArrayList<Jogo> alJogos;
         String[][] dadosJogos;
 
-        jDAO = new JogoDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogoDAO.getInstance();
+        
         alJogos = jDAO.listaTodos();
         dadosJogos = arrayList2StringMatrix(alJogos);
-        jDAO.fecharSessao();
+        
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogos;
     }
@@ -42,11 +31,14 @@ public class CtrJogo
         String[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
-        jDAO = new JogoDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogoDAO.getInstance();
+        
         alJogo = jDAO.queryJogoBySelecao(nomeSelecao);
         dadosJogos = arrayList2StringMatrix(alJogo);
-        jDAO.fecharSessao();
-
+        
+        SGCMFSessionManager.fecharSessao();
+        
         return dadosJogos;
     }
 
@@ -56,10 +48,13 @@ public class CtrJogo
         String[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
-        jDAO = new JogoDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogoDAO.getInstance();
+        
         alJogo = jDAO.queryJogoByCidade(cidade);
         dadosJogos = arrayList2StringMatrix(alJogo);
-        jDAO.fecharSessao();
+        
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogos;
     }
@@ -70,10 +65,13 @@ public class CtrJogo
         String[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
-        jDAO = new JogoDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogoDAO.getInstance();
+        
         alJogo = jDAO.queryJogoByEstadio(estadio);
         dadosJogos = arrayList2StringMatrix(alJogo);
-        jDAO.fecharSessao();
+        
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogos;
     }
@@ -84,10 +82,12 @@ public class CtrJogo
         String[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
-        jDAO = new JogoDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogoDAO.getInstance();
         alJogo = jDAO.queryJogoByTipo(tipo);
+        
         dadosJogos = arrayList2StringMatrix(alJogo);
-        jDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogos;
     }
@@ -120,12 +120,13 @@ public class CtrJogo
         JogoDAO jDao;
         Jogo j;
              
-        jDao = new JogoDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDao = JogoDAO.getInstance();
         j = jDao.queryInfoJogoById(idJogo);
         
         infoJogo = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora()) + " | " + j.getTipo() + " | "
                 + j.getSelecaoByIdselecaoi().getPais() + " vs " + j.getSelecaoByIdselecaoii().getPais();
-        jDao.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return infoJogo;
     }

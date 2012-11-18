@@ -1,13 +1,52 @@
 package sgcmf.model.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Jogador;
+import sgcmf.model.hibernate.Substituicao;
 
-public class JogadorDAO extends GeneralDAO
+public class JogadorDAO
 {
+    private static JogadorDAO instance;
+
+    private JogadorDAO()
+    {
+    }
+
+    public static JogadorDAO getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new JogadorDAO();
+        }
+        return instance;
+    }
+
+    public Jogador carregar(Jogador entidade, Serializable id)
+    {
+        SGCMFSessionManager.getCurrentSession().load(entidade, id);
+        return entidade;
+    }
+
+    public void salvar(Jogador entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().save(entidade);
+    }
+
+    public void atualizar(Jogador entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().update(entidade);
+    }
+    
+    public void apagar(Jogador entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().delete(entidade);
+    }
+
     public ArrayList<Jogador> listaTodosBySelecao(Short idSelecao)
     {
-        return (ArrayList<Jogador>) sessao.createQuery("from Jogador j where j.selecao.id = " + idSelecao + " order by j.ncamisa").list();
+        return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery("from Jogador j where j.selecao.id = " + idSelecao + " order by j.ncamisa").list();
     }
 
     public ArrayList<Jogador> queryJogadorByNome(String nome)
@@ -17,7 +56,7 @@ public class JogadorDAO extends GeneralDAO
         hql = "from Jogador j "
                 + "where lower(j.nome) like lower('%" + nome + "%') order by j.id";
 
-        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+        return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public ArrayList<Jogador> queryJogadorByPosicao(String posicao)
@@ -26,7 +65,7 @@ public class JogadorDAO extends GeneralDAO
 
         hql = "from Jogador j "
                 + "where lower(j.posicao) like lower('%" + posicao + "%') order by j.id";
-        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+        return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public int queryQuantidadeJogadorTitularesSelecao(Short idSelecao)
@@ -34,7 +73,7 @@ public class JogadorDAO extends GeneralDAO
         String hql;
         int qtde;
         hql = "select count(id) from Jogador j where j.selecao.id = " + idSelecao + " and j.titular = true";
-        qtde = Integer.parseInt(sessao.createQuery(hql).uniqueResult().toString());
+        qtde = Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
         return qtde;
     }
 
@@ -43,7 +82,7 @@ public class JogadorDAO extends GeneralDAO
         String hql;
         int qtde;
         hql = "select count(id) from Jogador j where j.selecao.id = " + idSelecao + "and j.posicao = 'Goleiro'";
-        qtde = Integer.parseInt(sessao.createQuery(hql).uniqueResult().toString());
+        qtde = Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
         return qtde;
     }
 
@@ -51,7 +90,7 @@ public class JogadorDAO extends GeneralDAO
     {
         String hql;
         hql = "select j.posicao from Jogador j where j.id = " + idJogador;
-        String posicao = sessao.createQuery(hql).uniqueResult().toString();
+        String posicao = SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString();
 
         return posicao;
     }
@@ -64,7 +103,7 @@ public class JogadorDAO extends GeneralDAO
                 + "from Jogador j "
                 + "where j.id = " + idJogador;
 
-        return Short.parseShort(String.valueOf(sessao.createQuery(hql).uniqueResult()));
+        return Short.parseShort(String.valueOf(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()));
     }
 
     public ArrayList<Jogador> queryJogadoresEmCampo(Short idJogo)
@@ -72,7 +111,7 @@ public class JogadorDAO extends GeneralDAO
         String hql;
         hql = auxQueryJogadoresEmCampo(idJogo);
 
-        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+        return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public ArrayList<Jogador> queryJogadoresEmCampoByNome(Short idJogo, String nome)
@@ -82,7 +121,7 @@ public class JogadorDAO extends GeneralDAO
         hql = auxQueryJogadoresEmCampo(idJogo) + " "
                 + "and lower(jgdr.nome) like lower('%" + nome + "%')";
 
-        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+        return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public ArrayList queryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
@@ -91,7 +130,7 @@ public class JogadorDAO extends GeneralDAO
 
         hql = auxQueryOutrosJogadoresEmCampoSelecao(idJogo, idSelecao, idJogador);
 
-        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+        return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public ArrayList queryOutrosJogadoresEmCampoSelecaoByNome(Short idJogo, Short idSelecao, Short idJogador, String nome)
@@ -101,7 +140,7 @@ public class JogadorDAO extends GeneralDAO
         hql = auxQueryOutrosJogadoresEmCampoSelecao(idJogo, idSelecao, idJogador) + " "
                 + "and lower(jgdr.nome) like lower('%" + nome + "%')";
 
-        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+        return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public ArrayList<Jogador> queryReservasSelecao(Short idJogo, Short idSelecao)
@@ -109,7 +148,7 @@ public class JogadorDAO extends GeneralDAO
         String hql;
         hql = auxQueryJogadoresReservaSelecao(idJogo, idSelecao);
 
-        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+        return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public ArrayList<Jogador> queryReservasSelecaoByNome(Short idJogo, Short idSelecao, String nome)
@@ -119,7 +158,7 @@ public class JogadorDAO extends GeneralDAO
         hql = auxQueryJogadoresReservaSelecao(idJogo, idSelecao) + " "
                 + "and lower(jgdr.nome) like lower('%" + nome + "%')";
 
-        return (ArrayList<Jogador>) sessao.createQuery(hql).list();
+        return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     private String auxQuerySelecaoIJogo(Short idJogo)
@@ -213,7 +252,7 @@ public class JogadorDAO extends GeneralDAO
         String hql;
         int resultado;
         hql = "select count(j.id) from Jogador j where j.ncamisa = " + camisa + " and j.selecao.id = " + idSelecao;
-        resultado = Integer.parseInt(sessao.createQuery(hql).uniqueResult().toString());
+        resultado = Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
         return resultado;
     }
 }

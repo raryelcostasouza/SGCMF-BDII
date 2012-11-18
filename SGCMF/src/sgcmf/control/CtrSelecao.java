@@ -1,7 +1,7 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
-import sgcmf.model.dao.GeneralDAO;
+import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.SelecaoDAO;
 import sgcmf.model.hibernate.Selecao;
 
@@ -13,10 +13,13 @@ public class CtrSelecao
         ArrayList<Selecao> alSelecao;
         String[][] dadosSelecoes;
 
-        sdao = new SelecaoDAO();
+        SGCMFSessionManager.abrirSessao();
+        sdao = SelecaoDAO.getInstance();
+        
         alSelecao = sdao.listaTodos();
         dadosSelecoes = arrayList2StringMatrix(alSelecao);
-        sdao.fecharSessao();
+        
+        SGCMFSessionManager.fecharSessao();
 
         return dadosSelecoes;
     }
@@ -27,10 +30,13 @@ public class CtrSelecao
         ArrayList<Selecao> alSelecao;
         String[][] dadosSelecoes;
 
-        sDAO = new SelecaoDAO();
+        SGCMFSessionManager.abrirSessao();
+        sDAO = SelecaoDAO.getInstance();
+        
         alSelecao = sDAO.querySelecaoByNomePais(pais);
         dadosSelecoes = arrayList2StringMatrix(alSelecao);
-        sDAO.fecharSessao();
+        
+        SGCMFSessionManager.fecharSessao();
 
         return dadosSelecoes;
     }
@@ -41,10 +47,13 @@ public class CtrSelecao
         String[][] dadosSelecoes;
         ArrayList<Selecao> alSelecao;
 
-        sDAO = new SelecaoDAO();
+        SGCMFSessionManager.abrirSessao();
+        sDAO = SelecaoDAO.getInstance();
+        
         alSelecao = sDAO.querySelecaoByNomeTecnico(nomeTecnico);
         dadosSelecoes = arrayList2StringMatrix(alSelecao);
-        sDAO.fecharSessao();
+        
+        SGCMFSessionManager.fecharSessao();
 
         return dadosSelecoes;
     }
@@ -72,18 +81,26 @@ public class CtrSelecao
         ArrayList alIdSelecao;
         SelecaoDAO sDao;
         Short idSelecao;
-        sDao = new SelecaoDAO();
+        
+        SGCMFSessionManager.abrirSessao();
+        sDao = SelecaoDAO.getInstance();
         alIdSelecao = sDao.queryIdSelecao(nomeSelecao);
         idSelecao = (Short) (alIdSelecao.get(0));
+        SGCMFSessionManager.fecharSessao();
+        
         return idSelecao;
     }
     
     public String pesquisarNomeSelecao(Short idSelecao)
     {
-        SelecaoDAO selecaoDAO = new SelecaoDAO();
+        SelecaoDAO selecaoDAO;
         String nomeSelecao;
+        
+        SGCMFSessionManager.abrirSessao();
+        selecaoDAO = SelecaoDAO.getInstance();
         nomeSelecao = selecaoDAO.queryNomeSelecao(idSelecao);
-        selecaoDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
+        
         return nomeSelecao;
     }
 }
