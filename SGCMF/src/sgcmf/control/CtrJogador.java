@@ -123,21 +123,6 @@ public class CtrJogador
         return idSelecao;
     }
 
-    public String[][] queryJogadorByNome(String nome)
-    {
-        JogadorDAO jDAO;
-        String[][] dadosJogador;
-        ArrayList<Jogador> alJogador;
-
-        SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO.getInstance();
-        alJogador = jDAO.queryJogadorByNome(nome);
-        dadosJogador = arrayList2StringMatrix(alJogador);
-        SGCMFSessionManager.fecharSessao();
-
-        return dadosJogador;
-    }
-
     public String[][] queryAllDataJogadorTecnico(Usuario u)
     {
         JogadorDAO jDAO;
@@ -157,16 +142,17 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public String[][] queryAllDataJogadorByNome(String nome)
+    public String[][] queryAllDataJogadorByNomeAndByUser(String nome, Usuario u)
     {
         JogadorDAO jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
-
+        Iterator iterator = u.getSelecaos().iterator();
+        Selecao s;
+        s = (Selecao) iterator.next();
         SGCMFSessionManager.abrirSessao();
         jDAO = JogadorDAO.getInstance();
-        
-        alJogador = jDAO.queryJogadorByNome(nome);
+        alJogador = jDAO.queryJogadorByNomeAndByUser(nome, s.getId());
         dadosJogador = arrayList2StringMatrixFull(alJogador);
         
         SGCMFSessionManager.fecharSessao();
@@ -174,15 +160,19 @@ public class CtrJogador
         return dadosJogador;
     }
 
-    public String[][] queryAllDataJogadorByPosicao(String posicao)
+    public String[][] queryAllDataJogadorByPosicaoAndByUser(String posicao, Usuario u)
     {
         JogadorDAO jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
+        Iterator iterator = u.getSelecaos().iterator();
+        Selecao s;
+        s = (Selecao) iterator.next();
 
         SGCMFSessionManager.abrirSessao();
         jDAO = JogadorDAO.getInstance();
-        alJogador = jDAO.queryJogadorByPosicao(posicao);
+        alJogador = jDAO.queryJogadorByPosicaoAndByUser(posicao, s.getId());
+
         dadosJogador = arrayList2StringMatrixFull(alJogador);
         SGCMFSessionManager.fecharSessao();
 
@@ -253,9 +243,17 @@ public class CtrJogador
         Iterator iterator = user.getSelecaos().iterator();
         Selecao s;
         s = (Selecao) iterator.next();
+        boolean bolGoleiro;
+        if (posicao.equals("Goleiro"))
+        {
+            bolGoleiro = true;
+        }
+        else
+        {
+            bolGoleiro = false;
+        }
+        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, bolGoleiro, false, s.getId(), posicao);
 
-        
-        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, false, false, s.getId());
         if (errorMessege.equals(""))
         {
             SGCMFSessionManager.abrirSessao();
@@ -311,13 +309,13 @@ public class CtrJogador
         Iterator iterator;
         iterator = user.getSelecaos().iterator();
         Selecao s = (Selecao) iterator.next();
-
-
         shortIdJogador = new Short(strIdJogador);
+
         bolNumCamisaJogador = isNumCamisaVelhaIgualCamisaNova(numCamisaNovo, numCamisaAtual);
         bolGoleiro = isJogadorGoleiro(shortIdJogador);
         errorMessege = validaCampos('a', numCamisaNovo, dtaNascimento, altura,
-                                    bolGoleiro, bolNumCamisaJogador, s.getId());
+                bolGoleiro, bolNumCamisaJogador, s.getId(), posicao);
+        
         if (errorMessege.equals(""))
         {
             SGCMFSessionManager.abrirSessao();
@@ -377,7 +375,7 @@ public class CtrJogador
     }
 
     private String validaCampos(char metodo, String numCamisa, String dataNascimento,
-                                String altura, boolean bolGoleiro, boolean bolNumCamisaIguais, Short idSelecao)
+            String altura, boolean bolGoleiro, boolean bolNumCamisaIguais, Short idSelecao, String novaPosicao)
     {
         String errorMessege = "";
         Short camisa;
@@ -391,7 +389,7 @@ public class CtrJogador
             resultadoCamisaExistente = verificarNumeroCamisaExistente(camisa, idSelecao);
             if (resultadoCamisaExistente != 0 && bolNumCamisaIguais == false)
             {
-                errorMessege = "Já existe um jogador cadastrado com este número de camisa";
+                errorMessege = "Já existe um jogador cadastrado com este número de camisa.";
             }
             if (camisa < 1 || camisa > 23)
             {
@@ -437,18 +435,19 @@ public class CtrJogador
         if (errorMessege.equals(""))
         {
             int resultado = qtdeGoleirosSelecao(idSelecao);
-            if (metodo == 'c')
+            if (metodo == 'c' && bolGoleiro == true)
             {
                 if (resultado >= 3)
                 {
                     errorMessege = "É permitido apenas 3 Goleiros por seleção.";
                 }
             }
-            else
+            else if (metodo == 'a')
             {
+                //A merda dessa condição da alteração esta errada.
                 if (bolGoleiro == false)
                 {
-                    if (resultado >= 3)
+                    if (resultado >= 3 && novaPosicao.equals("Goleiro"))
                     {
                         errorMessege = "É permitido apenas 3 Goleiros por seleção.";
                     }
@@ -497,9 +496,6 @@ public class CtrJogador
         SGCMFSessionManager.fecharSessao();
         return false;
     }
-    //Verificar na hora da alteracao por exemplo: se o nCamisa for = 1 e
-    //tentar alterar qualquer dado do jogador nao funciona, o nCamisa teria que ser
-    // diferente, ou seja, o nCamisa se manter inalterado vale.
 
     private int verificarNumeroCamisaExistente(Short camisa, Short idSelecao)
     {

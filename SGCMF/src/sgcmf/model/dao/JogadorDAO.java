@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Jogador;
-import sgcmf.model.hibernate.Substituicao;
 
 public class JogadorDAO
 {
@@ -49,22 +48,24 @@ public class JogadorDAO
         return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery("from Jogador j where j.selecao.id = " + idSelecao + " order by j.ncamisa").list();
     }
 
-    public ArrayList<Jogador> queryJogadorByNome(String nome)
+    public ArrayList<Jogador> queryJogadorByNomeAndByUser(String nome, Short idSelecao)
     {
         String hql;
 
         hql = "from Jogador j "
-                + "where lower(j.nome) like lower('%" + nome + "%') order by j.id";
+                + "where lower(j.nome) like lower('%" + nome + "%') and "
+                + "j.selecao.id = "+idSelecao +" order by j.id";
 
         return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
-
-    public ArrayList<Jogador> queryJogadorByPosicao(String posicao)
+    
+    public ArrayList<Jogador> queryJogadorByPosicaoAndByUser(String posicao, Short idSelecao)
     {
         String hql;
 
         hql = "from Jogador j "
-                + "where lower(j.posicao) like lower('%" + posicao + "%') order by j.id";
+            + "where lower(j.posicao) like lower('%" + posicao + "%') and"
+                + " j.selecao.id = "+ idSelecao+" order by j.id";
         return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 

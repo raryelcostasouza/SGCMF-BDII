@@ -202,11 +202,11 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
         String[][] dadosJogadores;
         if (jrbNome.isSelected())
         {
-            dadosJogadores = ctrJogador.queryAllDataJogadorByNome(chavePesquisa);
+            dadosJogadores = ctrJogador.queryAllDataJogadorByNomeAndByUser(chavePesquisa, ctrTecnico.getUser());
         }
         else
         {
-            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicao(chavePesquisa);
+            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicaoAndByUser(chavePesquisa, ctrTecnico.getUser());
 
         }
 
