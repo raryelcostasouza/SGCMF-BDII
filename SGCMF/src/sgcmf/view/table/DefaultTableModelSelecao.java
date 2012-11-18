@@ -10,7 +10,7 @@ public class DefaultTableModelSelecao extends DefaultTableModelSGCMF
     @Override
     public Class<?> getColumnClass(int columnIndex)
     {
-        if (columnIndex == 3)
+        if (columnIndex == 1)
         {
             return getValueAt(0, columnIndex).getClass();
         }

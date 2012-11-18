@@ -116,7 +116,7 @@ public class LimConsultaSelecao extends JDialog
     {
         String[] nomesColunas =
         {
-            "ID", "País", "Técnico", "Bandeira"
+            "ID", "Bandeira", "País", "Técnico"
         };
 
         jt = new JTableSGCMF(null, nomesColunas);

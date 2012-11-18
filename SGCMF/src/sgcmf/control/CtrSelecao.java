@@ -70,9 +70,9 @@ public class CtrSelecao
         {
             s = alSelecao.get(i);
             dadosSelecoes[i][0] = s.getId() + "";
-            dadosSelecoes[i][1] = s.getPais();
-            dadosSelecoes[i][2] = s.getUsuario().getNome();
-            dadosSelecoes[i][3] = new JLabel(new ImageIcon(s.getCaminhoimgbandeira()));
+            dadosSelecoes[i][1] = new JLabel(new ImageIcon(s.getCaminhoimgbandeira()));
+            dadosSelecoes[i][2] = s.getPais();
+            dadosSelecoes[i][3] = s.getUsuario().getNome();
         }
 
         return dadosSelecoes;
