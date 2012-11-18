@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
-import sgcmf.model.dao.CartaoDAO;
-import sgcmf.model.dao.GeneralDAO;
+import sgcmf.hibernate.SGCMFSessionManager;
+import sgcmf.model.dao.CartaoDAO2;
+import sgcmf.model.dao.FaltaDAO2;
+import sgcmf.model.dao.JogadorDAO2;
+import sgcmf.model.dao.OcorrenciaDAO2;
 import sgcmf.model.hibernate.Cartao;
 import sgcmf.model.hibernate.Falta;
 import sgcmf.model.hibernate.Jogador;
@@ -26,12 +29,11 @@ public class CtrCartao
     {
         ArrayList<Cartao> alCartao;
         String[][] dadosCartao;
-        CartaoDAO cartaoDAO;
 
-        cartaoDAO = new CartaoDAO();
-        alCartao = cartaoDAO.queryCartaoByIdJogo(idJogo);
+        SGCMFSessionManager.openSession();
+        alCartao = CartaoDAO2.getInstance().queryCartaoByIdJogo(idJogo);
         dadosCartao = arrayList2StringMatrix(alCartao);
-        cartaoDAO.fecharSessao();
+        SGCMFSessionManager.closeSession();
 
         return dadosCartao;
     }
@@ -58,7 +60,6 @@ public class CtrCartao
 
     public ResultadoOperacao registraCartaoUI(String min, String seg, Short idJogo, String idJogador, String cor)
     {
-        GeneralDAO gdao;
         Short shortIdJogador;
         Transaction tr;
         Ocorrencia objOcorrencia;
@@ -71,17 +72,19 @@ public class CtrCartao
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
         {
-            gdao = new GeneralDAO();
-
-            tr = gdao.getSessao().beginTransaction();
+            SGCMFSessionManager.openSession();
+            tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             try
             {
-                objOcorrencia = ctrMain.getCtrOcorrenciaJogo().registraOcorrencia(gdao, min, seg, idJogo);
+                objOcorrencia = ctrMain.getCtrOcorrenciaJogo().registraOcorrencia(min, seg, idJogo);
 
                 //carrega o jogador
                 shortIdJogador = Short.parseShort(idJogador);
-                objJogador = ctrMain.getCtrJogador().carregaJogadorById(gdao, shortIdJogador);
-                registraCartao(gdao, objOcorrencia, objJogador, cor);
+                
+                objJogador = new Jogador();
+                objJogador = JogadorDAO2.getInstance().carregar(objJogador, shortIdJogador);
+                
+                registraCartao(objOcorrencia, objJogador, cor);
                 tr.commit();
 
                 result = new ResultadoOperacao("Cartão cadastrado com êxito!", TipoResultadoOperacao.EXITO);
@@ -91,7 +94,7 @@ public class CtrCartao
                 tr.rollback();
                 result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
             }
-            gdao.fecharSessao();
+            SGCMFSessionManager.closeSession();
         }
         else
         {
@@ -101,15 +104,12 @@ public class CtrCartao
         return result;
     }
 
-    public Cartao registraCartao(GeneralDAO gdao, Ocorrencia objOcorrencia, Jogador objJogador, String cor) throws HibernateException
+    public Cartao registraCartao(Ocorrencia objOcorrencia, Jogador objJogador, String cor) throws HibernateException
     {
         int numCartaoAmareloJogadorNoJogo;
-        CartaoDAO cDAO;
         Cartao objCartao, objCartaoVermDerivado;        
-                
-        cDAO = new CartaoDAO();
 
-        numCartaoAmareloJogadorNoJogo = cDAO.queryNumCartaoAmareloJogadorJogo(objOcorrencia.getJogo().getId(), objJogador.getId());
+        numCartaoAmareloJogadorNoJogo = CartaoDAO2.getInstance().queryNumCartaoAmareloJogadorJogo(objOcorrencia.getJogo().getId(), objJogador.getId());
 
         objCartao = new Cartao();
         objCartao.setOcorrencia(objOcorrencia);
@@ -126,10 +126,10 @@ public class CtrCartao
             objCartaoVermDerivado.setCor("Vermelho");
 
             objCartao.setCartao(objCartaoVermDerivado);
-            gdao.salvar(objCartaoVermDerivado);
+            CartaoDAO2.getInstance().salvar(objCartaoVermDerivado);
         }
 
-        gdao.salvar(objCartao);
+        CartaoDAO2.getInstance().salvar(objCartao);
         
         return objCartao;
     }
@@ -160,7 +160,6 @@ public class CtrCartao
     {
         ResultadoOperacao result;
         Transaction tr;
-        GeneralDAO gdao;
         Falta faltaParaRemover;
         Cartao cartaoParaRemover;
         Cartao cartaoAssociado;
@@ -172,15 +171,15 @@ public class CtrCartao
         cartaoParaRemover = new Cartao();
         ocParaRemover = new Ocorrencia();
 
-        gdao = new GeneralDAO();
-        tr = gdao.getSessao().beginTransaction();
+        SGCMFSessionManager.openSession();
+        tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
 
         try
         {
-            errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(gdao, ocParaRemover, idOc);
+            errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(ocParaRemover, idOc);
             if (errorMessage.equals(""))
             {
-                gdao.carregar(cartaoParaRemover, idCartao);
+                CartaoDAO2.getInstance().carregar(cartaoParaRemover, idCartao);
                 ocParaRemover = cartaoParaRemover.getOcorrencia();
 
                 //apaga faltas associadas
@@ -188,7 +187,7 @@ public class CtrCartao
                 {
                     itFalta = ocParaRemover.getFaltas().iterator();
                     faltaParaRemover = itFalta.next();
-                    gdao.apagar(faltaParaRemover);
+                    FaltaDAO2.getInstance().apagar(faltaParaRemover);
                 }
 
                 //remove todos os cartoes associados
@@ -199,11 +198,11 @@ public class CtrCartao
                     while (itCartao.hasNext())
                     {
                         cartaoAssociado = itCartao.next();
-                        gdao.apagar(cartaoAssociado);
+                        CartaoDAO2.getInstance().apagar(cartaoAssociado);
                     }
                 }
                 //remove a ocorrência
-                gdao.apagar(ocParaRemover);
+                OcorrenciaDAO2.getInstance().apagar(ocParaRemover);
 
                 tr.commit();
                 result = new ResultadoOperacao("Cartão e faltas associadas removidos com êxito!", TipoResultadoOperacao.EXITO);
@@ -218,7 +217,7 @@ public class CtrCartao
             tr.rollback();
             result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
         }
-        gdao.fecharSessao();
+        SGCMFSessionManager.closeSession();
 
         return result;
     }

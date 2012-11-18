@@ -16,16 +16,6 @@ import sgcmf.model.other.TipoResultadoOperacao;
 
 public class CtrJogador
 {
-    public Jogador carregaJogadorById(GeneralDAO gdao, Short idJogador)
-    {
-        Jogador jogador;
-
-        jogador = new Jogador();
-        gdao.carregar(jogador, idJogador);
-
-        return jogador;
-    }
-
     public String[][] queryJogadoresEmCampo(Short idJogo)
     {
         JogadorDAO jDAO;

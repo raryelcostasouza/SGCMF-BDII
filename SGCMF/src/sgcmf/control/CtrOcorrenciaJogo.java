@@ -1,11 +1,11 @@
 package sgcmf.control;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 import sgcmf.model.dao.GeneralDAO;
+import sgcmf.model.dao.JogoDAO2;
 import sgcmf.model.dao.OcorrenciaDAO;
+import sgcmf.model.dao.OcorrenciaDAO2;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.hibernate.Ocorrencia;
 
@@ -18,25 +18,25 @@ public class CtrOcorrenciaJogo
         this.ctrMain = ctrMain;
     }
 
-    public Ocorrencia registraOcorrencia(GeneralDAO gdao, String min, String seg, Short idJogo)
+    public Ocorrencia registraOcorrencia(String min, String seg, Short idJogo)
     {
         Ocorrencia oc;
         Jogo jogo;
         GregorianCalendar gc;
 
-        jogo = ctrMain.getCtrJogo().carregaJogoById(gdao, idJogo);
+        jogo = new Jogo();
+        jogo = JogoDAO2.getInstance().carregar(jogo, idJogo);
 
         gc = new GregorianCalendar(0, 0, 0, 0, Integer.parseInt(min), Integer.parseInt(seg));
 
         oc = new Ocorrencia();
         oc.setInstantetempo(gc.getTime());
         oc.setJogo(jogo);
-
-        gdao.salvar(oc);
+        OcorrenciaDAO2.getInstance().salvar(oc);
 
         return oc;
     }
-
+    
     public String validaCampos(String min, String seg, Short idJogo)
     {
         int intMin;
@@ -84,16 +84,13 @@ public class CtrOcorrenciaJogo
         return errorMessage;
     }
     
-    public String validaRemocao(GeneralDAO gdao, Ocorrencia oc, Short idOc)
+    public String validaRemocao(Ocorrencia oc, Short idOc)
     {
-        OcorrenciaDAO ocDAO;
         int numOcDepois;
         
-        gdao.carregar(oc, idOc);
+        OcorrenciaDAO2.getInstance().carregar(oc, idOc);
         
-        ocDAO = new OcorrenciaDAO();
-        numOcDepois = ocDAO.queryNumOcorrenciasComInstanteTempoMaior(oc.getJogo().getId(), oc.getInstantetempo());
-        
+        numOcDepois = OcorrenciaDAO2.getInstance().queryNumOcorrenciasComInstanteTempoMaior(oc.getJogo().getId(), oc.getInstantetempo());
         
         if (numOcDepois == 0)
         {
