@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Falta;
 
-public class FaltaDAO2
+public class FaltaDAO
 {
-    private static FaltaDAO2 instance;
+    private static FaltaDAO instance;
     
-    private FaltaDAO2()
+    private FaltaDAO()
     {
         
     }
     
-    public static FaltaDAO2 getInstance()
+    public static FaltaDAO getInstance()
     {
         if (instance == null)
         {
-            instance = new FaltaDAO2();
+            instance = new FaltaDAO();
         }
         return instance;        
     }

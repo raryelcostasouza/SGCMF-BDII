@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Jogo;
 
-public class JogoDAO2
+public class JogoDAO
 {
-    private static JogoDAO2 instance;
+    private static JogoDAO instance;
     
-    private JogoDAO2()
+    private JogoDAO()
     {
         
     }
     
-    public static JogoDAO2 getInstance()
+    public static JogoDAO getInstance()
     {
         if (instance == null)
         {
-            instance = new JogoDAO2();
+            instance = new JogoDAO();
         }
         return instance;
     }

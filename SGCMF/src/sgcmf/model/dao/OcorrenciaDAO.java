@@ -6,20 +6,20 @@ import org.hibernate.Query;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Ocorrencia;
 
-public class OcorrenciaDAO2
+public class OcorrenciaDAO
 {
-    private static OcorrenciaDAO2 instance;
+    private static OcorrenciaDAO instance;
 
-    private OcorrenciaDAO2()
+    private OcorrenciaDAO()
     {
         
     }
     
-    public static OcorrenciaDAO2 getInstance()
+    public static OcorrenciaDAO getInstance()
     {
         if (instance == null)
         {
-            instance = new OcorrenciaDAO2();
+            instance = new OcorrenciaDAO();
         }
         return instance;
     }

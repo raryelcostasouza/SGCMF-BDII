@@ -6,19 +6,19 @@ import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Substituicao;
 
-public class JogadorDAO2
+public class JogadorDAO
 {
-    private static JogadorDAO2 instance;
+    private static JogadorDAO instance;
 
-    private JogadorDAO2()
+    private JogadorDAO()
     {
     }
 
-    public static JogadorDAO2 getInstance()
+    public static JogadorDAO getInstance()
     {
         if (instance == null)
         {
-            instance = new JogadorDAO2();
+            instance = new JogadorDAO();
         }
         return instance;
     }

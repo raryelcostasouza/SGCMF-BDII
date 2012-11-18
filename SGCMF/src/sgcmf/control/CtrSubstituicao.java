@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
-import sgcmf.model.dao.JogadorDAO2;
-import sgcmf.model.dao.OcorrenciaDAO2;
-import sgcmf.model.dao.SubstituicaoDAO2;
+import sgcmf.model.dao.JogadorDAO;
+import sgcmf.model.dao.OcorrenciaDAO;
+import sgcmf.model.dao.SubstituicaoDAO;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Ocorrencia;
 import sgcmf.model.hibernate.Substituicao;
@@ -28,7 +28,7 @@ public class CtrSubstituicao
         String[][] dadosCartao;
 
         SGCMFSessionManager.abrirSessao();
-        alSubst = SubstituicaoDAO2.getInstance().querySubstByIdJogo(idJogo);
+        alSubst = SubstituicaoDAO.getInstance().querySubstByIdJogo(idJogo);
         dadosCartao = arrayList2StringMatrix(alSubst);
         SGCMFSessionManager.fecharSessao();
 
@@ -90,11 +90,11 @@ public class CtrSubstituicao
 
                 objJogadorSaiu = new Jogador();
                 objJogadorEntrou = new Jogador();
-                JogadorDAO2.getInstance().carregar(objJogadorSaiu, shortIdJogadorSaiu);
-                JogadorDAO2.getInstance().carregar(objJogadorEntrou, shortIdJogadorEntrou);
+                JogadorDAO.getInstance().carregar(objJogadorSaiu, shortIdJogadorSaiu);
+                JogadorDAO.getInstance().carregar(objJogadorEntrou, shortIdJogadorEntrou);
 
                 objSubst = new Substituicao(objOcorrencia.getId(), objJogadorEntrou, objJogadorSaiu, objOcorrencia, motivo);
-                SubstituicaoDAO2.getInstance().salvar(objSubst);
+                SubstituicaoDAO.getInstance().salvar(objSubst);
                 tr.commit();
 
                 result = new ResultadoOperacao("Substituição registrada com êxito!", TipoResultadoOperacao.EXITO);
@@ -167,9 +167,9 @@ public class CtrSubstituicao
             errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(ocParaRemover, idOc);
             if (errorMessage.equals(""))
             {
-                SubstituicaoDAO2.getInstance().carregar(substParaRemover, idOc);
-                SubstituicaoDAO2.getInstance().apagar(substParaRemover);
-                OcorrenciaDAO2.getInstance().apagar(ocParaRemover);
+                SubstituicaoDAO.getInstance().carregar(substParaRemover, idOc);
+                SubstituicaoDAO.getInstance().apagar(substParaRemover);
+                OcorrenciaDAO.getInstance().apagar(ocParaRemover);
 
                 tr.commit();
                 result = new ResultadoOperacao("Substituição removida com êxito!", TipoResultadoOperacao.EXITO);

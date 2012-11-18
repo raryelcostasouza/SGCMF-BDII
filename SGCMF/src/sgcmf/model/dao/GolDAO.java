@@ -6,20 +6,20 @@ import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Gol;
 import sgcmf.model.hibernate.Ocorrencia;
 
-public class GolDAO2
+public class GolDAO
 {
-    private static GolDAO2 instance;
+    private static GolDAO instance;
 
-    private GolDAO2()
+    private GolDAO()
     {
         
     }
     
-    public static GolDAO2 getInstance()
+    public static GolDAO getInstance()
     {
         if (instance == null)
         {
-            instance = new GolDAO2();
+            instance = new GolDAO();
         }
         return instance;
     }

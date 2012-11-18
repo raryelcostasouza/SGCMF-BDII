@@ -2,7 +2,7 @@ package sgcmf.control;
 
 import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
-import sgcmf.model.dao.JogoDAO2;
+import sgcmf.model.dao.JogoDAO;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.other.SGCMFDate;
 
@@ -10,12 +10,12 @@ public class CtrJogo
 {    
     public String[][] queryJogoTodos()
     {
-        JogoDAO2 jDAO;
+        JogoDAO jDAO;
         ArrayList<Jogo> alJogos;
         String[][] dadosJogos;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogoDAO2.getInstance();
+        jDAO = JogoDAO.getInstance();
         
         alJogos = jDAO.listaTodos();
         dadosJogos = arrayList2StringMatrix(alJogos);
@@ -27,12 +27,12 @@ public class CtrJogo
 
     public String[][] queryJogoBySelecao(String nomeSelecao)
     {
-        JogoDAO2 jDAO;
+        JogoDAO jDAO;
         String[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogoDAO2.getInstance();
+        jDAO = JogoDAO.getInstance();
         
         alJogo = jDAO.queryJogoBySelecao(nomeSelecao);
         dadosJogos = arrayList2StringMatrix(alJogo);
@@ -44,12 +44,12 @@ public class CtrJogo
 
     public String[][] queryJogoByCidade(String cidade)
     {
-        JogoDAO2 jDAO;
+        JogoDAO jDAO;
         String[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogoDAO2.getInstance();
+        jDAO = JogoDAO.getInstance();
         
         alJogo = jDAO.queryJogoByCidade(cidade);
         dadosJogos = arrayList2StringMatrix(alJogo);
@@ -61,12 +61,12 @@ public class CtrJogo
 
     public String[][] queryJogoByEstadio(String estadio)
     {
-        JogoDAO2 jDAO;
+        JogoDAO jDAO;
         String[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogoDAO2.getInstance();
+        jDAO = JogoDAO.getInstance();
         
         alJogo = jDAO.queryJogoByEstadio(estadio);
         dadosJogos = arrayList2StringMatrix(alJogo);
@@ -78,12 +78,12 @@ public class CtrJogo
 
     public String[][] queryJogoByTipo(String tipo)
     {
-        JogoDAO2 jDAO;
+        JogoDAO jDAO;
         String[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogoDAO2.getInstance();
+        jDAO = JogoDAO.getInstance();
         alJogo = jDAO.queryJogoByTipo(tipo);
         
         dadosJogos = arrayList2StringMatrix(alJogo);
@@ -117,11 +117,11 @@ public class CtrJogo
     public String queryInfoJogoById(Short idJogo)
     {
         String infoJogo;
-        JogoDAO2 jDao;
+        JogoDAO jDao;
         Jogo j;
              
         SGCMFSessionManager.abrirSessao();
-        jDao = JogoDAO2.getInstance();
+        jDao = JogoDAO.getInstance();
         j = jDao.queryInfoJogoById(idJogo);
         
         infoJogo = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora()) + " | " + j.getTipo() + " | "

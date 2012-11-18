@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Selecao;
 
-public class SelecaoDAO2
+public class SelecaoDAO
 {
-    private static SelecaoDAO2 instance;
+    private static SelecaoDAO instance;
     
-    private SelecaoDAO2()
+    private SelecaoDAO()
     {
         
     }
     
-    public static SelecaoDAO2 getInstance()
+    public static SelecaoDAO getInstance()
     {
         if (instance == null)
         {
-            instance = new SelecaoDAO2();
+            instance = new SelecaoDAO();
         }
         return instance;
     }

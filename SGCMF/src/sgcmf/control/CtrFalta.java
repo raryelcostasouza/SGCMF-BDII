@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
-import sgcmf.model.dao.CartaoDAO2;
-import sgcmf.model.dao.FaltaDAO2;
+import sgcmf.model.dao.CartaoDAO;
+import sgcmf.model.dao.FaltaDAO;
 import sgcmf.model.dao.GeneralDAO;
-import sgcmf.model.dao.JogadorDAO2;
-import sgcmf.model.dao.OcorrenciaDAO2;
+import sgcmf.model.dao.JogadorDAO;
+import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.hibernate.Cartao;
 import sgcmf.model.hibernate.Falta;
 import sgcmf.model.hibernate.Jogador;
@@ -31,7 +31,7 @@ public class CtrFalta
         String[][] dadosFalta;
 
         SGCMFSessionManager.abrirSessao();
-        alFalta = FaltaDAO2.getInstance().queryFaltaByIdJogo(idJogo);
+        alFalta = FaltaDAO.getInstance().queryFaltaByIdJogo(idJogo);
         dadosFalta = arrayList2StringMatrix(alFalta);
         SGCMFSessionManager.fecharSessao();
 
@@ -96,7 +96,7 @@ public class CtrFalta
                 shortIdJogador = Short.parseShort(idJogador);
                 
                 objJogador = new Jogador();
-                objJogador = JogadorDAO2.getInstance().carregar(objJogador, shortIdJogador);
+                objJogador = JogadorDAO.getInstance().carregar(objJogador, shortIdJogador);
 
                 //se tiver jogador assistente, ele eh carregado
                 if (cartao.equals("Nenhum"))
@@ -109,7 +109,7 @@ public class CtrFalta
                     objFalta = new Falta(objOcorrencia.getId(), objOcorrencia, objCartao, objJogador, tipo);
                 }
 
-                FaltaDAO2.getInstance().salvar(objFalta);
+                FaltaDAO.getInstance().salvar(objFalta);
                 tr.commit();
 
                 result = new ResultadoOperacao("Falta cadastrada com êxito!", TipoResultadoOperacao.EXITO);
@@ -171,7 +171,7 @@ public class CtrFalta
             errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(ocParaRemover, idOc);
             if (errorMessage.equals(""))
             {
-                FaltaDAO2.getInstance().carregar(faltaParaRemover, idOc);
+                FaltaDAO.getInstance().carregar(faltaParaRemover, idOc);
 
                 if (faltaParaRemover.getCartao() != null)
                 {
@@ -184,10 +184,10 @@ public class CtrFalta
 
                 if (cartaoParaRemover != null)
                 {
-                    CartaoDAO2.getInstance().apagar(cartaoParaRemover);
+                    CartaoDAO.getInstance().apagar(cartaoParaRemover);
                 }
-                FaltaDAO2.getInstance().apagar(faltaParaRemover);
-                OcorrenciaDAO2.getInstance().apagar(ocParaRemover);
+                FaltaDAO.getInstance().apagar(faltaParaRemover);
+                OcorrenciaDAO.getInstance().apagar(ocParaRemover);
 
                 tr.commit();
                 result = new ResultadoOperacao("Falta e cartão associado removidos com êxito!", TipoResultadoOperacao.EXITO);

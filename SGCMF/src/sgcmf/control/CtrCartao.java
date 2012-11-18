@@ -5,10 +5,10 @@ import java.util.Iterator;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
-import sgcmf.model.dao.CartaoDAO2;
-import sgcmf.model.dao.FaltaDAO2;
-import sgcmf.model.dao.JogadorDAO2;
-import sgcmf.model.dao.OcorrenciaDAO2;
+import sgcmf.model.dao.CartaoDAO;
+import sgcmf.model.dao.FaltaDAO;
+import sgcmf.model.dao.JogadorDAO;
+import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.hibernate.Cartao;
 import sgcmf.model.hibernate.Falta;
 import sgcmf.model.hibernate.Jogador;
@@ -31,7 +31,7 @@ public class CtrCartao
         String[][] dadosCartao;
 
         SGCMFSessionManager.abrirSessao();
-        alCartao = CartaoDAO2.getInstance().queryCartaoByIdJogo(idJogo);
+        alCartao = CartaoDAO.getInstance().queryCartaoByIdJogo(idJogo);
         dadosCartao = arrayList2StringMatrix(alCartao);
         SGCMFSessionManager.fecharSessao();
 
@@ -82,7 +82,7 @@ public class CtrCartao
                 shortIdJogador = Short.parseShort(idJogador);
                 
                 objJogador = new Jogador();
-                objJogador = JogadorDAO2.getInstance().carregar(objJogador, shortIdJogador);
+                objJogador = JogadorDAO.getInstance().carregar(objJogador, shortIdJogador);
                 
                 registraCartao(objOcorrencia, objJogador, cor);
                 tr.commit();
@@ -109,7 +109,7 @@ public class CtrCartao
         int numCartaoAmareloJogadorNoJogo;
         Cartao objCartao, objCartaoVermDerivado;        
 
-        numCartaoAmareloJogadorNoJogo = CartaoDAO2.getInstance().queryNumCartaoAmareloJogadorJogo(objOcorrencia.getJogo().getId(), objJogador.getId());
+        numCartaoAmareloJogadorNoJogo = CartaoDAO.getInstance().queryNumCartaoAmareloJogadorJogo(objOcorrencia.getJogo().getId(), objJogador.getId());
 
         objCartao = new Cartao();
         objCartao.setOcorrencia(objOcorrencia);
@@ -126,10 +126,10 @@ public class CtrCartao
             objCartaoVermDerivado.setCor("Vermelho");
 
             objCartao.setCartao(objCartaoVermDerivado);
-            CartaoDAO2.getInstance().salvar(objCartaoVermDerivado);
+            CartaoDAO.getInstance().salvar(objCartaoVermDerivado);
         }
 
-        CartaoDAO2.getInstance().salvar(objCartao);
+        CartaoDAO.getInstance().salvar(objCartao);
         
         return objCartao;
     }
@@ -179,7 +179,7 @@ public class CtrCartao
             errorMessage = ctrMain.getCtrOcorrenciaJogo().validaRemocao(ocParaRemover, idOc);
             if (errorMessage.equals(""))
             {
-                CartaoDAO2.getInstance().carregar(cartaoParaRemover, idCartao);
+                CartaoDAO.getInstance().carregar(cartaoParaRemover, idCartao);
                 ocParaRemover = cartaoParaRemover.getOcorrencia();
 
                 //apaga faltas associadas
@@ -187,7 +187,7 @@ public class CtrCartao
                 {
                     itFalta = ocParaRemover.getFaltas().iterator();
                     faltaParaRemover = itFalta.next();
-                    FaltaDAO2.getInstance().apagar(faltaParaRemover);
+                    FaltaDAO.getInstance().apagar(faltaParaRemover);
                 }
 
                 //remove todos os cartoes associados
@@ -198,11 +198,11 @@ public class CtrCartao
                     while (itCartao.hasNext())
                     {
                         cartaoAssociado = itCartao.next();
-                        CartaoDAO2.getInstance().apagar(cartaoAssociado);
+                        CartaoDAO.getInstance().apagar(cartaoAssociado);
                     }
                 }
                 //remove a ocorrência
-                OcorrenciaDAO2.getInstance().apagar(ocParaRemover);
+                OcorrenciaDAO.getInstance().apagar(ocParaRemover);
 
                 tr.commit();
                 result = new ResultadoOperacao("Cartão e faltas associadas removidos com êxito!", TipoResultadoOperacao.EXITO);

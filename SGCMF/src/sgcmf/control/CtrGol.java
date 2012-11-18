@@ -5,9 +5,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.GeneralDAO;
-import sgcmf.model.dao.GolDAO2;
-import sgcmf.model.dao.JogadorDAO2;
-import sgcmf.model.dao.OcorrenciaDAO2;
+import sgcmf.model.dao.GolDAO;
+import sgcmf.model.dao.JogadorDAO;
+import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.hibernate.Gol;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Ocorrencia;
@@ -29,7 +29,7 @@ public class CtrGol
         String[][] dadosGol;
 
         SGCMFSessionManager.abrirSessao();
-        alGol = GolDAO2.getInstance().queryGolByIdJogo(idJogo);
+        alGol = GolDAO.getInstance().queryGolByIdJogo(idJogo);
         dadosGol = arrayList2StringMatrix(alGol);
         SGCMFSessionManager.fecharSessao();
 
@@ -63,14 +63,14 @@ public class CtrGol
                 //carrega o jogador autor
                 shortIdJogadorAutor = Short.parseShort(idJogadorAutor);
                 jAutor = new Jogador();
-                JogadorDAO2.getInstance().carregar(jAutor, shortIdJogadorAutor);
+                JogadorDAO.getInstance().carregar(jAutor, shortIdJogadorAutor);
 
                 //se tiver jogador assistente, ele eh carregado
                 if (!idJogadorAssist.equals(""))
                 {
                     shortIdJogadorAssist = Short.parseShort(idJogadorAssist);
                     jAssist = new Jogador();
-                    jAssist = JogadorDAO2.getInstance().carregar(jAssist, shortIdJogadorAssist);
+                    jAssist = JogadorDAO.getInstance().carregar(jAssist, shortIdJogadorAssist);
                     g = new Gol(o.getId(), jAutor, o, jAssist, tipoGol, modoGol);
                 }
                 else
@@ -79,7 +79,7 @@ public class CtrGol
                 }
 
                 //salva o gol e commita
-                GolDAO2.getInstance().salvar(g);
+                GolDAO.getInstance().salvar(g);
                 tr.commit();
 
                 result = new ResultadoOperacao("Gol cadastrado com êxito!", TipoResultadoOperacao.EXITO);
@@ -142,10 +142,10 @@ public class CtrGol
             //se a remocao for possivel de acordo com as regras de negocio
             if (errorMessage.equals(""))
             {
-                golParaRemover = GolDAO2.getInstance().carregar(golParaRemover, idOc);
+                golParaRemover = GolDAO.getInstance().carregar(golParaRemover, idOc);
 
-                GolDAO2.getInstance().apagar(golParaRemover);
-                OcorrenciaDAO2.getInstance().apagar(ocParaRemover);
+                GolDAO.getInstance().apagar(golParaRemover);
+                OcorrenciaDAO.getInstance().apagar(ocParaRemover);
 
                 tr.commit();
                 result = new ResultadoOperacao("Gol removido com êxito!", TipoResultadoOperacao.EXITO);

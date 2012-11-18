@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Cartao;
 
-public class CartaoDAO2
+public class CartaoDAO
 {
-    private static CartaoDAO2 instance;
+    private static CartaoDAO instance;
     
-    private CartaoDAO2()
+    private CartaoDAO()
     {
         
     }
             
-    public static CartaoDAO2 getInstance()
+    public static CartaoDAO getInstance()
     {
         if (instance == null)
         {
-            instance = new CartaoDAO2();
+            instance = new CartaoDAO();
         }
         return instance;        
     }

@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Substituicao;
 
-public class SubstituicaoDAO2
+public class SubstituicaoDAO
 {
-    private static SubstituicaoDAO2 instance;
+    private static SubstituicaoDAO instance;
 
-    private SubstituicaoDAO2()
+    private SubstituicaoDAO()
     {
     }
 
-    public static SubstituicaoDAO2 getInstance()
+    public static SubstituicaoDAO getInstance()
     {
         if (instance == null)
         {
-            instance = new SubstituicaoDAO2();
+            instance = new SubstituicaoDAO();
         }
         return instance;
     }

@@ -7,7 +7,7 @@ import java.util.Iterator;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
-import sgcmf.model.dao.JogadorDAO2;
+import sgcmf.model.dao.JogadorDAO;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Selecao;
 import sgcmf.model.hibernate.Usuario;
@@ -18,12 +18,12 @@ public class CtrJogador
 {
     public String[][] queryJogadoresEmCampo(Short idJogo)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
         alJogador = jDAO.queryJogadoresEmCampo(idJogo);
         dadosJogadores = arrayList2StringMatrix(alJogador);
         SGCMFSessionManager.fecharSessao();
@@ -33,12 +33,12 @@ public class CtrJogador
 
     public String[][] queryJogadoresEmCampoByNome(Short idJogo, String nome)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
         alJogador = jDAO.queryJogadoresEmCampoByNome(idJogo, nome);
         dadosJogadores = arrayList2StringMatrix(alJogador);
         SGCMFSessionManager.fecharSessao();
@@ -48,12 +48,12 @@ public class CtrJogador
 
     public String[][] queryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
 
         alJogador = jDAO.queryOutrosJogadoresEmCampoSelecao(idJogo, idSelecao, idJogador);
         dadosJogadores = arrayList2StringMatrix(alJogador);
@@ -65,12 +65,12 @@ public class CtrJogador
 
     public String[][] queryOutrosJogadoresEmCampoSelecaoByNome(Short idJogo, Short idSelecao, Short idJogador, String nome)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
 
         alJogador = jDAO.queryOutrosJogadoresEmCampoSelecaoByNome(idJogo, idSelecao, idJogador, nome);
         dadosJogadores = arrayList2StringMatrix(alJogador);
@@ -81,12 +81,12 @@ public class CtrJogador
 
     public String[][] queryReservasSelecao(Short idJogo, Short idSelecao)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
         alJogador = jDAO.queryReservasSelecao(idJogo, idSelecao);
         dadosJogadores = arrayList2StringMatrix(alJogador);
         SGCMFSessionManager.fecharSessao();
@@ -96,12 +96,12 @@ public class CtrJogador
 
     public String[][] queryReservasSelecaoByNome(Short idJogo, Short idSelecao, String nome)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
 
         alJogador = jDAO.queryReservasSelecaoByNome(idJogo, idSelecao, nome);
         dadosJogadores = arrayList2StringMatrix(alJogador);
@@ -112,11 +112,11 @@ public class CtrJogador
 
     public Short queryIdSelecaoJogador(Short idJogador)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         Short idSelecao;
         
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
         idSelecao = jDAO.queryIdSelecaoJogador(idJogador);
         SGCMFSessionManager.fecharSessao();
         
@@ -125,12 +125,12 @@ public class CtrJogador
 
     public String[][] queryJogadorByNome(String nome)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
         alJogador = jDAO.queryJogadorByNome(nome);
         dadosJogador = arrayList2StringMatrix(alJogador);
         SGCMFSessionManager.fecharSessao();
@@ -140,13 +140,13 @@ public class CtrJogador
 
     public String[][] queryAllDataJogadorTecnico(Usuario u)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
         Selecao s;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
         Iterator iterator = u.getSelecaos().iterator();
 
         s = (Selecao) iterator.next();
@@ -159,12 +159,12 @@ public class CtrJogador
 
     public String[][] queryAllDataJogadorByNome(String nome)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
         
         alJogador = jDAO.queryJogadorByNome(nome);
         dadosJogador = arrayList2StringMatrixFull(alJogador);
@@ -176,12 +176,12 @@ public class CtrJogador
 
     public String[][] queryAllDataJogadorByPosicao(String posicao)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
 
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
         alJogador = jDAO.queryJogadorByPosicao(posicao);
         dadosJogador = arrayList2StringMatrixFull(alJogador);
         SGCMFSessionManager.fecharSessao();
@@ -242,7 +242,7 @@ public class CtrJogador
     public ResultadoOperacao cadastrarJogador(String numCamisa, String nome, String dataNascimento,
                                               String altura, boolean titular, String posicao, Usuario user)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         Short nCamisa;
         Date dtaNascimento;
         BigDecimal aAltura;
@@ -259,7 +259,7 @@ public class CtrJogador
         if (errorMessege.equals(""))
         {
             SGCMFSessionManager.abrirSessao();
-            jDAO = JogadorDAO2.getInstance();
+            jDAO = JogadorDAO.getInstance();
             nCamisa = Short.parseShort(numCamisa);
             dtaNascimento = new Date(dataNascimento);
             aAltura = new BigDecimal(altura);
@@ -297,7 +297,7 @@ public class CtrJogador
                                             String numCamisaAtual, String nome, String dtaNascimento, String altura,
                                             String posicao, Usuario user)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         Short nCamisa;
         Date dataNascimento;
         BigDecimal pAltura;
@@ -321,7 +321,7 @@ public class CtrJogador
         if (errorMessege.equals(""))
         {
             SGCMFSessionManager.abrirSessao();
-            jDAO = JogadorDAO2.getInstance();
+            jDAO = JogadorDAO.getInstance();
             nCamisa = Short.parseShort(numCamisaNovo);
             dataNascimento = new Date(dtaNascimento);
             pAltura = new BigDecimal(altura);
@@ -355,12 +355,12 @@ public class CtrJogador
     {
         Jogador j = new Jogador();
         Transaction tr;
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         ResultadoOperacao resultado;
         try
         {
             SGCMFSessionManager.abrirSessao();
-            jDAO = JogadorDAO2.getInstance();
+            jDAO = JogadorDAO.getInstance();
             tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             jDAO.carregar(j, new Short(idJogador));
             jDAO.apagar(j);
@@ -460,11 +460,11 @@ public class CtrJogador
 
     private int qtdeTitularesSelecao(Short idSelecao)
     {
-        JogadorDAO2 jogadorDAO;
+        JogadorDAO jogadorDAO;
         int qtdeTitulares;
         
         SGCMFSessionManager.abrirSessao();
-        jogadorDAO = JogadorDAO2.getInstance();
+        jogadorDAO = JogadorDAO.getInstance();
         qtdeTitulares = jogadorDAO.queryQuantidadeJogadorTitularesSelecao(idSelecao);
         SGCMFSessionManager.fecharSessao();
         return qtdeTitulares;
@@ -472,11 +472,11 @@ public class CtrJogador
 
     private int qtdeGoleirosSelecao(Short idSelecao)
     {
-        JogadorDAO2 jogadorDAO;
+        JogadorDAO jogadorDAO;
         int qtdeGoleiros;
         
         SGCMFSessionManager.abrirSessao();
-        jogadorDAO = JogadorDAO2.getInstance();
+        jogadorDAO = JogadorDAO.getInstance();
         qtdeGoleiros = jogadorDAO.queryQuantidadeGoleirosSelecao(idSelecao);
         SGCMFSessionManager.fecharSessao();
         return qtdeGoleiros;
@@ -484,11 +484,11 @@ public class CtrJogador
 
     private boolean isJogadorGoleiro(Short idJogador)
     {
-        JogadorDAO2 jogadorDAO;
+        JogadorDAO jogadorDAO;
         String posicao;
         
         SGCMFSessionManager.abrirSessao();
-        jogadorDAO = JogadorDAO2.getInstance();
+        jogadorDAO = JogadorDAO.getInstance();
         posicao = jogadorDAO.queryPosicaoJogador(idJogador);
         if (posicao.equals("Goleiro"))
         {
@@ -503,11 +503,11 @@ public class CtrJogador
 
     private int verificarNumeroCamisaExistente(Short camisa, Short idSelecao)
     {
-        JogadorDAO2 jDAO;
+        JogadorDAO jDAO;
         int resultado;
         
         SGCMFSessionManager.abrirSessao();
-        jDAO = JogadorDAO2.getInstance();
+        jDAO = JogadorDAO.getInstance();
         resultado = jDAO.queryVerificarCamisaExistente(camisa, idSelecao);
         SGCMFSessionManager.fecharSessao();
         return resultado;

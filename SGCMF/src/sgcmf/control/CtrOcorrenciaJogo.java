@@ -3,8 +3,8 @@ package sgcmf.control;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import sgcmf.hibernate.SGCMFSessionManager;
-import sgcmf.model.dao.JogoDAO2;
-import sgcmf.model.dao.OcorrenciaDAO2;
+import sgcmf.model.dao.JogoDAO;
+import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.hibernate.Ocorrencia;
 
@@ -24,14 +24,14 @@ public class CtrOcorrenciaJogo
         GregorianCalendar gc;
 
         jogo = new Jogo();
-        jogo = JogoDAO2.getInstance().carregar(jogo, idJogo);
+        jogo = JogoDAO.getInstance().carregar(jogo, idJogo);
 
         gc = new GregorianCalendar(0, 0, 0, 0, Integer.parseInt(min), Integer.parseInt(seg));
 
         oc = new Ocorrencia();
         oc.setInstantetempo(gc.getTime());
         oc.setJogo(jogo);
-        OcorrenciaDAO2.getInstance().salvar(oc);
+        OcorrenciaDAO.getInstance().salvar(oc);
 
         return oc;
     }
@@ -42,7 +42,7 @@ public class CtrOcorrenciaJogo
         int intSeg;
         int numOcorrenciasDepois;
         String errorMessage;
-        OcorrenciaDAO2 oDAO;
+        OcorrenciaDAO oDAO;
 
         errorMessage = "";
         try
@@ -70,7 +70,7 @@ public class CtrOcorrenciaJogo
             //se houver alguma ocorrencia depois do instante de tempo da ocorrencia que o usuario
             //quer inserir ele não poderá inseri-la...
             SGCMFSessionManager.abrirSessao();
-            oDAO = OcorrenciaDAO2.getInstance();
+            oDAO = OcorrenciaDAO.getInstance();
             numOcorrenciasDepois = oDAO.queryNumOcorrenciasComInstanteTempoMaior(idJogo, new Date(0, 0, 0, 0, Integer.parseInt(min), Integer.parseInt(seg)));
             if (numOcorrenciasDepois > 0)
             {
@@ -88,9 +88,9 @@ public class CtrOcorrenciaJogo
     {
         int numOcDepois;
         
-        OcorrenciaDAO2.getInstance().carregar(oc, idOc);
+        OcorrenciaDAO.getInstance().carregar(oc, idOc);
         
-        numOcDepois = OcorrenciaDAO2.getInstance().queryNumOcorrenciasComInstanteTempoMaior(oc.getJogo().getId(), oc.getInstantetempo());
+        numOcDepois = OcorrenciaDAO.getInstance().queryNumOcorrenciasComInstanteTempoMaior(oc.getJogo().getId(), oc.getInstantetempo());
         
         if (numOcDepois == 0)
         {
