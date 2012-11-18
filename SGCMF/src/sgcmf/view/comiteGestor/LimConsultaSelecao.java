@@ -8,13 +8,16 @@ import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.control.CtrSelecao;
 import sgcmf.model.other.SGCMFIcons;
+import sgcmf.view.table.DefaultTableModelSelecao;
 import sgcmf.view.table.JTableSGCMF;
+import sgcmf.view.table.SelecaoTableCellRenderer;
 
 public class LimConsultaSelecao extends JDialog
 {
@@ -113,10 +116,13 @@ public class LimConsultaSelecao extends JDialog
     {
         String[] nomesColunas =
         {
-            "ID", "País", "Técnico"
+            "ID", "País", "Técnico", "Bandeira"
         };
 
         jt = new JTableSGCMF(null, nomesColunas);
+        jt.setModel(new DefaultTableModelSelecao(null, nomesColunas));
+        jt.setDefaultRenderer(JLabel.class, new SelecaoTableCellRenderer());
+        jt.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         return jsp;
@@ -124,7 +130,7 @@ public class LimConsultaSelecao extends JDialog
 
     public void ativaTela()
     {
-        String[][] dadosSelecoes;
+        Object[][] dadosSelecoes;
 
         dadosSelecoes = ctrSelecao.querySelecaoTodos();
         jt.preencheTabela(dadosSelecoes);
@@ -140,7 +146,7 @@ public class LimConsultaSelecao extends JDialog
 
     private void pesquisa(String chavePesquisa)
     {
-        String[][] dadosSelecoes;
+        Object[][] dadosSelecoes;
 
         if (jrbPais.isSelected())
         {

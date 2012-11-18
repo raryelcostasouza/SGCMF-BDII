@@ -1,17 +1,19 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.SelecaoDAO;
 import sgcmf.model.hibernate.Selecao;
 
 public class CtrSelecao
 {
-    public String[][] querySelecaoTodos()
+    public Object[][] querySelecaoTodos()
     {
         SelecaoDAO sdao;
         ArrayList<Selecao> alSelecao;
-        String[][] dadosSelecoes;
+        Object[][] dadosSelecoes;
 
         SGCMFSessionManager.abrirSessao();
         sdao = SelecaoDAO.getInstance();
@@ -24,11 +26,11 @@ public class CtrSelecao
         return dadosSelecoes;
     }
 
-    public String[][] querySelecaoByNomePais(String pais)
+    public Object[][] querySelecaoByNomePais(String pais)
     {
         SelecaoDAO sDAO;
         ArrayList<Selecao> alSelecao;
-        String[][] dadosSelecoes;
+        Object[][] dadosSelecoes;
 
         SGCMFSessionManager.abrirSessao();
         sDAO = SelecaoDAO.getInstance();
@@ -41,10 +43,10 @@ public class CtrSelecao
         return dadosSelecoes;
     }
 
-    public String[][] querySelecaoByNomeTecnico(String nomeTecnico)
+    public Object[][] querySelecaoByNomeTecnico(String nomeTecnico)
     {
         SelecaoDAO sDAO;
-        String[][] dadosSelecoes;
+        Object[][] dadosSelecoes;
         ArrayList<Selecao> alSelecao;
 
         SGCMFSessionManager.abrirSessao();
@@ -58,18 +60,19 @@ public class CtrSelecao
         return dadosSelecoes;
     }
 
-    private String[][] arrayList2StringMatrix(ArrayList<Selecao> alSelecao)
+    private Object[][] arrayList2StringMatrix(ArrayList<Selecao> alSelecao)
     {
-        String[][] dadosSelecoes;
+        Object[][] dadosSelecoes;
         Selecao s;
 
-        dadosSelecoes = new String[alSelecao.size()][3];
+        dadosSelecoes = new Object[alSelecao.size()][4];
         for (int i = 0; i < alSelecao.size(); i++)
         {
             s = alSelecao.get(i);
             dadosSelecoes[i][0] = s.getId() + "";
             dadosSelecoes[i][1] = s.getPais();
             dadosSelecoes[i][2] = s.getUsuario().getNome();
+            dadosSelecoes[i][3] = new JLabel(new ImageIcon(s.getCaminhoimgbandeira()));
         }
 
         return dadosSelecoes;
