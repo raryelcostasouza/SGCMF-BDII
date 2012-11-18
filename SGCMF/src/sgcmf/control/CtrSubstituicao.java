@@ -117,6 +117,9 @@ public class CtrSubstituicao
     private String validaCampos(String min, String seg, String idJogadorSaiu, String idJogadorEntrou, Short idJogo)
     {
         String errorMessage;
+        SubstituicaoDAO sDAO;
+        int nSubJogo;
+        Jogador jSaiu;
 
         errorMessage = ctrMain.getCtrOcorrenciaJogo().validaCampos(min, seg, idJogo);
 
@@ -145,6 +148,23 @@ public class CtrSubstituicao
             }
         }
 
+        if (errorMessage.equals(""))
+        {
+            SGCMFSessionManager.abrirSessao();
+            jSaiu = new Jogador();
+            JogadorDAO.getInstance().carregar(jSaiu, Short.parseShort(idJogadorSaiu));            
+            sDAO = SubstituicaoDAO.getInstance();
+            
+            nSubJogo = sDAO.queryNumSubstituicoesSelecaoJogo(idJogo, jSaiu.getSelecao().getId());
+            SGCMFSessionManager.fecharSessao();
+
+            System.out.println(nSubJogo);
+            if (nSubJogo ==3)
+            {
+                errorMessage = "Já há três substituições cadastradas\npara essa seleção nesse jogo.";
+            }
+        }
+        
         return errorMessage;
     }
 

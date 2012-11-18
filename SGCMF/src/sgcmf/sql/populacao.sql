@@ -64,6 +64,7 @@ insert into Jogador  values (7,'Jogador 7', 1.93, 7, '1990-10-10', 'Atacante', t
 insert into Jogador  values (8,'Jogador 8', 1.93, 15, '1990-10-10', 'Volante', false, 1);
 insert into Jogador  values (9,'Jogador 9', 1.93, 16, '1990-10-10', 'Volante', false, 1);
 insert into Jogador  values (10,'Jogador 10', 1.93, 17, '1990-10-10', 'Zagueiro', false, 1);
+insert into Jogador  values (25,'Jogador 11', 1.93, 23, '1990-10-10', 'Zagueiro', false, 1);
 insert into Jogador  values (11,'Jogador 11', 1.93, 1, '1990-10-10', 'Goleiro', true, 2);
 insert into Jogador  values (12,'Jogador 12', 1.93, 2, '1990-10-10', 'Zagueiro', true, 2);
 insert into Jogador  values (13,'Jogador 13', 1.93, 3, '1990-10-10', 'Zagueiro', true, 2);

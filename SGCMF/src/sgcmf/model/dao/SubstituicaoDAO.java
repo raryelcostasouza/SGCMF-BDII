@@ -47,4 +47,14 @@ public class SubstituicaoDAO
 
         return (ArrayList<Substituicao>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
+    
+    public int queryNumSubstituicoesSelecaoJogo(Short idJogo, Short idSelecao)
+    {
+        String hql;
+        
+        hql = "select count(s.idoc) "
+                + "from Substituicao s "
+                + "where s.ocorrencia.jogo.id = " + idJogo + " and s.jogadorByIdjogadorsaiu = " + idSelecao;
+        return Integer.parseInt(String.valueOf(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()));
+    }
 }
