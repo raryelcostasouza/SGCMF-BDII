@@ -13,11 +13,11 @@ public class SGCMFSessionManager
         return openedSession;
     }
 
-    public static Session getCurrentSession() throws Exception
+    public static Session getCurrentSession()
     {
         if (openedSession == null)
         {
-            throw new Exception("Você tem que abrir uma nova sessão antes de fazer operações com o DAO.\n"
+            System.err.println("Você tem que abrir uma nova sessão antes de fazer operações com o DAO.\n"
                     + "Para fazê-lo use SGCMFSessionManager.abrirSessao().");
         }
         return openedSession;
