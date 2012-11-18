@@ -242,7 +242,7 @@ public class CtrJogador
         {
             bolGoleiro = false;
         }
-        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, bolGoleiro, false, s.getId());
+        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, bolGoleiro, false, s.getId(), posicao);
         if (errorMessege.equals(""))
         {
             nCamisa = Short.parseShort(numCamisa);
@@ -301,7 +301,7 @@ public class CtrJogador
         bolNumCamisaJogador = isNumCamisaVelhaIgualCamisaNova(numCamisaNovo, numCamisaAtual);
         bolGoleiro = isJogadorGoleiro(shortIdJogador);
         errorMessege = validaCampos('a', numCamisaNovo, dtaNascimento, altura,
-                bolGoleiro, bolNumCamisaJogador, s.getId());
+                bolGoleiro, bolNumCamisaJogador, s.getId(), posicao);
         if (errorMessege.equals(""))
         {
             gdao = new GeneralDAO();
@@ -358,7 +358,7 @@ public class CtrJogador
     }
 
     private String validaCampos(char metodo, String numCamisa, String dataNascimento,
-            String altura, boolean bolGoleiro, boolean bolNumCamisaIguais, Short idSelecao)
+            String altura, boolean bolGoleiro, boolean bolNumCamisaIguais, Short idSelecao, String novaPosicao)
     {
         String errorMessege = "";
         Short camisa;
@@ -425,14 +425,12 @@ public class CtrJogador
                     errorMessege = "É permitido apenas 3 Goleiros por seleção.";
                 }
             }
-            else
+            else if (metodo == 'a')
             {
-                //Ta com um erro aqui, quando tenta alterar um atacante para goleiro
-                //e ja tem 3 goleiros, ele permite alteracao.
-                //Se eu tento de goleiro para atacante e ja tem mais de 3 goleiros, nao permite.
+                //A merda dessa condição da alteração esta errada.
                 if (bolGoleiro == false)
                 {
-                    if (resultado >= 3)
+                    if (resultado >= 3 && novaPosicao.equals("Goleiro"))
                     {
                         errorMessege = "É permitido apenas 3 Goleiros por seleção.";
                     }
