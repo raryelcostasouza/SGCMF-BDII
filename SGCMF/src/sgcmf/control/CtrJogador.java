@@ -232,9 +232,17 @@ public class CtrJogador
         Iterator iterator = user.getSelecaos().iterator();
         Selecao s;
         s = (Selecao) iterator.next();
-
+        boolean bolGoleiro;
         gdao = new GeneralDAO();
-        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, false, false, s.getId());
+        if (posicao.equals("Goleiro"))
+        {
+            bolGoleiro = true;
+        }
+        else
+        {
+            bolGoleiro = false;
+        }
+        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, bolGoleiro, false, s.getId());
         if (errorMessege.equals(""))
         {
             nCamisa = Short.parseShort(numCamisa);
@@ -288,9 +296,8 @@ public class CtrJogador
         Iterator iterator;
         iterator = user.getSelecaos().iterator();
         Selecao s = (Selecao) iterator.next();
-
-
         shortIdJogador = new Short(strIdJogador);
+
         bolNumCamisaJogador = isNumCamisaVelhaIgualCamisaNova(numCamisaNovo, numCamisaAtual);
         bolGoleiro = isJogadorGoleiro(shortIdJogador);
         errorMessege = validaCampos('a', numCamisaNovo, dtaNascimento, altura,
@@ -411,7 +418,7 @@ public class CtrJogador
         if (errorMessege.equals(""))
         {
             int resultado = qtdeGoleirosSelecao(idSelecao);
-            if (metodo == 'c')
+            if (metodo == 'c' && bolGoleiro == true)
             {
                 if (resultado >= 3)
                 {
@@ -420,9 +427,12 @@ public class CtrJogador
             }
             else
             {
-                if (bolGoleiro == true)
+                //Ta com um erro aqui, quando tenta alterar um atacante para goleiro
+                //e ja tem 3 goleiros, ele permite alteracao.
+                //Se eu tento de goleiro para atacante e ja tem mais de 3 goleiros, nao permite.
+                if (bolGoleiro == false)
                 {
-                    if (resultado > 3)
+                    if (resultado >= 3)
                     {
                         errorMessege = "É permitido apenas 3 Goleiros por seleção.";
                     }
@@ -457,7 +467,6 @@ public class CtrJogador
         posicao = jogadorDAO.queryPosicaoJogador(idJogador);
         if (posicao.equals("Goleiro"))
         {
-            System.out.println(posicao);
             return true;
         }
         jogadorDAO.fecharSessao();
