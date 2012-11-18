@@ -193,6 +193,7 @@ public class LimRegistrarFalta extends JDialog implements ISelecionarJogador
             setVisible(false);
             resetCamposInterface();
             limGerenciarOcorrencias.preencheTabelaFalta();
+            limGerenciarOcorrencias.preencheTabelaCartao();
         }
         else
         {
