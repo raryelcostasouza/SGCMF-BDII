@@ -1,4 +1,4 @@
-package sgcmf.view.table;
+package sgcmf.view.table.selecao;
 
 import java.awt.Component;
 import javax.swing.JLabel;

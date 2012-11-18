@@ -15,9 +15,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.control.CtrSelecao;
 import sgcmf.model.other.SGCMFIcons;
-import sgcmf.view.table.DefaultTableModelSelecao;
+import sgcmf.view.table.selecao.DefaultTableModelSelecao;
 import sgcmf.view.table.JTableSGCMF;
-import sgcmf.view.table.SelecaoTableCellRenderer;
+import sgcmf.view.table.selecao.SelecaoTableCellRenderer;
 
 public class LimConsultaSelecao extends JDialog
 {

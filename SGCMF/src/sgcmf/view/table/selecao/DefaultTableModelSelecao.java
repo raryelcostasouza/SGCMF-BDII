@@ -1,4 +1,6 @@
-package sgcmf.view.table;
+package sgcmf.view.table.selecao;
+
+import sgcmf.view.table.DefaultTableModelSGCMF;
 
 public class DefaultTableModelSelecao extends DefaultTableModelSGCMF
 {
