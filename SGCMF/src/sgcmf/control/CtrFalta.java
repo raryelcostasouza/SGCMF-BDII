@@ -30,10 +30,10 @@ public class CtrFalta
         ArrayList<Falta> alFalta;
         String[][] dadosFalta;
 
-        SGCMFSessionManager.openSession();
+        SGCMFSessionManager.abrirSessao();
         alFalta = FaltaDAO2.getInstance().queryFaltaByIdJogo(idJogo);
         dadosFalta = arrayList2StringMatrix(alFalta);
-        SGCMFSessionManager.closeSession();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosFalta;
     }
@@ -86,7 +86,7 @@ public class CtrFalta
         if (errorMessage.equals(""))
         {
             
-            SGCMFSessionManager.openSession();
+            SGCMFSessionManager.abrirSessao();
             tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             try
             {
@@ -119,7 +119,7 @@ public class CtrFalta
                 tr.rollback();
                 result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
             }
-            SGCMFSessionManager.closeSession();
+            SGCMFSessionManager.fecharSessao();
         }
         else
         {
@@ -163,7 +163,7 @@ public class CtrFalta
         faltaParaRemover = new Falta();
         ocParaRemover = new Ocorrencia();
 
-        SGCMFSessionManager.openSession();
+        SGCMFSessionManager.abrirSessao();
         tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
 
         try
@@ -203,7 +203,7 @@ public class CtrFalta
             tr.rollback();
             result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
         }
-        SGCMFSessionManager.closeSession();
+        SGCMFSessionManager.fecharSessao();
 
         return result;
     }

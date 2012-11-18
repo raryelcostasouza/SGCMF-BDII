@@ -6,7 +6,7 @@ public class SGCMFSessionManager
 {
     private static Session openedSession = null;
 
-    public static Session openSession()
+    public static Session abrirSessao()
     {
         openedSession = SGCMFHibernateUtil.getSessionFactory().openSession();
 
@@ -23,7 +23,7 @@ public class SGCMFSessionManager
         return openedSession;
     }
 
-    public static void closeSession()
+    public static void fecharSessao()
     {
         openedSession.close();
         openedSession = null;

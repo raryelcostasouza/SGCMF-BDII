@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Cartao;
-import sgcmf.model.hibernate.Gol;
 
 public class CartaoDAO2
 {
     private static CartaoDAO2 instance;
     
+    private CartaoDAO2()
+    {
+        
+    }
+            
     public static CartaoDAO2 getInstance()
     {
         if (instance == null)
@@ -56,7 +60,5 @@ public class CartaoDAO2
                 + "and c.cor = 'Amarelo'";
         
         return Integer.parseInt(String.valueOf(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()));
-    }
-    
-            
+    }            
 }

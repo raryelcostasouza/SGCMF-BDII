@@ -28,10 +28,10 @@ public class CtrGol
         ArrayList<Gol> alGol;
         String[][] dadosGol;
 
-        SGCMFSessionManager.openSession();
+        SGCMFSessionManager.abrirSessao();
         alGol = GolDAO2.getInstance().queryGolByIdJogo(idJogo);
         dadosGol = arrayList2StringMatrix(alGol);
-        SGCMFSessionManager.closeSession();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosGol;
     }
@@ -54,7 +54,7 @@ public class CtrGol
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
         {
-            SGCMFSessionManager.openSession();
+            SGCMFSessionManager.abrirSessao();
             tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             try
             {
@@ -89,7 +89,7 @@ public class CtrGol
                 tr.rollback();
                 result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
             }
-            SGCMFSessionManager.closeSession();
+            SGCMFSessionManager.fecharSessao();
         }
         else
         {
@@ -133,7 +133,7 @@ public class CtrGol
         golParaRemover = new Gol();
         ocParaRemover = new Ocorrencia();
 
-        SGCMFSessionManager.openSession();
+        SGCMFSessionManager.abrirSessao();
         tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
 
         try
@@ -160,7 +160,7 @@ public class CtrGol
             tr.rollback();
             result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
         }
-        SGCMFSessionManager.closeSession();;
+        SGCMFSessionManager.fecharSessao();;
 
         return result;
     }    

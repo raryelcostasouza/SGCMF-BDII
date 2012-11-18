@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Jogador;
+import sgcmf.model.hibernate.Substituicao;
 
 public class JogadorDAO2
 {
     private static JogadorDAO2 instance;
-    
+
+    private JogadorDAO2()
+    {
+    }
+
     public static JogadorDAO2 getInstance()
     {
         if (instance == null)
@@ -17,13 +22,28 @@ public class JogadorDAO2
         }
         return instance;
     }
-    
+
     public Jogador carregar(Jogador entidade, Serializable id)
     {
         SGCMFSessionManager.getCurrentSession().load(entidade, id);
         return entidade;
     }
+
+    public void salvar(Jogador entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().save(entidade);
+    }
+
+    public void atualizar(Jogador entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().update(entidade);
+    }
     
+    public void apagar(Jogador entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().delete(entidade);
+    }
+
     public ArrayList<Jogador> listaTodosBySelecao(Short idSelecao)
     {
         return (ArrayList<Jogador>) SGCMFSessionManager.getCurrentSession().createQuery("from Jogador j where j.selecao.id = " + idSelecao + " order by j.ncamisa").list();

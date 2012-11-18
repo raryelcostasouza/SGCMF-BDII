@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.Iterator;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
-import sgcmf.model.dao.GeneralDAO;
-import sgcmf.model.dao.JogadorDAO;
+import sgcmf.hibernate.SGCMFSessionManager;
+import sgcmf.model.dao.JogadorDAO2;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Selecao;
 import sgcmf.model.hibernate.Usuario;
@@ -18,151 +18,173 @@ public class CtrJogador
 {
     public String[][] queryJogadoresEmCampo(Short idJogo)
     {
-        JogadorDAO jDAO;
+        JogadorDAO2 jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
-        jDAO = new JogadorDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
         alJogador = jDAO.queryJogadoresEmCampo(idJogo);
         dadosJogadores = arrayList2StringMatrix(alJogador);
-        jDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogadores;
     }
 
     public String[][] queryJogadoresEmCampoByNome(Short idJogo, String nome)
     {
-        JogadorDAO jDAO;
+        JogadorDAO2 jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
-        jDAO = new JogadorDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
         alJogador = jDAO.queryJogadoresEmCampoByNome(idJogo, nome);
         dadosJogadores = arrayList2StringMatrix(alJogador);
-        jDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogadores;
     }
 
     public String[][] queryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
     {
-        JogadorDAO jDAO;
+        JogadorDAO2 jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
-        jDAO = new JogadorDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
+
         alJogador = jDAO.queryOutrosJogadoresEmCampoSelecao(idJogo, idSelecao, idJogador);
         dadosJogadores = arrayList2StringMatrix(alJogador);
-        jDAO.fecharSessao();
+
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogadores;
     }
 
     public String[][] queryOutrosJogadoresEmCampoSelecaoByNome(Short idJogo, Short idSelecao, Short idJogador, String nome)
     {
-        JogadorDAO jDAO;
+        JogadorDAO2 jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
-        jDAO = new JogadorDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
+
         alJogador = jDAO.queryOutrosJogadoresEmCampoSelecaoByNome(idJogo, idSelecao, idJogador, nome);
         dadosJogadores = arrayList2StringMatrix(alJogador);
-        jDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogadores;
     }
 
     public String[][] queryReservasSelecao(Short idJogo, Short idSelecao)
     {
-        JogadorDAO jDAO;
+        JogadorDAO2 jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
-        jDAO = new JogadorDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
         alJogador = jDAO.queryReservasSelecao(idJogo, idSelecao);
         dadosJogadores = arrayList2StringMatrix(alJogador);
-        jDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogadores;
     }
 
     public String[][] queryReservasSelecaoByNome(Short idJogo, Short idSelecao, String nome)
     {
-        JogadorDAO jDAO;
+        JogadorDAO2 jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
 
-        jDAO = new JogadorDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
+
         alJogador = jDAO.queryReservasSelecaoByNome(idJogo, idSelecao, nome);
         dadosJogadores = arrayList2StringMatrix(alJogador);
-        jDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogadores;
     }
 
     public Short queryIdSelecaoJogador(Short idJogador)
     {
-        JogadorDAO jDAO;
-        jDAO = new JogadorDAO();
-
-        return jDAO.queryIdSelecaoJogador(idJogador);
+        JogadorDAO2 jDAO;
+        Short idSelecao;
+        
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
+        idSelecao = jDAO.queryIdSelecaoJogador(idJogador);
+        SGCMFSessionManager.fecharSessao();
+        
+        return idSelecao;
     }
 
     public String[][] queryJogadorByNome(String nome)
     {
-        JogadorDAO jDAO;
+        JogadorDAO2 jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
 
-        jDAO = new JogadorDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
         alJogador = jDAO.queryJogadorByNome(nome);
         dadosJogador = arrayList2StringMatrix(alJogador);
-        jDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogador;
     }
 
     public String[][] queryAllDataJogadorTecnico(Usuario u)
     {
-        JogadorDAO jDAO;
+        JogadorDAO2 jDAO;
         String[][] dadosJogadores;
         ArrayList alJogador;
         Selecao s;
-        jDAO = new JogadorDAO();
+
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
         Iterator iterator = u.getSelecaos().iterator();
 
         s = (Selecao) iterator.next();
         alJogador = jDAO.listaTodosBySelecao(s.getId());
         dadosJogadores = arrayList2StringMatrixFull(alJogador);
-        jDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogadores;
     }
 
     public String[][] queryAllDataJogadorByNome(String nome)
     {
-        JogadorDAO jDAO;
+        JogadorDAO2 jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
 
-        jDAO = new JogadorDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
+        
         alJogador = jDAO.queryJogadorByNome(nome);
         dadosJogador = arrayList2StringMatrixFull(alJogador);
-        jDAO.fecharSessao();
+        
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogador;
     }
 
     public String[][] queryAllDataJogadorByPosicao(String posicao)
     {
-        JogadorDAO jDAO;
+        JogadorDAO2 jDAO;
         String[][] dadosJogador;
         ArrayList<Jogador> alJogador;
 
-        jDAO = new JogadorDAO();
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
         alJogador = jDAO.queryJogadorByPosicao(posicao);
         dadosJogador = arrayList2StringMatrixFull(alJogador);
-        jDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosJogador;
     }
@@ -218,8 +240,9 @@ public class CtrJogador
     }
 
     public ResultadoOperacao cadastrarJogador(String numCamisa, String nome, String dataNascimento,
-            String altura, boolean titular, String posicao, Usuario user)
+                                              String altura, boolean titular, String posicao, Usuario user)
     {
+        JogadorDAO2 jDAO;
         Short nCamisa;
         Date dtaNascimento;
         BigDecimal aAltura;
@@ -227,19 +250,20 @@ public class CtrJogador
         Jogador j = new Jogador();
         ResultadoOperacao result;
         String errorMessege;
-        GeneralDAO gdao;
         Iterator iterator = user.getSelecaos().iterator();
         Selecao s;
         s = (Selecao) iterator.next();
 
-        gdao = new GeneralDAO();
+        
         errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, false, false, s.getId());
         if (errorMessege.equals(""))
         {
+            SGCMFSessionManager.abrirSessao();
+            jDAO = JogadorDAO2.getInstance();
             nCamisa = Short.parseShort(numCamisa);
             dtaNascimento = new Date(dataNascimento);
             aAltura = new BigDecimal(altura);
-            tr = gdao.getSessao().beginTransaction();
+            tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             try
             {
                 j.setNcamisa(nCamisa);
@@ -249,37 +273,37 @@ public class CtrJogador
                 j.setTitular(titular);
                 j.setPosicao(posicao);
                 j.setSelecao(s);
-                gdao.salvar(j);
+                jDAO.salvar(j);
                 tr.commit();
                 result = new ResultadoOperacao("Jogador Cadastrado com êxito.",
-                        TipoResultadoOperacao.EXITO);
+                                               TipoResultadoOperacao.EXITO);
             }
             catch (HibernateException he)
             {
                 result = new ResultadoOperacao("Erro no Hibernate.\n" + he.getMessage(),
-                        TipoResultadoOperacao.ERRO);
+                                               TipoResultadoOperacao.ERRO);
             }
-            gdao.fecharSessao();
+            SGCMFSessionManager.fecharSessao();
         }
         else
         {
             result = new ResultadoOperacao("Falha no cadastro de jogador.\n" + errorMessege,
-                    TipoResultadoOperacao.ERRO);
+                                           TipoResultadoOperacao.ERRO);
         }
         return result;
     }
 
     public ResultadoOperacao alterarJogador(String strIdJogador, String numCamisaNovo,
-            String numCamisaAtual, String nome, String dtaNascimento, String altura,
-            String posicao, Usuario user)
+                                            String numCamisaAtual, String nome, String dtaNascimento, String altura,
+                                            String posicao, Usuario user)
     {
+        JogadorDAO2 jDAO;
         Short nCamisa;
         Date dataNascimento;
         BigDecimal pAltura;
         Short shortIdJogador;
         Jogador j = new Jogador();
         Transaction tr;
-        GeneralDAO gdao;
         ResultadoOperacao result;
         String errorMessege;
         boolean bolGoleiro;
@@ -293,15 +317,16 @@ public class CtrJogador
         bolNumCamisaJogador = isNumCamisaVelhaIgualCamisaNova(numCamisaNovo, numCamisaAtual);
         bolGoleiro = isJogadorGoleiro(shortIdJogador);
         errorMessege = validaCampos('a', numCamisaNovo, dtaNascimento, altura,
-                bolGoleiro, bolNumCamisaJogador, s.getId());
+                                    bolGoleiro, bolNumCamisaJogador, s.getId());
         if (errorMessege.equals(""))
         {
-            gdao = new GeneralDAO();
+            SGCMFSessionManager.abrirSessao();
+            jDAO = JogadorDAO2.getInstance();
             nCamisa = Short.parseShort(numCamisaNovo);
             dataNascimento = new Date(dtaNascimento);
             pAltura = new BigDecimal(altura);
-            tr = gdao.getSessao().beginTransaction();
-            gdao.carregar(j, shortIdJogador);
+            tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
+            jDAO.carregar(j, shortIdJogador);
             try
             {
                 j.setNcamisa(nCamisa);
@@ -309,7 +334,7 @@ public class CtrJogador
                 j.setDatanasc(dataNascimento);
                 j.setAltura(pAltura);
                 j.setPosicao(posicao);
-                gdao.atualizar(j);
+                jDAO.atualizar(j);
                 tr.commit();
                 result = new ResultadoOperacao("Jogador Alterado com êxito.", TipoResultadoOperacao.EXITO);
             }
@@ -317,7 +342,7 @@ public class CtrJogador
             {
                 result = new ResultadoOperacao("Erro no Hibernate.\n" + he.getMessage(), TipoResultadoOperacao.ERRO);
             }
-            gdao.fecharSessao();
+            SGCMFSessionManager.fecharSessao();
         }
         else
         {
@@ -330,27 +355,29 @@ public class CtrJogador
     {
         Jogador j = new Jogador();
         Transaction tr;
-        GeneralDAO gDAO;
+        JogadorDAO2 jDAO;
         ResultadoOperacao resultado;
         try
         {
-            gDAO = new GeneralDAO();
-            tr = gDAO.getSessao().beginTransaction();
-            gDAO.carregar(j, new Short(idJogador));
-            gDAO.apagar(j);
+            SGCMFSessionManager.abrirSessao();
+            jDAO = JogadorDAO2.getInstance();
+            tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
+            jDAO.carregar(j, new Short(idJogador));
+            jDAO.apagar(j);
             tr.commit();
             resultado = new ResultadoOperacao("Jogador excluido com sucesso.", TipoResultadoOperacao.EXITO);
         }
         catch (HibernateException he)
         {
             resultado = new ResultadoOperacao("Falha na exclusão do jogador.\n" + he.getMessage(),
-                    TipoResultadoOperacao.ERRO);
+                                              TipoResultadoOperacao.ERRO);
         }
+        SGCMFSessionManager.fecharSessao();
         return resultado;
     }
 
     private String validaCampos(char metodo, String numCamisa, String dataNascimento,
-            String altura, boolean bolGoleiro, boolean bolNumCamisaIguais, Short idSelecao)
+                                String altura, boolean bolGoleiro, boolean bolNumCamisaIguais, Short idSelecao)
     {
         String errorMessege = "";
         Short camisa;
@@ -433,32 +460,41 @@ public class CtrJogador
 
     private int qtdeTitularesSelecao(Short idSelecao)
     {
-        JogadorDAO jogadorDAO = new JogadorDAO();
+        JogadorDAO2 jogadorDAO;
         int qtdeTitulares;
+        
+        SGCMFSessionManager.abrirSessao();
+        jogadorDAO = JogadorDAO2.getInstance();
         qtdeTitulares = jogadorDAO.queryQuantidadeJogadorTitularesSelecao(idSelecao);
-        jogadorDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
         return qtdeTitulares;
     }
 
     private int qtdeGoleirosSelecao(Short idSelecao)
     {
-        JogadorDAO jogadorDAO = new JogadorDAO();
+        JogadorDAO2 jogadorDAO;
         int qtdeGoleiros;
+        
+        SGCMFSessionManager.abrirSessao();
+        jogadorDAO = JogadorDAO2.getInstance();
         qtdeGoleiros = jogadorDAO.queryQuantidadeGoleirosSelecao(idSelecao);
-        jogadorDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
         return qtdeGoleiros;
     }
 
     private boolean isJogadorGoleiro(Short idJogador)
     {
-        JogadorDAO jogadorDAO = new JogadorDAO();
+        JogadorDAO2 jogadorDAO;
         String posicao;
+        
+        SGCMFSessionManager.abrirSessao();
+        jogadorDAO = JogadorDAO2.getInstance();
         posicao = jogadorDAO.queryPosicaoJogador(idJogador);
         if (posicao.equals("Goleiro"))
         {
             return true;
         }
-        jogadorDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
         return false;
     }
     //Verificar na hora da alteracao por exemplo: se o nCamisa for = 1 e
@@ -467,10 +503,13 @@ public class CtrJogador
 
     private int verificarNumeroCamisaExistente(Short camisa, Short idSelecao)
     {
-        JogadorDAO jDAO = new JogadorDAO();
+        JogadorDAO2 jDAO;
         int resultado;
+        
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogadorDAO2.getInstance();
         resultado = jDAO.queryVerificarCamisaExistente(camisa, idSelecao);
-        jDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
         return resultado;
     }
 

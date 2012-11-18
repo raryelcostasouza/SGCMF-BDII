@@ -9,6 +9,11 @@ public class FaltaDAO2
 {
     private static FaltaDAO2 instance;
     
+    private FaltaDAO2()
+    {
+        
+    }
+    
     public static FaltaDAO2 getInstance()
     {
         if (instance == null)
@@ -41,6 +46,6 @@ public class FaltaDAO2
         hql = "from Falta f "
                 + "where f.ocorrencia.jogo.id = " + idJogo + " order by f.ocorrencia.instantetempo";
         
-        return (ArrayList<Falta>) SGCMFSessionManager.openSession().createQuery(hql).list();
+        return (ArrayList<Falta>) SGCMFSessionManager.abrirSessao().createQuery(hql).list();
     }
 }

@@ -10,6 +10,11 @@ public class GolDAO2
 {
     private static GolDAO2 instance;
 
+    private GolDAO2()
+    {
+        
+    }
+    
     public static GolDAO2 getInstance()
     {
         if (instance == null)

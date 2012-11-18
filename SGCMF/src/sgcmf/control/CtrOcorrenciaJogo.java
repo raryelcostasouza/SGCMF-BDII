@@ -2,9 +2,8 @@ package sgcmf.control;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
-import sgcmf.model.dao.GeneralDAO;
+import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.JogoDAO2;
-import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.dao.OcorrenciaDAO2;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.hibernate.Ocorrencia;
@@ -43,7 +42,7 @@ public class CtrOcorrenciaJogo
         int intSeg;
         int numOcorrenciasDepois;
         String errorMessage;
-        OcorrenciaDAO oDAO;
+        OcorrenciaDAO2 oDAO;
 
         errorMessage = "";
         try
@@ -70,7 +69,8 @@ public class CtrOcorrenciaJogo
             //as ocorrências devem ser lançadas sequencialmente pelo instante de tempo
             //se houver alguma ocorrencia depois do instante de tempo da ocorrencia que o usuario
             //quer inserir ele não poderá inseri-la...
-            oDAO = new OcorrenciaDAO();
+            SGCMFSessionManager.abrirSessao();
+            oDAO = OcorrenciaDAO2.getInstance();
             numOcorrenciasDepois = oDAO.queryNumOcorrenciasComInstanteTempoMaior(idJogo, new Date(0, 0, 0, 0, Integer.parseInt(min), Integer.parseInt(seg)));
             if (numOcorrenciasDepois > 0)
             {
@@ -78,7 +78,7 @@ public class CtrOcorrenciaJogo
                                 "Para esse jogo já existem ocorrências registradas para instantes de tempo posteriores.\n"
                                 + "Caso queira adicionar essa ocorrência é necessário antes remover todas as ocorrências posteriores.";
             }
-            oDAO.fecharSessao();
+            SGCMFSessionManager.fecharSessao();
         }
 
         return errorMessage;

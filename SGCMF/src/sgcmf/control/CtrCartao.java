@@ -30,10 +30,10 @@ public class CtrCartao
         ArrayList<Cartao> alCartao;
         String[][] dadosCartao;
 
-        SGCMFSessionManager.openSession();
+        SGCMFSessionManager.abrirSessao();
         alCartao = CartaoDAO2.getInstance().queryCartaoByIdJogo(idJogo);
         dadosCartao = arrayList2StringMatrix(alCartao);
-        SGCMFSessionManager.closeSession();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosCartao;
     }
@@ -72,7 +72,7 @@ public class CtrCartao
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
         {
-            SGCMFSessionManager.openSession();
+            SGCMFSessionManager.abrirSessao();
             tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             try
             {
@@ -94,7 +94,7 @@ public class CtrCartao
                 tr.rollback();
                 result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
             }
-            SGCMFSessionManager.closeSession();
+            SGCMFSessionManager.fecharSessao();
         }
         else
         {
@@ -171,7 +171,7 @@ public class CtrCartao
         cartaoParaRemover = new Cartao();
         ocParaRemover = new Ocorrencia();
 
-        SGCMFSessionManager.openSession();
+        SGCMFSessionManager.abrirSessao();
         tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
 
         try
@@ -217,7 +217,7 @@ public class CtrCartao
             tr.rollback();
             result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
         }
-        SGCMFSessionManager.closeSession();
+        SGCMFSessionManager.fecharSessao();
 
         return result;
     }

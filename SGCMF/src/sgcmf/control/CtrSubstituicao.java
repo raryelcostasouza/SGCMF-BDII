@@ -27,10 +27,10 @@ public class CtrSubstituicao
         ArrayList<Substituicao> alSubst;
         String[][] dadosCartao;
 
-        SGCMFSessionManager.openSession();
+        SGCMFSessionManager.abrirSessao();
         alSubst = SubstituicaoDAO2.getInstance().querySubstByIdJogo(idJogo);
         dadosCartao = arrayList2StringMatrix(alSubst);
-        SGCMFSessionManager.closeSession();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosCartao;
     }
@@ -79,7 +79,7 @@ public class CtrSubstituicao
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
         {
-            SGCMFSessionManager.openSession();
+            SGCMFSessionManager.abrirSessao();
             tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             try
             {
@@ -104,7 +104,7 @@ public class CtrSubstituicao
                 tr.rollback();
                 result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
             }
-            SGCMFSessionManager.closeSession();
+            SGCMFSessionManager.fecharSessao();
         }
         else
         {
@@ -159,7 +159,7 @@ public class CtrSubstituicao
         substParaRemover = new Substituicao();
         ocParaRemover = new Ocorrencia();
 
-        SGCMFSessionManager.openSession();
+        SGCMFSessionManager.abrirSessao();
         tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
 
         try
@@ -185,7 +185,7 @@ public class CtrSubstituicao
             tr.rollback();
             result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
         }
-        SGCMFSessionManager.closeSession();
+        SGCMFSessionManager.fecharSessao();
 
         return result;
     }

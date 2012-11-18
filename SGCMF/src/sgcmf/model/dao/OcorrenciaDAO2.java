@@ -10,6 +10,11 @@ public class OcorrenciaDAO2
 {
     private static OcorrenciaDAO2 instance;
 
+    private OcorrenciaDAO2()
+    {
+        
+    }
+    
     public static OcorrenciaDAO2 getInstance()
     {
         if (instance == null)

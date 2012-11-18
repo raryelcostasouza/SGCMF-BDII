@@ -9,6 +9,11 @@ public class JogoDAO2
 {
     private static JogoDAO2 instance;
     
+    private JogoDAO2()
+    {
+        
+    }
+    
     public static JogoDAO2 getInstance()
     {
         if (instance == null)
