@@ -2,6 +2,7 @@ package sgcmf.view.comiteGestor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +17,6 @@ import sgcmf.control.CtrComiteGestor;
 import sgcmf.control.CtrRelatorio;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
-import sgcmf.view.comiteGestor.disputaPenalti.LimGerDispPenaltiSelecionarJogo;
 import sgcmf.view.comiteGestor.ocorrenciaJogo.LimGerOcorrSelecionarJogo;
 
 public class LimComiteGestor extends JFrame
@@ -25,9 +25,9 @@ public class LimComiteGestor extends JFrame
     private LimConsultaSelecao limConsultaSelecao;
     private LimConsultarJogo limConsultaJogo;
     private LimGerOcorrSelecionarJogo limGerOcorrSelecionarJogo;
-    private LimGerDispPenaltiSelecionarJogo limGerDispPenaltiSelecionarJogo;
     private LimBuscarJogador limBuscarJogador;
     private CtrRelatorio ctrRelatorio;
+    private final Dimension buttonDimension = new Dimension(180, 180);
 
     public LimComiteGestor(CtrComiteGestor ctrComiteGestor)
     {
@@ -39,7 +39,6 @@ public class LimComiteGestor extends JFrame
         limConsultaJogo = new LimConsultarJogo(ctrComiteGestor.getCtrJogo());
         limBuscarJogador = new LimBuscarJogador(ctrComiteGestor.getCtrJogador());
         limGerOcorrSelecionarJogo = new LimGerOcorrSelecionarJogo(ctrComiteGestor, limBuscarJogador);
-        limGerDispPenaltiSelecionarJogo = new LimGerDispPenaltiSelecionarJogo(ctrComiteGestor, limBuscarJogador);
 
         setTitle("SGCMF | Usuário Comitê Gestor");
         setSize(570, 480);
@@ -64,7 +63,8 @@ public class LimComiteGestor extends JFrame
     {
         JPanel mainPanel = new JPanel(new BorderLayout());
 
-        mainPanel.add(montaGridPanel(), BorderLayout.CENTER);
+        mainPanel.add(montaNorthPanel(), BorderLayout.NORTH);
+        mainPanel.add(montaCenterPanel(), BorderLayout.CENTER);
 
         JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
 
@@ -82,10 +82,10 @@ public class LimComiteGestor extends JFrame
         return mainPanel;
     }
 
-    private JPanel montaGridPanel()
+    private JPanel montaNorthPanel()
     {
-        Dimension buttonDimension = new Dimension(180, 180);
-        JPanel gridPanel = new JPanel(new GridLayout(2, 3));
+        
+        JPanel gridPanel = new JPanel(new GridLayout(1, 3));
 
         JButton jbConsultarSelecoes = new JButton("Consultar Seleções", SGCMFIcons.SELECAO);
         jbConsultarSelecoes.setVerticalTextPosition(JButton.BOTTOM);
@@ -102,29 +102,6 @@ public class LimComiteGestor extends JFrame
         jbGerOcorrenciaJogo.setHorizontalTextPosition(JButton.CENTER);
         jbGerOcorrenciaJogo.setHorizontalAlignment(SwingConstants.CENTER);
         jbGerOcorrenciaJogo.setPreferredSize(buttonDimension);
-
-        JButton jbGerDisputaPenaltis = new JButton("<html>Gerenciar Disputa<br><center>de Pênaltis</center></html>", SGCMFIcons.PENALTI);
-        jbGerDisputaPenaltis.setVerticalTextPosition(JButton.BOTTOM);
-        jbGerDisputaPenaltis.setHorizontalTextPosition(JButton.CENTER);
-        jbGerDisputaPenaltis.setPreferredSize(buttonDimension);
-
-        JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
-        jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
-        jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
-        jbRelatorios.setPreferredSize(buttonDimension);
-        jbRelatorios.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                ctrRelatorio.ativaTela();
-            }
-        });
-
-        JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
-        jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
-        jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
-        jbTabelaCampeonato.setPreferredSize(buttonDimension);
 
         jbConsultarSelecoes.addActionListener(new ActionListener()
         {
@@ -150,24 +127,40 @@ public class LimComiteGestor extends JFrame
                 limGerOcorrSelecionarJogo.ativaTela();
             }
         });
-        jbGerDisputaPenaltis.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                limGerDispPenaltiSelecionarJogo.setVisible(true);
-            }
-        });
 
         gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarSelecoes));
         gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarJogos));
         gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbGerOcorrenciaJogo));
 
-        gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbGerDisputaPenaltis));
-        gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorios));
-        gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));
-
         return gridPanel;
+    }
+
+    private JPanel montaCenterPanel()
+    {
+        JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
+        jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
+        jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
+        jbRelatorios.setPreferredSize(buttonDimension);
+        jbRelatorios.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrRelatorio.ativaTela();
+            }
+        });
+
+        JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
+        jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
+        jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
+        jbTabelaCampeonato.setPreferredSize(buttonDimension);
+
+        centerPanel.add(jbRelatorios);
+        centerPanel.add(jbTabelaCampeonato);
+
+        return centerPanel;
     }
 
     private void acaoLogout()
