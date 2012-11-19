@@ -55,9 +55,9 @@ public class CtrOcorrenciaJogo
             {
                 errorMessage = "Instante de tempo: os segundos devem ser um número de 0 a 59";
             }
-            if (intMin < 0 || intMin > 120)
+            if (intMin < 0 || intMin > 90)
             {
-                errorMessage = "Instante de tempo: os minutos devem ser um número de 0 a 120";
+                errorMessage = "Instante de tempo: os minutos devem ser um número de 0 a 90";
             }
         }
         catch (NumberFormatException nfe)
