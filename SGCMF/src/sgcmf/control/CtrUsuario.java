@@ -114,7 +114,7 @@ public class CtrUsuario
         return result;
     }
 
-    public ResultadoOperacao alterarJogador(String strIdUsuario, String cpf, String nome, String email, String login,
+    public ResultadoOperacao alterarUsuario(String strIdUsuario, String cpf, String nome, String email, String login,
             String senha, String perfil)
     {
         Short shortIdUsuario;
@@ -157,7 +157,7 @@ public class CtrUsuario
         return result;
     }
 
-    public ResultadoOperacao removerJogador(String idUsuario)
+    public ResultadoOperacao removerUsuario(String idUsuario)
     {
         Usuario u = new Usuario();
         Transaction tr;
