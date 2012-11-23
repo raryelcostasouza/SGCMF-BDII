@@ -97,7 +97,7 @@ public class CtrJogo
         String[][] dadosJogos;
         Jogo j;
 
-        dadosJogos = new String[alJogo.size()][8];
+        dadosJogos = new String[alJogo.size()][7];
         for (int i = 0; i < alJogo.size(); i++)
         {
             j = alJogo.get(i);
@@ -108,7 +108,6 @@ public class CtrJogo
             dadosJogos[i][4] = j.getNomeestadio();
             dadosJogos[i][5] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
             dadosJogos[i][6] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());
-            dadosJogos[i][7] = String.valueOf(j.isProrrogacao());
         }
 
         return dadosJogos;

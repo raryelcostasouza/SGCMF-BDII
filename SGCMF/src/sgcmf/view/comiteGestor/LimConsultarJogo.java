@@ -192,7 +192,7 @@ public class LimConsultarJogo extends JDialog
     {
         String[] nomesColunas =
         {
-            "ID", "Tipo do Jogo", "Data/Hora", "Cidade", "Estádio", "Seleção I", "Seleção II", "Prorrogacao"
+            "ID", "Tipo do Jogo", "Data/Hora", "Cidade", "Estádio", "Seleção I", "Seleção II"
         };
 
         jt = new JTableSGCMF(null, nomesColunas);
