@@ -42,16 +42,16 @@ insert into Selecao  values (15,'Gana','img/selecoes32/grupod/Ghana.png',17, 'D'
 insert into Selecao  values (16,'Servia','img/selecoes32/grupod/Serbia.png',17, 'D');
 
 -- Insercao dos Jogos
-insert into Jogo  values (1,'Primeira Fase', 'Rio de Janeiro', 'Maracana', 1,2,'2012-08-10 10:20:00 +02');
-insert into Jogo  values (2,'Oitavas de Final', 'Sao Paulo', 'Morumbi', 3,4,'2012-08-11 11:20:00 +02');
-insert into Jogo  values (3,'Oitavas de Final', 'Belo Horizonte', 'Mineirao', 5,6,'2012-08-12 12:20:00 +01');
-insert into Jogo  values (4,'Quartas de final', 'Rio de Janeiro', 'Maracana', 7,8,'2012-08-13 13:20:00 +01');
-insert into Jogo  values (5,'Quartas de final', 'Sao Paulo', 'Morumbi', 9,10,'2012-08-14 10:20:00 +02');
-insert into Jogo  values (6,'Semi-final', 'Belo Horizonte', 'Mineirao', 11,12,'2012-08-15 11:20:00 -03');
-insert into Jogo  values (7,'Terceiro Lugar', 'Rio de Janeiro', 'Maracana', 13,14,'2012-08-16 12:20:00 -02');
-insert into Jogo  values (8,'Final', 'Sao Paulo', 'Morumbi', 5,2,'2012-08-17 13:20:00 +02');
-insert into Jogo  values (9,'Primeira Fase', 'Belo Horizonte', 'Mineirao', 3,5,'2012-08-18 11:20:00 +02');
-insert into Jogo  values (10,'Primeira Fase', 'Rio de Janeiro', 'Maracana', 1,6,'2012-08-19 12:20:00 +02');
+insert into Jogo  values (1, 'Rio de Janeiro', 'Maracana', 1,2,'2012-08-10 10:20:00 +02');
+insert into Jogo  values (2, 'Sao Paulo', 'Morumbi', 3,4,'2012-08-11 11:20:00 +02');
+insert into Jogo  values (3,'Belo Horizonte', 'Mineirao', 5,6,'2012-08-12 12:20:00 +01');
+insert into Jogo  values (4,'Rio de Janeiro', 'Maracana', 7,8,'2012-08-13 13:20:00 +01');
+insert into Jogo  values (5,'Sao Paulo', 'Morumbi', 9,10,'2012-08-14 10:20:00 +02');
+insert into Jogo  values (6,'Belo Horizonte', 'Mineirao', 11,12,'2012-08-15 11:20:00 -03');
+insert into Jogo  values (7,'Rio de Janeiro', 'Maracana', 13,14,'2012-08-16 12:20:00 -02');
+insert into Jogo  values (8,'Sao Paulo', 'Morumbi', 5,2,'2012-08-17 13:20:00 +02');
+insert into Jogo  values (9,'Belo Horizonte', 'Mineirao', 3,5,'2012-08-18 11:20:00 +02');
+insert into Jogo  values (10, 'Rio de Janeiro', 'Maracana', 1,6,'2012-08-19 12:20:00 +02');
 
 -- Insercao dos Jogadores
 insert into Jogador  values (1,'Jogador 1', 1.93, 1, '1990-10-10', 'Goleiro', true, 1);
