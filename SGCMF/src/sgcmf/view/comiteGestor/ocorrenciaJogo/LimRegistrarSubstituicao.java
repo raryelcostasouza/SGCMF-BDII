@@ -189,6 +189,7 @@ public class LimRegistrarSubstituicao extends JDialog implements ISelecionarJoga
             jtfJogadorSaiu.setText(idJogador + "");
             selecaoJogadorSaiu = false;
             jbPesqJogEntrou.setEnabled(true);
+            jtfJogadorEntrou.setText("");
         }
         else
         {
