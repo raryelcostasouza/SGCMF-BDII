@@ -9,6 +9,7 @@ package sgcmf.view.tabela;
 
 
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 /**
  *
@@ -22,6 +23,46 @@ public class PanelTabelaCampeonato extends JPanel
     public PanelTabelaCampeonato()
     {
         initComponents();
+    }
+
+    public JTable getJtGrupoA()
+    {
+        return jtGrupoA;
+    }
+
+    public JTable getJtGrupoB()
+    {
+        return jtGrupoB;
+    }
+
+    public JTable getJtGrupoC()
+    {
+        return jtGrupoC;
+    }
+
+    public JTable getJtGrupoD()
+    {
+        return jtGrupoD;
+    }
+
+    public JTable getJtGrupoE()
+    {
+        return jtGrupoE;
+    }
+
+    public JTable getJtGrupoF()
+    {
+        return jtGrupoF;
+    }
+
+    public JTable getJtGrupoG()
+    {
+        return jtGrupoG;
+    }
+
+    public JTable getJtGrupoH()
+    {
+        return jtGrupoH;
     }
 
     /**
@@ -43,7 +84,7 @@ public class PanelTabelaCampeonato extends JPanel
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtGrupoA = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
@@ -55,7 +96,7 @@ public class PanelTabelaCampeonato extends JPanel
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jtGrupoB = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
@@ -67,7 +108,7 @@ public class PanelTabelaCampeonato extends JPanel
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        jtGrupoC = new javax.swing.JTable();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
@@ -79,7 +120,7 @@ public class PanelTabelaCampeonato extends JPanel
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        jtGrupoD = new javax.swing.JTable();
         jLabel36 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
@@ -91,7 +132,7 @@ public class PanelTabelaCampeonato extends JPanel
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        jtGrupoE = new javax.swing.JTable();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         jTextField16 = new javax.swing.JTextField();
@@ -103,7 +144,7 @@ public class PanelTabelaCampeonato extends JPanel
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
+        jtGrupoF = new javax.swing.JTable();
         jLabel50 = new javax.swing.JLabel();
         jTextField18 = new javax.swing.JTextField();
         jLabel51 = new javax.swing.JLabel();
@@ -115,7 +156,7 @@ public class PanelTabelaCampeonato extends JPanel
         jLabel55 = new javax.swing.JLabel();
         jLabel56 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+        jtGrupoG = new javax.swing.JTable();
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
         jTextField20 = new javax.swing.JTextField();
@@ -127,7 +168,7 @@ public class PanelTabelaCampeonato extends JPanel
         jLabel62 = new javax.swing.JLabel();
         jLabel63 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTable9 = new javax.swing.JTable();
+        jtGrupoH = new javax.swing.JTable();
         jLabel64 = new javax.swing.JLabel();
         jTextField22 = new javax.swing.JTextField();
         jLabel65 = new javax.swing.JLabel();
@@ -155,7 +196,7 @@ public class PanelTabelaCampeonato extends JPanel
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtGrupoA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null, null},
@@ -170,7 +211,7 @@ public class PanelTabelaCampeonato extends JPanel
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtGrupoA);
 
         jLabel7.setText("2°");
 
@@ -206,7 +247,7 @@ public class PanelTabelaCampeonato extends JPanel
                             .addComponent(jLabel4)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel5)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(18, Short.MAX_VALUE)))
         );
         panelGrupoALayout.setVerticalGroup(
             panelGrupoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +270,7 @@ public class PanelTabelaCampeonato extends JPanel
                         .addComponent(jLabel5))
                     .addGap(1, 1, 1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(54, Short.MAX_VALUE)))
         );
 
         panelGrupoB.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -248,7 +289,7 @@ public class PanelTabelaCampeonato extends JPanel
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jtGrupoB.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null, null},
@@ -263,7 +304,7 @@ public class PanelTabelaCampeonato extends JPanel
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(jtGrupoB);
 
         jLabel23.setText("2°");
 
@@ -341,7 +382,7 @@ public class PanelTabelaCampeonato extends JPanel
 
         jScrollPane5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        jtGrupoC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null, null},
@@ -356,7 +397,7 @@ public class PanelTabelaCampeonato extends JPanel
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
         ));
-        jScrollPane5.setViewportView(jTable4);
+        jScrollPane5.setViewportView(jtGrupoC);
 
         jLabel29.setText("2°");
 
@@ -434,7 +475,7 @@ public class PanelTabelaCampeonato extends JPanel
 
         jScrollPane6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        jtGrupoD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null, null},
@@ -449,7 +490,7 @@ public class PanelTabelaCampeonato extends JPanel
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
         ));
-        jScrollPane6.setViewportView(jTable5);
+        jScrollPane6.setViewportView(jtGrupoD);
 
         jLabel36.setText("2°");
 
@@ -527,7 +568,7 @@ public class PanelTabelaCampeonato extends JPanel
 
         jScrollPane7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        jtGrupoE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null, null},
@@ -542,7 +583,7 @@ public class PanelTabelaCampeonato extends JPanel
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
         ));
-        jScrollPane7.setViewportView(jTable6);
+        jScrollPane7.setViewportView(jtGrupoE);
 
         jLabel43.setText("2°");
 
@@ -620,7 +661,7 @@ public class PanelTabelaCampeonato extends JPanel
 
         jScrollPane8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
+        jtGrupoF.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null, null},
@@ -635,7 +676,7 @@ public class PanelTabelaCampeonato extends JPanel
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
         ));
-        jScrollPane8.setViewportView(jTable7);
+        jScrollPane8.setViewportView(jtGrupoF);
 
         jLabel50.setText("2°");
 
@@ -713,7 +754,7 @@ public class PanelTabelaCampeonato extends JPanel
 
         jScrollPane9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        jtGrupoG.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null, null},
@@ -728,7 +769,7 @@ public class PanelTabelaCampeonato extends JPanel
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
         ));
-        jScrollPane9.setViewportView(jTable8);
+        jScrollPane9.setViewportView(jtGrupoG);
 
         jLabel57.setText("2°");
 
@@ -806,7 +847,7 @@ public class PanelTabelaCampeonato extends JPanel
 
         jScrollPane10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTable9.setModel(new javax.swing.table.DefaultTableModel(
+        jtGrupoH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null, null},
@@ -821,7 +862,7 @@ public class PanelTabelaCampeonato extends JPanel
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
         ));
-        jScrollPane10.setViewportView(jTable9);
+        jScrollPane10.setViewportView(jtGrupoH);
 
         jLabel64.setText("2°");
 
@@ -1002,14 +1043,6 @@ public class PanelTabelaCampeonato extends JPanel
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
-    private javax.swing.JTable jTable8;
-    private javax.swing.JTable jTable9;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
@@ -1026,6 +1059,14 @@ public class PanelTabelaCampeonato extends JPanel
     private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable jtGrupoA;
+    private javax.swing.JTable jtGrupoB;
+    private javax.swing.JTable jtGrupoC;
+    private javax.swing.JTable jtGrupoD;
+    private javax.swing.JTable jtGrupoE;
+    private javax.swing.JTable jtGrupoF;
+    private javax.swing.JTable jtGrupoG;
+    private javax.swing.JTable jtGrupoH;
     private javax.swing.JPanel panelGrupoA;
     private javax.swing.JPanel panelGrupoB;
     private javax.swing.JPanel panelGrupoC;

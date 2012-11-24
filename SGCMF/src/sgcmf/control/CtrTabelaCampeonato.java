@@ -15,6 +15,11 @@ public class CtrTabelaCampeonato
     
     public void ativaTela()
     {
-        limTabelaCampeonato.setVisible(true);
+        limTabelaCampeonato.ativaTela();
+    }
+    
+    public CtrJogo getCtrJogo()
+    {
+        return ctrMain.getCtrJogo();
     }
 }

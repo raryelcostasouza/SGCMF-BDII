@@ -91,6 +91,22 @@ public class CtrJogo
 
         return dadosJogos;
     }
+    
+    public String[][] queryJogoByGrupo(String grupo)
+    {
+        JogoDAO jDAO;
+        String[][] dadosJogos;
+        ArrayList<Jogo> alJogo;
+
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogoDAO.getInstance();
+        alJogo = jDAO.queryJogoByGrupo(grupo);
+        
+        dadosJogos = arrayList2StringMatrixParaTabelaCampeonato(alJogo);
+        SGCMFSessionManager.fecharSessao();
+
+        return dadosJogos;
+    }
 
     private String[][] arrayList2StringMatrix(ArrayList<Jogo> alJogo)
     {
@@ -108,6 +124,25 @@ public class CtrJogo
             dadosJogos[i][4] = j.getNomeestadio();
             dadosJogos[i][5] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
             dadosJogos[i][6] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());
+        }
+
+        return dadosJogos;
+    }
+    
+    private String[][] arrayList2StringMatrixParaTabelaCampeonato(ArrayList<Jogo> alJogo)
+    {
+        String[][] dadosJogos;
+        Jogo j;
+
+        dadosJogos = new String[alJogo.size()][5];
+        for (int i = 0; i < alJogo.size(); i++)
+        {
+            j = alJogo.get(i);
+            dadosJogos[i][0] = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora());
+            dadosJogos[i][1] = j.getCidade();
+            dadosJogos[i][2] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
+            dadosJogos[i][3] = "";
+            dadosJogos[i][4] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());            
         }
 
         return dadosJogos;

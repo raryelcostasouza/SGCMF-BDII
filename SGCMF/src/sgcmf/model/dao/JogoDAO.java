@@ -83,4 +83,14 @@ public class JogoDAO
 
         return (Jogo) SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult();
     }
+
+    public ArrayList<Jogo> queryJogoByGrupo(String grupo)
+    {
+        String hql;
+        
+        hql = "from Jogo j "
+                + "where j.selecaoByIdselecaoi.grupo = '" + grupo+"'";
+        
+        return (ArrayList<Jogo>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
 }
