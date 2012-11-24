@@ -135,6 +135,8 @@ public class PanelTabelaCampeonato extends JPanel
 
         setLayout(new java.awt.GridLayout(1, 0));
 
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(790, 700));
+
         jPanel2.setPreferredSize(new java.awt.Dimension(750, 1035));
 
         panelGrupoA.setBorder(javax.swing.BorderFactory.createEtchedBorder());

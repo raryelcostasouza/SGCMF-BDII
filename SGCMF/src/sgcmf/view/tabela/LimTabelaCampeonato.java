@@ -13,6 +13,7 @@ public class LimTabelaCampeonato extends JDialog
         this.ctrTabelaCampeonato = ctrTabelaCampeonato;
         setTitle("Tabela do Campeonato");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
+        setResizable(false);
         setModal(true);
         
         panelTabela = new PanelTabelaCampeonato();

@@ -25,7 +25,7 @@ public class LimEntusiasta extends JFrame
     {
         this.ctrEntusiasta = ctrEntusiasta;
         
-        setTitle("SGCMF - Usuário Entusiasta");
+        setTitle("SGCMF | Usuário Entusiasta");
         setIconImage(SGCMFIcons.LOGO.getImage());
         setResizable(false);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
