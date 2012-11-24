@@ -334,7 +334,8 @@ public class LimRegistrarGol extends JDialog implements ISelecionarJogador
             if (jrbTipoAFavor.isSelected() && jrbModoComum.isSelected())
             {
                 jbPesqJogadorAssist.setEnabled(true);
-            }            
+            } 
+            jtfJogadorAssist.setText("");
         }
         else
         {
