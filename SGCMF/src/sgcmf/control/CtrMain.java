@@ -43,7 +43,7 @@ public class CtrMain
         ctrAdmin = new CtrAdmin(this);
         ctrComiteGestor = new CtrComiteGestor(this);
         ctrTecnico = new CtrTecnico(this);
-        ctrEntusiasta = new CtrEntusiasta();
+        ctrEntusiasta = new CtrEntusiasta(this);
 
         limLogin = new LimLogin(this);
 
