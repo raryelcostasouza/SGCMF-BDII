@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 17/11/2012 16:51:03 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 23/11/2012 22:56:22 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="sgcmf.model.hibernate.Jogo" table="jogo" schema="public">
         <id name="id" type="short">
@@ -22,9 +22,6 @@
         </property>
         <property name="nomeestadio" type="string">
             <column name="nomeestadio" not-null="true" />
-        </property>
-        <property name="prorrogacao" type="boolean">
-            <column name="prorrogacao" not-null="true" />
         </property>
         <property name="datahora" type="timestamp">
             <column name="datahora" length="35" not-null="true" />

@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated 17/11/2012 16:51:03 by Hibernate Tools 3.2.1.GA
+// Generated 23/11/2012 22:56:22 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
@@ -27,8 +27,6 @@ public class Jogador  implements java.io.Serializable {
      private Set substituicaosForIdjogadorsaiu = new HashSet(0);
      private Set faltas = new HashSet(0);
      private Set cartaos = new HashSet(0);
-     private Set rodadadepenaltisesForIdjogadorcobrancai = new HashSet(0);
-     private Set rodadadepenaltisesForIdjogadorcobrancaii = new HashSet(0);
 
     public Jogador() {
     }
@@ -44,7 +42,7 @@ public class Jogador  implements java.io.Serializable {
         this.posicao = posicao;
         this.titular = titular;
     }
-    public Jogador(short id, Selecao selecao, String nome, BigDecimal altura, short ncamisa, Date datanasc, String posicao, boolean titular, Set golsForIdjogadorassistencia, Set substituicaosForIdjogadorentrou, Set golsForIdjogadorautor, Set substituicaosForIdjogadorsaiu, Set faltas, Set cartaos, Set rodadadepenaltisesForIdjogadorcobrancai, Set rodadadepenaltisesForIdjogadorcobrancaii) {
+    public Jogador(short id, Selecao selecao, String nome, BigDecimal altura, short ncamisa, Date datanasc, String posicao, boolean titular, Set golsForIdjogadorassistencia, Set substituicaosForIdjogadorentrou, Set golsForIdjogadorautor, Set substituicaosForIdjogadorsaiu, Set faltas, Set cartaos) {
        this.id = id;
        this.selecao = selecao;
        this.nome = nome;
@@ -59,8 +57,6 @@ public class Jogador  implements java.io.Serializable {
        this.substituicaosForIdjogadorsaiu = substituicaosForIdjogadorsaiu;
        this.faltas = faltas;
        this.cartaos = cartaos;
-       this.rodadadepenaltisesForIdjogadorcobrancai = rodadadepenaltisesForIdjogadorcobrancai;
-       this.rodadadepenaltisesForIdjogadorcobrancaii = rodadadepenaltisesForIdjogadorcobrancaii;
     }
    
     public short getId() {
@@ -160,20 +156,6 @@ public class Jogador  implements java.io.Serializable {
     
     public void setCartaos(Set cartaos) {
         this.cartaos = cartaos;
-    }
-    public Set getRodadadepenaltisesForIdjogadorcobrancai() {
-        return this.rodadadepenaltisesForIdjogadorcobrancai;
-    }
-    
-    public void setRodadadepenaltisesForIdjogadorcobrancai(Set rodadadepenaltisesForIdjogadorcobrancai) {
-        this.rodadadepenaltisesForIdjogadorcobrancai = rodadadepenaltisesForIdjogadorcobrancai;
-    }
-    public Set getRodadadepenaltisesForIdjogadorcobrancaii() {
-        return this.rodadadepenaltisesForIdjogadorcobrancaii;
-    }
-    
-    public void setRodadadepenaltisesForIdjogadorcobrancaii(Set rodadadepenaltisesForIdjogadorcobrancaii) {
-        this.rodadadepenaltisesForIdjogadorcobrancaii = rodadadepenaltisesForIdjogadorcobrancaii;
     }
 
 

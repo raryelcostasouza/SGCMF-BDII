@@ -21,37 +21,37 @@ insert into Usuario values (19,'Usuario 19','785.456.781-10', 'usuario19@sgcmf.c
 insert into Usuario values (20,'Usuario 20','785.456.781-20', 'usuario20@sgcmf.com', 'Entusiasta','user20','user20');
 
 -- Insercao das Selecoes
-insert into Selecao  values (1,'Franca','img/selecoes32/grupoa/France.png',3);
-insert into Selecao  values (2,'Mexico','img/selecoes32/grupoa/Mexico.png',4);
-insert into Selecao  values (3,'Africa do Sul','img/selecoes32/grupoa/South-Africa.png',5);
-insert into Selecao  values (4,'Uruguai','img/selecoes32/grupoa/Uruguay.png',6);
+insert into Selecao  values (1,'Franca','img/selecoes32/grupoa/France.png',3, 'A');
+insert into Selecao  values (2,'Mexico','img/selecoes32/grupoa/Mexico.png',4, 'A');
+insert into Selecao  values (3,'Africa do Sul','img/selecoes32/grupoa/South-Africa.png',5, 'A');
+insert into Selecao  values (4,'Uruguai','img/selecoes32/grupoa/Uruguay.png',6, 'A');
 
-insert into Selecao  values (5,'Argentina','img/selecoes32/grupob/Argentina.png',7);
-insert into Selecao  values (6,'Grecia','img/selecoes32/grupob/Greece.png',8);
-insert into Selecao  values (7,'Nigeria','img/selecoes32/grupob/Nigeria.png',9);
-insert into Selecao  values (8,'Coreia do sul','img/selecoes32/grupob/South-Korea.png',10);
+insert into Selecao  values (5,'Argentina','img/selecoes32/grupob/Argentina.png',7, 'B');
+insert into Selecao  values (6,'Grecia','img/selecoes32/grupob/Greece.png',8, 'B');
+insert into Selecao  values (7,'Nigeria','img/selecoes32/grupob/Nigeria.png',9, 'B');
+insert into Selecao  values (8,'Coreia do sul','img/selecoes32/grupob/South-Korea.png',10, 'B');
 
-insert into Selecao  values (9,'Algeria','img/selecoes32/grupoc/Algeria.png',11);
-insert into Selecao  values (10,'Inglaterra','img/selecoes32/grupoc/England.png',12);
-insert into Selecao  values (11,'Eslovenia','img/selecoes32/grupoc/Slovenia.png',13);
-insert into Selecao  values (12,'Estados Unidos','img/selecoes32/grupoc/United-States.png',14);
+insert into Selecao  values (9,'Algeria','img/selecoes32/grupoc/Algeria.png',11, 'C');
+insert into Selecao  values (10,'Inglaterra','img/selecoes32/grupoc/England.png',12, 'C');
+insert into Selecao  values (11,'Eslovenia','img/selecoes32/grupoc/Slovenia.png',13, 'C');
+insert into Selecao  values (12,'Estados Unidos','img/selecoes32/grupoc/United-States.png',14, 'C');
 
-insert into Selecao  values (13,'Australia','img/selecoes32/grupod/Australia.png',15);
-insert into Selecao  values (14,'Alemanha','img/selecoes32/grupod/Germany.png',16);
-insert into Selecao  values (15,'Gana','img/selecoes32/grupod/Ghana.png',17);
-insert into Selecao  values (16,'Servia','img/selecoes32/grupod/Serbia.png',17);
+insert into Selecao  values (13,'Australia','img/selecoes32/grupod/Australia.png',15, 'D');
+insert into Selecao  values (14,'Alemanha','img/selecoes32/grupod/Germany.png',16, 'D');
+insert into Selecao  values (15,'Gana','img/selecoes32/grupod/Ghana.png',17, 'D');
+insert into Selecao  values (16,'Servia','img/selecoes32/grupod/Serbia.png',17, 'D');
 
 -- Insercao dos Jogos
-insert into Jogo  values (1,'Primeira Fase', 'Rio de Janeiro', 'Maracana', 1,2,false,'2012-08-10 10:20:00 +02');
-insert into Jogo  values (2,'Oitavas de Final', 'Sao Paulo', 'Morumbi', 3,4,false,'2012-08-11 11:20:00 +02');
-insert into Jogo  values (3,'Oitavas de Final', 'Belo Horizonte', 'Mineirao', 5,6,false,'2012-08-12 12:20:00 +01');
-insert into Jogo  values (4,'Quartas de final', 'Rio de Janeiro', 'Maracana', 7,8,false,'2012-08-13 13:20:00 +01');
-insert into Jogo  values (5,'Quartas de final', 'Sao Paulo', 'Morumbi', 9,10,false,'2012-08-14 10:20:00 +02');
-insert into Jogo  values (6,'Semi-final', 'Belo Horizonte', 'Mineirao', 11,12,false,'2012-08-15 11:20:00 -03');
-insert into Jogo  values (7,'Terceiro Lugar', 'Rio de Janeiro', 'Maracana', 13,14,false,'2012-08-16 12:20:00 -02');
-insert into Jogo  values (8,'Final', 'Sao Paulo', 'Morumbi', 5,2,false,'2012-08-17 13:20:00 +02');
-insert into Jogo  values (9,'Primeira Fase', 'Belo Horizonte', 'Mineirao', 3,5,false,'2012-08-18 11:20:00 +02');
-insert into Jogo  values (10,'Primeira Fase', 'Rio de Janeiro', 'Maracana', 1,6,false,'2012-08-19 12:20:00 +02');
+insert into Jogo  values (1,'Primeira Fase', 'Rio de Janeiro', 'Maracana', 1,2,'2012-08-10 10:20:00 +02');
+insert into Jogo  values (2,'Oitavas de Final', 'Sao Paulo', 'Morumbi', 3,4,'2012-08-11 11:20:00 +02');
+insert into Jogo  values (3,'Oitavas de Final', 'Belo Horizonte', 'Mineirao', 5,6,'2012-08-12 12:20:00 +01');
+insert into Jogo  values (4,'Quartas de final', 'Rio de Janeiro', 'Maracana', 7,8,'2012-08-13 13:20:00 +01');
+insert into Jogo  values (5,'Quartas de final', 'Sao Paulo', 'Morumbi', 9,10,'2012-08-14 10:20:00 +02');
+insert into Jogo  values (6,'Semi-final', 'Belo Horizonte', 'Mineirao', 11,12,'2012-08-15 11:20:00 -03');
+insert into Jogo  values (7,'Terceiro Lugar', 'Rio de Janeiro', 'Maracana', 13,14,'2012-08-16 12:20:00 -02');
+insert into Jogo  values (8,'Final', 'Sao Paulo', 'Morumbi', 5,2,'2012-08-17 13:20:00 +02');
+insert into Jogo  values (9,'Primeira Fase', 'Belo Horizonte', 'Mineirao', 3,5,'2012-08-18 11:20:00 +02');
+insert into Jogo  values (10,'Primeira Fase', 'Rio de Janeiro', 'Maracana', 1,6,'2012-08-19 12:20:00 +02');
 
 -- Insercao dos Jogadores
 insert into Jogador  values (1,'Jogador 1', 1.93, 1, '1990-10-10', 'Goleiro', true, 1);

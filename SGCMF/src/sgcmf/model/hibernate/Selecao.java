@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated 17/11/2012 16:51:03 by Hibernate Tools 3.2.1.GA
+// Generated 23/11/2012 22:56:22 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -15,6 +15,7 @@ public class Selecao  implements java.io.Serializable {
      private Usuario usuario;
      private String pais;
      private String caminhoimgbandeira;
+     private char grupo;
      private Set jogosForIdselecaoii = new HashSet(0);
      private Set jogosForIdselecaoi = new HashSet(0);
      private Set jogadors = new HashSet(0);
@@ -23,17 +24,19 @@ public class Selecao  implements java.io.Serializable {
     }
 
 	
-    public Selecao(short id, Usuario usuario, String pais, String caminhoimgbandeira) {
+    public Selecao(short id, Usuario usuario, String pais, String caminhoimgbandeira, char grupo) {
         this.id = id;
         this.usuario = usuario;
         this.pais = pais;
         this.caminhoimgbandeira = caminhoimgbandeira;
+        this.grupo = grupo;
     }
-    public Selecao(short id, Usuario usuario, String pais, String caminhoimgbandeira, Set jogosForIdselecaoii, Set jogosForIdselecaoi, Set jogadors) {
+    public Selecao(short id, Usuario usuario, String pais, String caminhoimgbandeira, char grupo, Set jogosForIdselecaoii, Set jogosForIdselecaoi, Set jogadors) {
        this.id = id;
        this.usuario = usuario;
        this.pais = pais;
        this.caminhoimgbandeira = caminhoimgbandeira;
+       this.grupo = grupo;
        this.jogosForIdselecaoii = jogosForIdselecaoii;
        this.jogosForIdselecaoi = jogosForIdselecaoi;
        this.jogadors = jogadors;
@@ -66,6 +69,13 @@ public class Selecao  implements java.io.Serializable {
     
     public void setCaminhoimgbandeira(String caminhoimgbandeira) {
         this.caminhoimgbandeira = caminhoimgbandeira;
+    }
+    public char getGrupo() {
+        return this.grupo;
+    }
+    
+    public void setGrupo(char grupo) {
+        this.grupo = grupo;
     }
     public Set getJogosForIdselecaoii() {
         return this.jogosForIdselecaoii;

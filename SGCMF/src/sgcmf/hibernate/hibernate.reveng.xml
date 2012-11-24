@@ -7,7 +7,6 @@
   <table-filter match-name="jogador"/>
   <table-filter match-name="cartao"/>
   <table-filter match-name="ocorrencia"/>
-  <table-filter match-name="rodadadepenaltis"/>
   <table-filter match-name="falta"/>
   <table-filter match-name="gol"/>
   <table-filter match-name="selecao"/>

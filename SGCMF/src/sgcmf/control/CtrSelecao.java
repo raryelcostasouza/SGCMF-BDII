@@ -65,14 +65,15 @@ public class CtrSelecao
         Object[][] dadosSelecoes;
         Selecao s;
 
-        dadosSelecoes = new Object[alSelecao.size()][4];
+        dadosSelecoes = new Object[alSelecao.size()][5];
         for (int i = 0; i < alSelecao.size(); i++)
         {
             s = alSelecao.get(i);
             dadosSelecoes[i][0] = s.getId() + "";
             dadosSelecoes[i][1] = new JLabel(new ImageIcon(s.getCaminhoimgbandeira()));
             dadosSelecoes[i][2] = s.getPais();
-            dadosSelecoes[i][3] = s.getUsuario().getNome();
+            dadosSelecoes[i][3] = s.getGrupo();
+            dadosSelecoes[i][4] = s.getUsuario().getNome();
         }
 
         return dadosSelecoes;

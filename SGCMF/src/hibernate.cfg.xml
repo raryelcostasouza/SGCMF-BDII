@@ -15,7 +15,6 @@
     <mapping resource="sgcmf/model/hibernate/Ocorrencia.hbm.xml"/>
     <mapping resource="sgcmf/model/hibernate/Jogo.hbm.xml"/>
     <mapping resource="sgcmf/model/hibernate/Usuario.hbm.xml"/>
-    <mapping resource="sgcmf/model/hibernate/Rodadadepenaltis.hbm.xml"/>
     <mapping resource="sgcmf/model/hibernate/Selecao.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

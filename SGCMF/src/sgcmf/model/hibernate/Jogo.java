@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated 17/11/2012 16:51:03 by Hibernate Tools 3.2.1.GA
+// Generated 23/11/2012 22:56:22 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -18,7 +18,6 @@ public class Jogo  implements java.io.Serializable {
      private String tipo;
      private String cidade;
      private String nomeestadio;
-     private boolean prorrogacao;
      private Date datahora;
      private Set ocorrencias = new HashSet(0);
 
@@ -26,22 +25,20 @@ public class Jogo  implements java.io.Serializable {
     }
 
 	
-    public Jogo(short id, String tipo, String cidade, String nomeestadio, boolean prorrogacao, Date datahora) {
+    public Jogo(short id, String tipo, String cidade, String nomeestadio, Date datahora) {
         this.id = id;
         this.tipo = tipo;
         this.cidade = cidade;
         this.nomeestadio = nomeestadio;
-        this.prorrogacao = prorrogacao;
         this.datahora = datahora;
     }
-    public Jogo(short id, Selecao selecaoByIdselecaoi, Selecao selecaoByIdselecaoii, String tipo, String cidade, String nomeestadio, boolean prorrogacao, Date datahora, Set ocorrencias) {
+    public Jogo(short id, Selecao selecaoByIdselecaoi, Selecao selecaoByIdselecaoii, String tipo, String cidade, String nomeestadio, Date datahora, Set ocorrencias) {
        this.id = id;
        this.selecaoByIdselecaoi = selecaoByIdselecaoi;
        this.selecaoByIdselecaoii = selecaoByIdselecaoii;
        this.tipo = tipo;
        this.cidade = cidade;
        this.nomeestadio = nomeestadio;
-       this.prorrogacao = prorrogacao;
        this.datahora = datahora;
        this.ocorrencias = ocorrencias;
     }
@@ -87,13 +84,6 @@ public class Jogo  implements java.io.Serializable {
     
     public void setNomeestadio(String nomeestadio) {
         this.nomeestadio = nomeestadio;
-    }
-    public boolean isProrrogacao() {
-        return this.prorrogacao;
-    }
-    
-    public void setProrrogacao(boolean prorrogacao) {
-        this.prorrogacao = prorrogacao;
     }
     public Date getDatahora() {
         return this.datahora;

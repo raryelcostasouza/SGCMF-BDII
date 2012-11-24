@@ -15,6 +15,7 @@ Create Table Selecao
 	pais text not null unique,
 	caminhoImgBandeira text not null,
 	idUsuarioTecnico smallint not null,
+        grupo char(1) check (grupo in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')) not null,
 	foreign key (idUsuarioTecnico) references Usuario(id)
 );
 
@@ -26,7 +27,6 @@ Create Table Jogo
 	nomeEstadio text not null,
 	idSelecaoI smallint,
 	idSelecaoII smallint,
-	prorrogacao boolean default false not null,
 	dataHora timestamp with time zone not null,
 	unique(dataHora, idSelecaoI, idSelecaoII),
 	foreign key(idSelecaoI) references Selecao(id),
@@ -45,20 +45,6 @@ Create Table Jogador
 	idSelecao smallint not null,
 	unique(idSelecao,nCamisa),
 	foreign key(idSelecao) references Selecao(id)
-);
-
-Create Table RodadaDePenaltis
-(
-	id smallserial primary key,
-	idJogo smallint not null,
-	nRodada smallint not null,
-	idJogadorCobrancaI smallint not null,
-	resultadoCobrancaI boolean not null,
-	idJogadorCobrancaII smallint not null,
-	resultadoCobrancaII boolean not null,
-	unique (idJogo, nRodada),
-	foreign key(idJogadorCobrancaI) references Jogador(id),
-	foreign key(idJogadorCobrancaII) references Jogador(id)
 );
 
 Create Table Ocorrencia
