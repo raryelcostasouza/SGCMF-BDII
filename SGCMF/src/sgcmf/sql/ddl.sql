@@ -22,7 +22,6 @@ Create Table Selecao
 Create Table Jogo
 (
 	id smallserial primary key,
-	tipo text check(tipo in('Primeira Fase', 'Oitavas de Final', 'Quartas de final', 'Semi-final', 'Terceiro Lugar', 'Final')) not null,
 	cidade text not null,
 	nomeEstadio text not null,
 	idSelecaoI smallint,

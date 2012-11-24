@@ -75,22 +75,6 @@ public class CtrJogo
 
         return dadosJogos;
     }
-
-    public String[][] queryJogoByTipo(String tipo)
-    {
-        JogoDAO jDAO;
-        String[][] dadosJogos;
-        ArrayList<Jogo> alJogo;
-
-        SGCMFSessionManager.abrirSessao();
-        jDAO = JogoDAO.getInstance();
-        alJogo = jDAO.queryJogoByTipo(tipo);
-        
-        dadosJogos = arrayList2StringMatrix(alJogo);
-        SGCMFSessionManager.fecharSessao();
-
-        return dadosJogos;
-    }
     
     public String[][] queryJogoByGrupo(String grupo)
     {
@@ -113,17 +97,16 @@ public class CtrJogo
         String[][] dadosJogos;
         Jogo j;
 
-        dadosJogos = new String[alJogo.size()][7];
+        dadosJogos = new String[alJogo.size()][6];
         for (int i = 0; i < alJogo.size(); i++)
         {
             j = alJogo.get(i);
             dadosJogos[i][0] = String.valueOf(j.getId());
-            dadosJogos[i][1] = String.valueOf(j.getTipo());
-            dadosJogos[i][2] = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora());
-            dadosJogos[i][3] = j.getCidade();
-            dadosJogos[i][4] = j.getNomeestadio();
-            dadosJogos[i][5] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
-            dadosJogos[i][6] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());
+            dadosJogos[i][1] = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora());
+            dadosJogos[i][2] = j.getCidade();
+            dadosJogos[i][3] = j.getNomeestadio();
+            dadosJogos[i][4] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
+            dadosJogos[i][5] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());
         }
 
         return dadosJogos;
@@ -158,7 +141,7 @@ public class CtrJogo
         jDao = JogoDAO.getInstance();
         j = jDao.queryInfoJogoById(idJogo);
         
-        infoJogo = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora()) + " | " + j.getTipo() + " | "
+        infoJogo = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora()) + " | "
                 + j.getSelecaoByIdselecaoi().getPais() + " vs " + j.getSelecaoByIdselecaoii().getPais();
         SGCMFSessionManager.fecharSessao();
 

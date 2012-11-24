@@ -1,5 +1,5 @@
 package sgcmf.model.hibernate;
-// Generated 23/11/2012 22:56:22 by Hibernate Tools 3.2.1.GA
+// Generated 24/11/2012 12:00:19 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -15,7 +15,6 @@ public class Jogo  implements java.io.Serializable {
      private short id;
      private Selecao selecaoByIdselecaoi;
      private Selecao selecaoByIdselecaoii;
-     private String tipo;
      private String cidade;
      private String nomeestadio;
      private Date datahora;
@@ -25,18 +24,16 @@ public class Jogo  implements java.io.Serializable {
     }
 
 	
-    public Jogo(short id, String tipo, String cidade, String nomeestadio, Date datahora) {
+    public Jogo(short id, String cidade, String nomeestadio, Date datahora) {
         this.id = id;
-        this.tipo = tipo;
         this.cidade = cidade;
         this.nomeestadio = nomeestadio;
         this.datahora = datahora;
     }
-    public Jogo(short id, Selecao selecaoByIdselecaoi, Selecao selecaoByIdselecaoii, String tipo, String cidade, String nomeestadio, Date datahora, Set ocorrencias) {
+    public Jogo(short id, Selecao selecaoByIdselecaoi, Selecao selecaoByIdselecaoii, String cidade, String nomeestadio, Date datahora, Set ocorrencias) {
        this.id = id;
        this.selecaoByIdselecaoi = selecaoByIdselecaoi;
        this.selecaoByIdselecaoii = selecaoByIdselecaoii;
-       this.tipo = tipo;
        this.cidade = cidade;
        this.nomeestadio = nomeestadio;
        this.datahora = datahora;
@@ -63,13 +60,6 @@ public class Jogo  implements java.io.Serializable {
     
     public void setSelecaoByIdselecaoii(Selecao selecaoByIdselecaoii) {
         this.selecaoByIdselecaoii = selecaoByIdselecaoii;
-    }
-    public String getTipo() {
-        return this.tipo;
-    }
-    
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
     public String getCidade() {
         return this.cidade;

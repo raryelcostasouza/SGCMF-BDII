@@ -65,16 +65,6 @@ public class JogoDAO
         return (ArrayList<Jogo>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
-    public ArrayList<Jogo> queryJogoByTipo(String tipo)
-    {
-        String hql;
-
-        hql = "from Jogo j "
-                + "where j.tipo = '" + tipo + "'";
-
-        return (ArrayList<Jogo>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
-    }
-
     public Jogo queryInfoJogoById(Short idJogo)
     {
         String hql;

@@ -24,13 +24,9 @@ public class LimConsultarJogo extends JDialog
     protected JTableSGCMF jt;
     private CtrJogo ctrJogo;
     private JPanel northEastPanel;
-    private final String nameCardPanelSearchBox = "SEARCH_BOX";
-    private final String nameCardPanelComboBox = "COMBO_BOX";
-    private JRadioButton jrbTipoJogo;
     private JRadioButton jrbCidade;
     private JRadioButton jrbEstadio;
     private JRadioButton jrbSelecao;
-    private JComboBox jcb;
     private JTextField jtfSearchBox;
 
     public LimConsultarJogo(CtrJogo ctrJogo)
@@ -79,74 +75,25 @@ public class LimConsultarJogo extends JDialog
     {
         JPanel northWestPanel = new JPanel();
 
-        jrbTipoJogo = new JRadioButton("Tipo de Jogo");
         jrbCidade = new JRadioButton("Cidade");
         jrbEstadio = new JRadioButton("Estádio");
         jrbSelecao = new JRadioButton("Seleção");
         jrbSelecao.setSelected(true);
 
         ButtonGroup bg = new ButtonGroup();
-        bg.add(jrbTipoJogo);
         bg.add(jrbCidade);
         bg.add(jrbEstadio);
         bg.add(jrbSelecao);
 
-        jrbTipoJogo.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                CardLayout cl = (CardLayout) northEastPanel.getLayout();
-                cl.show(northEastPanel, nameCardPanelComboBox);
-
-                pesquisa(String.valueOf(jcb.getSelectedItem()));
-            }
-        });
-        jrbCidade.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                trocarNorthEastPanelParaSearchBox();
-            }
-        });
-        jrbEstadio.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                trocarNorthEastPanelParaSearchBox();
-            }
-        });
-        jrbSelecao.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                trocarNorthEastPanelParaSearchBox();
-            }
-        });
-
         northWestPanel.setBorder(BorderFactory.createTitledBorder("Pesquisar por:"));
-        northWestPanel.add(jrbTipoJogo);
         northWestPanel.add(jrbCidade);
         northWestPanel.add(jrbEstadio);
         northWestPanel.add(jrbSelecao);
 
         return northWestPanel;
     }
-
+    
     private JPanel montaNorthEastPanel()
-    {
-        northEastPanel = new JPanel(new CardLayout());
-
-        northEastPanel.add(nameCardPanelSearchBox, montaNorthEastPanelSearchBox());
-        northEastPanel.add(nameCardPanelComboBox, montaNorthEastPanelComboBox());
-
-        return northEastPanel;
-    }
-
-    private JPanel montaNorthEastPanelSearchBox()
     {
         JPanel northEastPanelSearchBox = new JPanel();
         northEastPanelSearchBox.setBorder(BorderFactory.createTitledBorder("Busca:"));
@@ -165,46 +112,17 @@ public class LimConsultarJogo extends JDialog
         return northEastPanelSearchBox;
     }
 
-    private JPanel montaNorthEastPanelComboBox()
-    {
-        String[] opcoesJCB =
-        {
-            "Primeira Fase", "Oitavas de Final", "Quartas de final", "Semi-final", "Final", "Terceiro Lugar"
-        };
-        JPanel northEastPanelComboBox = new JPanel();
-        northEastPanelComboBox.setBorder(BorderFactory.createTitledBorder("Tipo jogo:"));
-
-        jcb = new JComboBox(opcoesJCB);
-        jcb.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                pesquisa(String.valueOf(jcb.getSelectedItem()));
-            }
-        });
-
-        northEastPanelComboBox.add(jcb);
-        return northEastPanelComboBox;
-    }
-
     private JScrollPane montaCenterPanel()
     {
         String[] nomesColunas =
         {
-            "ID", "Tipo do Jogo", "Data/Hora", "Cidade", "Estádio", "Seleção I", "Seleção II"
+            "ID", "Data/Hora", "Cidade", "Estádio", "Seleção I", "Seleção II"
         };
 
         jt = new JTableSGCMF(null, nomesColunas);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         return jsp;
-    }
-
-    private void trocarNorthEastPanelParaSearchBox()
-    {
-        CardLayout cl = (CardLayout) northEastPanel.getLayout();
-        cl.show(northEastPanel, nameCardPanelSearchBox);
     }
 
     public void ativaTela()
@@ -221,7 +139,6 @@ public class LimConsultarJogo extends JDialog
     {
         jrbSelecao.setSelected(true);
         jtfSearchBox.setText("");
-        jcb.setSelectedIndex(0);
     }
 
     private void pesquisa(String chave)
@@ -236,13 +153,9 @@ public class LimConsultarJogo extends JDialog
         {
             dadosJogo = ctrJogo.queryJogoByCidade(chave);
         }
-        else if (jrbEstadio.isSelected())
-        {
-            dadosJogo = ctrJogo.queryJogoByEstadio(chave);
-        }
         else
         {
-            dadosJogo = ctrJogo.queryJogoByTipo(chave);
+            dadosJogo = ctrJogo.queryJogoByEstadio(chave);
         }
         jt.preencheTabela(dadosJogo);
     }
