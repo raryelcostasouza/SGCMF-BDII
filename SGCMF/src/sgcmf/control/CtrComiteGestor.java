@@ -67,4 +67,9 @@ public class CtrComiteGestor
     {
         return ctrMain.getCtrSubstituicao();
     }
+    
+    public CtrRelatorio getCtrRelatorio()
+    {
+        return ctrMain.getCtrRelatorio();
+    }
 }

@@ -26,13 +26,12 @@ public class LimComiteGestor extends JFrame
     private LimConsultarJogo limConsultaJogo;
     private LimGerOcorrSelecionarJogo limGerOcorrSelecionarJogo;
     private LimBuscarJogador limBuscarJogador;
-    private CtrRelatorio ctrRelatorio;
     private final Dimension buttonDimension = new Dimension(180, 180);
 
     public LimComiteGestor(CtrComiteGestor ctrComiteGestor)
     {
         this.ctrComiteGestor = ctrComiteGestor;
-        ctrRelatorio = ctrComiteGestor.getCtrMain().getCtrRelatorio();
+        
         setIconImage(SGCMFIcons.LOGO.getImage());
 
         limConsultaSelecao = new LimConsultaSelecao(ctrComiteGestor.getCtrSelecao());
@@ -148,7 +147,7 @@ public class LimComiteGestor extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                ctrRelatorio.ativaTela();
+                ctrComiteGestor.getCtrRelatorio().ativaTela();
             }
         });
 
