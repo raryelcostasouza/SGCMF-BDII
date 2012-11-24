@@ -20,6 +20,25 @@ insert into Usuario values (18,'Usuario 18','785.456.781-90', 'usuario18@sgcmf.c
 insert into Usuario values (19,'Usuario 19','785.456.781-10', 'usuario19@sgcmf.com', 'Membro Comite','user19','user19');
 insert into Usuario values (20,'Usuario 20','785.456.781-20', 'usuario20@sgcmf.com', 'Entusiasta','user20','user20');
 
+insert into Usuario values (21,'Usuario 21','785.456.781-81', 'usuario21@sgcmf.com', 'Tecnico da Selecao','user21','user21');
+insert into Usuario values (22,'Usuario 22','785.456.781-82', 'usuario22@sgcmf.com', 'Tecnico da Selecao','user22','user22');
+insert into Usuario values (23,'Usuario 23','785.456.781-83', 'usuario23@sgcmf.com', 'Tecnico da Selecao','user23','user23');
+insert into Usuario values (24,'Usuario 24','785.456.781-84', 'usuario24@sgcmf.com', 'Tecnico da Selecao','user24','user24');
+insert into Usuario values (25,'Usuario 25','785.456.781-85', 'usuario25@sgcmf.com', 'Tecnico da Selecao','user25','user25');
+insert into Usuario values (26,'Usuario 26','785.456.781-86', 'usuario26@sgcmf.com', 'Tecnico da Selecao','user26','user26');
+insert into Usuario values (27,'Usuario 27','785.456.781-87', 'usuario27@sgcmf.com', 'Tecnico da Selecao','user27','user27');
+insert into Usuario values (28,'Usuario 28','785.456.781-88', 'usuario28@sgcmf.com', 'Tecnico da Selecao','user28','user28');
+insert into Usuario values (29,'Usuario 29','785.456.781-89', 'usuario29@sgcmf.com', 'Tecnico da Selecao','user29','user29');
+insert into Usuario values (30,'Usuario 30','785.456.782-90', 'usuario30@sgcmf.com', 'Tecnico da Selecao','user30','user30');
+insert into Usuario values (31,'Usuario 31','785.456.781-91', 'usuario31@sgcmf.com', 'Tecnico da Selecao','user31','user31');
+insert into Usuario values (32,'Usuario 32','785.456.781-92', 'usuario32@sgcmf.com', 'Tecnico da Selecao','user32','user32');
+insert into Usuario values (33,'Usuario 33','785.456.781-93', 'usuario33@sgcmf.com', 'Tecnico da Selecao','user33','user33');
+insert into Usuario values (34,'Usuario 34','785.456.781-94', 'usuario34@sgcmf.com', 'Tecnico da Selecao','user34','user34');
+insert into Usuario values (35,'Usuario 35','785.456.781-95', 'usuario35@sgcmf.com', 'Tecnico da Selecao','user35','user35');
+insert into Usuario values (36,'Usuario 36','785.456.781-96', 'usuario36@sgcmf.com', 'Tecnico da Selecao','user36','user36');
+insert into Usuario values (37,'Usuario 37','785.456.781-97', 'usuario37@sgcmf.com', 'Tecnico da Selecao','user37','user37');
+
+
 -- Insercao das Selecoes
 insert into Selecao  values (1,'Franca','img/selecoes32/grupoa/France.png',3, 'A');
 insert into Selecao  values (2,'Mexico','img/selecoes32/grupoa/Mexico.png',4, 'A');
@@ -39,19 +58,92 @@ insert into Selecao  values (12,'Estados Unidos','img/selecoes32/grupoc/United-S
 insert into Selecao  values (13,'Australia','img/selecoes32/grupod/Australia.png',15, 'D');
 insert into Selecao  values (14,'Alemanha','img/selecoes32/grupod/Germany.png',16, 'D');
 insert into Selecao  values (15,'Gana','img/selecoes32/grupod/Ghana.png',17, 'D');
-insert into Selecao  values (16,'Servia','img/selecoes32/grupod/Serbia.png',17, 'D');
+insert into Selecao  values (16,'Servia','img/selecoes32/grupod/Serbia.png',21, 'D');
+
+insert into Selecao  values (17,'Camaroes','img/selecoes32/grupoe/Cameroon.png',22, 'E');
+insert into Selecao  values (18,'Dinamarca','img/selecoes32/grupoe/Denmark.png',23, 'E');
+insert into Selecao  values (19,'Japao','img/selecoes32/grupoe/Japan.png',24, 'E');
+insert into Selecao  values (20,'Holanda','img/selecoes32/grupoe/Netherlands.png',25, 'E');
+
+insert into Selecao  values (21,'Italia','img/selecoes32/grupof/Italy.png',26, 'F');
+insert into Selecao  values (22,'Nova Zelandia','img/selecoes32/grupof/New-Zealand.png',27, 'F');
+insert into Selecao  values (23,'Paraguai','img/selecoes32/grupof/Paraguay.png',28, 'F');
+insert into Selecao  values (24,'Eslovaquia','img/selecoes32/grupof/Slovakia.png',29, 'F');
+
+insert into Selecao  values (25,'Brasil','img/selecoes32/grupog/Brazil.png',30, 'G');
+insert into Selecao  values (26,'Costa do Marfim','img/selecoes32/grupog/Cote-dIvoire.png',31, 'G');
+insert into Selecao  values (27,'Coreia do Norte','img/selecoes32/grupog/North-Korea.png',32, 'G');
+insert into Selecao  values (28,'Portugal','img/selecoes32/grupog/Portugal.png',33, 'G');
+
+insert into Selecao  values (29,'Chile','img/selecoes32/grupoh/Chile.png',34, 'H');
+insert into Selecao  values (30,'Equador', 'img/selecoes32/grupoh/Ecuador.png',35, 'H');
+insert into Selecao  values (31,'Honduras','img/selecoes32/grupoh/Honduras.png',36, 'H');
+insert into Selecao  values (32,'Espanha','img/selecoes32/grupoh/Spain.png',37, 'H');
 
 -- Insercao dos Jogos
-insert into Jogo  values (1, 'Rio de Janeiro', 'Maracana', 1,2,'2012-08-10 10:20:00 +02');
-insert into Jogo  values (2, 'Sao Paulo', 'Morumbi', 3,4,'2012-08-11 11:20:00 +02');
-insert into Jogo  values (3,'Belo Horizonte', 'Mineirao', 5,6,'2012-08-12 12:20:00 +01');
-insert into Jogo  values (4,'Rio de Janeiro', 'Maracana', 7,8,'2012-08-13 13:20:00 +01');
-insert into Jogo  values (5,'Sao Paulo', 'Morumbi', 9,10,'2012-08-14 10:20:00 +02');
-insert into Jogo  values (6,'Belo Horizonte', 'Mineirao', 11,12,'2012-08-15 11:20:00 -03');
-insert into Jogo  values (7,'Rio de Janeiro', 'Maracana', 13,14,'2012-08-16 12:20:00 -02');
-insert into Jogo  values (8,'Sao Paulo', 'Morumbi', 5,2,'2012-08-17 13:20:00 +02');
-insert into Jogo  values (9,'Belo Horizonte', 'Mineirao', 3,5,'2012-08-18 11:20:00 +02');
-insert into Jogo  values (10, 'Rio de Janeiro', 'Maracana', 1,6,'2012-08-19 12:20:00 +02');
+--grupo a
+insert into Jogo  values (1, 'Rio de Janeiro', 'Maracana', 1,2,'2014-06-11 11:00:00 -03');
+insert into Jogo  values (2, 'Sao Paulo', 'Morumbi', 1,3,'2014-06-12 11:00:00 -03');
+insert into Jogo  values (3, 'Belo Horizonte', 'Mineirao', 1,4,'2014-06-13 11:20:00 -03');
+insert into Jogo  values (4, 'Rio de Janeiro', 'Maracana', 2,3,'2014-06-14 12:00:00 -03');
+insert into Jogo  values (5, 'Sao Paulo', 'Morumbi', 2,4,'2014-06-15 12:00:00 -03');
+insert into Jogo  values (6, 'Belo Horizonte', 'Mineirao', 3,4,'2014-06-16 12:00:00 -03');
+
+--grupob
+insert into Jogo  values (7, 'Rio de Janeiro', 'Maracana', 5,6,'2014-06-11 12:00:00 -03');
+insert into Jogo  values (8, 'Sao Paulo', 'Morumbi', 5,7,'2014-06-12 12:00:00 -03');
+insert into Jogo  values (9, 'Rio de Janeiro', 'Maracana', 5,8,'2014-06-13 12:00:00 -03');
+insert into Jogo  values (10, 'Rio de Janeiro', 'Maracana', 6,7,'2014-06-14 12:00:00 -03');
+insert into Jogo  values (11, 'Sao Paulo', 'Morumbi', 6,8,'2014-06-15 12:00:00 -03');
+insert into Jogo  values (12, 'Belo Horizonte', 'Mineirao', 7,8,'2014-06-16 12:00:00 -03');
+
+--grupo c
+insert into Jogo  values (13, 'Rio de Janeiro', 'Maracana', 9,10,'2014-06-11 12:00:00 -03');
+insert into Jogo  values (14, 'Sao Paulo', 'Morumbi', 9,11,'2014-06-12 12:00:00 -03');
+insert into Jogo  values (15, 'Belo Horizonte', 'Mineirao', 9,12,'2014-06-13 12:00:00 -03');
+insert into Jogo  values (16, 'Rio de Janeiro', 'Maracana', 10,11,'2014-06-14 12:00:00 -03');
+insert into Jogo  values (17, 'Sao Paulo', 'Morumbi', 10,12,'2014-06-15 12:00:00 -03');
+insert into Jogo  values (18, 'Belo Horizonte', 'Mineirao', 11,12,'2014-06-16 12:00:00 -03');
+
+--grupo d
+insert into Jogo  values (19, 'Rio de Janeiro', 'Maracana', 13,14,'2014-06-11 12:00:00 -03');
+insert into Jogo  values (20, 'Sao Paulo', 'Morumbi', 13,15,'2014-06-12 12:00:00 -03');
+insert into Jogo  values (21, 'Belo Horizonte', 'Mineirao', 13,16,'2014-06-13 12:00:00 -03');
+insert into Jogo  values (22, 'Rio de Janeiro', 'Maracana', 14,15,'2014-06-14 12:00:00 -03');
+insert into Jogo  values (23, 'Sao Paulo', 'Morumbi', 14,16,'2014-06-15 12:00:00 -03');
+insert into Jogo  values (24, 'Belo Horizonte', 'Mineirao', 15,16,'2014-06-16 12:00:00 -03');
+
+--grupo e
+insert into Jogo  values (25, 'Rio de Janeiro', 'Maracana', 17,18,'2014-06-11 12:00:00 -03');
+insert into Jogo  values (26, 'Sao Paulo', 'Morumbi', 17,19,'2014-06-12 12:00:00 -03');
+insert into Jogo  values (27, 'Belo Horizonte', 'Mineirao', 17,20,'2014-06-13 12:00:00 -03');
+insert into Jogo  values (28, 'Rio de Janeiro', 'Maracana', 18,19,'2014-06-14 12:00:00 -03');
+insert into Jogo  values (29, 'Sao Paulo', 'Morumbi', 18,20,'2014-06-15 12:00:00 -03');
+insert into Jogo  values (30, 'Belo Horizonte', 'Mineirao', 19,20,'2014-06-16 12:00:00 -03');
+
+--grupo f
+insert into Jogo  values (31, 'Rio de Janeiro', 'Maracana', 21,22,'2014-06-11 12:00:00 -03');
+insert into Jogo  values (32, 'Sao Paulo', 'Morumbi', 21,23,'2014-06-12 12:00:00 -03');
+insert into Jogo  values (33, 'Belo Horizonte', 'Mineirao', 21,24,'2014-06-13 12:00:00 -03');
+insert into Jogo  values (34, 'Rio de Janeiro', 'Maracana', 22,23,'2014-06-14 12:00:00 -03');
+insert into Jogo  values (35, 'Sao Paulo', 'Morumbi', 22,24,'2014-06-15 12:00:00 -03');
+insert into Jogo  values (36, 'Belo Horizonte', 'Mineirao', 23,24,'2014-06-16 12:00:00 -03');
+
+--grupo g
+insert into Jogo  values (37, 'Rio de Janeiro', 'Maracana', 25,26,'2014-06-11 12:00:00 -03');
+insert into Jogo  values (38, 'Sao Paulo', 'Morumbi', 25,27,'2014-06-12 12:00:00 -03');
+insert into Jogo  values (39, 'Belo Horizonte', 'Mineirao', 25,28,'2014-06-13 12:00:00 -03');
+insert into Jogo  values (40, 'Rio de Janeiro', 'Maracana', 26,27,'2014-06-14 12:00:00 -03');
+insert into Jogo  values (41, 'Sao Paulo', 'Morumbi', 26,28,'2014-06-15 12:00:00 -03');
+insert into Jogo  values (42, 'Belo Horizonte', 'Mineirao', 27,28,'2014-06-16 12:00:00 -03');
+
+--grupo h
+insert into Jogo  values (43, 'Rio de Janeiro', 'Maracana', 29,30,'2014-06-11 12:00:00 -03');
+insert into Jogo  values (44, 'Sao Paulo', 'Morumbi', 29,31,'2014-06-12 12:00:00 -03');
+insert into Jogo  values (45, 'Belo Horizonte', 'Mineirao', 29,32,'2014-06-13 12:00:00 -03');
+insert into Jogo  values (46, 'Rio de Janeiro', 'Maracana', 30,31,'2014-06-14 12:00:00 -03');
+insert into Jogo  values (47, 'Sao Paulo', 'Morumbi', 30,32,'2014-06-15 12:00:00 -03');
+insert into Jogo  values (48, 'Belo Horizonte', 'Mineirao', 31,32,'2014-06-16 12:00:00 -03');
 
 -- Insercao dos Jogadores
 insert into Jogador  values (1,'Jogador 1', 1.93, 1, '1990-10-10', 'Goleiro', true, 1);
@@ -83,7 +175,7 @@ insert into Jogador  values (24,'Jogador 24', 1.93, 15, '1990-10-10', 'Lateral D
 -- Insercao de Ocorrencias
 insert into Ocorrencia values (1,'10:00',1);
 insert into Ocorrencia values (2,'10:10',1);
-insert into Ocorrencia values (3,'10:20',1);
+insert into Ocorrencia values (3,'12:00',1);
 insert into Ocorrencia values (4,'10:30',1);
 insert into Ocorrencia values (5,'10:40',1);
 insert into Ocorrencia values (6,'10:50',1);
