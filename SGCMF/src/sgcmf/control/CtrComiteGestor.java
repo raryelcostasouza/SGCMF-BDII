@@ -72,4 +72,10 @@ public class CtrComiteGestor
     {
         return ctrMain.getCtrRelatorio();
     }
+    
+    public CtrTabelaCampeonato getCtrTabelaCampeonato()
+    {
+        return ctrMain.getCtrTabelaCampeonato();
+    }
+            
 }

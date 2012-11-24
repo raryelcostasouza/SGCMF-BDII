@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import sgcmf.control.CtrComiteGestor;
-import sgcmf.control.CtrRelatorio;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 import sgcmf.view.comiteGestor.ocorrenciaJogo.LimGerOcorrSelecionarJogo;
@@ -155,6 +154,14 @@ public class LimComiteGestor extends JFrame
         jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
         jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
         jbTabelaCampeonato.setPreferredSize(buttonDimension);
+        jbTabelaCampeonato.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrComiteGestor.getCtrTabelaCampeonato().ativaTela();
+            }
+        });
 
         centerPanel.add(jbRelatorios);
         centerPanel.add(jbTabelaCampeonato);

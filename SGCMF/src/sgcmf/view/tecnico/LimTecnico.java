@@ -87,6 +87,15 @@ public class LimTecnico extends JFrame
         JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
         jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
         jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
+        jbTabelaCampeonato.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrTecnico.getCtrMain().getCtrTabelaCampeonato().ativaTela();
+            }
+        });
+                
 
         JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
         jbLogout.addActionListener(new ActionListener() {
