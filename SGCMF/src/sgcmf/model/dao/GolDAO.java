@@ -49,4 +49,19 @@ public class GolDAO
 
         return (ArrayList<Gol>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
+    
+    public int queryNumGolsJogoSelecao(Short idJogo, Short idSelecaoI, Short idSelecaoII)
+    {
+        String hql;
+        
+        hql = "select count(g.idoc) "
+                + "from Gol g "
+                + "where g.ocorrencia.jogo.id = " + idJogo + " "
+                //gols a favor da selecaoI
+                + "and ((g.tipo = 'A Favor' and g.jogadorByIdjogadorautor.selecao.id = " + idSelecaoI+") "
+                //+ gols contra da selecao II
+                + "or (g.tipo = 'Contra' and g.jogadorByIdjogadorautor.selecao.id = "+ idSelecaoII  +")"
+                + ")";
+        return Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()+"");
+    }
 }

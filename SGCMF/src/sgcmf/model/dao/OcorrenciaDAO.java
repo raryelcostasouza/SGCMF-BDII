@@ -69,4 +69,15 @@ public class OcorrenciaDAO
         resultado = String.valueOf(q.uniqueResult());
         return Integer.parseInt(resultado);
     }
+    
+    public int queryHaOcorrenciaParaJogo(Short idJogo)
+    {
+        String hql;
+        
+        hql = "select count(o.id) "
+                + "from Ocorrencia o "
+                + "where o.jogo.id = " + idJogo;
+        
+        return Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()+"");
+    }
 }

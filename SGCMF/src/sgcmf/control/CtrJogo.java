@@ -2,7 +2,9 @@ package sgcmf.control;
 
 import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
+import sgcmf.model.dao.GolDAO;
 import sgcmf.model.dao.JogoDAO;
+import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.other.SGCMFDate;
 
@@ -124,12 +126,36 @@ public class CtrJogo
             dadosJogos[i][0] = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora());
             dadosJogos[i][1] = j.getCidade();
             dadosJogos[i][2] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
-            dadosJogos[i][3] = "";
+            dadosJogos[i][3] = geraPlacarJogo(j);
             dadosJogos[i][4] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());            
         }
 
         return dadosJogos;
     }
+    
+    private String geraPlacarJogo(Jogo j)
+    {
+        String placar = "";
+        int numGolsSelI;
+        int numGolsSelII;
+        OcorrenciaDAO oDAO;
+        GolDAO gDAO;
+        
+        oDAO = OcorrenciaDAO.getInstance();
+        gDAO = GolDAO.getInstance();
+        //se o jogo ocorreu
+        //(se há alguma ocorrência cadastrada)
+        if (oDAO.queryHaOcorrenciaParaJogo(j.getId())!=0)
+        { 
+            numGolsSelI = gDAO.queryNumGolsJogoSelecao(j.getId(), j.getSelecaoByIdselecaoi().getId(), j.getSelecaoByIdselecaoii().getId());
+            numGolsSelII = gDAO.queryNumGolsJogoSelecao(j.getId(),j.getSelecaoByIdselecaoii().getId(), j.getSelecaoByIdselecaoi().getId());
+            
+            placar = numGolsSelI + " x " + numGolsSelII;
+        }
+        
+        return placar;
+    }            
+            
 
     public String queryInfoJogoById(Short idJogo)
     {
