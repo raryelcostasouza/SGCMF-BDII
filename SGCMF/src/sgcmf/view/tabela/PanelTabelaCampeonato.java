@@ -210,7 +210,18 @@ public class PanelTabelaCampeonato extends JPanel
             {
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jtGrupoA);
 
         jLabel7.setText("2°");
@@ -303,7 +314,18 @@ public class PanelTabelaCampeonato extends JPanel
             {
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jtGrupoB);
 
         jLabel23.setText("2°");
@@ -396,7 +418,18 @@ public class PanelTabelaCampeonato extends JPanel
             {
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane5.setViewportView(jtGrupoC);
 
         jLabel29.setText("2°");
@@ -489,7 +522,18 @@ public class PanelTabelaCampeonato extends JPanel
             {
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(jtGrupoD);
 
         jLabel36.setText("2°");
@@ -582,7 +626,18 @@ public class PanelTabelaCampeonato extends JPanel
             {
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane7.setViewportView(jtGrupoE);
 
         jLabel43.setText("2°");
@@ -675,7 +730,18 @@ public class PanelTabelaCampeonato extends JPanel
             {
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane8.setViewportView(jtGrupoF);
 
         jLabel50.setText("2°");
@@ -768,7 +834,18 @@ public class PanelTabelaCampeonato extends JPanel
             {
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane9.setViewportView(jtGrupoG);
 
         jLabel57.setText("2°");
@@ -861,7 +938,18 @@ public class PanelTabelaCampeonato extends JPanel
             {
                 "Data/Hora", "Local", "Seleção I", "Placar", "Seleção II"
             }
-        ));
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane10.setViewportView(jtGrupoH);
 
         jLabel64.setText("2°");
