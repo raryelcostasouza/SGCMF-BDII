@@ -54,7 +54,7 @@ public class SubstituicaoDAO
         
         hql = "select count(s.idoc) "
                 + "from Substituicao s "
-                + "where s.ocorrencia.jogo.id = " + idJogo + " and s.jogadorByIdjogadorsaiu = " + idSelecao;
+                + "where s.ocorrencia.jogo.id = " + idJogo + " and s.jogadorByIdjogadorsaiu.selecao.id = " + idSelecao;
         return Integer.parseInt(String.valueOf(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()));
     }
 }
