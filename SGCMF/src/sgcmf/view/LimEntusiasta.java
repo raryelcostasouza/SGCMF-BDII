@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -74,6 +75,14 @@ public class LimEntusiasta extends JFrame
         jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
         jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
         jbTabelaCampeonato.setPreferredSize(buttonDimension);
+        jbTabelaCampeonato.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrEntusiasta.getCtrTabelaCampeonato().ativaTela();
+            }
+        });
         
         centerPanel.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorio));
         centerPanel.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));

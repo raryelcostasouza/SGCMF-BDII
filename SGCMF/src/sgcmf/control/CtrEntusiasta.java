@@ -27,4 +27,9 @@ public class CtrEntusiasta
     {
         return ctrMain.getCtrRelatorio();
     }
+    
+    public CtrTabelaCampeonato getCtrTabelaCampeonato()
+    {
+        return ctrMain.getCtrTabelaCampeonato();
+    }
 }

@@ -24,6 +24,7 @@ public class CtrMain
     private CtrOcorrenciaJogo ctrOcorrenciaJogo;
     private CtrJogador ctrJogador;
     private CtrRelatorio ctrRelatorio;
+    private CtrTabelaCampeonato ctrTabelaCampeonato;
     private Thread t;
     private CtrUsuario ctrUsuario;
 
@@ -36,6 +37,7 @@ public class CtrMain
         ctrJogo = new CtrJogo();
         ctrSelecao = new CtrSelecao();
         ctrRelatorio = new CtrRelatorio(this);
+        ctrTabelaCampeonato = new CtrTabelaCampeonato(this);
         ctrOcorrenciaJogo = new CtrOcorrenciaJogo(this);
         ctrJogador = new CtrJogador();
         ctrUsuario = new CtrUsuario();
@@ -128,6 +130,11 @@ public class CtrMain
     public CtrRelatorio getCtrRelatorio()
     {
         return ctrRelatorio;
+    }
+    
+    public CtrTabelaCampeonato getCtrTabelaCampeonato()
+    {
+        return ctrTabelaCampeonato;
     }
 
     public CtrOcorrenciaJogo getCtrOcorrenciaJogo()

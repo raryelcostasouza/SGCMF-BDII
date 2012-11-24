@@ -14,12 +14,12 @@ import javax.swing.JPanel;
  *
  * @author Helio
  */
-public class PrimeiraFase extends JPanel
+public class PanelTabelaCampeonato extends JPanel
 {
     /**
      * Creates new form PrimeiraFase
      */
-    public PrimeiraFase()
+    public PanelTabelaCampeonato()
     {
         initComponents();
     }
