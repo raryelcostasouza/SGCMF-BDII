@@ -285,4 +285,16 @@ public class CtrJogo
 
         return infoJogo;
     }
+    
+    public int pesquisarQtdeJogosDisputados(Short idSelecao)
+    {
+        OcorrenciaDAO oDao;
+        int qtdeJogosDisputados;
+        SGCMFSessionManager.abrirSessao();
+        oDao = OcorrenciaDAO.getInstance();
+        qtdeJogosDisputados = oDao.queryQtdeJogosDisputados(idSelecao);
+        SGCMFSessionManager.fecharSessao();
+        
+        return qtdeJogosDisputados;
+    }
 }

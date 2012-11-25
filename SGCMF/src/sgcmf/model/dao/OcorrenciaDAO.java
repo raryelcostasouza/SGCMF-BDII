@@ -80,4 +80,17 @@ public class OcorrenciaDAO
         
         return Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()+"");
     }
+    
+    public int queryQtdeJogosDisputados(Short idSelecao)
+    {
+        String hql;
+        int qtdeJogosDisputados;
+        hql = "select count (distinct o.jogo.id)"
+                + "from Ocorrencia o "
+                + "where o.jogo.selecaoByIdselecaoi.id = "+idSelecao+" or"
+                + " o.jogo.selecaoByIdselecaoii.id = "+idSelecao;
+        qtdeJogosDisputados = Integer.parseInt
+                (SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
+        return qtdeJogosDisputados;
+    }
 }

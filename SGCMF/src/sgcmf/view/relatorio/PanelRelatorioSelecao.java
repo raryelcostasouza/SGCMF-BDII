@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrMain;
 import sgcmf.control.CtrRelatorio;
 import sgcmf.control.CtrSelecao;
@@ -30,6 +31,7 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
 {
     private CtrRelatorio ctrRelatorio;
     private CtrSelecao ctrSelecao;
+    private CtrJogo ctrJogo;
     private LimSelecionarSelecao limSelecionarSelecao;
     private CtrMain ctrMain;
     private JTextField jtfSelecao;
@@ -50,6 +52,7 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         this.ctrRelatorio = ctrRelatorio;
         ctrMain = ctrRelatorio.getCtrMain();
         ctrSelecao = ctrMain.getCtrSelecao();
+        ctrJogo = ctrMain.getCtrJogo();
         limSelecionarSelecao = new LimSelecionarSelecao(ctrSelecao);
         this.setLayout(new BorderLayout());
         add(panelNorte(), BorderLayout.NORTH);
@@ -190,12 +193,13 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
     private void preencheTextFields(Short idSelecao)
     {
         String nomeSelecao;
+        int jogosDisputados;
         //Recebendo os campos
         nomeSelecao = ctrSelecao.pesquisarNomeSelecao(idSelecao);
-
+        jogosDisputados = ctrJogo.pesquisarQtdeJogosDisputados(idSelecao);
         //Atulizando os TextFields
         jtfNomeSelecao.setText(nomeSelecao);
-
+        jtfJogosDisputados.setText(jogosDisputados + "");
     }
 
     public void limparTela()
