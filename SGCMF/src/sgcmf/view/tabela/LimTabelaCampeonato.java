@@ -38,6 +38,7 @@ public class LimTabelaCampeonato extends JDialog
 
     public void ativaTela()
     {
+        ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("A");
         preencheJTable(panelTabela.getJtGrupoA(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("A"));
         preencheJTable(panelTabela.getJtGrupoB(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("B"));
         preencheJTable(panelTabela.getJtGrupoC(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("C"));

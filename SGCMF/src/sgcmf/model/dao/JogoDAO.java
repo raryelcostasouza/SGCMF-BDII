@@ -83,4 +83,15 @@ public class JogoDAO
         
         return (ArrayList<Jogo>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
+    
+    public ArrayList<Jogo> queryJogoByIdSelecao(Short idSelecao)
+    {
+        String hql;
+        
+        hql = "from Jogo j "
+                + "where j.selecaoByIdselecaoi.id = '" + idSelecao+"' "
+                + "or j.selecaoByIdselecaoii.id = '"+idSelecao+"'";
+        
+        return (ArrayList<Jogo>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
 }

@@ -10,6 +10,7 @@ package sgcmf.view.tabela;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -65,6 +66,87 @@ public class PanelTabelaCampeonato extends JPanel
         return jtGrupoH;
     }
 
+    public JTextField getJtf1GrupoA()
+    {
+        return jtf1GrupoA;
+    }
+
+    public JTextField getJtf1GrupoB()
+    {
+        return jtf1GrupoB;
+    }
+
+    public JTextField getJtf1GrupoC()
+    {
+        return jtf1GrupoC;
+    }
+
+    public JTextField getJtf1GrupoD()
+    {
+        return jtf1GrupoD;
+    }
+
+    public JTextField getJtf1GrupoE()
+    {
+        return jtf1GrupoE;
+    }
+
+    public JTextField getJtf1GrupoF()
+    {
+        return jtf1GrupoF;
+    }
+
+    public JTextField getJtf1GrupoG()
+    {
+        return jtf1GrupoG;
+    }
+
+    public JTextField getJtf1GrupoH()
+    {
+        return jtf1GrupoH;
+    }
+
+    public JTextField getJtf2GrupoA()
+    {
+        return jtf2GrupoA;
+    }
+
+    public JTextField getJtf2GrupoB()
+    {
+        return jtf2GrupoB;
+    }
+
+    public JTextField getJtf2GrupoC()
+    {
+        return jtf2GrupoC;
+    }
+
+    public JTextField getJtf2GrupoD()
+    {
+        return jtf2GrupoD;
+    }
+
+    public JTextField getJtf2GrupoE()
+    {
+        return jtf2GrupoE;
+    }
+
+    public JTextField getJtf2GrupoF()
+    {
+        return jtf2GrupoF;
+    }
+
+    public JTextField getJtf2GrupoG()
+    {
+        return jtf2GrupoG;
+    }
+
+    public JTextField getJtf2GrupoH()
+    {
+        return jtf2GrupoH;
+    }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,8 +169,8 @@ public class PanelTabelaCampeonato extends JPanel
         jtGrupoA = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        jtf1GrupoA = new javax.swing.JTextField();
+        jtf2GrupoA = new javax.swing.JTextField();
         panelGrupoB = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -98,9 +180,9 @@ public class PanelTabelaCampeonato extends JPanel
         jScrollPane3 = new javax.swing.JScrollPane();
         jtGrupoB = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        jtf1GrupoB = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        jtf2GrupoB = new javax.swing.JTextField();
         panelGrupoC = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -111,8 +193,8 @@ public class PanelTabelaCampeonato extends JPanel
         jtGrupoC = new javax.swing.JTable();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
+        jtf1GrupoC = new javax.swing.JTextField();
+        jtf2GrupoC = new javax.swing.JTextField();
         panelGrupoD = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -122,9 +204,9 @@ public class PanelTabelaCampeonato extends JPanel
         jScrollPane6 = new javax.swing.JScrollPane();
         jtGrupoD = new javax.swing.JTable();
         jLabel36 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
+        jtf1GrupoD = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        jtf2GrupoD = new javax.swing.JTextField();
         panelGrupoE = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
@@ -135,8 +217,8 @@ public class PanelTabelaCampeonato extends JPanel
         jtGrupoE = new javax.swing.JTable();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
+        jtf1GrupoE = new javax.swing.JTextField();
+        jtf2GrupoE = new javax.swing.JTextField();
         panelGrupoF = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
@@ -146,9 +228,9 @@ public class PanelTabelaCampeonato extends JPanel
         jScrollPane8 = new javax.swing.JScrollPane();
         jtGrupoF = new javax.swing.JTable();
         jLabel50 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
+        jtf1GrupoF = new javax.swing.JTextField();
         jLabel51 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
+        jtf2GrupoF = new javax.swing.JTextField();
         panelGrupoG = new javax.swing.JPanel();
         jLabel52 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
@@ -159,8 +241,8 @@ public class PanelTabelaCampeonato extends JPanel
         jtGrupoG = new javax.swing.JTable();
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
-        jTextField20 = new javax.swing.JTextField();
-        jTextField21 = new javax.swing.JTextField();
+        jtf1GrupoG = new javax.swing.JTextField();
+        jtf2GrupoG = new javax.swing.JTextField();
         panelGrupoH = new javax.swing.JPanel();
         jLabel59 = new javax.swing.JLabel();
         jLabel60 = new javax.swing.JLabel();
@@ -170,9 +252,9 @@ public class PanelTabelaCampeonato extends JPanel
         jScrollPane10 = new javax.swing.JScrollPane();
         jtGrupoH = new javax.swing.JTable();
         jLabel64 = new javax.swing.JLabel();
-        jTextField22 = new javax.swing.JTextField();
+        jtf1GrupoH = new javax.swing.JTextField();
         jLabel65 = new javax.swing.JLabel();
-        jTextField23 = new javax.swing.JTextField();
+        jtf2GrupoH = new javax.swing.JTextField();
 
         setLayout(new java.awt.GridLayout(1, 0));
 
@@ -228,6 +310,22 @@ public class PanelTabelaCampeonato extends JPanel
 
         jLabel6.setText("1°");
 
+        jtf1GrupoA.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jtf1GrupoAActionPerformed(evt);
+            }
+        });
+
+        jtf2GrupoA.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jtf2GrupoAActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelGrupoALayout = new javax.swing.GroupLayout(panelGrupoA);
         panelGrupoA.setLayout(panelGrupoALayout);
         panelGrupoALayout.setHorizontalGroup(
@@ -236,11 +334,11 @@ public class PanelTabelaCampeonato extends JPanel
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf1GrupoA, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf2GrupoA, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(panelGrupoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoALayout.createSequentialGroup()
@@ -267,8 +365,8 @@ public class PanelTabelaCampeonato extends JPanel
                 .addGroup(panelGrupoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf1GrupoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf2GrupoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
             .addGroup(panelGrupoALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoALayout.createSequentialGroup()
@@ -340,11 +438,11 @@ public class PanelTabelaCampeonato extends JPanel
                 .addContainerGap()
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf1GrupoB, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf2GrupoB, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(panelGrupoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoBLayout.createSequentialGroup()
@@ -371,8 +469,8 @@ public class PanelTabelaCampeonato extends JPanel
                 .addGroup(panelGrupoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(jLabel23)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf1GrupoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf2GrupoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
             .addGroup(panelGrupoBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoBLayout.createSequentialGroup()
@@ -444,11 +542,11 @@ public class PanelTabelaCampeonato extends JPanel
                 .addContainerGap()
                 .addComponent(jLabel30)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf1GrupoC, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf2GrupoC, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(panelGrupoCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoCLayout.createSequentialGroup()
@@ -475,8 +573,8 @@ public class PanelTabelaCampeonato extends JPanel
                 .addGroup(panelGrupoCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
                     .addComponent(jLabel29)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf1GrupoC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf2GrupoC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
             .addGroup(panelGrupoCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoCLayout.createSequentialGroup()
@@ -548,11 +646,11 @@ public class PanelTabelaCampeonato extends JPanel
                 .addContainerGap()
                 .addComponent(jLabel37)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf1GrupoD, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf2GrupoD, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(panelGrupoDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoDLayout.createSequentialGroup()
@@ -579,8 +677,8 @@ public class PanelTabelaCampeonato extends JPanel
                 .addGroup(panelGrupoDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
                     .addComponent(jLabel36)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf1GrupoD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf2GrupoD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
             .addGroup(panelGrupoDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoDLayout.createSequentialGroup()
@@ -652,11 +750,11 @@ public class PanelTabelaCampeonato extends JPanel
                 .addContainerGap()
                 .addComponent(jLabel44)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf1GrupoE, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel43)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf2GrupoE, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(panelGrupoELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoELayout.createSequentialGroup()
@@ -683,8 +781,8 @@ public class PanelTabelaCampeonato extends JPanel
                 .addGroup(panelGrupoELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
                     .addComponent(jLabel43)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf1GrupoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf2GrupoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
             .addGroup(panelGrupoELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoELayout.createSequentialGroup()
@@ -756,11 +854,11 @@ public class PanelTabelaCampeonato extends JPanel
                 .addContainerGap()
                 .addComponent(jLabel51)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf1GrupoF, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel50)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf2GrupoF, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(panelGrupoFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoFLayout.createSequentialGroup()
@@ -787,8 +885,8 @@ public class PanelTabelaCampeonato extends JPanel
                 .addGroup(panelGrupoFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel51)
                     .addComponent(jLabel50)
-                    .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf1GrupoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf2GrupoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
             .addGroup(panelGrupoFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoFLayout.createSequentialGroup()
@@ -860,11 +958,11 @@ public class PanelTabelaCampeonato extends JPanel
                 .addContainerGap()
                 .addComponent(jLabel58)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf1GrupoG, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel57)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf2GrupoG, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(panelGrupoGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoGLayout.createSequentialGroup()
@@ -891,8 +989,8 @@ public class PanelTabelaCampeonato extends JPanel
                 .addGroup(panelGrupoGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel58)
                     .addComponent(jLabel57)
-                    .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf1GrupoG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf2GrupoG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
             .addGroup(panelGrupoGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoGLayout.createSequentialGroup()
@@ -964,11 +1062,11 @@ public class PanelTabelaCampeonato extends JPanel
                 .addContainerGap()
                 .addComponent(jLabel65)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf1GrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel64)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf2GrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(panelGrupoHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoHLayout.createSequentialGroup()
@@ -995,8 +1093,8 @@ public class PanelTabelaCampeonato extends JPanel
                 .addGroup(panelGrupoHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel65)
                     .addComponent(jLabel64)
-                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf1GrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf2GrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
             .addGroup(panelGrupoHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGrupoHLayout.createSequentialGroup()
@@ -1063,6 +1161,16 @@ public class PanelTabelaCampeonato extends JPanel
 
         add(jScrollPane2);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtf1GrupoAActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtf1GrupoAActionPerformed
+    {//GEN-HEADEREND:event_jtf1GrupoAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf1GrupoAActionPerformed
+
+    private void jtf2GrupoAActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jtf2GrupoAActionPerformed
+    {//GEN-HEADEREND:event_jtf2GrupoAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf2GrupoAActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -1131,22 +1239,6 @@ public class PanelTabelaCampeonato extends JPanel
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTable jtGrupoA;
     private javax.swing.JTable jtGrupoB;
     private javax.swing.JTable jtGrupoC;
@@ -1155,6 +1247,22 @@ public class PanelTabelaCampeonato extends JPanel
     private javax.swing.JTable jtGrupoF;
     private javax.swing.JTable jtGrupoG;
     private javax.swing.JTable jtGrupoH;
+    private javax.swing.JTextField jtf1GrupoA;
+    private javax.swing.JTextField jtf1GrupoB;
+    private javax.swing.JTextField jtf1GrupoC;
+    private javax.swing.JTextField jtf1GrupoD;
+    private javax.swing.JTextField jtf1GrupoE;
+    private javax.swing.JTextField jtf1GrupoF;
+    private javax.swing.JTextField jtf1GrupoG;
+    private javax.swing.JTextField jtf1GrupoH;
+    private javax.swing.JTextField jtf2GrupoA;
+    private javax.swing.JTextField jtf2GrupoB;
+    private javax.swing.JTextField jtf2GrupoC;
+    private javax.swing.JTextField jtf2GrupoD;
+    private javax.swing.JTextField jtf2GrupoE;
+    private javax.swing.JTextField jtf2GrupoF;
+    private javax.swing.JTextField jtf2GrupoG;
+    private javax.swing.JTextField jtf2GrupoH;
     private javax.swing.JPanel panelGrupoA;
     private javax.swing.JPanel panelGrupoB;
     private javax.swing.JPanel panelGrupoC;

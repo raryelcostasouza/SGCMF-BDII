@@ -62,4 +62,13 @@ public class SelecaoDAO
         nomeSelecao = SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString();
         return nomeSelecao;
     }
+    
+    public ArrayList<Selecao> querySelecaoByGrupo(String grupo)
+    {
+        String hql;
+        
+        hql = "from Selecao s "
+                + "where s.grupo = '" +grupo+"'";
+        return (ArrayList<Selecao>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
 }
