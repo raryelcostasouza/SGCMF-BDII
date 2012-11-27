@@ -64,4 +64,30 @@ public class GolDAO
                 + ")";
         return Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()+"");
     }
+    
+    public int queryNumGolsMarcadosSelecao(Short idSelecao)
+    {
+        String hql;
+        
+        hql = "select count (g.idoc) "
+                + "from Gol g "
+                + "where g.tipo = 'A Favor' and g.jogadorByIdjogadorautor.selecao.id = " + idSelecao;
+        
+        return Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()+"");
+    }
+    
+    public int queryNumGolsSofridosSelecaoJogo(Short idJogo, Short idSelecao, Short idSelecaoRival)
+    {
+        String hql;
+        
+        hql = "select count (g.idoc) "
+                + "from Gol g "
+                + "where g.ocorrencia.jogo.id = "+ idJogo +" "
+                + "and ("
+                + "(g.tipo = 'Contra' and g.jogadorByIdjogadorautor.selecao.id = " + idSelecao+") "
+                + "or (g.tipo = 'A Favor' and g.jogadorByIdjogadorautor.selecao.id = " + idSelecaoRival + ")"
+                + ")";
+        
+        return Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()+"");
+    }
 }

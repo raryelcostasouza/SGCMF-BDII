@@ -2,6 +2,7 @@ package sgcmf.control;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.GolDAO;
 import sgcmf.model.dao.JogoDAO;
@@ -9,6 +10,8 @@ import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.dao.SelecaoDAO;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.hibernate.Selecao;
+import sgcmf.model.other.ResultadoGolsSelecao;
+import sgcmf.model.other.ResultadoSelecao;
 import sgcmf.model.other.SGCMFDate;
 
 public class CtrJogo
@@ -99,17 +102,15 @@ public class CtrJogo
 
     public void getClassificadosGrupo(String grupo)
     {
-        Object[][] ptosSelecoes;
-        int p;
+        ResultadoSelecao[] resultadoSelecoesGrupo;
 
         SGCMFSessionManager.abrirSessao();
-        ptosSelecoes = calculaPontosSelecoesNoGrupo(grupo);
-        for (int i = 0; i < 4; i++)
-        {
-            Selecao s;
-            s = (Selecao) ptosSelecoes[i][0];
-            System.out.println(s.getPais() + ": " + ptosSelecoes[i][1]);
 
+        resultadoSelecoesGrupo = calculaResultadoSelecoesDoGrupo(grupo);
+        Arrays.sort(resultadoSelecoesGrupo);
+        for (int i = resultadoSelecoesGrupo.length - 1; i >= 0; i--)
+        {
+            System.out.println(resultadoSelecoesGrupo[i].toString());
         }
 
         SGCMFSessionManager.fecharSessao();
@@ -179,24 +180,75 @@ public class CtrJogo
         return placar;
     }
 
-    private Object[][] calculaPontosSelecoesNoGrupo(String grupo)
+    private ResultadoSelecao[] calculaResultadoSelecoesDoGrupo(String grupo)
     {
         ArrayList<Selecao> selecoesGrupo;
         SelecaoDAO sDAO;
-        Object[][] ptosSelecoes = new Object[4][2];
+        ResultadoSelecao[] resultadoSelecoesGrupo;
+        ResultadoGolsSelecao objRGS;
         int i;
+        int numPontos;
 
         sDAO = SelecaoDAO.getInstance();
         selecoesGrupo = sDAO.querySelecaoByGrupo(grupo);
 
         i = 0;
+        resultadoSelecoesGrupo = new ResultadoSelecao[4];
         for (Selecao s : selecoesGrupo)
         {
-            ptosSelecoes[i][0] = s;
-            ptosSelecoes[i][1] = calculaPontosSelecao(s);
+            numPontos = calculaPontosSelecao(s);
+            objRGS = calculaSaldoGolsSelecao(s);
+            resultadoSelecoesGrupo[i] = new ResultadoSelecao(s, numPontos, objRGS.getSaldoGols(),
+                                                             objRGS.getNumGolsMarcados());
             i++;
         }
-        return ptosSelecoes;
+        return resultadoSelecoesGrupo;
+    }
+
+    private ResultadoGolsSelecao calculaSaldoGolsSelecao(Selecao s)
+    {
+        int numGolsMarcados;
+        int numGolsSofridos;
+        int saldoGols;
+        GolDAO gDAO;
+
+        gDAO = GolDAO.getInstance();
+
+        numGolsMarcados = gDAO.queryNumGolsMarcadosSelecao(s.getId());
+        numGolsSofridos = calculaNumGolsSofridosSelecao(s);
+        saldoGols = numGolsMarcados - numGolsSofridos;
+
+        return new ResultadoGolsSelecao(numGolsMarcados, saldoGols);
+    }
+
+    private int calculaNumGolsSofridosSelecao(Selecao s)
+    {
+        int numGolsSofridos;
+        Short idSelecao, idSelRival;
+        JogoDAO jDAO;
+        GolDAO gDAO;
+        ArrayList<Jogo> listaJogosSelecao;
+
+        jDAO = JogoDAO.getInstance();
+        gDAO = GolDAO.getInstance();
+        
+        numGolsSofridos = 0;
+        listaJogosSelecao = jDAO.queryJogoByIdSelecao(s.getId());
+        for (Jogo jogo : listaJogosSelecao)
+        {
+            idSelecao = s.getId();
+            if (idSelecao == jogo.getSelecaoByIdselecaoi().getId())
+            {
+                idSelRival = jogo.getSelecaoByIdselecaoii().getId();
+            }
+            else
+            {
+                idSelRival = jogo.getSelecaoByIdselecaoi().getId();
+            }
+            numGolsSofridos += gDAO.queryNumGolsSofridosSelecaoJogo(jogo.getId(), idSelecao, idSelRival);           
+        }
+
+        return numGolsSofridos;
     }
 
     private int calculaPontosSelecao(Selecao s)
@@ -285,7 +337,7 @@ public class CtrJogo
 
         return infoJogo;
     }
-    
+
     public int pesquisarQtdeJogosDisputados(Short idSelecao)
     {
         OcorrenciaDAO oDao;
@@ -294,7 +346,7 @@ public class CtrJogo
         oDao = OcorrenciaDAO.getInstance();
         qtdeJogosDisputados = oDao.queryQtdeJogosDisputados(idSelecao);
         SGCMFSessionManager.fecharSessao();
-        
+
         return qtdeJogosDisputados;
     }
 }
