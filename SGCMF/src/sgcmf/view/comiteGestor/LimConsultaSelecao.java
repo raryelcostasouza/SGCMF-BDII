@@ -37,7 +37,7 @@ public class LimConsultaSelecao extends JDialog
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         add(montaMainPanel());
-        pack();
+        setSize(600,600);
         setModal(true);
 
         setLocationRelativeTo(null);

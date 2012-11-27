@@ -62,7 +62,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         add(montaMainPanel());
 
         setModal(true);
-        setSize(600, 500);
+        setSize(700, 600);
         setLocationRelativeTo(null);
 
         addWindowListener(new WindowAdapter()
@@ -183,7 +183,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         String[] nomesColunas =
         {
-            "ID", "Instante de Tempo", "Seleção", "Jogador Autor", "Jogador Assistência", "Tipo Gol", "Modo"
+            "ID", "Tempo", "Seleção", "Jogador Autor", "Jog. Assistente", "Tipo Gol", "Modo"
         };
         jtGol = new JTableSGCMF(null, nomesColunas);
         JScrollPane jsp = new JScrollPane(jtGol, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -210,7 +210,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         String[] nomesColunas =
         {
-            "ID", "Instante de Tempo", "Seleção",  "Jogador Autor", "Cartão", "Tipo"
+            "ID", "Tempo", "Seleção",  "Jogador Autor", "Cartão", "Tipo"
         };
         jtFalta = new JTableSGCMF(null, nomesColunas);
         JScrollPane jsp = new JScrollPane(jtFalta, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -237,7 +237,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         String[] nomesColunas =
         {
-            "ID", "IDOc", "Instante de Tempo", "Seleção" ,"Jogador", "Cor"
+            "ID", "IDOc", "Tempo", "Seleção" ,"Jogador", "Cor"
         };
         jtCartao = new JTableSGCMF(null, nomesColunas);
         JScrollPane jsp = new JScrollPane(jtCartao, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -264,7 +264,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         String[] nomesColunas =
         {
-            "ID", "Instante de Tempo", "Seleção", "Jogador Saiu", "Jogador Entrou", "Motivo"
+            "ID", "Tempo", "Seleção", "Jogador Saiu", "Jogador Entrou", "Motivo"
         };
         jtSubst = new JTableSGCMF(null, nomesColunas);
         JScrollPane jsp = new JScrollPane(jtSubst, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

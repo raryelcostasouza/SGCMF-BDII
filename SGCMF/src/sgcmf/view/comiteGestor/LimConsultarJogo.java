@@ -36,7 +36,7 @@ public class LimConsultarJogo extends JDialog
         setTitle("Consulta Jogo");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         add(montaMainPanel());
-        pack();
+        setSize(700,600);
 
         setModal(true);
         setLocationRelativeTo(null);
