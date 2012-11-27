@@ -304,6 +304,7 @@ public class PanelTabelaCampeonato extends JPanel
                 return canEdit [columnIndex];
             }
         });
+        jtGrupoA.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jtGrupoA);
 
         jLabel7.setText("2°");
@@ -426,6 +427,7 @@ public class PanelTabelaCampeonato extends JPanel
                 return canEdit [columnIndex];
             }
         });
+        jtGrupoB.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jtGrupoB);
 
         jLabel23.setText("2°");
@@ -534,6 +536,7 @@ public class PanelTabelaCampeonato extends JPanel
                 return canEdit [columnIndex];
             }
         });
+        jtGrupoC.getTableHeader().setReorderingAllowed(false);
         jScrollPane5.setViewportView(jtGrupoC);
 
         jLabel29.setText("2°");
@@ -642,6 +645,7 @@ public class PanelTabelaCampeonato extends JPanel
                 return canEdit [columnIndex];
             }
         });
+        jtGrupoD.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(jtGrupoD);
 
         jLabel36.setText("2°");
@@ -750,6 +754,7 @@ public class PanelTabelaCampeonato extends JPanel
                 return canEdit [columnIndex];
             }
         });
+        jtGrupoE.getTableHeader().setReorderingAllowed(false);
         jScrollPane7.setViewportView(jtGrupoE);
 
         jLabel43.setText("2°");
@@ -858,6 +863,7 @@ public class PanelTabelaCampeonato extends JPanel
                 return canEdit [columnIndex];
             }
         });
+        jtGrupoF.getTableHeader().setReorderingAllowed(false);
         jScrollPane8.setViewportView(jtGrupoF);
 
         jLabel50.setText("2°");
@@ -966,6 +972,7 @@ public class PanelTabelaCampeonato extends JPanel
                 return canEdit [columnIndex];
             }
         });
+        jtGrupoG.getTableHeader().setReorderingAllowed(false);
         jScrollPane9.setViewportView(jtGrupoG);
 
         jLabel57.setText("2°");
@@ -1074,6 +1081,7 @@ public class PanelTabelaCampeonato extends JPanel
                 return canEdit [columnIndex];
             }
         });
+        jtGrupoH.getTableHeader().setReorderingAllowed(false);
         jScrollPane10.setViewportView(jtGrupoH);
 
         jLabel64.setText("2°");
