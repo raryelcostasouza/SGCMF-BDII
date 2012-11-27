@@ -100,24 +100,6 @@ public class CtrJogo
         return dadosJogos;
     }
 
-    public void getClassificadosGrupo(String grupo)
-    {
-        ResultadoSelecao[] resultadoSelecoesGrupo;
-
-        SGCMFSessionManager.abrirSessao();
-
-        resultadoSelecoesGrupo = calculaResultadoSelecoesDoGrupo(grupo);
-        Arrays.sort(resultadoSelecoesGrupo);
-        for (int i = resultadoSelecoesGrupo.length - 1; i >= 0; i--)
-        {
-            System.out.println(resultadoSelecoesGrupo[i].toString());
-        }
-
-        SGCMFSessionManager.fecharSessao();
-
-        //return classificados;
-    }
-
     private String[][] arrayList2StringMatrix(ArrayList<Jogo> alJogo)
     {
         String[][] dadosJogos;
@@ -180,6 +162,24 @@ public class CtrJogo
         return placar;
     }
 
+    public void getClassificadosGrupo(String grupo)
+    {
+        ResultadoSelecao[] resultadoSelecoesGrupo;
+
+        SGCMFSessionManager.abrirSessao();
+
+        resultadoSelecoesGrupo = calculaResultadoSelecoesDoGrupo(grupo);
+        Arrays.sort(resultadoSelecoesGrupo);
+        for (int i = resultadoSelecoesGrupo.length - 1; i >= 0; i--)
+        {
+            System.out.println(resultadoSelecoesGrupo[i].toString());
+        }
+
+        SGCMFSessionManager.fecharSessao();
+
+        //return classificados;
+    }
+
     private ResultadoSelecao[] calculaResultadoSelecoesDoGrupo(String grupo)
     {
         ArrayList<Selecao> selecoesGrupo;
@@ -205,52 +205,6 @@ public class CtrJogo
         return resultadoSelecoesGrupo;
     }
 
-    private ResultadoGolsSelecao calculaSaldoGolsSelecao(Selecao s)
-    {
-        int numGolsMarcados;
-        int numGolsSofridos;
-        int saldoGols;
-        GolDAO gDAO;
-
-        gDAO = GolDAO.getInstance();
-
-        numGolsMarcados = gDAO.queryNumGolsMarcadosSelecao(s.getId());
-        numGolsSofridos = calculaNumGolsSofridosSelecao(s);
-        saldoGols = numGolsMarcados - numGolsSofridos;
-
-        return new ResultadoGolsSelecao(numGolsMarcados, saldoGols);
-    }
-
-    private int calculaNumGolsSofridosSelecao(Selecao s)
-    {
-        int numGolsSofridos;
-        Short idSelecao, idSelRival;
-        JogoDAO jDAO;
-        GolDAO gDAO;
-        ArrayList<Jogo> listaJogosSelecao;
-
-        jDAO = JogoDAO.getInstance();
-        gDAO = GolDAO.getInstance();
-        
-        numGolsSofridos = 0;
-        listaJogosSelecao = jDAO.queryJogoByIdSelecao(s.getId());
-        for (Jogo jogo : listaJogosSelecao)
-        {
-            idSelecao = s.getId();
-            if (idSelecao == jogo.getSelecaoByIdselecaoi().getId())
-            {
-                idSelRival = jogo.getSelecaoByIdselecaoii().getId();
-            }
-            else
-            {
-                idSelRival = jogo.getSelecaoByIdselecaoi().getId();
-            }
-            numGolsSofridos += gDAO.queryNumGolsSofridosSelecaoJogo(jogo.getId(), idSelecao, idSelRival);           
-        }
-
-        return numGolsSofridos;
-    }
-
     private int calculaPontosSelecao(Selecao s)
     {
         int totalPtos;
@@ -273,7 +227,7 @@ public class CtrJogo
 
         return totalPtos;
     }
-
+    
     private int resultadoJogo(Jogo j, Short idSelecao)
     {
         int numGolsSelI;
@@ -319,6 +273,52 @@ public class CtrJogo
         }
 
         return resultado;
+    }
+
+    private ResultadoGolsSelecao calculaSaldoGolsSelecao(Selecao s)
+    {
+        int numGolsMarcados;
+        int numGolsSofridos;
+        int saldoGols;
+        GolDAO gDAO;
+
+        gDAO = GolDAO.getInstance();
+
+        numGolsMarcados = gDAO.queryNumGolsMarcadosSelecao(s.getId());
+        numGolsSofridos = calculaNumGolsSofridosSelecao(s);
+        saldoGols = numGolsMarcados - numGolsSofridos;
+
+        return new ResultadoGolsSelecao(numGolsMarcados, saldoGols);
+    }
+
+    private int calculaNumGolsSofridosSelecao(Selecao s)
+    {
+        int numGolsSofridos;
+        Short idSelecao, idSelRival;
+        JogoDAO jDAO;
+        GolDAO gDAO;
+        ArrayList<Jogo> listaJogosSelecao;
+
+        jDAO = JogoDAO.getInstance();
+        gDAO = GolDAO.getInstance();
+
+        numGolsSofridos = 0;
+        listaJogosSelecao = jDAO.queryJogoByIdSelecao(s.getId());
+        for (Jogo jogo : listaJogosSelecao)
+        {
+            idSelecao = s.getId();
+            if (idSelecao == jogo.getSelecaoByIdselecaoi().getId())
+            {
+                idSelRival = jogo.getSelecaoByIdselecaoii().getId();
+            }
+            else
+            {
+                idSelRival = jogo.getSelecaoByIdselecaoi().getId();
+            }
+            numGolsSofridos += gDAO.queryNumGolsSofridosSelecaoJogo(jogo.getId(), idSelecao, idSelRival);
+        }
+
+        return numGolsSofridos;
     }
 
     public String queryInfoJogoById(Short idJogo)
