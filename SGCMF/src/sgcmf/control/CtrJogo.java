@@ -162,22 +162,31 @@ public class CtrJogo
         return placar;
     }
 
-    public void getClassificadosGrupo(String grupo)
+    public String[] getClassificadosGrupo(String grupo)
     {
+        OcorrenciaDAO oDAO;
         ResultadoSelecao[] resultadoSelecoesGrupo;
+        String[] strSelecoesClassificadas;
 
         SGCMFSessionManager.abrirSessao();
+        oDAO = OcorrenciaDAO.getInstance();
 
-        resultadoSelecoesGrupo = calculaResultadoSelecoesDoGrupo(grupo);
-        Arrays.sort(resultadoSelecoesGrupo);
-        for (int i = resultadoSelecoesGrupo.length - 1; i >= 0; i--)
+        //somente gera a classificação se já ocorreu algum jogo do grupo
+        if (oDAO.queryAlgumJogoDoGrupoOcorreu(grupo) != 0)
         {
-            System.out.println(resultadoSelecoesGrupo[i].toString());
+            resultadoSelecoesGrupo = calculaResultadoSelecoesDoGrupo(grupo);
+            Arrays.sort(resultadoSelecoesGrupo);
+            
+            strSelecoesClassificadas = new String[2];
+            strSelecoesClassificadas[0] = resultadoSelecoesGrupo[3].getSelecao().getPais();
+            strSelecoesClassificadas[1] = resultadoSelecoesGrupo[2].getSelecao().getPais();
         }
-
+        else
+        {
+            strSelecoesClassificadas = null;
+        }
         SGCMFSessionManager.fecharSessao();
-
-        //return classificados;
+        return strSelecoesClassificadas;
     }
 
     private ResultadoSelecao[] calculaResultadoSelecoesDoGrupo(String grupo)
@@ -197,7 +206,7 @@ public class CtrJogo
         for (Selecao s : selecoesGrupo)
         {
             numPontos = calculaPontosSelecao(s);
-            objRGS = calculaSaldoGolsSelecao(s);
+            objRGS = calculaResultadoGolsSelecao(s);
             resultadoSelecoesGrupo[i] = new ResultadoSelecao(s, numPontos, objRGS.getSaldoGols(),
                                                              objRGS.getNumGolsMarcados());
             i++;
@@ -227,7 +236,7 @@ public class CtrJogo
 
         return totalPtos;
     }
-    
+
     private int resultadoJogo(Jogo j, Short idSelecao)
     {
         int numGolsSelI;
@@ -275,7 +284,7 @@ public class CtrJogo
         return resultado;
     }
 
-    private ResultadoGolsSelecao calculaSaldoGolsSelecao(Selecao s)
+    private ResultadoGolsSelecao calculaResultadoGolsSelecao(Selecao s)
     {
         int numGolsMarcados;
         int numGolsSofridos;

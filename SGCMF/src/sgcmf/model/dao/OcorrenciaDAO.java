@@ -93,4 +93,15 @@ public class OcorrenciaDAO
                 (SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
         return qtdeJogosDisputados;
     }
+    
+    public int queryAlgumJogoDoGrupoOcorreu(String grupo)
+    {
+        String hql;
+        
+        hql = "select count(o.id) "
+                + "from Ocorrencia o "
+                + "where o.jogo.selecaoByIdselecaoi.grupo = '" + grupo+"'";
+        
+        return Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()+"");
+    }
 }
