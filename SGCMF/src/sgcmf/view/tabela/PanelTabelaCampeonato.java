@@ -310,6 +310,7 @@ public class PanelTabelaCampeonato extends JPanel
 
         jLabel6.setText("1°");
 
+        jtf1GrupoA.setEditable(false);
         jtf1GrupoA.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -318,6 +319,7 @@ public class PanelTabelaCampeonato extends JPanel
             }
         });
 
+        jtf2GrupoA.setEditable(false);
         jtf2GrupoA.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -428,7 +430,11 @@ public class PanelTabelaCampeonato extends JPanel
 
         jLabel23.setText("2°");
 
+        jtf1GrupoB.setEditable(false);
+
         jLabel22.setText("1°");
+
+        jtf2GrupoB.setEditable(false);
 
         javax.swing.GroupLayout panelGrupoBLayout = new javax.swing.GroupLayout(panelGrupoB);
         panelGrupoB.setLayout(panelGrupoBLayout);
@@ -534,6 +540,10 @@ public class PanelTabelaCampeonato extends JPanel
 
         jLabel30.setText("1°");
 
+        jtf1GrupoC.setEditable(false);
+
+        jtf2GrupoC.setEditable(false);
+
         javax.swing.GroupLayout panelGrupoCLayout = new javax.swing.GroupLayout(panelGrupoC);
         panelGrupoC.setLayout(panelGrupoCLayout);
         panelGrupoCLayout.setHorizontalGroup(
@@ -636,7 +646,11 @@ public class PanelTabelaCampeonato extends JPanel
 
         jLabel36.setText("2°");
 
+        jtf1GrupoD.setEditable(false);
+
         jLabel37.setText("1°");
+
+        jtf2GrupoD.setEditable(false);
 
         javax.swing.GroupLayout panelGrupoDLayout = new javax.swing.GroupLayout(panelGrupoD);
         panelGrupoD.setLayout(panelGrupoDLayout);
@@ -742,6 +756,10 @@ public class PanelTabelaCampeonato extends JPanel
 
         jLabel44.setText("1°");
 
+        jtf1GrupoE.setEditable(false);
+
+        jtf2GrupoE.setEditable(false);
+
         javax.swing.GroupLayout panelGrupoELayout = new javax.swing.GroupLayout(panelGrupoE);
         panelGrupoE.setLayout(panelGrupoELayout);
         panelGrupoELayout.setHorizontalGroup(
@@ -844,7 +862,11 @@ public class PanelTabelaCampeonato extends JPanel
 
         jLabel50.setText("2°");
 
+        jtf1GrupoF.setEditable(false);
+
         jLabel51.setText("1°");
+
+        jtf2GrupoF.setEditable(false);
 
         javax.swing.GroupLayout panelGrupoFLayout = new javax.swing.GroupLayout(panelGrupoF);
         panelGrupoF.setLayout(panelGrupoFLayout);
@@ -950,6 +972,10 @@ public class PanelTabelaCampeonato extends JPanel
 
         jLabel58.setText("1°");
 
+        jtf1GrupoG.setEditable(false);
+
+        jtf2GrupoG.setEditable(false);
+
         javax.swing.GroupLayout panelGrupoGLayout = new javax.swing.GroupLayout(panelGrupoG);
         panelGrupoG.setLayout(panelGrupoGLayout);
         panelGrupoGLayout.setHorizontalGroup(
@@ -1052,7 +1078,11 @@ public class PanelTabelaCampeonato extends JPanel
 
         jLabel64.setText("2°");
 
+        jtf1GrupoH.setEditable(false);
+
         jLabel65.setText("1°");
+
+        jtf2GrupoH.setEditable(false);
 
         javax.swing.GroupLayout panelGrupoHLayout = new javax.swing.GroupLayout(panelGrupoH);
         panelGrupoH.setLayout(panelGrupoHLayout);

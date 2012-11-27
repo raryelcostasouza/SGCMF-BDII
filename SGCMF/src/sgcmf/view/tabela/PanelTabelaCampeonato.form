@@ -283,11 +283,17 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf1GrupoA">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtf1GrupoAActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf2GrupoA">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtf2GrupoAActionPerformed"/>
                   </Events>
@@ -477,6 +483,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf1GrupoB">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel22">
                   <Properties>
@@ -484,6 +493,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf2GrupoB">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -675,8 +687,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf1GrupoC">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf2GrupoC">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -863,6 +881,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf1GrupoD">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel37">
                   <Properties>
@@ -870,6 +891,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf2GrupoD">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -1061,8 +1085,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf1GrupoE">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf2GrupoE">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -1249,6 +1279,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf1GrupoF">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel51">
                   <Properties>
@@ -1256,6 +1289,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf2GrupoF">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -1447,8 +1483,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf1GrupoG">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf2GrupoG">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -1635,6 +1677,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf1GrupoH">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel65">
                   <Properties>
@@ -1642,6 +1687,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtf2GrupoH">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
