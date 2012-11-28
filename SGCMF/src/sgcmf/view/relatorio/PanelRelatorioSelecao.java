@@ -18,6 +18,7 @@ import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrMain;
 import sgcmf.control.CtrRelatorio;
 import sgcmf.control.CtrSelecao;
+import sgcmf.model.other.AproveitamentoSelecao;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 import sgcmf.view.tecnico.ISelecionarSelecao;
@@ -193,13 +194,19 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
     private void preencheTextFields(Short idSelecao)
     {
         String nomeSelecao;
-        int jogosDisputados;
+        AproveitamentoSelecao objAproveitamentoSelecao;
+        
         //Recebendo os campos
         nomeSelecao = ctrSelecao.pesquisarNomeSelecao(idSelecao);
-        jogosDisputados = ctrJogo.pesquisarQtdeJogosDisputados(idSelecao);
+        objAproveitamentoSelecao = ctrJogo.calculaNumVitoriasDerrotaEmpate(idSelecao);
+
         //Atulizando os TextFields
         jtfNomeSelecao.setText(nomeSelecao);
-        jtfJogosDisputados.setText(jogosDisputados + "");
+        jtfJogosDisputados.setText(objAproveitamentoSelecao.getJogosDisputados() + "");
+        jtfVitorias.setText(objAproveitamentoSelecao.getVitorias() + "");
+        jtfDerrotas.setText(objAproveitamentoSelecao.getDerrotas() + "");
+        jtfEmpates.setText(objAproveitamentoSelecao.getEmpates() + "");
+        jtfAproveitamento.setText(objAproveitamentoSelecao.getAproveitamento() + "%");
     }
 
     public void limparTela()

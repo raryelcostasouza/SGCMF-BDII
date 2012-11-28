@@ -12,6 +12,7 @@ import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.dao.SelecaoDAO;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.hibernate.Selecao;
+import sgcmf.model.other.AproveitamentoSelecao;
 import sgcmf.model.other.ResultadoGolsSelecao;
 import sgcmf.model.other.ResultadoSelecao;
 import sgcmf.model.other.SGCMFDate;
@@ -258,6 +259,54 @@ public class CtrJogo
 
         return totalPtos;
     }
+    
+    public AproveitamentoSelecao calculaNumVitoriasDerrotaEmpate(Short idSelecao)
+    {
+        ArrayList<Jogo> jogosSelecao;
+        JogoDAO jDAO;
+        int resultado;
+        int derrota;
+        int empate;
+        int vitoria;
+        int jogosDisputados;
+        float aproveitamento;
+        AproveitamentoSelecao objAproveitamento;
+
+        jDAO = JogoDAO.getInstance();
+        SGCMFSessionManager.abrirSessao();
+        jogosSelecao = jDAO.queryJogoByIdSelecao(idSelecao);
+
+        vitoria = 0;
+        derrota = 0;
+        empate = 0;
+        jogosDisputados = 0;
+        for (Jogo j : jogosSelecao)
+        {
+            resultado = resultadoJogo(j, idSelecao);
+            if (resultado != -1)
+            {
+                if (resultado == 3)
+                {
+                    vitoria++;
+                }
+                else if (resultado == 1)
+                {
+                    empate++;
+                }
+                else
+                {
+                    derrota++;
+                }
+                jogosDisputados++;
+            }
+
+        }
+        aproveitamento = (vitoria * 100 + empate * 33) / (float) jogosDisputados;
+
+        objAproveitamento = new AproveitamentoSelecao(jogosDisputados, vitoria, derrota, empate, aproveitamento);
+        SGCMFSessionManager.fecharSessao();
+        return objAproveitamento;
+    }
 
     private int resultadoJogo(Jogo j, Short idSelecao)
     {
@@ -367,17 +416,5 @@ public class CtrJogo
         SGCMFSessionManager.fecharSessao();
 
         return infoJogo;
-    }
-
-    public int pesquisarQtdeJogosDisputados(Short idSelecao)
-    {
-        OcorrenciaDAO oDao;
-        int qtdeJogosDisputados;
-        SGCMFSessionManager.abrirSessao();
-        oDao = OcorrenciaDAO.getInstance();
-        qtdeJogosDisputados = oDao.queryQtdeJogosDisputados(idSelecao);
-        SGCMFSessionManager.fecharSessao();
-
-        return qtdeJogosDisputados;
     }
 }
