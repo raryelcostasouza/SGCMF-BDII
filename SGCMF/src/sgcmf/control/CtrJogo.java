@@ -84,7 +84,23 @@ public class CtrJogo
         return dadosJogos;
     }
 
-    public String[][] queryJogoByGrupo(String grupo)
+    public String[][] queryJogoByGrupoParaConsultarJogo(String grupo)
+    {
+        JogoDAO jDAO;
+        String[][] dadosJogos;
+        ArrayList<Jogo> alJogo;
+
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogoDAO.getInstance();
+        alJogo = jDAO.queryJogoByGrupo(grupo);
+
+        dadosJogos = arrayList2StringMatrix(alJogo);
+        SGCMFSessionManager.fecharSessao();
+
+        return dadosJogos;
+    }
+
+    public String[][] queryJogoByGrupoParaTabelaCampeonato(String grupo)
     {
         JogoDAO jDAO;
         String[][] dadosJogos;
@@ -105,7 +121,7 @@ public class CtrJogo
         String[][] dadosJogos;
         Jogo j;
 
-        dadosJogos = new String[alJogo.size()][6];
+        dadosJogos = new String[alJogo.size()][7];
         for (int i = 0; i < alJogo.size(); i++)
         {
             j = alJogo.get(i);
@@ -113,8 +129,9 @@ public class CtrJogo
             dadosJogos[i][1] = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora());
             dadosJogos[i][2] = j.getCidade();
             dadosJogos[i][3] = j.getNomeestadio();
-            dadosJogos[i][4] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
-            dadosJogos[i][5] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());
+            dadosJogos[i][4] = String.valueOf(j.getSelecaoByIdselecaoi().getGrupo());
+            dadosJogos[i][5] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
+            dadosJogos[i][6] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());
         }
 
         return dadosJogos;
@@ -176,7 +193,7 @@ public class CtrJogo
         {
             resultadoSelecoesGrupo = calculaResultadoSelecoesDoGrupo(grupo);
             Arrays.sort(resultadoSelecoesGrupo);
-            
+
             strSelecoesClassificadas = new String[2];
             strSelecoesClassificadas[0] = resultadoSelecoesGrupo[3].getSelecao().getPais();
             strSelecoesClassificadas[1] = resultadoSelecoesGrupo[2].getSelecao().getPais();
