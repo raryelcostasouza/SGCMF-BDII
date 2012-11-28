@@ -31,6 +31,7 @@ public class CtrOcorrenciaJogo
         oc.setInstantetempo(gc.getTime());
         oc.setJogo(jogo);
         OcorrenciaDAO.getInstance().salvar(oc);
+        ctrMain.getCtrTabelaCampeonato().setPrecisaAtualizarTabela(true);
 
         return oc;
     }
@@ -114,6 +115,7 @@ public class CtrOcorrenciaJogo
         
         if (numOcDepois == 0)
         {
+            ctrMain.getCtrTabelaCampeonato().setPrecisaAtualizarTabela(true);
             return "";
         }
         else

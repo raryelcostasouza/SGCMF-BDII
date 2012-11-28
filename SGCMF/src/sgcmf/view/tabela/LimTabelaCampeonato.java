@@ -54,39 +54,44 @@ public class LimTabelaCampeonato extends JDialog
 
     public void ativaTela()
     {
-        preencheJTable(panelTabela.getJtGrupoA(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("A"));
-        preencheJTable(panelTabela.getJtGrupoB(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("B"));
-        preencheJTable(panelTabela.getJtGrupoC(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("C"));
-        preencheJTable(panelTabela.getJtGrupoD(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("D"));
-        preencheJTable(panelTabela.getJtGrupoE(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("E"));
-        preencheJTable(panelTabela.getJtGrupoF(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("F"));
-        preencheJTable(panelTabela.getJtGrupoG(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("G"));
-        preencheJTable(panelTabela.getJtGrupoH(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("H"));
+        if (ctrTabelaCampeonato.getPrecisaAtualizarTabela())
+        {
+            preencheJTable(panelTabela.getJtGrupoA(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("A"));
+            preencheJTable(panelTabela.getJtGrupoB(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("B"));
+            preencheJTable(panelTabela.getJtGrupoC(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("C"));
+            preencheJTable(panelTabela.getJtGrupoD(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("D"));
+            preencheJTable(panelTabela.getJtGrupoE(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("E"));
+            preencheJTable(panelTabela.getJtGrupoF(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("F"));
+            preencheJTable(panelTabela.getJtGrupoG(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("G"));
+            preencheJTable(panelTabela.getJtGrupoH(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("H"));
 
-        preencheClassificacao(panelTabela.getJtf1GrupoA(),
-                              panelTabela.getJtf2GrupoA(),
-                              ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("A"));
-        preencheClassificacao(panelTabela.getJtf1GrupoB(),
-                              panelTabela.getJtf2GrupoB(),
-                              ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("B"));
-        preencheClassificacao(panelTabela.getJtf1GrupoC(),
-                              panelTabela.getJtf2GrupoC(),
-                              ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("C"));
-        preencheClassificacao(panelTabela.getJtf1GrupoD(),
-                              panelTabela.getJtf2GrupoD(),
-                              ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("D"));
-        preencheClassificacao(panelTabela.getJtf1GrupoE(),
-                              panelTabela.getJtf2GrupoE(),
-                              ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("E"));
-        preencheClassificacao(panelTabela.getJtf1GrupoF(),
-                              panelTabela.getJtf2GrupoF(),
-                              ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("F"));
-        preencheClassificacao(panelTabela.getJtf1GrupoG(),
-                              panelTabela.getJtf2GrupoG(),
-                              ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("G"));
-        preencheClassificacao(panelTabela.getJtf1GrupoH(),
-                              panelTabela.getJtf2GrupoH(),
-                              ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("H"));
+            preencheClassificacao(panelTabela.getJtf1GrupoA(),
+                                  panelTabela.getJtf2GrupoA(),
+                                  ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("A"));
+            preencheClassificacao(panelTabela.getJtf1GrupoB(),
+                                  panelTabela.getJtf2GrupoB(),
+                                  ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("B"));
+            preencheClassificacao(panelTabela.getJtf1GrupoC(),
+                                  panelTabela.getJtf2GrupoC(),
+                                  ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("C"));
+            preencheClassificacao(panelTabela.getJtf1GrupoD(),
+                                  panelTabela.getJtf2GrupoD(),
+                                  ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("D"));
+            preencheClassificacao(panelTabela.getJtf1GrupoE(),
+                                  panelTabela.getJtf2GrupoE(),
+                                  ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("E"));
+            preencheClassificacao(panelTabela.getJtf1GrupoF(),
+                                  panelTabela.getJtf2GrupoF(),
+                                  ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("F"));
+            preencheClassificacao(panelTabela.getJtf1GrupoG(),
+                                  panelTabela.getJtf2GrupoG(),
+                                  ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("G"));
+            preencheClassificacao(panelTabela.getJtf1GrupoH(),
+                                  panelTabela.getJtf2GrupoH(),
+                                  ctrTabelaCampeonato.getCtrJogo().getClassificadosGrupo("H"));
+           ctrTabelaCampeonato.setPrecisaAtualizarTabela(false);
+        }
+
         setVisible(true);
     }
 }
