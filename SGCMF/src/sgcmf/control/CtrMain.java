@@ -89,7 +89,7 @@ public class CtrMain
 
         if (u == null)
         {
-            JOptionPane.showMessageDialog(null, "Login inválido!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Login inválido ou inexistente!", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
         else
         {

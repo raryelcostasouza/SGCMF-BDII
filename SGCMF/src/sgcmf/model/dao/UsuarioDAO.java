@@ -14,12 +14,32 @@ public class UsuarioDAO extends GeneralDAO{
         return (ArrayList<Usuario>) sessao.createQuery("from Usuario u order by u.perfil").list();
     }
 
+    public int numeroAdmins()
+    {
+        String hql;
+
+        hql = "select count(u.perfil) from Usuario u where perfil = 'Administrador' ";
+
+        return Integer.parseInt(sessao.createQuery(hql).uniqueResult()+"");
+    }
+
+
     public ArrayList<Usuario> queryUsuarioByLogin(String login, String senha)
     {
         String hql;
 
         hql = "from Usuario u "
                 + "where login = '" + login + "' and senha = '" + senha + "' ";
+
+        return (ArrayList<Usuario>) sessao.createQuery(hql).list();
+    }
+
+    public ArrayList<Usuario> queryUsuarioOnlyByLogin(String login)
+    {
+        String hql;
+
+        hql = "from Usuario u "
+                + "where login = '" + login + "'";
 
         return (ArrayList<Usuario>) sessao.createQuery(hql).list();
     }

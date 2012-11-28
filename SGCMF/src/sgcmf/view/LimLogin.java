@@ -56,6 +56,8 @@ public class LimLogin extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 ctrMain.login(jtfLogin.getText(), jpSenha.getPassword());
+                jtfLogin.setText("");
+                jpSenha.setText("");
             }
         });
 

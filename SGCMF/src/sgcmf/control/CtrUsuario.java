@@ -23,15 +23,17 @@ public class CtrUsuario
     {
 
         ArrayList<Usuario> usuarios = usuarioDAO.queryUsuarioByLogin(login, senha);
-        if (usuarios.size() < 0)
+        
+        if (usuarios.size() <= 0)
         {
             return null;
         }
         Usuario u = usuarioDAO.queryUsuarioByLogin(login, senha).get(0);
+
         return u;
     }
 
-    public String[][] queryJogadorTodos()
+    public String[][] queryUsuarioTodos()
     {
 
         ArrayList alUsuario;
@@ -43,7 +45,7 @@ public class CtrUsuario
         return dadosUsuarios;
     }
 
-    public String[][] queryJogadorByNome(String nome)
+    public String[][] queryUsuarioByNome(String nome)
     {
 
         ArrayList<Usuario> alUsuario;
@@ -59,7 +61,7 @@ public class CtrUsuario
     {
         Usuario u;
 
-        dadosUsuarios = new String[alUsuario.size()][5];
+        dadosUsuarios = new String[alUsuario.size()][7];
         for (int i = 0; i < alUsuario.size(); i++)
         {
             u = alUsuario.get(i);
@@ -68,8 +70,8 @@ public class CtrUsuario
             dadosUsuarios[i][2] = u.getEmail();
             dadosUsuarios[i][3] = u.getNome();
             dadosUsuarios[i][4] = u.getLogin();
-            dadosUsuarios[i][4] = u.getSenha();
-            dadosUsuarios[i][4] = u.getPerfil();
+            dadosUsuarios[i][5] = u.getSenha();
+            dadosUsuarios[i][6] = u.getPerfil();
         }
 
         return dadosUsuarios;
@@ -81,36 +83,35 @@ public class CtrUsuario
         Transaction tr;
         Usuario u = new Usuario();
         ResultadoOperacao result;
-        String errorMessege;
         GeneralDAO gdao;
+        
+        if(usuarioDAO.queryUsuarioOnlyByLogin(login).size() > 0)
+        {
+            return (new ResultadoOperacao("Login já cadastrado.\n", TipoResultadoOperacao.ERRO));
+        }
 
         gdao = new GeneralDAO();
-        errorMessege = validaCampos('c', cpf, nome, email, login);
-        if (errorMessege.equals(""))
+
+        tr = gdao.getSessao().beginTransaction();
+        try
         {
-            tr = gdao.getSessao().beginTransaction();
-            try
-            {
-                u.setCpf(cpf);
-                u.setNome(nome);
-                u.setEmail(email);
-                u.setLogin(login);
-                u.setPerfil(perfil);
-                u.setSenha(senha);
-                gdao.salvar(u);
-                tr.commit();
-                result = new ResultadoOperacao("Usuario Cadastrado com êxito.", TipoResultadoOperacao.EXITO);
-            }
-            catch (HibernateException he)
-            {
-                result = new ResultadoOperacao("Erro no Hibernate.\n" + he.getMessage(), TipoResultadoOperacao.ERRO);
-            }
-            gdao.fecharSessao();
+            u.setCpf(cpf);
+            u.setNome(nome);
+            u.setEmail(email);
+            u.setLogin(login);
+            u.setPerfil(perfil);
+            u.setSenha(senha);
+            gdao.salvar(u);
+            tr.commit();
+            
+            result = new ResultadoOperacao("Usuario Cadastrado com êxito.", TipoResultadoOperacao.EXITO);
         }
-        else
+        catch (HibernateException he)
         {
-            result = new ResultadoOperacao("Falha no cadastro de jogador.\n" + errorMessege, TipoResultadoOperacao.ERRO);
+            result = new ResultadoOperacao("Erro no cadastro do usuário.\n" + he.getMessage(), TipoResultadoOperacao.ERRO);
         }
+        gdao.fecharSessao();
+
         return result;
     }
 
@@ -122,38 +123,38 @@ public class CtrUsuario
         Transaction tr;
         GeneralDAO gdao;
         ResultadoOperacao result;
-        String errorMessege;
-
 
         shortIdUsuario = new Short(strIdUsuario);
-        errorMessege = validaCampos('c', cpf, nome, email, login);
-        if (errorMessege.equals(""))
+
+        gdao = new GeneralDAO();
+        tr = gdao.getSessao().beginTransaction();
+        gdao.carregar(u, shortIdUsuario);
+
+        if(u.getPerfil().equals("Administrador") && usuarioDAO.numeroAdmins() <= 1 && !perfil.equals("Administrador"))
         {
-            gdao = new GeneralDAO();
-            tr = gdao.getSessao().beginTransaction();
-            gdao.carregar(u, shortIdUsuario);
-            try
-            {
-                u.setCpf(cpf);
-                u.setNome(nome);
-                u.setEmail(email);
-                u.setLogin(login);
-                u.setPerfil(perfil);
-                u.setSenha(senha);
-                gdao.atualizar(u);
-                tr.commit();
-                result = new ResultadoOperacao("Usuario Alterado com êxito.", TipoResultadoOperacao.EXITO);
-            }
-            catch (HibernateException he)
-            {
-                result = new ResultadoOperacao("Erro no Hibernate.\n" + he.getMessage(), TipoResultadoOperacao.ERRO);
-            }
-            gdao.fecharSessao();
+            result = new ResultadoOperacao("Um único administrador não pode ter seu perfil alterado.\n",
+                    TipoResultadoOperacao.ERRO);
+            return result;
         }
-        else
+
+        try
         {
-            result = new ResultadoOperacao("Falha na alteracao do usuario.\n" + errorMessege, TipoResultadoOperacao.ERRO);
+            u.setCpf(cpf);
+            u.setNome(nome);
+            u.setEmail(email);
+            u.setLogin(login);
+            u.setPerfil(perfil);
+            u.setSenha(senha);
+            gdao.atualizar(u);
+            tr.commit();
+            result = new ResultadoOperacao("Usuario Alterado com êxito.", TipoResultadoOperacao.EXITO);
         }
+        catch (HibernateException he)
+        {
+            result = new ResultadoOperacao("Falha na alteracao do usuario.\n" + he.getMessage(), TipoResultadoOperacao.ERRO);
+        }
+        gdao.fecharSessao();
+
         return result;
     }
 
@@ -163,11 +164,20 @@ public class CtrUsuario
         Transaction tr;
         GeneralDAO gDAO;
         ResultadoOperacao resultado;
+
         try
         {
             gDAO = new GeneralDAO();
             tr = gDAO.getSessao().beginTransaction();
             gDAO.carregar(u, new Short(idUsuario));
+
+            if(u.getPerfil().equals("Administrador") && usuarioDAO.numeroAdmins() <= 1)
+            {
+                resultado = new ResultadoOperacao("Um único administrador não pode ser excluido.\n",
+                        TipoResultadoOperacao.ERRO);
+                return resultado;
+            }
+
             gDAO.apagar(u);
             tr.commit();
             resultado = new ResultadoOperacao("Usuario excluido com sucesso.", TipoResultadoOperacao.EXITO);
@@ -178,27 +188,5 @@ public class CtrUsuario
                     TipoResultadoOperacao.ERRO);
         }
         return resultado;
-    }
-
-    private String validaCampos(char metodo, String numCamisa, String dataNascimento,
-            String altura, String selecao)
-    {
-        String errorMessege = "";
-        Short camisa;
-        try
-        {
-            camisa = Short.parseShort(numCamisa);
-            if (camisa < 1 || camisa > 23)
-            {
-                errorMessege = "O valor da camisa deve estar entre 1 e 23.";
-                return errorMessege;
-            }
-        }
-        catch (Exception e)
-        {
-            errorMessege = "Digite um número valido para camisa.";
-        }
-
-        return errorMessege;
     }
 }
