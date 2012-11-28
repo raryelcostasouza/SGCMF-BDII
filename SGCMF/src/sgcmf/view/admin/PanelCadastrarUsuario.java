@@ -2,6 +2,7 @@ package sgcmf.view.admin;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,10 +32,17 @@ public class PanelCadastrarUsuario extends JPanel {
     private CtrUsuario ctrUsuario = new CtrUsuario();
     JTextField jtfLogin = new JTextField(10);
     JTextField jtfSenha = new JTextField(10);
-    JTextField jtfPerfil = new JTextField(10);
     JTextField jtfNome = new JTextField(10);
     JTextField jtfEmail = new JTextField(10);
     JTextField jtfCPF = new JTextField(10);
+    private JComboBox jcbPerfil;
+    private String[] items =
+    {
+        "Administrador", "Tecnico da selecao", "Membro Comite",
+        "Entusiasta"
+    };
+
+    
    
      public PanelCadastrarUsuario(CtrAdmin ctrAdmin)
     {
@@ -59,6 +68,10 @@ public class PanelCadastrarUsuario extends JPanel {
         JLabel jlCPF = new JLabel("CPF:");
         UtilView.alinhaLabel(jlCPF);
 
+        jcbPerfil = new JComboBox(items);
+        jcbPerfil.setEditable(false);
+        jcbPerfil.setPreferredSize(new Dimension(132, 20));
+
         JButton jbCadastrar = new JButton("Cadastrar");
 
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
@@ -66,7 +79,8 @@ public class PanelCadastrarUsuario extends JPanel {
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfSenha, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlPerfil));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfPerfil, FlowLayout.LEFT));
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jcbPerfil, FlowLayout.LEFT));
+        jpAux.setBorder(BorderFactory.createEtchedBorder());
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNome));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNome, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlEmail));
@@ -85,8 +99,10 @@ public class PanelCadastrarUsuario extends JPanel {
             {
                 ResultadoOperacao resultado;
 
+                String perfil = (String) jcbPerfil.getSelectedItem();
+
                 resultado = ctrUsuario.cadastrarUsuario(jtfCPF.getText(),jtfNome.getText(),
-                        jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(),jtfPerfil.getText());
+                        jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
 
                 if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
                 {
@@ -110,7 +126,6 @@ public class PanelCadastrarUsuario extends JPanel {
         jtfEmail.setText("");
         jtfLogin.setText("");
         jtfSenha.setText("");
-        jtfPerfil.setText("");
     }
 
 }

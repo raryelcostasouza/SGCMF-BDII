@@ -1,11 +1,13 @@
 package sgcmf.view.admin;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -107,13 +109,23 @@ public class PanelRemoverUsuario extends JPanel {
         JLabel jlCPF = new JLabel("CPF:");
         UtilView.alinhaLabel(jlCPF);
 
+        JComboBox jcbPerfil;
+        String[] items =
+        {
+            "Administrador", "Tecnico da selecao", "Membro Comite",
+            "Entusiasta"
+        };
+
         JTextField jtfLogin = new JTextField(10);
         JTextField jtfSenha = new JTextField(10);
-        JTextField jtfPerfil = new JTextField(10);
         JTextField jtfNome = new JTextField(10);
         JTextField jtfEmail = new JTextField(10);
         JTextField jtfCPF = new JTextField(10);
 
+
+        jcbPerfil = new JComboBox(items);
+        jcbPerfil.setEditable(false);
+        jcbPerfil.setPreferredSize(new Dimension(132, 20));
 
         //travarBotao();
         JButton jbRemover = new JButton("Remover");
@@ -122,7 +134,8 @@ public class PanelRemoverUsuario extends JPanel {
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfSenha, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlPerfil));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfPerfil, FlowLayout.LEFT));
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jcbPerfil, FlowLayout.LEFT));
+        jpAux.setBorder(BorderFactory.createEtchedBorder());
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNome));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNome, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlEmail));
