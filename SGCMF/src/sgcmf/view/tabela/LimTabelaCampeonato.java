@@ -56,14 +56,14 @@ public class LimTabelaCampeonato extends JDialog
     {
         if (ctrTabelaCampeonato.getPrecisaAtualizarTabela())
         {
-            preencheJTable(panelTabela.getJtGrupoA(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("A"));
-            preencheJTable(panelTabela.getJtGrupoB(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("B"));
-            preencheJTable(panelTabela.getJtGrupoC(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("C"));
-            preencheJTable(panelTabela.getJtGrupoD(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("D"));
-            preencheJTable(panelTabela.getJtGrupoE(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("E"));
-            preencheJTable(panelTabela.getJtGrupoF(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("F"));
-            preencheJTable(panelTabela.getJtGrupoG(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("G"));
-            preencheJTable(panelTabela.getJtGrupoH(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupo("H"));
+            preencheJTable(panelTabela.getJtGrupoA(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupoParaTabelaCampeonato("A"));
+            preencheJTable(panelTabela.getJtGrupoB(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupoParaTabelaCampeonato("B"));
+            preencheJTable(panelTabela.getJtGrupoC(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupoParaTabelaCampeonato("C"));
+            preencheJTable(panelTabela.getJtGrupoD(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupoParaTabelaCampeonato("D"));
+            preencheJTable(panelTabela.getJtGrupoE(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupoParaTabelaCampeonato("E"));
+            preencheJTable(panelTabela.getJtGrupoF(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupoParaTabelaCampeonato("F"));
+            preencheJTable(panelTabela.getJtGrupoG(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupoParaTabelaCampeonato("G"));
+            preencheJTable(panelTabela.getJtGrupoH(), ctrTabelaCampeonato.getCtrJogo().queryJogoByGrupoParaTabelaCampeonato("H"));
 
             preencheClassificacao(panelTabela.getJtf1GrupoA(),
                                   panelTabela.getJtf2GrupoA(),
