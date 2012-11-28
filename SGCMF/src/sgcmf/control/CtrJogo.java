@@ -3,6 +3,8 @@ package sgcmf.control;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.GolDAO;
 import sgcmf.model.dao.JogoDAO;
@@ -16,11 +18,11 @@ import sgcmf.model.other.SGCMFDate;
 
 public class CtrJogo
 {
-    public String[][] queryJogoTodos()
+    public Object[][] queryJogoTodos()
     {
         JogoDAO jDAO;
         ArrayList<Jogo> alJogos;
-        String[][] dadosJogos;
+        Object[][] dadosJogos;
 
         SGCMFSessionManager.abrirSessao();
         jDAO = JogoDAO.getInstance();
@@ -33,10 +35,10 @@ public class CtrJogo
         return dadosJogos;
     }
 
-    public String[][] queryJogoBySelecao(String nomeSelecao)
+    public Object[][] queryJogoBySelecao(String nomeSelecao)
     {
         JogoDAO jDAO;
-        String[][] dadosJogos;
+        Object[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
         SGCMFSessionManager.abrirSessao();
@@ -50,10 +52,10 @@ public class CtrJogo
         return dadosJogos;
     }
 
-    public String[][] queryJogoByCidade(String cidade)
+    public Object[][] queryJogoByCidade(String cidade)
     {
         JogoDAO jDAO;
-        String[][] dadosJogos;
+        Object[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
         SGCMFSessionManager.abrirSessao();
@@ -67,10 +69,10 @@ public class CtrJogo
         return dadosJogos;
     }
 
-    public String[][] queryJogoByEstadio(String estadio)
+    public Object[][] queryJogoByEstadio(String estadio)
     {
         JogoDAO jDAO;
-        String[][] dadosJogos;
+        Object[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
         SGCMFSessionManager.abrirSessao();
@@ -84,10 +86,10 @@ public class CtrJogo
         return dadosJogos;
     }
 
-    public String[][] queryJogoByGrupoParaConsultarJogo(String grupo)
+    public Object[][] queryJogoByGrupoParaConsultarJogo(String grupo)
     {
         JogoDAO jDAO;
-        String[][] dadosJogos;
+        Object[][] dadosJogos;
         ArrayList<Jogo> alJogo;
 
         SGCMFSessionManager.abrirSessao();
@@ -116,12 +118,13 @@ public class CtrJogo
         return dadosJogos;
     }
 
-    private String[][] arrayList2StringMatrix(ArrayList<Jogo> alJogo)
+    private Object[][] arrayList2StringMatrix(ArrayList<Jogo> alJogo)
     {
-        String[][] dadosJogos;
+        Object[][] dadosJogos;
         Jogo j;
+        Selecao s1, s2;
 
-        dadosJogos = new String[alJogo.size()][7];
+        dadosJogos = new Object[alJogo.size()][7];
         for (int i = 0; i < alJogo.size(); i++)
         {
             j = alJogo.get(i);
@@ -130,8 +133,10 @@ public class CtrJogo
             dadosJogos[i][2] = j.getCidade();
             dadosJogos[i][3] = j.getNomeestadio();
             dadosJogos[i][4] = String.valueOf(j.getSelecaoByIdselecaoi().getGrupo());
-            dadosJogos[i][5] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
-            dadosJogos[i][6] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());
+            s1 = j.getSelecaoByIdselecaoi();
+            s2 = j.getSelecaoByIdselecaoii();
+            dadosJogos[i][5] = new JLabel(s1.getPais(), new ImageIcon(s1.getCaminhoimgbandeira()), JLabel.LEFT);
+            dadosJogos[i][6] = new JLabel(s2.getPais(), new ImageIcon(s2.getCaminhoimgbandeira()), JLabel.LEFT);
         }
 
         return dadosJogos;

@@ -10,13 +10,16 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.control.CtrJogo;
 import sgcmf.model.other.SGCMFIcons;
+import sgcmf.view.table.DefaultTableModelJogo;
 import sgcmf.view.table.JTableSGCMF;
+import sgcmf.view.table.JLabelTableCellRenderer;
 
 public class LimConsultarJogo extends JDialog
 {
@@ -203,6 +206,9 @@ public class LimConsultarJogo extends JDialog
         };
 
         jt = new JTableSGCMF(null, nomesColunas);
+        jt.setModel(new DefaultTableModelJogo(null, nomesColunas));
+        jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
+        jt.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         return jsp;
@@ -222,7 +228,7 @@ public class LimConsultarJogo extends JDialog
 
     private void recarregaTodosJogos()
     {
-        String[][] dadosJogos;
+        Object[][] dadosJogos;
 
         dadosJogos = ctrJogo.queryJogoTodos();
         jt.preencheTabela(dadosJogos);
@@ -230,7 +236,7 @@ public class LimConsultarJogo extends JDialog
 
     private void pesquisa(String chave)
     {
-        String[][] dadosJogo;
+        Object[][] dadosJogo;
 
         if (jrbSelecao.isSelected())
         {
