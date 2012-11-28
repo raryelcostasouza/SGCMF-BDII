@@ -36,6 +36,12 @@ public class CtrOcorrenciaJogo
         return oc;
     }
     
+    public void removerOcorrencia(Ocorrencia oc)
+    {
+        OcorrenciaDAO.getInstance().apagar(oc);
+        ctrMain.getCtrTabelaCampeonato().setPrecisaAtualizarTabela(true);
+    }
+    
     public String validaCampos(String min, String seg, Short idJogo)
     {
         int intMin;
@@ -115,7 +121,6 @@ public class CtrOcorrenciaJogo
         
         if (numOcDepois == 0)
         {
-            ctrMain.getCtrTabelaCampeonato().setPrecisaAtualizarTabela(true);
             return "";
         }
         else

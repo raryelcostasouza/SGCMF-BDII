@@ -85,16 +85,16 @@ public class CtrFalta
         //se nao tiver erros nos campos, entao faz o cadastro
         if (errorMessage.equals(""))
         {
-            
+
             SGCMFSessionManager.abrirSessao();
             tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             try
             {
-                objOcorrencia = ctrMain.getCtrOcorrenciaJogo().registraOcorrencia( min, seg, idJogo);
+                objOcorrencia = ctrMain.getCtrOcorrenciaJogo().registraOcorrencia(min, seg, idJogo);
 
                 //carrega o jogador autor
                 shortIdJogador = Short.parseShort(idJogador);
-                
+
                 objJogador = new Jogador();
                 objJogador = JogadorDAO.getInstance().carregar(objJogador, shortIdJogador);
 
@@ -187,7 +187,7 @@ public class CtrFalta
                     CartaoDAO.getInstance().apagar(cartaoParaRemover);
                 }
                 FaltaDAO.getInstance().apagar(faltaParaRemover);
-                OcorrenciaDAO.getInstance().apagar(ocParaRemover);
+                ctrMain.getCtrOcorrenciaJogo().removerOcorrencia(ocParaRemover);
 
                 tr.commit();
                 result = new ResultadoOperacao("Falta e cartão associado removidos com êxito!", TipoResultadoOperacao.EXITO);
@@ -207,7 +207,7 @@ public class CtrFalta
 
         return result;
     }
-    
+
     public CtrCartao getCtrCartao()
     {
         return ctrMain.getCtrCartao();

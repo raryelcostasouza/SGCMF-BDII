@@ -223,7 +223,7 @@ public class CtrCartao
                     }
                 }
                 //remove a ocorrência
-                OcorrenciaDAO.getInstance().apagar(ocParaRemover);
+                ctrMain.getCtrOcorrenciaJogo().removerOcorrencia(ocParaRemover);
 
                 tr.commit();
                 result = new ResultadoOperacao("Cartão e faltas associadas removidos com êxito!", TipoResultadoOperacao.EXITO);

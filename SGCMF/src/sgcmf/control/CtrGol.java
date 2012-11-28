@@ -22,7 +22,7 @@ public class CtrGol
     {
         this.ctrMain = ctrMain;
     }
-    
+
     public String[][] queryGolByIdJogo(Short idJogo)
     {
         ArrayList<Gol> alGol;
@@ -145,7 +145,7 @@ public class CtrGol
                 golParaRemover = GolDAO.getInstance().carregar(golParaRemover, idOc);
 
                 GolDAO.getInstance().apagar(golParaRemover);
-                OcorrenciaDAO.getInstance().apagar(ocParaRemover);
+                ctrMain.getCtrOcorrenciaJogo().removerOcorrencia(ocParaRemover);
 
                 tr.commit();
                 result = new ResultadoOperacao("Gol removido com êxito!", TipoResultadoOperacao.EXITO);
@@ -163,7 +163,7 @@ public class CtrGol
         SGCMFSessionManager.fecharSessao();;
 
         return result;
-    }    
+    }
 
     public String[][] arrayList2StringMatrix(ArrayList<Gol> alGol)
     {

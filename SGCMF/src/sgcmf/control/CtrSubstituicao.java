@@ -152,19 +152,19 @@ public class CtrSubstituicao
         {
             SGCMFSessionManager.abrirSessao();
             jSaiu = new Jogador();
-            JogadorDAO.getInstance().carregar(jSaiu, Short.parseShort(idJogadorSaiu));            
+            JogadorDAO.getInstance().carregar(jSaiu, Short.parseShort(idJogadorSaiu));
             sDAO = SubstituicaoDAO.getInstance();
-            
+
             nSubJogo = sDAO.queryNumSubstituicoesSelecaoJogo(idJogo, jSaiu.getSelecao().getId());
             SGCMFSessionManager.fecharSessao();
 
             System.out.println(nSubJogo);
-            if (nSubJogo ==3)
+            if (nSubJogo == 3)
             {
                 errorMessage = "Já há três substituições cadastradas\npara essa seleção nesse jogo.";
             }
         }
-        
+
         return errorMessage;
     }
 
@@ -189,7 +189,7 @@ public class CtrSubstituicao
             {
                 SubstituicaoDAO.getInstance().carregar(substParaRemover, idOc);
                 SubstituicaoDAO.getInstance().apagar(substParaRemover);
-                OcorrenciaDAO.getInstance().apagar(ocParaRemover);
+                ctrMain.getCtrOcorrenciaJogo().removerOcorrencia(ocParaRemover);
 
                 tr.commit();
                 result = new ResultadoOperacao("Substituição removida com êxito!", TipoResultadoOperacao.EXITO);
