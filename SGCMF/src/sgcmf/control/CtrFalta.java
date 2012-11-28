@@ -190,7 +190,7 @@ public class CtrFalta
                 ctrMain.getCtrOcorrenciaJogo().removerOcorrencia(ocParaRemover);
 
                 tr.commit();
-                result = new ResultadoOperacao("Falta e cartão associado removidos com êxito!", TipoResultadoOperacao.EXITO);
+                result = new ResultadoOperacao("Falta e cartões associados removidos com êxito!", TipoResultadoOperacao.EXITO);
             }
             else
             {
