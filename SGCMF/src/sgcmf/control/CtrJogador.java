@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
@@ -16,10 +18,10 @@ import sgcmf.model.other.TipoResultadoOperacao;
 
 public class CtrJogador
 {
-    public String[][] queryJogadoresEmCampo(Short idJogo)
+    public Object[][] queryJogadoresEmCampo(Short idJogo)
     {
         JogadorDAO jDAO;
-        String[][] dadosJogadores;
+        Object[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
@@ -31,10 +33,10 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public String[][] queryJogadoresEmCampoByNome(Short idJogo, String nome)
+    public Object[][] queryJogadoresEmCampoByNome(Short idJogo, String nome)
     {
         JogadorDAO jDAO;
-        String[][] dadosJogadores;
+        Object[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
@@ -46,10 +48,10 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public String[][] queryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
+    public Object[][] queryOutrosJogadoresEmCampoSelecao(Short idJogo, Short idSelecao, Short idJogador)
     {
         JogadorDAO jDAO;
-        String[][] dadosJogadores;
+        Object[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
@@ -63,10 +65,10 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public String[][] queryOutrosJogadoresEmCampoSelecaoByNome(Short idJogo, Short idSelecao, Short idJogador, String nome)
+    public Object[][] queryOutrosJogadoresEmCampoSelecaoByNome(Short idJogo, Short idSelecao, Short idJogador, String nome)
     {
         JogadorDAO jDAO;
-        String[][] dadosJogadores;
+        Object[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
@@ -79,10 +81,10 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public String[][] queryReservasSelecao(Short idJogo, Short idSelecao)
+    public Object[][] queryReservasSelecao(Short idJogo, Short idSelecao)
     {
         JogadorDAO jDAO;
-        String[][] dadosJogadores;
+        Object[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
@@ -94,10 +96,10 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public String[][] queryReservasSelecaoByNome(Short idJogo, Short idSelecao, String nome)
+    public Object[][] queryReservasSelecaoByNome(Short idJogo, Short idSelecao, String nome)
     {
         JogadorDAO jDAO;
-        String[][] dadosJogadores;
+        Object[][] dadosJogadores;
         ArrayList alJogador;
 
         SGCMFSessionManager.abrirSessao();
@@ -179,17 +181,19 @@ public class CtrJogador
         return dadosJogador;
     }
 
-    private String[][] arrayList2StringMatrix(ArrayList<Jogador> alJogador)
+    private Object[][] arrayList2StringMatrix(ArrayList<Jogador> alJogador)
     {
-        String[][] dadosJogadores;
+        Object[][] dadosJogadores;
         Jogador j;
+        Selecao s;
 
-        dadosJogadores = new String[alJogador.size()][5];
+        dadosJogadores = new Object[alJogador.size()][5];
         for (int i = 0; i < alJogador.size(); i++)
         {
             j = alJogador.get(i);
             dadosJogadores[i][0] = String.valueOf(j.getId());
-            dadosJogadores[i][1] = j.getSelecao().getPais();
+            s = j.getSelecao();
+            dadosJogadores[i][1] = new JLabel(s.getPais(), new ImageIcon(s.getCaminhoimgbandeira()), JLabel.LEFT);
             dadosJogadores[i][2] = String.valueOf(j.getNcamisa());
             dadosJogadores[i][3] = j.getNome();
             dadosJogadores[i][4] = j.getPosicao();

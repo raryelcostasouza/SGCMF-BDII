@@ -14,7 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.control.CtrJogador;
+import sgcmf.view.table.JLabelTableCellRenderer;
 import sgcmf.view.table.JTableSGCMF;
+import sgcmf.view.table.selecao.DefaultTableModelSelecao;
 import sgcmf.view.tecnico.ISelecionarJogador;
 
 public class LimBuscarJogador extends JDialog
@@ -84,6 +86,9 @@ public class LimBuscarJogador extends JDialog
         };
 
         jt = new JTableSGCMF(null, nomesColunas);
+        jt.setModel(new DefaultTableModelSelecao(null, nomesColunas));
+        jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
+        jt.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         return jsp;
@@ -110,7 +115,7 @@ public class LimBuscarJogador extends JDialog
 
     public void ativaTelaSelecionaJogador(ISelecionarJogador isj, Short idJogo)
     {
-        String[][] dadosJogador;
+        Object[][] dadosJogador;
         tipoTela = SELECIONA_JOGADOR;
         
         this.isj = isj;
@@ -124,7 +129,7 @@ public class LimBuscarJogador extends JDialog
 
     public void ativaTelaSelecionaOutroJogadorSelecao(ISelecionarJogador isj, Short idJogo, Short idSelecao, Short idJogador)
     { 
-        String[][] dadosJogador;
+        Object[][] dadosJogador;
         tipoTela = SELECIONA_JOGADOR_MESMA_SELECAO;
         
         this.isj = isj;
@@ -140,7 +145,7 @@ public class LimBuscarJogador extends JDialog
     
     public void ativaTelaSelecionaJogadorReservaSelecao(ISelecionarJogador isj, Short idJogo, Short idSelecao)
     {
-        String[][] dadosJogador;
+        Object[][] dadosJogador;
         tipoTela = SELECIONA_RESERVA_SELECAO;
         
         this.isj = isj;
@@ -155,7 +160,7 @@ public class LimBuscarJogador extends JDialog
 
     private void pesquisa(String chave)
     {
-        String[][] dadosJogador;
+        Object[][] dadosJogador;
 
         if (tipoTela == SELECIONA_JOGADOR)
         {
