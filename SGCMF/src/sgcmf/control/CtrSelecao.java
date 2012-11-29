@@ -59,6 +59,23 @@ public class CtrSelecao
 
         return dadosSelecoes;
     }
+    
+    public Object[][] querySelecaoByGrupo(String grupo)
+    {
+        SelecaoDAO sDAO;
+        Object[][] dadosSelecoes;
+        ArrayList<Selecao> alSelecao;
+
+        SGCMFSessionManager.abrirSessao();
+        sDAO = SelecaoDAO.getInstance();
+        
+        alSelecao = sDAO.querySelecaoByGrupo(grupo);
+        dadosSelecoes = arrayList2StringMatrix(alSelecao);
+        
+        SGCMFSessionManager.fecharSessao();
+
+        return dadosSelecoes;
+    }
 
     private Object[][] arrayList2StringMatrix(ArrayList<Selecao> alSelecao)
     {

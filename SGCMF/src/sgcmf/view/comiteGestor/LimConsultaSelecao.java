@@ -1,12 +1,14 @@
 package sgcmf.view.comiteGestor;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,9 +26,14 @@ public class LimConsultaSelecao extends JDialog
     private CtrSelecao ctrSelecao;
     private JRadioButton jrbPais;
     private JRadioButton jrbNomeTecnico;
+    private JRadioButton jrbGrupo;
+    private JComboBox jcb;
     protected JTableSGCMF jt;
     private JTextField jtfSearchBox;
     protected JPanel mainPanel;
+    private JPanel northEastPanel;
+    private final String nameCardPanelSearchBox = "SEARCH_BOX";
+    private final String nameCardPanelComboBox = "COMBO_BOX";
 
     public LimConsultaSelecao(CtrSelecao ctrSelecao)
     {
@@ -37,7 +44,7 @@ public class LimConsultaSelecao extends JDialog
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         add(montaMainPanel());
-        setSize(600,600);
+        setSize(600, 600);
         setModal(true);
 
         setLocationRelativeTo(null);
@@ -70,7 +77,6 @@ public class LimConsultaSelecao extends JDialog
         northPanel.add(montaNorthWestPanel(), BorderLayout.WEST);
 
         return northPanel;
-
     }
 
     private JPanel montaNorthWestPanel()
@@ -80,12 +86,43 @@ public class LimConsultaSelecao extends JDialog
         jrbPais = new JRadioButton("País");
         jrbPais.setSelected(true);
         jrbNomeTecnico = new JRadioButton("Nome Técnico");
+        jrbGrupo = new JRadioButton("Grupo");
+
+        jrbGrupo.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                CardLayout cl = (CardLayout) northEastPanel.getLayout();
+                cl.show(northEastPanel, nameCardPanelComboBox);
+
+                pesquisa(String.valueOf(jcb.getSelectedItem()));
+            }
+        });
+        jrbPais.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                trocarNorthEastPanelParaSearchBox();
+            }
+        });
+        jrbNomeTecnico.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                trocarNorthEastPanelParaSearchBox();
+            }
+        });
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(jrbPais);
         bg.add(jrbNomeTecnico);
+        bg.add(jrbGrupo);
 
         northWestPanel.setBorder(BorderFactory.createTitledBorder("Pesquisar por:"));
+        northWestPanel.add(jrbGrupo);
         northWestPanel.add(jrbPais);
         northWestPanel.add(jrbNomeTecnico);
 
@@ -94,8 +131,16 @@ public class LimConsultaSelecao extends JDialog
 
     private JPanel montaNorthEastPanel()
     {
-        JPanel northEastPanel = new JPanel();
-        northEastPanel.setBorder(BorderFactory.createTitledBorder("Busca:"));
+        northEastPanel = new JPanel(new CardLayout());
+        northEastPanel.add(nameCardPanelSearchBox, montaNorthEastPanelSearchBox());
+        northEastPanel.add(nameCardPanelComboBox, montaNorthEastPanelComboBox());
+        return northEastPanel;
+    }
+
+    private JPanel montaNorthEastPanelSearchBox()
+    {
+        JPanel northEastPanelSearchBox = new JPanel();
+        northEastPanelSearchBox.setBorder(BorderFactory.createTitledBorder("Busca:"));
 
         jtfSearchBox = new JTextField(15);
         jtfSearchBox.addActionListener(new ActionListener()
@@ -107,9 +152,41 @@ public class LimConsultaSelecao extends JDialog
             }
         });
 
-        northEastPanel.add(jtfSearchBox);
+        northEastPanelSearchBox.add(jtfSearchBox);
 
-        return northEastPanel;
+        return northEastPanelSearchBox;
+    }
+
+    private JPanel montaNorthEastPanelComboBox()
+    {
+        String[] opcoesJCB =
+        {
+            "A", "B", "C", "D", "E", "F", "G", "H"
+        };
+        JPanel northEastPanelComboBox = new JPanel();
+        northEastPanelComboBox.setBorder(BorderFactory.createTitledBorder("Grupo:"));
+
+        jcb = new JComboBox(opcoesJCB);
+        jcb.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                pesquisa(String.valueOf(jcb.getSelectedItem()));
+            }
+        });
+
+        northEastPanelComboBox.add(jcb);
+        return northEastPanelComboBox;
+    }
+
+    private void trocarNorthEastPanelParaSearchBox()
+    {
+        CardLayout cl = (CardLayout) northEastPanel.getLayout();
+        cl.show(northEastPanel, nameCardPanelSearchBox);
+
+        recarregaTodasSelecoes();
+        jtfSearchBox.setText("");
     }
 
     private JScrollPane montaCenterPanel()
@@ -130,17 +207,22 @@ public class LimConsultaSelecao extends JDialog
 
     public void ativaTela()
     {
+        recarregaTodasSelecoes();
+        setVisible(true);
+    }
+
+    private void recarregaTodasSelecoes()
+    {
         Object[][] dadosSelecoes;
 
         dadosSelecoes = ctrSelecao.querySelecaoTodos();
         jt.preencheTabela(dadosSelecoes);
-
-        setVisible(true);
     }
 
     private void resetCamposInterface()
     {
         jrbPais.setSelected(true);
+        trocarNorthEastPanelParaSearchBox();
         jtfSearchBox.setText("");
     }
 
@@ -152,9 +234,13 @@ public class LimConsultaSelecao extends JDialog
         {
             dadosSelecoes = ctrSelecao.querySelecaoByNomePais(chavePesquisa);
         }
-        else
+        else if (jrbNomeTecnico.isSelected())
         {
             dadosSelecoes = ctrSelecao.querySelecaoByNomeTecnico(chavePesquisa);
+        }
+        else
+        {
+            dadosSelecoes = ctrSelecao.querySelecaoByGrupo(chavePesquisa);
         }
         jt.preencheTabela(dadosSelecoes);
     }
