@@ -122,9 +122,9 @@ public class LimComiteGestor extends JFrame
             }
         });
 
+        gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbGerOcorrenciaJogo));
         gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarSelecoes));
         gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarJogos));
-        gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbGerOcorrenciaJogo));
 
         return gridPanel;
     }
