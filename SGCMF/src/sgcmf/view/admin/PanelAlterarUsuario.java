@@ -4,15 +4,21 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.control.CtrUsuario;
+import sgcmf.model.other.ResultadoOperacao;
+import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
@@ -23,6 +29,21 @@ import sgcmf.view.table.JTableSGCMF;
 public class PanelAlterarUsuario extends JPanel {
 
 
+    JButton jbAlterar = new JButton("Alterar");
+    private JComboBox jcbPerfil;
+    private String[] items =
+        {
+            "Administrador", "Tecnico da selecao", "Membro Comite",
+            "Entusiasta"
+        };
+
+    JTextField jtfLogin = new JTextField(10);
+    JTextField jtfSenha = new JTextField(10);
+    JTextField jtfNome = new JTextField(10);
+    JTextField jtfEmail = new JTextField(10);
+    JTextField jtfCPF = new JTextField(10);
+    CtrUsuario ctrUsuario = new CtrUsuario();
+
     public PanelAlterarUsuario()
     {
         setLayout(new BorderLayout());
@@ -31,7 +52,6 @@ public class PanelAlterarUsuario extends JPanel {
 
     private void montaPainelPrincipal()
     {
-        //JPanel jpPrincipal = new JPanel(new BorderLayout());
         JPanel jpNorth = montaPainelNorte();
         JScrollPane jpCenter = montaPainelCentral();
         JPanel jpSouth = montaPainelSouth();
@@ -108,24 +128,43 @@ public class PanelAlterarUsuario extends JPanel {
         JLabel jlCPF = new JLabel("CPF:");
         UtilView.alinhaLabel(jlCPF);
 
-        JComboBox jcbPerfil;
-        String[] items =
-        {
-            "Administrador", "Tecnico da selecao", "Membro Comite",
-            "Entusiasta"
-        };
 
-        JTextField jtfLogin = new JTextField(10);
-        JTextField jtfSenha = new JTextField(10);
-        JTextField jtfNome = new JTextField(10);
-        JTextField jtfEmail = new JTextField(10);
-        JTextField jtfCPF = new JTextField(10);
+
+         jbAlterar.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ResultadoOperacao resultado;
+
+                String perfil = (String) jcbPerfil.getSelectedItem();
+
+                resultado = ctrUsuario.cadastrarUsuario(jtfCPF.getText(),jtfNome.getText(),
+                        jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
+
+                if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                {
+                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                            + " no Cadastro de Usuario", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Cadastro"
+                            + " bem Sucedido", JOptionPane.INFORMATION_MESSAGE);
+                    limparCampos();
+                }
+            }
+        });
+
+
+
+        
 
         jcbPerfil = new JComboBox(items);
         jcbPerfil.setEditable(false);
         jcbPerfil.setPreferredSize(new Dimension(132, 20));
 
-        JButton jbAlterar = new JButton("Alterar");
+        
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfLogin, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));
@@ -145,5 +184,19 @@ public class PanelAlterarUsuario extends JPanel {
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbAlterar), BorderLayout.SOUTH);
 
         return jpPrincipal;
+    }
+
+    public void travarBotoes()
+    {
+        jbAlterar.setEnabled(false);
+    }
+
+    public void limparCampos()
+    {
+        jtfCPF.setText("");
+        jtfNome.setText("");
+        jtfEmail.setText("");
+        jtfLogin.setText("");
+        jtfSenha.setText("");
     }
 }
