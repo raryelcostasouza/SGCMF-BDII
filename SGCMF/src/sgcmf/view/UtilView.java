@@ -9,27 +9,34 @@ import javax.swing.JPanel;
 
 public class UtilView
 {
+    public static void configuraJButton(JButton jb)
+    {
+        jb.setHorizontalTextPosition(JButton.CENTER);
+        jb.setVerticalTextPosition(JButton.BOTTOM);
+        jb.setPreferredSize(new Dimension(180,180));
+    }
+
     public static JPanel putComponentInFlowLayoutPanel(JComponent jc)
     {
         JPanel panel = new JPanel();
-        
-		panel.add(jc);
+
+        panel.add(jc);
         return panel;
     }
-	
-	public static JPanel putComponentInFlowLayoutPanel(JComponent jc, int flowLayoutAlign)
-	{
-		JPanel panel = new JPanel(new FlowLayout(flowLayoutAlign));
-        
-		panel.add(jc);
+
+    public static JPanel putComponentInFlowLayoutPanel(JComponent jc, int flowLayoutAlign)
+    {
+        JPanel panel = new JPanel(new FlowLayout(flowLayoutAlign));
+
+        panel.add(jc);
         return panel;
-	}
-    
-    public static void alinhaLabel (JLabel jl)
+    }
+
+    public static void alinhaLabel(JLabel jl)
     {
         jl.setPreferredSize(new Dimension(130, 20));
     }
-    
+
     public static void ajustarTamanhoBotaoPesquisar(JButton jb)
     {
         jb.setPreferredSize(new Dimension(28, 20));

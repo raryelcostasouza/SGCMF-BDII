@@ -19,12 +19,11 @@ import sgcmf.model.other.SGCMFIcons;
 public class LimEntusiasta extends JFrame
 {
     private CtrEntusiasta ctrEntusiasta;
-    private final Dimension buttonDimension = new Dimension(180, 180);
 
     public LimEntusiasta(CtrEntusiasta ctrEntusiasta)
     {
         this.ctrEntusiasta = ctrEntusiasta;
-        
+
         setTitle("SGCMF | Usuário Entusiasta");
         setIconImage(SGCMFIcons.LOGO.getImage());
         setResizable(false);
@@ -58,72 +57,65 @@ public class LimEntusiasta extends JFrame
         JPanel centerPanel = new JPanel(new GridLayout(2, 2));
 
         JButton jbConsultarSelecao = new JButton("Consultar Seleções", SGCMFIcons.SELECAO);
-        jbConsultarSelecao.setVerticalTextPosition(JButton.BOTTOM);
-        jbConsultarSelecao.setHorizontalTextPosition(JButton.CENTER);
-        jbConsultarSelecao.setPreferredSize(buttonDimension);
-        
-        JButton jbConsultarJogos = new JButton("Consultar Jogos", SGCMFIcons.JOGO);
-        jbConsultarJogos.setVerticalTextPosition(JButton.BOTTOM);
-        jbConsultarJogos.setHorizontalTextPosition(JButton.CENTER);
-        jbConsultarJogos.setPreferredSize(buttonDimension);
-        
-        JButton jbRelatorio = new JButton("Relatórios", SGCMFIcons.RELATORIO);
-        jbRelatorio.setVerticalTextPosition(JButton.BOTTOM);
-        jbRelatorio.setHorizontalTextPosition(JButton.CENTER);
-        jbRelatorio.setPreferredSize(buttonDimension);
-        
-        jbConsultarSelecao.addActionListener(new ActionListener() {
+        UtilView.configuraJButton(jbConsultarSelecao);
 
+        JButton jbConsultarJogos = new JButton("Consultar Jogos", SGCMFIcons.JOGO);
+        UtilView.configuraJButton(jbConsultarJogos);
+
+        JButton jbRelatorio = new JButton("Relatórios", SGCMFIcons.RELATORIO);
+        UtilView.configuraJButton(jbRelatorio);
+
+        jbConsultarSelecao.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 ctrEntusiasta.getCtrSelecao().ativaLimConsultaSelecao();
             }
         });
-        
-        jbConsultarJogos.addActionListener(new ActionListener() {
 
+        jbConsultarJogos.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 ctrEntusiasta.getCtrJogo().ativaLimConsultarJogo();
             }
         });
-        
-        jbRelatorio.addActionListener(new ActionListener() {
 
+        jbRelatorio.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 ctrEntusiasta.getCtrRelatorio().ativaTela();
             }
         });
-        
-        JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
-        jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
-        jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
-        jbTabelaCampeonato.setPreferredSize(buttonDimension);
-        jbTabelaCampeonato.addActionListener(new ActionListener() {
 
+        JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
+        UtilView.configuraJButton(jbTabelaCampeonato);
+        
+        jbTabelaCampeonato.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 ctrEntusiasta.getCtrTabelaCampeonato().ativaTela();
             }
         });
-        
+
         centerPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarSelecao));
         centerPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarJogos));
         centerPanel.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorio));
         centerPanel.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));
-        
+
         return centerPanel;
     }
 
     private JPanel montaSouthPanel()
     {
         JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        
+
         JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
         jbLogout.addActionListener(new ActionListener()
         {
@@ -132,10 +124,10 @@ public class LimEntusiasta extends JFrame
             {
                 acaoLogout();
             }
-        });                
-        
+        });
+
         southPanel.add(jbLogout);
-        
+
         return southPanel;
     }
 

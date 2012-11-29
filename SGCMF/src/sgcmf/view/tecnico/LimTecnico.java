@@ -31,7 +31,6 @@ public class LimTecnico extends JFrame
     private LimGerenciarJogador limGerenciarJogador;
     private CtrTecnico ctrTecnico;
     private CtrRelatorio ctrRelatorio;
-    private final Dimension buttonDimension = new Dimension(180, 180);
     
     public LimTecnico(CtrTecnico ctrTecnico, CtrJogo ctrJogo)
     {
@@ -83,12 +82,10 @@ public class LimTecnico extends JFrame
     
     private JPanel montaNorthPanel()
     {
-        JPanel gridPanel = new JPanel(new GridLayout(1,3));
+        JPanel gridPanel = new JPanel(new GridLayout(1, 3));
         
         JButton jbGerenciarJogadores = new JButton("Gerenciar Jogadores", SGCMFIcons.JOGADOR);
-        jbGerenciarJogadores.setVerticalTextPosition(JButton.BOTTOM);
-        jbGerenciarJogadores.setHorizontalTextPosition(JButton.CENTER);
-        jbGerenciarJogadores.setPreferredSize(buttonDimension);
+        UtilView.configuraJButton(jbGerenciarJogadores);
         
         jbGerenciarJogadores.addActionListener(new ActionListener()
         {
@@ -100,9 +97,7 @@ public class LimTecnico extends JFrame
         });
         
         JButton jbConsultarSelecao = new JButton("Consultar Seleções", SGCMFIcons.SELECAO);
-        jbConsultarSelecao.setVerticalTextPosition(JButton.BOTTOM);
-        jbConsultarSelecao.setHorizontalTextPosition(JButton.CENTER);
-        jbConsultarSelecao.setPreferredSize(buttonDimension);
+        UtilView.configuraJButton(jbConsultarSelecao);
         
         jbConsultarSelecao.addActionListener(new ActionListener()
         {
@@ -115,12 +110,10 @@ public class LimTecnico extends JFrame
         
         
         JButton jbConsultarJogos = new JButton("Consultar Jogos", SGCMFIcons.JOGO);
-        jbConsultarJogos.setVerticalTextPosition(JButton.BOTTOM);
-        jbConsultarJogos.setHorizontalTextPosition(JButton.CENTER);
-        jbConsultarJogos.setPreferredSize(buttonDimension);
+        UtilView.configuraJButton(jbConsultarJogos);
         
-        jbConsultarJogos.addActionListener(new ActionListener() {
-
+        jbConsultarJogos.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -140,9 +133,7 @@ public class LimTecnico extends JFrame
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
-        jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
-        jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
-        jbRelatorios.setPreferredSize(buttonDimension);
+        UtilView.configuraJButton(jbRelatorios);
         
         jbRelatorios.addActionListener(new ActionListener()
         {
@@ -153,9 +144,7 @@ public class LimTecnico extends JFrame
             }
         });
         JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
-        jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
-        jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
-        jbTabelaCampeonato.setPreferredSize(buttonDimension);
+        UtilView.configuraJButton(jbTabelaCampeonato);
         
         jbTabelaCampeonato.addActionListener(new ActionListener()
         {

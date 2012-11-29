@@ -23,12 +23,11 @@ public class LimComiteGestor extends JFrame
     private CtrComiteGestor ctrComiteGestor;
     private LimGerOcorrSelecionarJogo limGerOcorrSelecionarJogo;
     private LimBuscarJogador limBuscarJogador;
-    private final Dimension buttonDimension = new Dimension(180, 180);
 
     public LimComiteGestor(CtrComiteGestor ctrComiteGestor)
     {
         this.ctrComiteGestor = ctrComiteGestor;
-        
+
         setIconImage(SGCMFIcons.LOGO.getImage());
 
         limBuscarJogador = new LimBuscarJogador(ctrComiteGestor.getCtrJogador());
@@ -78,25 +77,18 @@ public class LimComiteGestor extends JFrame
 
     private JPanel montaNorthPanel()
     {
-        
+
         JPanel gridPanel = new JPanel(new GridLayout(1, 3));
 
         JButton jbConsultarSelecoes = new JButton("Consultar Seleções", SGCMFIcons.SELECAO);
-        jbConsultarSelecoes.setVerticalTextPosition(JButton.BOTTOM);
-        jbConsultarSelecoes.setHorizontalTextPosition(JButton.CENTER);
-        jbConsultarSelecoes.setPreferredSize(buttonDimension);
+        UtilView.configuraJButton(jbConsultarSelecoes);
 
         JButton jbConsultarJogos = new JButton("Consultar Jogos", SGCMFIcons.JOGO);
-        jbConsultarJogos.setVerticalTextPosition(JButton.BOTTOM);
-        jbConsultarJogos.setHorizontalTextPosition(JButton.CENTER);
-        jbConsultarJogos.setPreferredSize(buttonDimension);
+        UtilView.configuraJButton(jbConsultarJogos);
 
         JButton jbGerOcorrenciaJogo = new JButton("<html>Gerenciar Ocorrências<br><center>de Jogo</center></html>", SGCMFIcons.OCORRENCIA_JOGO);
-        jbGerOcorrenciaJogo.setVerticalTextPosition(JButton.BOTTOM);
-        jbGerOcorrenciaJogo.setHorizontalTextPosition(JButton.CENTER);
-        jbGerOcorrenciaJogo.setHorizontalAlignment(SwingConstants.CENTER);
-        jbGerOcorrenciaJogo.setPreferredSize(buttonDimension);
-
+        UtilView.configuraJButton(jbGerOcorrenciaJogo);
+        
         jbConsultarSelecoes.addActionListener(new ActionListener()
         {
             @Override
@@ -134,9 +126,8 @@ public class LimComiteGestor extends JFrame
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
-        jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
-        jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
-        jbRelatorios.setPreferredSize(buttonDimension);
+        UtilView.configuraJButton(jbRelatorios);
+        
         jbRelatorios.addActionListener(new ActionListener()
         {
             @Override
@@ -147,11 +138,10 @@ public class LimComiteGestor extends JFrame
         });
 
         JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
-        jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
-        jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
-        jbTabelaCampeonato.setPreferredSize(buttonDimension);
-        jbTabelaCampeonato.addActionListener(new ActionListener() {
-
+        UtilView.configuraJButton(jbTabelaCampeonato);
+        
+        jbTabelaCampeonato.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
