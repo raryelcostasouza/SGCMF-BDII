@@ -1,6 +1,8 @@
 package sgcmf.view.admin;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +27,7 @@ public class LimAdmin extends JFrame
     private LimGerenciarUsuario limGerenciarUsuario;
     private CtrAdmin ctrAdmin;
     private CtrRelatorio ctrRelatorio;
+    private final Dimension buttonDimension = new Dimension(180, 180);
 
     public LimAdmin(CtrAdmin ctrAdmin)
     {
@@ -53,12 +56,33 @@ public class LimAdmin extends JFrame
     private JPanel montaPainel()
     {
         JPanel jpPrincipal = new JPanel(new BorderLayout());
-        JPanel jpAux = new JPanel(new GridLayout(1, 1));
+       
+        JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
+        jbLogout.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                acaoLogout();
+            }
+        });
+
+        jpPrincipal.add(montaNorthPanel(), BorderLayout.NORTH);
+        jpPrincipal.add(montaCenterPanel(), BorderLayout.CENTER);
+        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbLogout), BorderLayout.SOUTH);
+
+        return jpPrincipal;
+    }
+    
+    private JPanel montaNorthPanel()
+    {
+        JPanel gridPanel = new JPanel(new GridLayout(1,3));
+        
         JButton jbGerenciarUsuarios = new JButton("Gerenciar Usuários", SGCMFIcons.USUARIO);
         jbGerenciarUsuarios.setVerticalTextPosition(JButton.BOTTOM);
         jbGerenciarUsuarios.setHorizontalTextPosition(JButton.CENTER);
-
+        jbGerenciarUsuarios.setPreferredSize(buttonDimension);
+        
         jbGerenciarUsuarios.addActionListener(new ActionListener()
         {
             @Override
@@ -67,10 +91,52 @@ public class LimAdmin extends JFrame
                 limGerenciarUsuario.setVisible(true);
             }
         });
+        
+        JButton jbConsultarSelecao = new JButton("Consultar Seleções", SGCMFIcons.SELECAO);
+        jbConsultarSelecao.setVerticalTextPosition(JButton.BOTTOM);
+        jbConsultarSelecao.setHorizontalTextPosition(JButton.CENTER);
+        jbConsultarSelecao.setPreferredSize(buttonDimension);
+        
+        jbConsultarSelecao.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrAdmin.getCtrMain().getCtrSelecao().ativaLimConsultaSelecao();
+            }
+        });
+        
+        
+        JButton jbConsultarJogos = new JButton("Consultar Jogos", SGCMFIcons.JOGO);
+        jbConsultarJogos.setVerticalTextPosition(JButton.BOTTOM);
+        jbConsultarJogos.setHorizontalTextPosition(JButton.CENTER);
+        jbConsultarJogos.setPreferredSize(buttonDimension);
+        
+        jbConsultarJogos.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrAdmin.getCtrMain().getCtrJogo().ativaLimConsultarJogo();
+            }
+        });
+        
+        gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbGerenciarUsuarios));
+        gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarSelecao));
+        gridPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarJogos));
+        
+        return gridPanel;
+    }
+    
+    private JPanel montaCenterPanel()
+    {
+        JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        
         JButton jbRelatorios = new JButton("Relatórios", SGCMFIcons.RELATORIO);
         jbRelatorios.setVerticalTextPosition(JButton.BOTTOM);
         jbRelatorios.setHorizontalTextPosition(JButton.CENTER);
+        jbRelatorios.setPreferredSize(buttonDimension);
+        
         jbRelatorios.addActionListener(new ActionListener()
         {
             @Override
@@ -82,33 +148,21 @@ public class LimAdmin extends JFrame
         JButton jbTabelaCampeonato = new JButton("Tabela do Campeonato", SGCMFIcons.TABELA);
         jbTabelaCampeonato.setVerticalTextPosition(JButton.BOTTOM);
         jbTabelaCampeonato.setHorizontalTextPosition(JButton.CENTER);
-        jbTabelaCampeonato.addActionListener(new ActionListener() {
-
+        jbTabelaCampeonato.setPreferredSize(buttonDimension);
+        
+        jbTabelaCampeonato.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 ctrAdmin.getCtrMain().getCtrTabelaCampeonato().ativaTela();
             }
         });
-
-        JButton jbLogout = new JButton("Logout", SGCMFIcons.LOGOUT);
-        jbLogout.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                acaoLogout();
-            }
-        });
-
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbGerenciarUsuarios));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorios));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));
-
-        jpPrincipal.add(jpAux, BorderLayout.CENTER);
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbLogout), BorderLayout.SOUTH);
-
-        return jpPrincipal;
+        
+        centerPanel.add(jbRelatorios);
+        centerPanel.add(jbTabelaCampeonato);
+        
+        return centerPanel;
     }
 
     private void acaoLogout()
