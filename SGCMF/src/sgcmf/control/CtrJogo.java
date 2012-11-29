@@ -16,9 +16,22 @@ import sgcmf.model.other.AproveitamentoSelecao;
 import sgcmf.model.other.ResultadoGolsSelecao;
 import sgcmf.model.other.ResultadoSelecao;
 import sgcmf.model.other.SGCMFDate;
+import sgcmf.view.comiteGestor.LimConsultarJogo;
 
 public class CtrJogo
 {
+    private LimConsultarJogo limConsultarJogo;
+
+    public CtrJogo()
+    {
+        this.limConsultarJogo = new LimConsultarJogo(this);
+    }
+
+    public void ativaLimConsultarJogo()
+    {
+        limConsultarJogo.ativaTela();
+    }   
+    
     public Object[][] queryJogoTodos()
     {
         JogoDAO jDAO;

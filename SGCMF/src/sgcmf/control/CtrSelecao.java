@@ -6,9 +6,22 @@ import javax.swing.JLabel;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.SelecaoDAO;
 import sgcmf.model.hibernate.Selecao;
+import sgcmf.view.comiteGestor.LimConsultaSelecao;
 
 public class CtrSelecao
 {
+    private LimConsultaSelecao limConsultaSelecao;
+    
+    public CtrSelecao()
+    {
+        limConsultaSelecao = new LimConsultaSelecao(this);
+    }
+
+    public void ativaLimConsultaSelecao()
+    {
+        limConsultaSelecao.ativaTela();
+    }
+    
     public Object[][] querySelecaoTodos()
     {
         SelecaoDAO sdao;

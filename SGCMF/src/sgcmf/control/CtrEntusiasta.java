@@ -32,4 +32,14 @@ public class CtrEntusiasta
     {
         return ctrMain.getCtrTabelaCampeonato();
     }
+    
+    public CtrSelecao getCtrSelecao()
+    {
+        return ctrMain.getCtrSelecao();
+    }
+    
+    public CtrJogo getCtrJogo()
+    {
+        return ctrMain.getCtrJogo();
+    }
 }

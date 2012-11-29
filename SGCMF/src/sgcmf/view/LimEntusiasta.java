@@ -55,12 +55,40 @@ public class LimEntusiasta extends JFrame
 
     private JPanel montaCenterPanel()
     {
-        JPanel centerPanel = new JPanel(new GridLayout(1, 2));
+        JPanel centerPanel = new JPanel(new GridLayout(2, 2));
 
+        JButton jbConsultarSelecao = new JButton("Consultar Seleções", SGCMFIcons.SELECAO);
+        jbConsultarSelecao.setVerticalTextPosition(JButton.BOTTOM);
+        jbConsultarSelecao.setHorizontalTextPosition(JButton.CENTER);
+        jbConsultarSelecao.setPreferredSize(buttonDimension);
+        
+        JButton jbConsultarJogos = new JButton("Consultar Jogos", SGCMFIcons.JOGO);
+        jbConsultarJogos.setVerticalTextPosition(JButton.BOTTOM);
+        jbConsultarJogos.setHorizontalTextPosition(JButton.CENTER);
+        jbConsultarJogos.setPreferredSize(buttonDimension);
+        
         JButton jbRelatorio = new JButton("Relatórios", SGCMFIcons.RELATORIO);
         jbRelatorio.setVerticalTextPosition(JButton.BOTTOM);
         jbRelatorio.setHorizontalTextPosition(JButton.CENTER);
         jbRelatorio.setPreferredSize(buttonDimension);
+        
+        jbConsultarSelecao.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrEntusiasta.getCtrSelecao().ativaLimConsultaSelecao();
+            }
+        });
+        
+        jbConsultarJogos.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrEntusiasta.getCtrJogo().ativaLimConsultarJogo();
+            }
+        });
         
         jbRelatorio.addActionListener(new ActionListener() {
 
@@ -84,6 +112,8 @@ public class LimEntusiasta extends JFrame
             }
         });
         
+        centerPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarSelecao));
+        centerPanel.add(UtilView.putComponentInFlowLayoutPanel(jbConsultarJogos));
         centerPanel.add(UtilView.putComponentInFlowLayoutPanel(jbRelatorio));
         centerPanel.add(UtilView.putComponentInFlowLayoutPanel(jbTabelaCampeonato));
         

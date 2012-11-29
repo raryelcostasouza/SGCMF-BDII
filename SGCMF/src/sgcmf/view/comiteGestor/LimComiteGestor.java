@@ -21,8 +21,6 @@ import sgcmf.view.comiteGestor.ocorrenciaJogo.LimGerOcorrSelecionarJogo;
 public class LimComiteGestor extends JFrame
 {
     private CtrComiteGestor ctrComiteGestor;
-    private LimConsultaSelecao limConsultaSelecao;
-    private LimConsultarJogo limConsultaJogo;
     private LimGerOcorrSelecionarJogo limGerOcorrSelecionarJogo;
     private LimBuscarJogador limBuscarJogador;
     private final Dimension buttonDimension = new Dimension(180, 180);
@@ -33,8 +31,6 @@ public class LimComiteGestor extends JFrame
         
         setIconImage(SGCMFIcons.LOGO.getImage());
 
-        limConsultaSelecao = new LimConsultaSelecao(ctrComiteGestor.getCtrSelecao());
-        limConsultaJogo = new LimConsultarJogo(ctrComiteGestor.getCtrJogo());
         limBuscarJogador = new LimBuscarJogador(ctrComiteGestor.getCtrJogador());
         limGerOcorrSelecionarJogo = new LimGerOcorrSelecionarJogo(ctrComiteGestor, limBuscarJogador);
 
@@ -106,7 +102,7 @@ public class LimComiteGestor extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                limConsultaSelecao.ativaTela();
+                ctrComiteGestor.getCtrSelecao().ativaLimConsultaSelecao();
             }
         });
         jbConsultarJogos.addActionListener(new ActionListener()
@@ -114,7 +110,7 @@ public class LimComiteGestor extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                limConsultaJogo.ativaTela();
+                ctrComiteGestor.getCtrJogo().ativaLimConsultarJogo();
             }
         });
         jbGerOcorrenciaJogo.addActionListener(new ActionListener()
