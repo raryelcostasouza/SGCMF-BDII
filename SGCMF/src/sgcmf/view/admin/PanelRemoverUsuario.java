@@ -4,15 +4,21 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.control.CtrUsuario;
+import sgcmf.model.other.ResultadoOperacao;
+import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
 import sgcmf.view.table.JTableSGCMF;
 
@@ -22,8 +28,21 @@ import sgcmf.view.table.JTableSGCMF;
  */
 public class PanelRemoverUsuario extends JPanel {
 
+    String[] items =
+    {
+        "Administrador", "Tecnico da selecao", "Membro Comite",
+        "Entusiasta"
+    };
 
-    public PanelRemoverUsuario()
+    JComboBox jcbPerfil = new JComboBox(items);
+
+    JTextField jtfLogin = new JTextField(10);
+    JTextField jtfSenha = new JTextField(10);
+    JTextField jtfNome = new JTextField(10);
+    JTextField jtfEmail = new JTextField(10);
+    JTextField jtfCPF = new JTextField(10);
+
+     public PanelRemoverUsuario()
     {
         setLayout(new BorderLayout());
         montaPainelPrincipal();
@@ -109,21 +128,6 @@ public class PanelRemoverUsuario extends JPanel {
         JLabel jlCPF = new JLabel("CPF:");
         UtilView.alinhaLabel(jlCPF);
 
-        JComboBox jcbPerfil;
-        String[] items =
-        {
-            "Administrador", "Tecnico da selecao", "Membro Comite",
-            "Entusiasta"
-        };
-
-        JTextField jtfLogin = new JTextField(10);
-        JTextField jtfSenha = new JTextField(10);
-        JTextField jtfNome = new JTextField(10);
-        JTextField jtfEmail = new JTextField(10);
-        JTextField jtfCPF = new JTextField(10);
-
-
-        jcbPerfil = new JComboBox(items);
         jcbPerfil.setEditable(false);
         jcbPerfil.setPreferredSize(new Dimension(132, 20));
 
@@ -147,34 +151,30 @@ public class PanelRemoverUsuario extends JPanel {
         jpPrincipal.add(jpAux, BorderLayout.CENTER);
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbRemover), BorderLayout.SOUTH);
 
+        jbRemover.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ResultadoOperacao resultado;
+                CtrUsuario ctrUsuario = new CtrUsuario();
+
+                resultado = ctrUsuario.removerUsuario(jtfLogin.getText());
+
+                if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                {
+                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                            + " na remoção de Usuario", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Remoção"
+                            + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+
+
         return jpPrincipal;
     }
-
-  /*   public void travarBotao()
-    {
-        jbRemover.setEnabled(false);
-    }
-
-    public void limparTodosCampos()
-    {
-        travarBotao();
-        jrbNome.setSelected(true);
-        jtfPosicao.setText("");
-        jtfPesquisar.setText("");
-        jtfDataNascimento.setText("");
-        jtfNumeroCamisa.setText("");
-        jtfNome.setText("");
-        jtfSelecao.setText("");
-        jtfAltura.setText("");
-    }
-
-    public void limparParteCampos()
-    {
-        jtfPosicao.setText("");
-        jtfDataNascimento.setText("");
-        jtfNumeroCamisa.setText("");
-        jtfNome.setText("");
-        jtfSelecao.setText("");
-        jtfAltura.setText("");
-    }*/
 }

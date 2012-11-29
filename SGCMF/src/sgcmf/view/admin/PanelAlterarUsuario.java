@@ -128,9 +128,7 @@ public class PanelAlterarUsuario extends JPanel {
         JLabel jlCPF = new JLabel("CPF:");
         UtilView.alinhaLabel(jlCPF);
 
-
-
-         jbAlterar.addActionListener(new ActionListener()
+        jbAlterar.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -138,27 +136,25 @@ public class PanelAlterarUsuario extends JPanel {
                 ResultadoOperacao resultado;
 
                 String perfil = (String) jcbPerfil.getSelectedItem();
-
-                resultado = ctrUsuario.cadastrarUsuario(jtfCPF.getText(),jtfNome.getText(),
+                
+                resultado = ctrUsuario.alterarUsuario(jtfCPF.getText(),jtfNome.getText(),
                         jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
+
 
                 if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
                 {
                     JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
-                            + " no Cadastro de Usuario", JOptionPane.ERROR_MESSAGE);
+                            + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Cadastro"
-                            + " bem Sucedido", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Alteração"
+                            + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
                     limparCampos();
                 }
             }
         });
 
-
-
-        
 
         jcbPerfil = new JComboBox(items);
         jcbPerfil.setEditable(false);

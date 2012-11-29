@@ -115,7 +115,7 @@ public class CtrUsuario
         return result;
     }
 
-    public ResultadoOperacao alterarUsuario(String strIdUsuario, String cpf, String nome, String email, String login,
+    public ResultadoOperacao alterarUsuario(String cpf, String nome, String email, String login,
             String senha, String perfil)
     {
         Short shortIdUsuario;
@@ -123,8 +123,8 @@ public class CtrUsuario
         Transaction tr;
         GeneralDAO gdao;
         ResultadoOperacao result;
-
-        shortIdUsuario = new Short(strIdUsuario);
+        
+        shortIdUsuario = usuarioDAO.queryUsuarioByLogin(login, senha).get(0).getId();
 
         gdao = new GeneralDAO();
         tr = gdao.getSessao().beginTransaction();
@@ -158,18 +158,21 @@ public class CtrUsuario
         return result;
     }
 
-    public ResultadoOperacao removerUsuario(String idUsuario)
+    public ResultadoOperacao removerUsuario(String login)
     {
         Usuario u = new Usuario();
         Transaction tr;
         GeneralDAO gDAO;
         ResultadoOperacao resultado;
+        Short shortIdUsuario;
+
+        shortIdUsuario = usuarioDAO.queryUsuarioOnlyByLogin(login).get(0).getId();
 
         try
         {
             gDAO = new GeneralDAO();
             tr = gDAO.getSessao().beginTransaction();
-            gDAO.carregar(u, new Short(idUsuario));
+            gDAO.carregar(u, new Short(shortIdUsuario));
 
             if(u.getPerfil().equals("Administrador") && usuarioDAO.numeroAdmins() <= 1)
             {
