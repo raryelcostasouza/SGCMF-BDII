@@ -217,6 +217,7 @@ public class LimConsultarJogo extends JDialog
     public void ativaTela()
     {
         recarregaTodosJogos();
+        trocarNorthEastPanelParaSearchBox();
         setVisible(true);
     }
 
