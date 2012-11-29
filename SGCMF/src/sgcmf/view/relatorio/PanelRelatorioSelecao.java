@@ -195,11 +195,11 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
     {
         String nomeSelecao;
         AproveitamentoSelecao objAproveitamentoSelecao;
-        
+        int qtdeFaltasSelecao;
         //Recebendo os campos
         nomeSelecao = ctrSelecao.pesquisarNomeSelecao(idSelecao);
         objAproveitamentoSelecao = ctrJogo.calculaNumVitoriasDerrotaEmpate(idSelecao);
-
+        qtdeFaltasSelecao = ctrSelecao.calculaNumFaltas(idSelecao);
         //Atulizando os TextFields
         jtfNomeSelecao.setText(nomeSelecao);
         jtfJogosDisputados.setText(objAproveitamentoSelecao.getJogosDisputados() + "");
@@ -207,6 +207,8 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         jtfDerrotas.setText(objAproveitamentoSelecao.getDerrotas() + "");
         jtfEmpates.setText(objAproveitamentoSelecao.getEmpates() + "");
         jtfAproveitamento.setText(objAproveitamentoSelecao.getAproveitamento() + "%");
+        jtfFaltas.setText(qtdeFaltasSelecao + "");
+
     }
 
     public void limparTela()

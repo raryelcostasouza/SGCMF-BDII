@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import sgcmf.hibernate.SGCMFSessionManager;
+import sgcmf.model.dao.FaltaDAO;
 import sgcmf.model.dao.SelecaoDAO;
 import sgcmf.model.hibernate.Selecao;
 import sgcmf.view.comiteGestor.LimConsultaSelecao;
@@ -134,5 +135,17 @@ public class CtrSelecao
         SGCMFSessionManager.fecharSessao();
         
         return nomeSelecao;
+    }
+
+    public int calculaNumFaltas(Short idSelecao)
+    {
+        FaltaDAO faltaDao;
+        int qtdeFaltas;
+        SGCMFSessionManager.abrirSessao();
+        faltaDao = FaltaDAO.getInstance();
+        qtdeFaltas = faltaDao.queryQtdeFaltasSelecao(idSelecao);
+        SGCMFSessionManager.fecharSessao();
+        
+        return qtdeFaltas;
     }
 }
