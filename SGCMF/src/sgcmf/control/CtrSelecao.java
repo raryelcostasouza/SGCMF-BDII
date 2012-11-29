@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import sgcmf.hibernate.SGCMFSessionManager;
+import sgcmf.model.dao.CartaoDAO;
 import sgcmf.model.dao.FaltaDAO;
 import sgcmf.model.dao.SelecaoDAO;
 import sgcmf.model.hibernate.Selecao;
@@ -147,5 +148,17 @@ public class CtrSelecao
         SGCMFSessionManager.fecharSessao();
         
         return qtdeFaltas;
+    }
+
+    public int calculaNumCartoes(Short idSelecao)
+    {
+        CartaoDAO cartaoDao;
+        int qtdeCartoes;
+        SGCMFSessionManager.abrirSessao();
+        cartaoDao = CartaoDAO.getInstance();
+        qtdeCartoes = cartaoDao.queryQtdeCartoesSelecao(idSelecao);
+        SGCMFSessionManager.fecharSessao();
+        
+        return qtdeCartoes;
     }
 }

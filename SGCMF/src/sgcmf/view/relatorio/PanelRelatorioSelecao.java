@@ -47,7 +47,7 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
     private JTextField jtfGolsPro;
     private JTextField jtfGolsContra;
     private JTextField jtfSaldoGols;
-
+    
     public PanelRelatorioSelecao(CtrRelatorio ctrRelatorio)
     {
         this.ctrRelatorio = ctrRelatorio;
@@ -59,7 +59,7 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         add(panelNorte(), BorderLayout.NORTH);
         add(panelCentral(), BorderLayout.CENTER);
     }
-
+    
     private JPanel panelNorte()
     {
         JPanel jpPrincipal = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -83,20 +83,20 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         jpPrincipal.setBorder(BorderFactory.createTitledBorder("Buscar por:"));
         return jpPrincipal;
     }
-
+    
     private JPanel panelCentral()
     {
         JPanel jpPrincipal = new JPanel(new BorderLayout());
         jpPrincipal.add(panelCentralEsquerda(), BorderLayout.WEST);
         jpPrincipal.add(panelCentralDireita(), BorderLayout.EAST);
-
+        
         return jpPrincipal;
     }
-
+    
     private JPanel panelCentralEsquerda()
     {
         JPanel jpPrincipal = new JPanel(new GridLayout(6, 2));
-
+        
         JLabel jlNomeSelecao = new JLabel("Nome da Seleção:");
         UtilView.alinhaLabel(jlNomeSelecao);
         JLabel jlJogosDisputados = new JLabel("Jogos Disputados:");
@@ -109,7 +109,7 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         UtilView.alinhaLabel(jlEmpates);
         JLabel jlAproveitamento = new JLabel("Aproveitamento:");
         UtilView.alinhaLabel(jlAproveitamento);
-
+        
         jtfNomeSelecao = new JTextField(10);
         jtfNomeSelecao.setEditable(false);
         jtfJogosDisputados = new JTextField(10);
@@ -122,7 +122,7 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         jtfEmpates.setEditable(false);
         jtfAproveitamento = new JTextField(10);
         jtfAproveitamento.setEditable(false);
-
+        
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlNomeSelecao));
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfNomeSelecao, FlowLayout.LEFT));
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlJogosDisputados));
@@ -135,14 +135,14 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfEmpates, FlowLayout.LEFT));
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlAproveitamento));
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfAproveitamento, FlowLayout.LEFT));
-
+        
         return jpPrincipal;
     }
-
+    
     private JPanel panelCentralDireita()
     {
         JPanel jpPrincipal = new JPanel(new GridLayout(5, 2));
-
+        
         JLabel jlFaltas = new JLabel("Faltas:");
         UtilView.alinhaLabel(jlFaltas);
         JLabel jlCartoes = new JLabel("Cartões:");
@@ -153,7 +153,7 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         UtilView.alinhaLabel(jlGolsContra);
         JLabel jlSaldoGols = new JLabel("Saldo Gols:");
         UtilView.alinhaLabel(jlSaldoGols);
-
+        
         jtfFaltas = new JTextField(10);
         jtfFaltas.setEditable(false);
         jtfCartoes = new JTextField(10);
@@ -164,7 +164,7 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         jtfGolsContra.setEditable(false);
         jtfSaldoGols = new JTextField(10);
         jtfSaldoGols.setEditable(false);
-
+        
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlFaltas));
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfFaltas, FlowLayout.LEFT));
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlCartoes));
@@ -175,31 +175,33 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfGolsContra, FlowLayout.LEFT));
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlSaldoGols));
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfSaldoGols, FlowLayout.LEFT));
-
+        
         return jpPrincipal;
     }
-
+    
     @Override
     public void selecaoSelecionada(Short idSelecao)
     {
         jtfSelecao.setText(idSelecao + "");
         preencheTextFields(idSelecao);
     }
-
+    
     private void ativaTelaSelecionarSelecao()
     {
         limSelecionarSelecao.ativaTela(this);
     }
-
+    
     private void preencheTextFields(Short idSelecao)
     {
         String nomeSelecao;
         AproveitamentoSelecao objAproveitamentoSelecao;
-        int qtdeFaltasSelecao;
+        int qtdeFaltas;
+        int qtdeCartoes;
         //Recebendo os campos
         nomeSelecao = ctrSelecao.pesquisarNomeSelecao(idSelecao);
         objAproveitamentoSelecao = ctrJogo.calculaNumVitoriasDerrotaEmpate(idSelecao);
-        qtdeFaltasSelecao = ctrSelecao.calculaNumFaltas(idSelecao);
+        qtdeFaltas = ctrSelecao.calculaNumFaltas(idSelecao);
+        qtdeCartoes = ctrSelecao.calculaNumCartoes(idSelecao);
         //Atulizando os TextFields
         jtfNomeSelecao.setText(nomeSelecao);
         jtfJogosDisputados.setText(objAproveitamentoSelecao.getJogosDisputados() + "");
@@ -207,10 +209,11 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         jtfDerrotas.setText(objAproveitamentoSelecao.getDerrotas() + "");
         jtfEmpates.setText(objAproveitamentoSelecao.getEmpates() + "");
         jtfAproveitamento.setText(objAproveitamentoSelecao.getAproveitamento() + "%");
-        jtfFaltas.setText(qtdeFaltasSelecao + "");
-
+        jtfFaltas.setText(qtdeFaltas + "");
+        jtfCartoes.setText(qtdeCartoes + "");
+        
     }
-
+    
     public void limparTela()
     {
         jtfSelecao.setText("");
