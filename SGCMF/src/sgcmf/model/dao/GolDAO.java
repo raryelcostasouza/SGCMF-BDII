@@ -90,4 +90,27 @@ public class GolDAO
         
         return Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()+"");
     }
+
+    public int queryQtdeGolsSofridos(Short idSelecao)
+    {
+        //Descobrir todas as selecoes que enfrentam a selecao com idSelecao
+        
+        //Retorna 2 colunas com os id's das selecoes
+        //select j.idSelecaoi, j.idSelecaoii 
+        //from jogo j join selecao s on (j.idSelecaoi = s.id or j.idSelecaoii = s.id) 
+        //where s.id=idSelecao
+        
+        //Ver todos os gols contra que o idSelecao fez
+        //"select count(g.idoc) 
+        //from Gol g 
+        //where g.tipo = 'Contra' and g.jogadorByIdjogadorAutor.selecao.id = "+idSelecao;
+        
+        //ver todos os gols a favor que as outras selecoes fizeram contra idSelecao.
+        //ideia... fore(array(do primeiro select)) com a seguinte condicao...
+        //se(idselecao != array[i]) qtde golssofridos = qtdegolssofridos+ queryNumGolsMarcadosselecao 
+        //(idSelecao[i] do array)
+        String hql;
+        hql = "select coung (g.idoc) from Gol g where g.tipo = 'Contra' and g.";
+        return 0;
+    }
 }
