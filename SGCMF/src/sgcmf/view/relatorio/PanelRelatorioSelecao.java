@@ -22,6 +22,7 @@ import sgcmf.control.CtrMain;
 import sgcmf.control.CtrRelatorio;
 import sgcmf.control.CtrSelecao;
 import sgcmf.model.other.AproveitamentoSelecao;
+import sgcmf.model.other.ResultadoGolsSelecao;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
 import sgcmf.view.tecnico.ISelecionarSelecao;
@@ -206,13 +207,13 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         AproveitamentoSelecao objAproveitamentoSelecao;
         int qtdeFaltas;
         int qtdeCartoes;
-        int[] gols;
+        ResultadoGolsSelecao rgs;
         //Recebendo os campos
         nomeSelecao = ctrSelecao.pesquisarNomeSelecao(idSelecao);
         objAproveitamentoSelecao = ctrJogo.calculaNumVitoriasDerrotaEmpate(idSelecao);
         qtdeFaltas = ctrFalta.calculaNumFaltas(idSelecao);
         qtdeCartoes = ctrCartao.calculaNumCartoes(idSelecao);
-        //gols = ctrGol.pesquisarGols(idSelecao);
+        rgs = ctrGol.calculaResultadoGolsSelecaoRelatorio(idSelecao);
         //Atulizando os TextFields
         jtfNomeSelecao.setText(nomeSelecao);
         jtfJogosDisputados.setText(objAproveitamentoSelecao.getJogosDisputados() + "");
@@ -222,9 +223,9 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         jtfAproveitamento.setText(objAproveitamentoSelecao.getAproveitamento() + "%");
         jtfFaltas.setText(qtdeFaltas + "");
         jtfCartoes.setText(qtdeCartoes + "");
-        /*jtfGolsPro.setText(gols[0] + "");
-        jtfGolsContra.setText(gols[1] + "");
-        jtfSaldoGols.setText(gols[2] + "");*/
+        jtfGolsPro.setText(rgs.getNumGolsMarcados() + "");
+        jtfGolsContra.setText(rgs.getNumGolsSofridos() + "");
+        jtfSaldoGols.setText(rgs.getSaldoGols() + "");
     }
     
     public void limparTela()

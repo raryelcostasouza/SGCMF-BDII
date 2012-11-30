@@ -317,8 +317,15 @@ public class CtrJogo
             }
 
         }
-        aproveitamento = (vitoria * 100 + empate * 33) / (float) jogosDisputados;
-
+        if (jogosDisputados == 0)
+        {
+            aproveitamento = 0;
+        }
+        else
+        {
+            aproveitamento = (vitoria * 100 + empate * 33) / (float) jogosDisputados;
+        }
+        
         objAproveitamento = new AproveitamentoSelecao(jogosDisputados, vitoria, derrota, empate, aproveitamento);
         SGCMFSessionManager.fecharSessao();
         return objAproveitamento;
