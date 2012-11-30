@@ -381,7 +381,18 @@ public class CtrJogo
         numGolsSofridos = calculaNumGolsSofridosSelecao(s);
         saldoGols = numGolsMarcados - numGolsSofridos;
 
-        return new ResultadoGolsSelecao(numGolsMarcados, saldoGols);
+        return new ResultadoGolsSelecao(numGolsMarcados, numGolsSofridos, saldoGols);
+    }
+    
+    public ResultadoGolsSelecao calculaResultadoGolsSelecaoRelatorio(Selecao s)
+    {
+        ResultadoGolsSelecao resultado;
+        
+        SGCMFSessionManager.abrirSessao();
+        resultado = calculaResultadoGolsSelecao(s);
+        SGCMFSessionManager.fecharSessao();
+        
+        return resultado;
     }
 
     private int calculaNumGolsSofridosSelecao(Selecao s)
