@@ -34,7 +34,7 @@ public class CtrMain
         ctrSubstituicao = new CtrSubstituicao(this);
         ctrFalta = new CtrFalta(this);
         ctrGol = new CtrGol(this);
-        ctrJogo = new CtrJogo();
+        ctrJogo = new CtrJogo(this);
         ctrSelecao = new CtrSelecao();
         ctrRelatorio = new CtrRelatorio(this);
         ctrTabelaCampeonato = new CtrTabelaCampeonato(this);

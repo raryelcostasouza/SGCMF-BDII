@@ -21,10 +21,13 @@ import sgcmf.view.comiteGestor.LimConsultarJogo;
 public class CtrJogo
 {
     private LimConsultarJogo limConsultarJogo;
+    private CtrMain ctrMain;
 
-    public CtrJogo()
+    public CtrJogo(CtrMain ctrMain)
     {
+        this.ctrMain = ctrMain;
         this.limConsultarJogo = new LimConsultarJogo(this);
+        
     }
 
     public void ativaLimConsultarJogo()
@@ -242,7 +245,7 @@ public class CtrJogo
         for (Selecao s : selecoesGrupo)
         {
             numPontos = calculaPontosSelecao(s);
-            objRGS = calculaResultadoGolsSelecao(s);
+            objRGS = ctrMain.getCtrGol().calculaResultadoGolsSelecao(s);
             resultadoSelecoesGrupo[i] = new ResultadoSelecao(s, numPontos, objRGS.getSaldoGols(),
                                                              objRGS.getNumGolsMarcados());
             i++;
@@ -368,62 +371,7 @@ public class CtrJogo
         return resultado;
     }
 
-    private ResultadoGolsSelecao calculaResultadoGolsSelecao(Selecao s)
-    {
-        int numGolsMarcados;
-        int numGolsSofridos;
-        int saldoGols;
-        GolDAO gDAO;
-
-        gDAO = GolDAO.getInstance();
-
-        numGolsMarcados = gDAO.queryNumGolsMarcadosSelecao(s.getId());
-        numGolsSofridos = calculaNumGolsSofridosSelecao(s);
-        saldoGols = numGolsMarcados - numGolsSofridos;
-
-        return new ResultadoGolsSelecao(numGolsMarcados, numGolsSofridos, saldoGols);
-    }
-    
-    public ResultadoGolsSelecao calculaResultadoGolsSelecaoRelatorio(Selecao s)
-    {
-        ResultadoGolsSelecao resultado;
-        
-        SGCMFSessionManager.abrirSessao();
-        resultado = calculaResultadoGolsSelecao(s);
-        SGCMFSessionManager.fecharSessao();
-        
-        return resultado;
-    }
-
-    private int calculaNumGolsSofridosSelecao(Selecao s)
-    {
-        int numGolsSofridos;
-        Short idSelecao, idSelRival;
-        JogoDAO jDAO;
-        GolDAO gDAO;
-        ArrayList<Jogo> listaJogosSelecao;
-
-        jDAO = JogoDAO.getInstance();
-        gDAO = GolDAO.getInstance();
-
-        numGolsSofridos = 0;
-        listaJogosSelecao = jDAO.queryJogoByIdSelecao(s.getId());
-        for (Jogo jogo : listaJogosSelecao)
-        {
-            idSelecao = s.getId();
-            if (idSelecao == jogo.getSelecaoByIdselecaoi().getId())
-            {
-                idSelRival = jogo.getSelecaoByIdselecaoii().getId();
-            }
-            else
-            {
-                idSelRival = jogo.getSelecaoByIdselecaoi().getId();
-            }
-            numGolsSofridos += gDAO.queryNumGolsSofridosSelecaoJogo(jogo.getId(), idSelecao, idSelRival);
-        }
-
-        return numGolsSofridos;
-    }
+   
 
     public String queryInfoJogoById(Short idJogo)
     {

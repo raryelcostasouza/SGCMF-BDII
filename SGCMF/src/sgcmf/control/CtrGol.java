@@ -7,10 +7,14 @@ import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.GolDAO;
 import sgcmf.model.dao.JogadorDAO;
+import sgcmf.model.dao.JogoDAO;
 import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.hibernate.Gol;
 import sgcmf.model.hibernate.Jogador;
+import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.hibernate.Ocorrencia;
+import sgcmf.model.hibernate.Selecao;
+import sgcmf.model.other.ResultadoGolsSelecao;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
 
@@ -193,5 +197,62 @@ public class CtrGol
         }
 
         return dadosGol;
+    }
+
+    public ResultadoGolsSelecao calculaResultadoGolsSelecao(Selecao s)
+    {
+        int numGolsMarcados;
+        int numGolsSofridos;
+        int saldoGols;
+        GolDAO gDAO;
+
+        gDAO = GolDAO.getInstance();
+
+        numGolsMarcados = gDAO.queryNumGolsMarcadosSelecao(s.getId());
+        numGolsSofridos = calculaNumGolsSofridosSelecao(s);
+        saldoGols = numGolsMarcados - numGolsSofridos;
+
+        return new ResultadoGolsSelecao(numGolsMarcados, numGolsSofridos, saldoGols);
+    }
+
+    public ResultadoGolsSelecao calculaResultadoGolsSelecaoRelatorio(Selecao s)
+    {
+        ResultadoGolsSelecao resultado;
+
+        SGCMFSessionManager.abrirSessao();
+        resultado = calculaResultadoGolsSelecao(s);
+        SGCMFSessionManager.fecharSessao();
+
+        return resultado;
+    }
+
+    private int calculaNumGolsSofridosSelecao(Selecao s)
+    {
+        int numGolsSofridos;
+        Short idSelecao, idSelRival;
+        JogoDAO jDAO;
+        GolDAO gDAO;
+        ArrayList<Jogo> listaJogosSelecao;
+
+        jDAO = JogoDAO.getInstance();
+        gDAO = GolDAO.getInstance();
+
+        numGolsSofridos = 0;
+        listaJogosSelecao = jDAO.queryJogoByIdSelecao(s.getId());
+        for (Jogo jogo : listaJogosSelecao)
+        {
+            idSelecao = s.getId();
+            if (idSelecao == jogo.getSelecaoByIdselecaoi().getId())
+            {
+                idSelRival = jogo.getSelecaoByIdselecaoii().getId();
+            }
+            else
+            {
+                idSelRival = jogo.getSelecaoByIdselecaoi().getId();
+            }
+            numGolsSofridos += gDAO.queryNumGolsSofridosSelecaoJogo(jogo.getId(), idSelecao, idSelRival);
+        }
+
+        return numGolsSofridos;
     }
 }
