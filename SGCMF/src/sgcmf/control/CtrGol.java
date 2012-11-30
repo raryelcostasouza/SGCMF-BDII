@@ -199,7 +199,7 @@ public class CtrGol
         return dadosGol;
     }
 
-    public ResultadoGolsSelecao calculaResultadoGolsSelecao(Selecao s)
+    public ResultadoGolsSelecao calculaResultadoGolsSelecao(Short idSelecao)
     {
         int numGolsMarcados;
         int numGolsSofridos;
@@ -208,28 +208,28 @@ public class CtrGol
 
         gDAO = GolDAO.getInstance();
 
-        numGolsMarcados = gDAO.queryNumGolsMarcadosSelecao(s.getId());
-        numGolsSofridos = calculaNumGolsSofridosSelecao(s);
+        numGolsMarcados = gDAO.queryNumGolsMarcadosSelecao(idSelecao);
+        numGolsSofridos = calculaNumGolsSofridosSelecao(idSelecao);
         saldoGols = numGolsMarcados - numGolsSofridos;
 
         return new ResultadoGolsSelecao(numGolsMarcados, numGolsSofridos, saldoGols);
     }
 
-    public ResultadoGolsSelecao calculaResultadoGolsSelecaoRelatorio(Selecao s)
+    public ResultadoGolsSelecao calculaResultadoGolsSelecaoRelatorio(Short idSelecao)
     {
         ResultadoGolsSelecao resultado;
 
         SGCMFSessionManager.abrirSessao();
-        resultado = calculaResultadoGolsSelecao(s);
+        resultado = calculaResultadoGolsSelecao(idSelecao);
         SGCMFSessionManager.fecharSessao();
 
         return resultado;
     }
 
-    private int calculaNumGolsSofridosSelecao(Selecao s)
+    private int calculaNumGolsSofridosSelecao(Short idSelecao)
     {
         int numGolsSofridos;
-        Short idSelecao, idSelRival;
+        Short idSelRival;
         JogoDAO jDAO;
         GolDAO gDAO;
         ArrayList<Jogo> listaJogosSelecao;
@@ -238,10 +238,9 @@ public class CtrGol
         gDAO = GolDAO.getInstance();
 
         numGolsSofridos = 0;
-        listaJogosSelecao = jDAO.queryJogoByIdSelecao(s.getId());
+        listaJogosSelecao = jDAO.queryJogoByIdSelecao(idSelecao);
         for (Jogo jogo : listaJogosSelecao)
         {
-            idSelecao = s.getId();
             if (idSelecao == jogo.getSelecaoByIdselecaoi().getId())
             {
                 idSelRival = jogo.getSelecaoByIdselecaoii().getId();

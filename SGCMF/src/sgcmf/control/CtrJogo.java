@@ -245,7 +245,7 @@ public class CtrJogo
         for (Selecao s : selecoesGrupo)
         {
             numPontos = calculaPontosSelecao(s);
-            objRGS = ctrMain.getCtrGol().calculaResultadoGolsSelecao(s);
+            objRGS = ctrMain.getCtrGol().calculaResultadoGolsSelecao(s.getId());
             resultadoSelecoesGrupo[i] = new ResultadoSelecao(s, numPontos, objRGS.getSaldoGols(),
                                                              objRGS.getNumGolsMarcados());
             i++;
