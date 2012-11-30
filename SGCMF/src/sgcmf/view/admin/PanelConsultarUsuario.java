@@ -3,6 +3,8 @@ package sgcmf.view.admin;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -11,7 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import sgcmf.control.CtrUsuario;
 import sgcmf.view.UtilView;
+import sgcmf.view.table.DefaultTableModelC1;
+import sgcmf.view.table.JLabelTableCellRenderer;
 import sgcmf.view.table.JTableSGCMF;
 
 /**
@@ -20,6 +25,13 @@ import sgcmf.view.table.JTableSGCMF;
  */
 public class PanelConsultarUsuario extends JPanel {
 
+    CtrUsuario ctrUsuario = new CtrUsuario();
+    protected JTableSGCMF jt;
+    JTextField jtfPesquisar;
+    JRadioButton jrbNome;
+    JRadioButton jrbPerfil;
+    JRadioButton jrbLogin;
+    JRadioButton jrbEmail;
 
     public PanelConsultarUsuario()
     {
@@ -32,7 +44,7 @@ public class PanelConsultarUsuario extends JPanel {
         //JPanel jpPrincipal = new JPanel(new BorderLayout());
         JPanel jpNorth = montaPainelNorte();
         JScrollPane jpCenter = montaPainelCentral();
-
+        recarregaTodosusuarios();
         this.add(jpNorth,BorderLayout.NORTH);
         this.add(jpCenter,BorderLayout.CENTER);
 
@@ -44,13 +56,22 @@ public class PanelConsultarUsuario extends JPanel {
         JPanel jpEsquerda = new JPanel();
         JPanel jpDireita = new JPanel();
 
-        JTextField jtfPesquisar = new JTextField(15);
+        jtfPesquisar = new JTextField(15);
 
-        JRadioButton jrbNome = new JRadioButton("Nome");
+        jtfPesquisar.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                pesquisa(jtfPesquisar.getText());
+            }
+        });
+
+        jrbNome = new JRadioButton("Nome");
         jrbNome.setSelected(true);
-        JRadioButton jrbPerfil = new JRadioButton("Perfil");
-        JRadioButton jrbLogin = new JRadioButton("Login");
-        JRadioButton jrbEmail = new JRadioButton("Email");
+        jrbPerfil = new JRadioButton("Perfil");
+        jrbLogin = new JRadioButton("Login");
+        jrbEmail = new JRadioButton("Email");
 
 
         ButtonGroup bg = new ButtonGroup();
@@ -78,13 +99,49 @@ public class PanelConsultarUsuario extends JPanel {
     {
         String[] nomeColunas =
         {
-            "Login", "Senha", "Perfil", "Nome", "E-mail", "CPF"
+            "ID", "CPF", "E-mail", "Nome", "Login", "Senha", "Perfil"
         };
-        JTableSGCMF jt = new JTableSGCMF(null, nomeColunas);
+        
+        jt = new JTableSGCMF(null, nomeColunas);
+        jt.setModel(new DefaultTableModelC1(null, nomeColunas));
+        jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
+        //jt.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         return jsp;
+    }
+
+    private void recarregaTodosusuarios()
+    {
+        Object[][] dadosUsuarios;
+
+        dadosUsuarios = ctrUsuario.queryUsuarioTodos();
+        jt.preencheTabela(dadosUsuarios);
+    }
+
+    private void pesquisa(String chavePesquisa)
+    {
+        Object[][] dadosUsuarios = null;
+
+        if (jrbNome.isSelected())
+        {
+            dadosUsuarios = ctrUsuario.queryUsuarioByNomeUsuario(chavePesquisa);
+        }
+        else if (jrbPerfil.isSelected())
+        {
+            dadosUsuarios = ctrUsuario.queryUsuarioByPerfilUsuario(chavePesquisa);
+        }
+        else if (jrbLogin.isSelected())
+        {
+            dadosUsuarios = ctrUsuario.queryUsuarioByLoginUsuario(chavePesquisa);
+        }
+        else 
+        {
+            dadosUsuarios = ctrUsuario.queryUsuarioByEmailUsuario(chavePesquisa);
+        }
+        jt.preencheTabela(dadosUsuarios);
+
     }
 
 }

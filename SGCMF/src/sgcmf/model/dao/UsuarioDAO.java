@@ -1,5 +1,6 @@
 package sgcmf.model.dao;
 import java.util.ArrayList;
+import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Usuario;
 
 
@@ -8,6 +9,17 @@ import sgcmf.model.hibernate.Usuario;
  * @author Thatiane
  */
 public class UsuarioDAO extends GeneralDAO{
+
+    private static UsuarioDAO instance;
+
+    public static UsuarioDAO getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new UsuarioDAO();
+        }
+        return instance;
+    }
 
     public ArrayList<Usuario> listaTodos()
     {
@@ -23,6 +35,45 @@ public class UsuarioDAO extends GeneralDAO{
         return Integer.parseInt(sessao.createQuery(hql).uniqueResult()+"");
     }
 
+    public ArrayList<Usuario> queryUsuarioByNomeUsuario(String nome)
+    {
+        String hql;
+
+        hql = "from Usuario u "
+                + "where lower(u.nome) like lower('%" + nome + "%')";
+
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
+
+    public ArrayList<Usuario> queryUsuarioByLoginUsuario(String login)
+    {
+        String hql;
+
+        hql = "from Usuario u "
+                + "where lower(u.login) like lower('%" + login + "%')";
+
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
+
+    public ArrayList<Usuario> queryUsuarioByPerfilUsuario(String perfil)
+    {
+        String hql;
+
+        hql = "from Usuario u "
+                + "where lower(u.perfil) like lower('%" + perfil + "%')";
+
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
+
+    public ArrayList<Usuario> queryUsuarioByEmailUsuario(String email)
+    {
+        String hql;
+
+        hql = "from Usuario u "
+                + "where lower(u.email) like lower('%" + email + "%')";
+
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
 
     public ArrayList<Usuario> queryUsuarioByLogin(String login, String senha)
     {

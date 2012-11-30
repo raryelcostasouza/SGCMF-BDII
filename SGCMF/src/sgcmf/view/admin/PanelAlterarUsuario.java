@@ -44,6 +44,13 @@ public class PanelAlterarUsuario extends JPanel {
     JTextField jtfCPF = new JTextField(10);
     CtrUsuario ctrUsuario = new CtrUsuario();
 
+    JRadioButton jrbNome = new JRadioButton("Nome");
+    JRadioButton jrbPerfil = new JRadioButton("Perfil");
+    JRadioButton jrbLogin = new JRadioButton("Login");
+    JRadioButton jrbEmail = new JRadioButton("Email");
+    private JTableSGCMF jt;
+    JTextField jtfPesquisar = new JTextField(15);
+
     public PanelAlterarUsuario()
     {
         setLayout(new BorderLayout());
@@ -68,13 +75,17 @@ public class PanelAlterarUsuario extends JPanel {
         JPanel jpEsquerda = new JPanel();
         JPanel jpDireita = new JPanel();
 
-        JTextField jtfPesquisar = new JTextField(15);
+        
 
-        JRadioButton jrbNome = new JRadioButton("Nome");
-        jrbNome.setSelected(true);
-        JRadioButton jrbPerfil = new JRadioButton("Perfil");
-        JRadioButton jrbLogin = new JRadioButton("Login");
-        JRadioButton jrbEmail = new JRadioButton("Email");
+        jtfPesquisar = new JTextField(15);
+        jtfPesquisar.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                pesquisar(jtfPesquisar.getText());
+            }
+        });
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(jrbNome);
@@ -103,7 +114,7 @@ public class PanelAlterarUsuario extends JPanel {
         {
             "Login", "Senha", "Perfil", "Nome", "E-mail", "CPF"
         };
-        JTableSGCMF jt = new JTableSGCMF(null, nomeColunas);
+        jt = new JTableSGCMF(null, nomeColunas);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -127,6 +138,9 @@ public class PanelAlterarUsuario extends JPanel {
         UtilView.alinhaLabel(jlEmail);
         JLabel jlCPF = new JLabel("CPF:");
         UtilView.alinhaLabel(jlCPF);
+
+
+        jrbNome.setSelected(true);
 
         jbAlterar.addActionListener(new ActionListener()
         {
@@ -194,5 +208,22 @@ public class PanelAlterarUsuario extends JPanel {
         jtfEmail.setText("");
         jtfLogin.setText("");
         jtfSenha.setText("");
+    }
+
+     private void pesquisar(String chavePesquisa)
+    {
+        String[][] dadosUsuarios;
+        if (jrbNome.isSelected())
+        {
+    //        dadosUsuarios = ctrUsuario.queryAllDataJogadorByNomeAndByUser(chavePesquisa, ctrTecnico.getUser());
+        }
+        else
+        {
+   //         dadosUsuarios = ctrUsuario.queryAllDataJogadorByPosicaoAndByUser(chavePesquisa, ctrTecnico.getUser());
+
+        }
+        //limparParteCampos();
+        travarBotoes();
+     //   jt.preencheTabela(dadosUsuarios);
     }
 }

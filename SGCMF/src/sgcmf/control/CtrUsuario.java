@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
+import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.UsuarioDAO;
 import sgcmf.model.hibernate.Usuario;
@@ -55,6 +56,74 @@ public class CtrUsuario
         usuarioDAO.fecharSessao();
 
         return dadosUsuarios;
+    }
+
+    public Object[][] queryUsuarioByNomeUsuario(String nome)
+    {
+        UsuarioDAO sDAO;
+        ArrayList<Usuario> alUsuario;
+        Object[][] dadosUsuario;
+
+        SGCMFSessionManager.abrirSessao();
+        sDAO = UsuarioDAO.getInstance();
+
+        alUsuario = sDAO.queryUsuarioByNomeUsuario(nome);
+        dadosUsuario = arrayList2StringMatrix(alUsuario);
+
+        SGCMFSessionManager.fecharSessao();
+
+        return dadosUsuario;
+    }
+
+    public Object[][] queryUsuarioByPerfilUsuario(String perfil)
+    {
+        UsuarioDAO sDAO;
+        ArrayList<Usuario> alUsuario;
+        Object[][] dadosUsuario;
+
+        SGCMFSessionManager.abrirSessao();
+        sDAO = UsuarioDAO.getInstance();
+
+        alUsuario = sDAO.queryUsuarioByPerfilUsuario(perfil);
+        dadosUsuario = arrayList2StringMatrix(alUsuario);
+
+        SGCMFSessionManager.fecharSessao();
+
+        return dadosUsuario;
+    }
+
+    public Object[][] queryUsuarioByLoginUsuario(String login)
+    {
+        UsuarioDAO sDAO;
+        ArrayList<Usuario> alUsuario;
+        Object[][] dadosUsuario;
+
+        SGCMFSessionManager.abrirSessao();
+        sDAO = UsuarioDAO.getInstance();
+
+        alUsuario = sDAO.queryUsuarioByLoginUsuario(login);
+        dadosUsuario = arrayList2StringMatrix(alUsuario);
+
+        SGCMFSessionManager.fecharSessao();
+
+        return dadosUsuario;
+    }
+
+    public Object[][] queryUsuarioByEmailUsuario(String email)
+    {
+        UsuarioDAO sDAO;
+        ArrayList<Usuario> alUsuario;
+        Object[][] dadosUsuario;
+
+        SGCMFSessionManager.abrirSessao();
+        sDAO = UsuarioDAO.getInstance();
+
+        alUsuario = sDAO.queryUsuarioByEmailUsuario(email);
+        dadosUsuario = arrayList2StringMatrix(alUsuario);
+
+        SGCMFSessionManager.fecharSessao();
+
+        return dadosUsuario;
     }
 
     private String[][] arrayList2StringMatrix(ArrayList<Usuario> alUsuario)
