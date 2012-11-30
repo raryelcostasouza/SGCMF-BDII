@@ -194,4 +194,28 @@ public class CtrGol
 
         return dadosGol;
     }
+    
+    public int[] pesquisarGols(Short idSelecao)
+    {
+        GolDAO golDao;
+
+        int qtdeGolsPro;
+        int qtdeGolsSofridos = 0;
+        int saldoGols = 0;
+        int[] gols;
+
+        gols = new int[3];
+        SGCMFSessionManager.abrirSessao();
+        golDao = GolDAO.getInstance();
+        qtdeGolsPro = golDao.queryNumGolsMarcadosSelecao(idSelecao);
+        qtdeGolsSofridos = golDao.queryQtdeGolsSofridos(idSelecao);
+        SGCMFSessionManager.fecharSessao();
+        saldoGols = qtdeGolsPro - qtdeGolsSofridos;
+        
+        gols[0] = qtdeGolsPro;
+        gols[1] = qtdeGolsSofridos;
+        gols[2] = saldoGols;
+
+        return gols;
+    }
 }

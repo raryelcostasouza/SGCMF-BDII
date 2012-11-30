@@ -14,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import sgcmf.control.CtrCartao;
+import sgcmf.control.CtrFalta;
+import sgcmf.control.CtrGol;
 import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrMain;
 import sgcmf.control.CtrRelatorio;
@@ -33,6 +36,9 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
     private CtrRelatorio ctrRelatorio;
     private CtrSelecao ctrSelecao;
     private CtrJogo ctrJogo;
+    private CtrGol ctrGol;
+    private CtrCartao ctrCartao;
+    private CtrFalta ctrFalta;
     private LimSelecionarSelecao limSelecionarSelecao;
     private CtrMain ctrMain;
     private JTextField jtfSelecao;
@@ -54,6 +60,9 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         ctrMain = ctrRelatorio.getCtrMain();
         ctrSelecao = ctrMain.getCtrSelecao();
         ctrJogo = ctrMain.getCtrJogo();
+        ctrGol = ctrMain.getCtrGol();
+        ctrFalta = ctrMain.getCtrFalta();
+        ctrCartao = ctrMain.getCtrCartao();
         limSelecionarSelecao = new LimSelecionarSelecao(ctrSelecao);
         this.setLayout(new BorderLayout());
         add(panelNorte(), BorderLayout.NORTH);
@@ -197,11 +206,13 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         AproveitamentoSelecao objAproveitamentoSelecao;
         int qtdeFaltas;
         int qtdeCartoes;
+        int[] gols;
         //Recebendo os campos
         nomeSelecao = ctrSelecao.pesquisarNomeSelecao(idSelecao);
         objAproveitamentoSelecao = ctrJogo.calculaNumVitoriasDerrotaEmpate(idSelecao);
-        qtdeFaltas = ctrSelecao.calculaNumFaltas(idSelecao);
-        qtdeCartoes = ctrSelecao.calculaNumCartoes(idSelecao);
+        qtdeFaltas = ctrFalta.calculaNumFaltas(idSelecao);
+        qtdeCartoes = ctrCartao.calculaNumCartoes(idSelecao);
+        gols = ctrGol.pesquisarGols(idSelecao);
         //Atulizando os TextFields
         jtfNomeSelecao.setText(nomeSelecao);
         jtfJogosDisputados.setText(objAproveitamentoSelecao.getJogosDisputados() + "");
@@ -211,7 +222,9 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         jtfAproveitamento.setText(objAproveitamentoSelecao.getAproveitamento() + "%");
         jtfFaltas.setText(qtdeFaltas + "");
         jtfCartoes.setText(qtdeCartoes + "");
-        
+        jtfGolsPro.setText(gols[0] + "");
+        jtfGolsContra.setText(gols[1] + "");
+        jtfSaldoGols.setText(gols[2] + "");
     }
     
     public void limparTela()

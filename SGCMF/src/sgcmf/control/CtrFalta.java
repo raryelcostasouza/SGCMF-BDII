@@ -212,4 +212,16 @@ public class CtrFalta
     {
         return ctrMain.getCtrCartao();
     }
+    
+    public int calculaNumFaltas(Short idSelecao)
+    {
+        FaltaDAO faltaDao;
+        int qtdeFaltas;
+        SGCMFSessionManager.abrirSessao();
+        faltaDao = FaltaDAO.getInstance();
+        qtdeFaltas = faltaDao.queryQtdeFaltasSelecao(idSelecao);
+        SGCMFSessionManager.fecharSessao();
+
+        return qtdeFaltas;
+    }
 }

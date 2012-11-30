@@ -242,4 +242,16 @@ public class CtrCartao
 
         return result;
     }
+    
+    public int calculaNumCartoes(Short idSelecao)
+    {
+        CartaoDAO cartaoDao;
+        int qtdeCartoes;
+        SGCMFSessionManager.abrirSessao();
+        cartaoDao = CartaoDAO.getInstance();
+        qtdeCartoes = cartaoDao.queryQtdeCartoesSelecao(idSelecao);
+        SGCMFSessionManager.fecharSessao();
+
+        return qtdeCartoes;
+    }
 }
