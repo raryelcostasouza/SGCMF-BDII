@@ -30,7 +30,6 @@ public class LimGerenciarRelatorio extends JDialog
         setTitle("Relatórios");
 
         setResizable(false);
-        setModal(true);
 
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
@@ -56,7 +55,7 @@ public class LimGerenciarRelatorio extends JDialog
                 String tituloAba = jtp.getTitleAt(jtp.getSelectedIndex());
                 if (tituloAba.equals("Relatório para Seleção"))
                 {
-                    setSize(600, 300);
+                    setSize(400, 300);
                 }
                 else if (tituloAba.equals("Relatório para Jogo"))
                 {

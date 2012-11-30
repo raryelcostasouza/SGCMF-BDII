@@ -40,20 +40,12 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
     private CtrGol ctrGol;
     private CtrCartao ctrCartao;
     private CtrFalta ctrFalta;
+    private JButton jbRelatorio;
     private LimSelecionarSelecao limSelecionarSelecao;
     private CtrMain ctrMain;
-    private JTextField jtfSelecao;
-    private JTextField jtfNomeSelecao;
-    private JTextField jtfJogosDisputados;
-    private JTextField jtfVitorias;
-    private JTextField jtfDerrotas;
-    private JTextField jtfEmpates;
-    private JTextField jtfAproveitamento;
-    private JTextField jtfFaltas;
-    private JTextField jtfCartoes;
-    private JTextField jtfGolsPro;
-    private JTextField jtfGolsContra;
-    private JTextField jtfSaldoGols;
+    private JTextField jtfSelecaoI;
+    private JTextField jtfSelecaoII;
+    private boolean clicadoI = false;
     
     public PanelRelatorioSelecao(CtrRelatorio ctrRelatorio)
     {
@@ -72,128 +64,86 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
     
     private JPanel panelNorte()
     {
-        JPanel jpPrincipal = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel jlSelecao = new JLabel("Seleção:");
-        UtilView.alinhaLabel(jlSelecao);
-        jtfSelecao = new JTextField(10);
-        jtfSelecao.setEditable(false);
-        JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
-        jbPesquisar.addActionListener(new ActionListener()
+        JPanel jpPrincipal = new JPanel(new GridLayout(2, 1));
+        JPanel jpAuxI = new JPanel(new GridLayout(1, 3));
+        JPanel jpAuxII = new JPanel(new GridLayout(1, 3));
+        JLabel jlSelecaoI = new JLabel("Seleção I:");
+        UtilView.alinhaLabel(jlSelecaoI);
+        JLabel jlSelecaoII = new JLabel("Seleção II:");
+        UtilView.alinhaLabel(jlSelecaoII);
+        
+        jtfSelecaoI = new JTextField(10);
+        jtfSelecaoI.setEditable(false);
+        jtfSelecaoII = new JTextField(10);
+        jtfSelecaoII.setEditable(false);
+        
+        JButton jbPesquisarI = new JButton(SGCMFIcons.PESQUISAR);
+        jbPesquisarI.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                clicadoI = true;
+                ativaTelaSelecionarSelecao();
+                verificaTextFieldsPreenchidos();
+            }
+        });
+        
+        JButton jbPesquisarII = new JButton(SGCMFIcons.PESQUISAR);
+        jbPesquisarII.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 ativaTelaSelecionarSelecao();
+                verificaTextFieldsPreenchidos();
             }
         });
-        UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
-        jpPrincipal.add(jlSelecao);
-        jpPrincipal.add(jtfSelecao);
-        jpPrincipal.add(jbPesquisar);
+        UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisarI);
+        UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisarII);
+        jpAuxI.add(UtilView.putComponentInFlowLayoutPanel(jlSelecaoI));
+        jpAuxI.add(UtilView.putComponentInFlowLayoutPanel(jtfSelecaoI));
+        jpAuxI.add(UtilView.putComponentInFlowLayoutPanel(jbPesquisarI));
+        jpAuxII.add(UtilView.putComponentInFlowLayoutPanel(jlSelecaoII));
+        jpAuxII.add(UtilView.putComponentInFlowLayoutPanel(jtfSelecaoII));
+        jpAuxII.add(UtilView.putComponentInFlowLayoutPanel(jbPesquisarII));
+        jpPrincipal.add(jpAuxI);
+        jpPrincipal.add(jpAuxII);
+        
         jpPrincipal.setBorder(BorderFactory.createTitledBorder("Buscar por:"));
         return jpPrincipal;
     }
     
     private JPanel panelCentral()
     {
-        JPanel jpPrincipal = new JPanel(new BorderLayout());
-        jpPrincipal.add(panelCentralEsquerda(), BorderLayout.WEST);
-        jpPrincipal.add(panelCentralDireita(), BorderLayout.EAST);
+        JPanel jpPrincipal = new JPanel();
+        jbRelatorio = new JButton("Gerar Relatório");
+        jbRelatorio.setEnabled(false);
+        jbRelatorio.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ctrRelatorio.gerarRelatorio(jtfSelecaoI.getText(), jtfSelecaoII.getText());
+            }
+        });
         
-        return jpPrincipal;
-    }
-    
-    private JPanel panelCentralEsquerda()
-    {
-        JPanel jpPrincipal = new JPanel(new GridLayout(6, 2));
-        
-        JLabel jlNomeSelecao = new JLabel("Nome da Seleção:");
-        UtilView.alinhaLabel(jlNomeSelecao);
-        JLabel jlJogosDisputados = new JLabel("Jogos Disputados:");
-        UtilView.alinhaLabel(jlJogosDisputados);
-        JLabel jlVitorias = new JLabel("Vitórias:");
-        UtilView.alinhaLabel(jlVitorias);
-        JLabel jlDerrotas = new JLabel("Derrotas:");
-        UtilView.alinhaLabel(jlDerrotas);
-        JLabel jlEmpates = new JLabel("Empates:");
-        UtilView.alinhaLabel(jlEmpates);
-        JLabel jlAproveitamento = new JLabel("Aproveitamento:");
-        UtilView.alinhaLabel(jlAproveitamento);
-        
-        jtfNomeSelecao = new JTextField(10);
-        jtfNomeSelecao.setEditable(false);
-        jtfJogosDisputados = new JTextField(10);
-        jtfJogosDisputados.setEditable(false);
-        jtfVitorias = new JTextField(10);
-        jtfVitorias.setEditable(false);
-        jtfDerrotas = new JTextField(10);
-        jtfDerrotas.setEditable(false);
-        jtfEmpates = new JTextField(10);
-        jtfEmpates.setEditable(false);
-        jtfAproveitamento = new JTextField(10);
-        jtfAproveitamento.setEditable(false);
-        
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlNomeSelecao));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfNomeSelecao, FlowLayout.LEFT));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlJogosDisputados));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfJogosDisputados, FlowLayout.LEFT));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlVitorias));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfVitorias, FlowLayout.LEFT));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlDerrotas));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfDerrotas, FlowLayout.LEFT));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlEmpates));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfEmpates, FlowLayout.LEFT));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlAproveitamento));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfAproveitamento, FlowLayout.LEFT));
-        
-        return jpPrincipal;
-    }
-    
-    private JPanel panelCentralDireita()
-    {
-        JPanel jpPrincipal = new JPanel(new GridLayout(5, 2));
-        
-        JLabel jlFaltas = new JLabel("Faltas:");
-        UtilView.alinhaLabel(jlFaltas);
-        JLabel jlCartoes = new JLabel("Cartões:");
-        UtilView.alinhaLabel(jlCartoes);
-        JLabel jlGolsPro = new JLabel("Gols Pró:");
-        UtilView.alinhaLabel(jlGolsPro);
-        JLabel jlGolsContra = new JLabel("Gols Contra:");
-        UtilView.alinhaLabel(jlGolsContra);
-        JLabel jlSaldoGols = new JLabel("Saldo Gols:");
-        UtilView.alinhaLabel(jlSaldoGols);
-        
-        jtfFaltas = new JTextField(10);
-        jtfFaltas.setEditable(false);
-        jtfCartoes = new JTextField(10);
-        jtfCartoes.setEditable(false);
-        jtfGolsPro = new JTextField(10);
-        jtfGolsPro.setEditable(false);
-        jtfGolsContra = new JTextField(10);
-        jtfGolsContra.setEditable(false);
-        jtfSaldoGols = new JTextField(10);
-        jtfSaldoGols.setEditable(false);
-        
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlFaltas));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfFaltas, FlowLayout.LEFT));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlCartoes));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfCartoes, FlowLayout.LEFT));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlGolsPro));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfGolsPro, FlowLayout.LEFT));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlGolsContra));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfGolsContra, FlowLayout.LEFT));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlSaldoGols));
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jtfSaldoGols, FlowLayout.LEFT));
-        
+        jpPrincipal.add(jbRelatorio);
         return jpPrincipal;
     }
     
     @Override
     public void selecaoSelecionada(Short idSelecao)
     {
-        jtfSelecao.setText(idSelecao + "");
-        preencheTextFields(idSelecao);
+        if (clicadoI)
+        {
+            jtfSelecaoI.setText(idSelecao + "");
+            clicadoI = false;
+        }
+        else
+        {
+            jtfSelecaoII.setText(idSelecao + "");
+        }
     }
     
     private void ativaTelaSelecionarSelecao()
@@ -201,46 +151,22 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         limSelecionarSelecao.ativaTela(this);
     }
     
-    private void preencheTextFields(Short idSelecao)
-    {
-        String nomeSelecao;
-        AproveitamentoSelecao objAproveitamentoSelecao;
-        int qtdeFaltas;
-        int qtdeCartoes;
-        ResultadoGolsSelecao rgs;
-        //Recebendo os campos
-        nomeSelecao = ctrSelecao.pesquisarNomeSelecao(idSelecao);
-        objAproveitamentoSelecao = ctrJogo.calculaNumVitoriasDerrotaEmpate(idSelecao);
-        qtdeFaltas = ctrFalta.calculaNumFaltas(idSelecao);
-        qtdeCartoes = ctrCartao.calculaNumCartoes(idSelecao);
-        rgs = ctrGol.calculaResultadoGolsSelecaoRelatorio(idSelecao);
-        //Atulizando os TextFields
-        jtfNomeSelecao.setText(nomeSelecao);
-        jtfJogosDisputados.setText(objAproveitamentoSelecao.getJogosDisputados() + "");
-        jtfVitorias.setText(objAproveitamentoSelecao.getVitorias() + "");
-        jtfDerrotas.setText(objAproveitamentoSelecao.getDerrotas() + "");
-        jtfEmpates.setText(objAproveitamentoSelecao.getEmpates() + "");
-        jtfAproveitamento.setText(objAproveitamentoSelecao.getAproveitamento() + "%");
-        jtfFaltas.setText(qtdeFaltas + "");
-        jtfCartoes.setText(qtdeCartoes + "");
-        jtfGolsPro.setText(rgs.getNumGolsMarcados() + "");
-        jtfGolsContra.setText(rgs.getNumGolsSofridos() + "");
-        jtfSaldoGols.setText(rgs.getSaldoGols() + "");
-    }
-    
     public void limparTela()
     {
-        jtfSelecao.setText("");
-        jtfNomeSelecao.setText("");
-        jtfJogosDisputados.setText("");
-        jtfVitorias.setText("");
-        jtfDerrotas.setText("");
-        jtfEmpates.setText("");
-        jtfAproveitamento.setText("");
-        jtfFaltas.setText("");
-        jtfCartoes.setText("");
-        jtfGolsPro.setText("");
-        jtfGolsContra.setText("");
-        jtfSaldoGols.setText("");
+        jbRelatorio.setEnabled(false);
+        jtfSelecaoI.setText("");
+        jtfSelecaoII.setText("");
+    }
+    
+    private void verificaTextFieldsPreenchidos()
+    {
+        if ((jtfSelecaoI.getText().equals("")) || (jtfSelecaoII.getText().equals("")))
+        {
+            jbRelatorio.setEnabled(false);
+        }
+        else
+        {
+            jbRelatorio.setEnabled(true);
+        }
     }
 }
