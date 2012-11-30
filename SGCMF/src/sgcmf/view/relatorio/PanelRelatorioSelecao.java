@@ -212,7 +212,7 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         objAproveitamentoSelecao = ctrJogo.calculaNumVitoriasDerrotaEmpate(idSelecao);
         qtdeFaltas = ctrFalta.calculaNumFaltas(idSelecao);
         qtdeCartoes = ctrCartao.calculaNumCartoes(idSelecao);
-        gols = ctrGol.pesquisarGols(idSelecao);
+        //gols = ctrGol.pesquisarGols(idSelecao);
         //Atulizando os TextFields
         jtfNomeSelecao.setText(nomeSelecao);
         jtfJogosDisputados.setText(objAproveitamentoSelecao.getJogosDisputados() + "");
@@ -222,9 +222,9 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         jtfAproveitamento.setText(objAproveitamentoSelecao.getAproveitamento() + "%");
         jtfFaltas.setText(qtdeFaltas + "");
         jtfCartoes.setText(qtdeCartoes + "");
-        jtfGolsPro.setText(gols[0] + "");
+        /*jtfGolsPro.setText(gols[0] + "");
         jtfGolsContra.setText(gols[1] + "");
-        jtfSaldoGols.setText(gols[2] + "");
+        jtfSaldoGols.setText(gols[2] + "");*/
     }
     
     public void limparTela()
