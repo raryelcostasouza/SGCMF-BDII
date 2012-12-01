@@ -38,7 +38,7 @@ public class LimTecnico extends JFrame
         setIconImage(SGCMFIcons.LOGO.getImage());
         limGerenciarJogador = new LimGerenciarJogador(ctrTecnico);
         
-        setTitle("Usuário Técnico da Seleção");
+        setTitle("SGCMF | Usuário Técnico da Seleção");
         add(montaPainel());
         pack();
         setLocationRelativeTo(null);
