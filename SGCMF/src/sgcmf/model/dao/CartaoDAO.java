@@ -66,7 +66,7 @@ public class CartaoDAO
         String hql;
         int qtdeCartoes;
         hql = "select count(c.id) from Cartao c where c.jogador.selecao.id = " + idSelecao;
-        qtdeCartoes = Integer.parseInt(SGCMFSessionManager.abrirSessao().createQuery(hql).uniqueResult().toString());
+        qtdeCartoes = Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
 
         return qtdeCartoes;
 
@@ -78,9 +78,19 @@ public class CartaoDAO
         int qtdeCartoes;
         hql = "select count(c.id)"
                 + " from Cartao c "
-                + "where c.ocorrencia.jogo.id = " + idJogo + " and c.cor = '" + cor + 
-                "' and c.jogador.selecao.id = " + idSelecao;
-        qtdeCartoes = Integer.parseInt(SGCMFSessionManager.abrirSessao().createQuery(hql).uniqueResult().toString());
+                + "where c.ocorrencia.jogo.id = " + idJogo + " and c.cor = '" + cor
+                + "' and c.jogador.selecao.id = " + idSelecao;
+        qtdeCartoes = Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
+
+        return qtdeCartoes;
+    }
+
+    public int queryQtdeCartoesJogador(Short id)
+    {
+        String hql;
+        int qtdeCartoes;
+        hql = "select count(c.id) from Cartao c where c.jogador.id = " + id;
+        qtdeCartoes = Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
 
         return qtdeCartoes;
     }

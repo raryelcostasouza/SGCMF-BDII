@@ -45,7 +45,7 @@ public class FaltaDAO
         hql = "from Falta f "
                 + "where f.ocorrencia.jogo.id = " + idJogo + " order by f.ocorrencia.instantetempo";
 
-        return (ArrayList<Falta>) SGCMFSessionManager.abrirSessao().createQuery(hql).list();
+        return (ArrayList<Falta>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public int queryQtdeFaltasSelecao(Short idSelecao)
@@ -53,7 +53,7 @@ public class FaltaDAO
         String hql;
         int qtdeFaltas;
         hql = "select count(f.idoc) from Falta f where f.jogador.selecao.id = " + idSelecao + "";
-        qtdeFaltas = Integer.parseInt(SGCMFSessionManager.abrirSessao().createQuery(hql).uniqueResult().toString());
+        qtdeFaltas = Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
         return qtdeFaltas;
     }
 
@@ -64,7 +64,16 @@ public class FaltaDAO
         hql = "select count(f.idoc) "
                 + "from Falta f "
                 + "where f.jogador.selecao.id = " + idSelecao + " and f.ocorrencia.jogo.id = " + idJogo;
-        qtdeFaltas = Integer.parseInt(SGCMFSessionManager.abrirSessao().createQuery(hql).uniqueResult().toString());
+        qtdeFaltas = Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
+        return qtdeFaltas;
+    }
+
+    public int queryQtdeFaltasJogador(Short id)
+    {
+        String hql;
+        int qtdeFaltas;
+        hql = "select count(f.idoc) from Falta f where f.jogador.id = " + id;
+        qtdeFaltas = Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult().toString());
         return qtdeFaltas;
     }
 }
