@@ -20,17 +20,19 @@ import sgcmf.control.CtrUsuario;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
+import sgcmf.view.table.DefaultTableModelC1;
+import sgcmf.view.table.JLabelTableCellRenderer;
 import sgcmf.view.table.JTableSGCMF;
+import sgcmf.view.table.ReceiveRowDataSGCMF;
 
 /**
  *
  * @author Thatiane
  */
-public class PanelAlterarUsuario extends JPanel {
+public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
 
 
     JButton jbAlterar = new JButton("Alterar");
-    private JComboBox jcbPerfil;
     private String[] items =
         {
             "Administrador", "Tecnico da selecao", "Membro Comite",
@@ -39,6 +41,7 @@ public class PanelAlterarUsuario extends JPanel {
 
     JTextField jtfLogin = new JTextField(10);
     JTextField jtfSenha = new JTextField(10);
+    JTextField jtfPerfil = new JTextField(10);
     JTextField jtfNome = new JTextField(10);
     JTextField jtfEmail = new JTextField(10);
     JTextField jtfCPF = new JTextField(10);
@@ -62,7 +65,7 @@ public class PanelAlterarUsuario extends JPanel {
         JPanel jpNorth = montaPainelNorte();
         JScrollPane jpCenter = montaPainelCentral();
         JPanel jpSouth = montaPainelSouth();
-
+        recarregaTodosusuarios();
         this.add(jpNorth,BorderLayout.NORTH);
         this.add(jpCenter,BorderLayout.CENTER);
         this.add(jpSouth,BorderLayout.SOUTH);
@@ -83,7 +86,7 @@ public class PanelAlterarUsuario extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                pesquisar(jtfPesquisar.getText());
+                pesquisa(jtfPesquisar.getText());
             }
         });
 
@@ -112,9 +115,12 @@ public class PanelAlterarUsuario extends JPanel {
     {
         String[] nomeColunas =
         {
-            "Login", "Senha", "Perfil", "Nome", "E-mail", "CPF"
+            "ID", "CPF", "E-mail", "Nome", "Login", "Senha", "Perfil"
         };
-        jt = new JTableSGCMF(null, nomeColunas);
+
+        jt = new JTableSGCMF(null, nomeColunas, this);
+        jt.setModel(new DefaultTableModelC1(null, nomeColunas));
+        jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -148,11 +154,9 @@ public class PanelAlterarUsuario extends JPanel {
             public void actionPerformed(ActionEvent e)
             {
                 ResultadoOperacao resultado;
-
-                String perfil = (String) jcbPerfil.getSelectedItem();
                 
                 resultado = ctrUsuario.alterarUsuario(jtfCPF.getText(),jtfNome.getText(),
-                        jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
+                        jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), jtfPerfil.getText());
 
 
                 if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
@@ -169,19 +173,13 @@ public class PanelAlterarUsuario extends JPanel {
             }
         });
 
-
-        jcbPerfil = new JComboBox(items);
-        jcbPerfil.setEditable(false);
-        jcbPerfil.setPreferredSize(new Dimension(132, 20));
-
-        
+       
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfLogin, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfSenha, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlPerfil));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jcbPerfil, FlowLayout.LEFT));
-        jpAux.setBorder(BorderFactory.createEtchedBorder());
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfPerfil, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNome));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNome, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlEmail));
@@ -210,20 +208,56 @@ public class PanelAlterarUsuario extends JPanel {
         jtfSenha.setText("");
     }
 
-     private void pesquisar(String chavePesquisa)
+    private void pesquisa(String chavePesquisa)
     {
-        String[][] dadosUsuarios;
+        Object[][] dadosUsuarios = null;
+
         if (jrbNome.isSelected())
         {
-    //        dadosUsuarios = ctrUsuario.queryAllDataJogadorByNomeAndByUser(chavePesquisa, ctrTecnico.getUser());
+            dadosUsuarios = ctrUsuario.queryUsuarioByNomeUsuario(chavePesquisa);
+        }
+        else if (jrbPerfil.isSelected())
+        {
+            dadosUsuarios = ctrUsuario.queryUsuarioByPerfilUsuario(chavePesquisa);
+        }
+        else if (jrbLogin.isSelected())
+        {
+            dadosUsuarios = ctrUsuario.queryUsuarioByLoginUsuario(chavePesquisa);
         }
         else
         {
-   //         dadosUsuarios = ctrUsuario.queryAllDataJogadorByPosicaoAndByUser(chavePesquisa, ctrTecnico.getUser());
-
+            dadosUsuarios = ctrUsuario.queryUsuarioByEmailUsuario(chavePesquisa);
         }
-        //limparParteCampos();
-        travarBotoes();
-     //   jt.preencheTabela(dadosUsuarios);
+
+        jt.preencheTabela(dadosUsuarios);
+    }
+
+    @Override
+    public void receiveRowData(String[] dados)
+    {
+        jtfLogin.setText(dados[4]);
+        jtfNome.setText(dados[3]);
+        jtfEmail.setText(dados[2]);
+        jtfSenha.setText(dados[5]);
+        jtfCPF.setText(dados[1]);
+        jtfPerfil.setText(dados[6]);
+    }
+
+    public void limparTodosCampos()
+    {
+        jtfLogin.setText("");
+        jtfPesquisar.setText("");
+        jtfNome.setText("");
+        jtfEmail.setText("");
+        jtfSenha.setText("");
+        jtfCPF.setText("");
+    }
+
+    private void recarregaTodosusuarios()
+    {
+        Object[][] dadosUsuarios;
+
+        dadosUsuarios = ctrUsuario.queryUsuarioTodos();
+        jt.preencheTabela(dadosUsuarios);
     }
 }
