@@ -5,7 +5,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import sgcmf.control.CtrTabelaCampeonato;
-import sgcmf.model.other.ResultadoSelecao;
+import sgcmf.model.other.SGCMFIcons;
 
 public class LimTabelaCampeonato extends JDialog
 {
@@ -16,6 +16,7 @@ public class LimTabelaCampeonato extends JDialog
     public LimTabelaCampeonato(CtrTabelaCampeonato ctrTabelaCampeonato)
     {
         this.ctrTabelaCampeonato = ctrTabelaCampeonato;
+        setIconImage(SGCMFIcons.TABELA.getImage());
         setTitle("Tabela do Campeonato");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setResizable(false);
