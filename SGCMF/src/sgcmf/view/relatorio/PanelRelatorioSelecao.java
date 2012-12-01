@@ -59,7 +59,7 @@ public class PanelRelatorioSelecao extends JPanel implements ISelecionarSelecao
         limSelecionarSelecao = new LimSelecionarSelecao(ctrSelecao);
         this.setLayout(new BorderLayout());
         add(panelNorte(), BorderLayout.NORTH);
-        add(panelCentral(), BorderLayout.CENTER);
+        add(panelCentral(), BorderLayout.SOUTH);
     }
     
     private JPanel panelNorte()

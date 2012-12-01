@@ -55,12 +55,13 @@ public class LimGerenciarRelatorio extends JDialog
                 String tituloAba = jtp.getTitleAt(jtp.getSelectedIndex());
                 if (tituloAba.equals("Relatório para Seleção"))
                 {
-                    setSize(400, 300);
+                    setSize(400, 180);
                 }
                 else if (tituloAba.equals("Relatório para Jogo"))
                 {
                     setSize(590, 400);
                 }
+                panelRelatorioSelecao.limparTela();
                 setLocationRelativeTo(null);
             }
         });
