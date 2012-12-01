@@ -7,14 +7,18 @@ package sgcmf.view.relatorio;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import sgcmf.control.CtrRelatorio;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
+import sgcmf.view.comiteGestor.LimConsultarJogo;
 
 /**
  *
@@ -22,11 +26,16 @@ import sgcmf.view.UtilView;
  */
 public class PanelRelatorioJogo extends JPanel
 {
-    public PanelRelatorioJogo()
+    private LimSelecionarJogo limSelecionarJogo;
+    private JTextField jtfJogo;
+    
+    public PanelRelatorioJogo(CtrRelatorio ctrRelatorio)
     {
         this.setLayout(new BorderLayout());
         add(panelNorte(), BorderLayout.NORTH);
         add(panelCentral(), BorderLayout.CENTER);
+        limSelecionarJogo = new LimSelecionarJogo(ctrRelatorio.getCtrMain().getCtrJogo());
+        
     }
 
     private JPanel panelNorte()
@@ -34,10 +43,18 @@ public class PanelRelatorioJogo extends JPanel
         JPanel jpPrincipal = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel jlJogo = new JLabel("Jogo:");
         UtilView.alinhaLabel(jlJogo);
-        JTextField jtfJogo = new JTextField(10);
+        jtfJogo = new JTextField(10);
         jtfJogo.setEditable(false);
         JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
+        jbPesquisar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ativaTelaSelecionarJogo();
+            }
+        });
         jpPrincipal.add(jlJogo);
         jpPrincipal.add(jtfJogo);
         jpPrincipal.add(jbPesquisar);
@@ -51,9 +68,9 @@ public class PanelRelatorioJogo extends JPanel
         JPanel jpPrincipal = new JPanel(new BorderLayout());
         JSeparator js = new JSeparator(JSeparator.VERTICAL);
         jpPrincipal.add(panelCentralEsquerda(), BorderLayout.WEST);
-        jpPrincipal.add(js,BorderLayout.CENTER);
+        jpPrincipal.add(js, BorderLayout.CENTER);
         jpPrincipal.add(panelCentralDireita(), BorderLayout.EAST);
-        
+
         return jpPrincipal;
     }
 
@@ -159,5 +176,20 @@ public class PanelRelatorioJogo extends JPanel
         jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jlSelecaoII), BorderLayout.NORTH);
 
         return jpPrincipal;
+    }
+
+    private void ativaTelaSelecionarJogo()
+    {
+        limSelecionarJogo.ativaTela(this);
+    }
+    
+    public void preencherTextFieldJogo(String idJogo)
+    {
+        jtfJogo.setText(idJogo);
+    }
+    
+    public void preencheTextFields()
+    {
+        
     }
 }

@@ -26,7 +26,7 @@ public class LimGerenciarRelatorio extends JDialog
     {
         setIconImage(SGCMFIcons.RELATORIO.getImage());
         panelRelatorioSelecao = new PanelRelatorioSelecao(ctrRelatorio);
-        panelRelatorioJogo = new PanelRelatorioJogo();
+        panelRelatorioJogo = new PanelRelatorioJogo(ctrRelatorio);
         setTitle("Relatórios");
 
         setResizable(false);
