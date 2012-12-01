@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
@@ -14,7 +13,6 @@ import sgcmf.model.dao.CartaoDAO;
 import sgcmf.model.dao.FaltaDAO;
 import sgcmf.model.dao.GolDAO;
 import sgcmf.model.dao.JogadorDAO;
-import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.dao.SubstituicaoDAO;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Selecao;
@@ -235,7 +233,7 @@ public class CtrJogador
             {
                 titular = "Não";
             }
-            dadosJogadores[i][7] = titular;
+            dadosJogadores[i][7] = new Boolean(j.isTitular());
         }
 
         return dadosJogadores;

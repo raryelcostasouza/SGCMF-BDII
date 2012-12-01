@@ -255,7 +255,6 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     @Override
     public void receiveRowData(String[] dados)
     {
-        Short idSelecao;
         String s;
         jbAlterar.setEnabled(true);
         jtfNumeroCamisa.setText(dados[1]);
@@ -265,7 +264,6 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         jtfDataNascimento.setText(s);
         jtfAltura.setText(dados[4]);
         jcbPosicao.setSelectedItem((String) dados[5]);
-        idSelecao = ctrMain.getCtrSelecao().capturarIdSelecao(dados[6]);
     }
 
     public void travarBotoes()

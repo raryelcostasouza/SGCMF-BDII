@@ -18,13 +18,6 @@ public class DefaultTableModelC1 extends DefaultTableModelSGCMF
     @Override
     public Class<?> getColumnClass(int columnIndex)
     {
-        if (columnIndex == colunaJLabel)
-        {
-            return getValueAt(0, columnIndex).getClass();
-        }
-        else
-        {
-            return super.getColumnClass(columnIndex);
-        }
+        return getValueAt(0, columnIndex).getClass();
     }
 }

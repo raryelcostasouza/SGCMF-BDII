@@ -111,21 +111,6 @@ public class CtrSelecao
         return dadosSelecoes;
     }
 
-    public Short capturarIdSelecao(String nomeSelecao)
-    {
-        ArrayList alIdSelecao;
-        SelecaoDAO sDao;
-        Short idSelecao;
-
-        SGCMFSessionManager.abrirSessao();
-        sDao = SelecaoDAO.getInstance();
-        alIdSelecao = sDao.queryIdSelecao(nomeSelecao);
-        idSelecao = (Short) (alIdSelecao.get(0));
-        SGCMFSessionManager.fecharSessao();
-
-        return idSelecao;
-    }
-
     public String pesquisarNomeSelecao(Short idSelecao)
     {
         SelecaoDAO selecaoDAO;
