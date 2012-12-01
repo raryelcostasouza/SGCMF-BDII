@@ -1,6 +1,8 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
@@ -22,10 +24,10 @@ public class CtrSubstituicao
         this.ctrMain = ctrMain;
     }
 
-    public String[][] querySubstByIdJogo(Short idJogo)
+    public Object[][] querySubstByIdJogo(Short idJogo)
     {
         ArrayList<Substituicao> alSubst;
-        String[][] dadosCartao;
+        Object[][] dadosCartao;
 
         SGCMFSessionManager.abrirSessao();
         alSubst = SubstituicaoDAO.getInstance().querySubstByIdJogo(idJogo);
@@ -35,14 +37,14 @@ public class CtrSubstituicao
         return dadosCartao;
     }
 
-    public String[][] arrayList2StringMatrix(ArrayList<Substituicao> alSubst)
+    public Object[][] arrayList2StringMatrix(ArrayList<Substituicao> alSubst)
     {
-        String[][] dadosSubst;
+        Object[][] dadosSubst;
         Substituicao s;
         Jogador jEntrou;
         Jogador jSaiu;
 
-        dadosSubst = new String[alSubst.size()][6];
+        dadosSubst = new Object[alSubst.size()][6];
         for (int i = 0; i < alSubst.size(); i++)
         {
             s = alSubst.get(i);
@@ -52,7 +54,7 @@ public class CtrSubstituicao
 
             dadosSubst[i][0] = String.valueOf(s.getIdoc());
             dadosSubst[i][1] = String.valueOf(s.getOcorrencia().getInstantetempo());
-            dadosSubst[i][2] = String.valueOf(s.getJogadorByIdjogadorsaiu().getSelecao().getPais());
+            dadosSubst[i][2] = new JLabel(s.getJogadorByIdjogadorsaiu().getSelecao().getPais(), new ImageIcon(s.getJogadorByIdjogadorsaiu().getSelecao().getCaminhoimgbandeira()), JLabel.LEFT);
             dadosSubst[i][3] = "(" + jSaiu.getNcamisa() + ") " + jSaiu.getNome();
             dadosSubst[i][4] = "(" + jEntrou.getNcamisa() + ") " + jEntrou.getNome();
             dadosSubst[i][5] = s.getMotivo();

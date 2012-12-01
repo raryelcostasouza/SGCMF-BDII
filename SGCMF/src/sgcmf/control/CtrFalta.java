@@ -1,6 +1,8 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
@@ -13,6 +15,7 @@ import sgcmf.model.hibernate.Cartao;
 import sgcmf.model.hibernate.Falta;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Ocorrencia;
+import sgcmf.model.hibernate.Selecao;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
 
@@ -25,10 +28,10 @@ public class CtrFalta
         this.ctrMain = ctrMain;
     }
 
-    public String[][] queryFaltaByIdJogo(Short idJogo)
+    public Object[][] queryFaltaByIdJogo(Short idJogo)
     {
         ArrayList<Falta> alFalta;
-        String[][] dadosFalta;
+        Object[][] dadosFalta;
 
         SGCMFSessionManager.abrirSessao();
         alFalta = FaltaDAO.getInstance().queryFaltaByIdJogo(idJogo);
@@ -38,18 +41,21 @@ public class CtrFalta
         return dadosFalta;
     }
 
-    public String[][] arrayList2StringMatrix(ArrayList<Falta> alFalta)
+    public Object[][] arrayList2StringMatrix(ArrayList<Falta> alFalta)
     {
-        String[][] dadosFalta;
+        Object[][] dadosFalta;
         Falta f;
+        Selecao s;
 
-        dadosFalta = new String[alFalta.size()][6];
+        dadosFalta = new Object[alFalta.size()][6];
         for (int i = 0; i < alFalta.size(); i++)
         {
             f = alFalta.get(i);
             dadosFalta[i][0] = String.valueOf(f.getIdoc());
             dadosFalta[i][1] = String.valueOf(f.getOcorrencia().getInstantetempo());
-            dadosFalta[i][2] = f.getJogador().getSelecao().getPais();
+            s = f.getJogador().getSelecao();
+            
+            dadosFalta[i][2] = new JLabel(s.getPais(), new ImageIcon(s.getCaminhoimgbandeira()), JLabel.LEFT);
             dadosFalta[i][3] = f.getJogador().getNome();
 
             if (f.getCartao() != null)

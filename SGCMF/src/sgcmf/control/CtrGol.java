@@ -1,6 +1,8 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
@@ -27,10 +29,10 @@ public class CtrGol
         this.ctrMain = ctrMain;
     }
 
-    public String[][] queryGolByIdJogo(Short idJogo)
+    public Object[][] queryGolByIdJogo(Short idJogo)
     {
         ArrayList<Gol> alGol;
-        String[][] dadosGol;
+        Object[][] dadosGol;
 
         SGCMFSessionManager.abrirSessao();
         alGol = GolDAO.getInstance().queryGolByIdJogo(idJogo);
@@ -169,18 +171,18 @@ public class CtrGol
         return result;
     }
 
-    public String[][] arrayList2StringMatrix(ArrayList<Gol> alGol)
+    public Object[][] arrayList2StringMatrix(ArrayList<Gol> alGol)
     {
-        String[][] dadosGol;
+        Object[][] dadosGol;
         Gol g;
 
-        dadosGol = new String[alGol.size()][7];
+        dadosGol = new Object[alGol.size()][7];
         for (int i = 0; i < alGol.size(); i++)
         {
             g = alGol.get(i);
             dadosGol[i][0] = String.valueOf(g.getIdoc());
             dadosGol[i][1] = String.valueOf(g.getOcorrencia().getInstantetempo());
-            dadosGol[i][2] = g.getJogadorByIdjogadorautor().getSelecao().getPais();
+            dadosGol[i][2] = new JLabel(g.getJogadorByIdjogadorautor().getSelecao().getPais(), new ImageIcon(g.getJogadorByIdjogadorautor().getSelecao().getCaminhoimgbandeira()), JLabel.LEFT);
             dadosGol[i][3] = g.getJogadorByIdjogadorautor().getNome();
 
             if (g.getJogadorByIdjogadorassistencia() != null)

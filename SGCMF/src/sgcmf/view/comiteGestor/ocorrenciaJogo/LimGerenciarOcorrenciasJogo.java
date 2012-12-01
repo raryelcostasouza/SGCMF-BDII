@@ -23,6 +23,8 @@ import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
+import sgcmf.view.table.DefaultTableModelC1;
+import sgcmf.view.table.JLabelTableCellRenderer;
 import sgcmf.view.table.JTableSGCMF;
 
 public class LimGerenciarOcorrenciasJogo extends JDialog
@@ -186,6 +188,9 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             "ID", "Tempo", "Seleção", "Jogador Autor", "Jog. Assistente", "Tipo Gol", "Modo"
         };
         jtGol = new JTableSGCMF(null, nomesColunas);
+        jtGol.setModel(new DefaultTableModelC1(null, nomesColunas,2));
+        jtGol.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
+        jtGol.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jtGol, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         centerPanelGol.add(jsp, BorderLayout.CENTER);
@@ -213,6 +218,9 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             "ID", "Tempo", "Seleção",  "Jogador Autor", "Cartão", "Tipo"
         };
         jtFalta = new JTableSGCMF(null, nomesColunas);
+        jtFalta.setModel(new DefaultTableModelC1(null, nomesColunas,2));
+        jtFalta.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
+        jtFalta.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jtFalta, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         centerPanelFalta.add(jsp, BorderLayout.CENTER);
@@ -240,6 +248,10 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             "ID", "IDOc", "Tempo", "Seleção" ,"Jogador", "Cor"
         };
         jtCartao = new JTableSGCMF(null, nomesColunas);
+        jtCartao.setModel(new DefaultTableModelC1(null, nomesColunas,3));
+        jtCartao.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
+        jtCartao.setRowHeight(32);
+        
         JScrollPane jsp = new JScrollPane(jtCartao, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         centerPanelCartao.add(jsp, BorderLayout.CENTER);
@@ -267,6 +279,9 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             "ID", "Tempo", "Seleção", "Jogador Saiu", "Jogador Entrou", "Motivo"
         };
         jtSubst = new JTableSGCMF(null, nomesColunas);
+        jtSubst.setModel(new DefaultTableModelC1(null, nomesColunas,2));
+        jtSubst.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
+        jtSubst.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jtSubst, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         centerPanelSubst.add(jsp, BorderLayout.CENTER);
@@ -317,7 +332,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
     public void preencheTabelaGol()
     {
-        String[][] dadosGol;
+        Object[][] dadosGol;
 
         dadosGol = ctrComiteGestor.getCtrGol().queryGolByIdJogo(idJogo);
         jtGol.preencheTabela(dadosGol);
@@ -325,7 +340,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
     public void preencheTabelaFalta()
     {
-        String[][] dadosFalta;
+        Object[][] dadosFalta;
 
         dadosFalta = ctrComiteGestor.getCtrFalta().queryFaltaByIdJogo(idJogo);
         jtFalta.preencheTabela(dadosFalta);
@@ -333,7 +348,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     
     public void preencheTabelaCartao()
     {
-        String [][] dadosCartao;
+        Object [][] dadosCartao;
         
         dadosCartao = ctrComiteGestor.getCtrCartao().queryCartaoByIdJogo(idJogo);
         jtCartao.preencheTabela(dadosCartao);
@@ -341,7 +356,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     
     public void preencheTabelaSubstituicao()
     {
-        String[][] dadosSubst;
+        Object[][] dadosSubst;
         
         dadosSubst = ctrComiteGestor.getCtrSubstituicao().querySubstByIdJogo(idJogo);
         jtSubst.preencheTabela(dadosSubst);

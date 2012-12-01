@@ -2,6 +2,8 @@ package sgcmf.control;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
@@ -46,10 +48,10 @@ public class CtrCartao
         }
     }
     
-    public String[][] queryCartaoByIdJogo(Short idJogo)
+    public Object[][] queryCartaoByIdJogo(Short idJogo)
     {
         ArrayList<Cartao> alCartao;
-        String[][] dadosCartao;
+        Object[][] dadosCartao;
 
         SGCMFSessionManager.abrirSessao();
         alCartao = CartaoDAO.getInstance().queryCartaoByIdJogo(idJogo);
@@ -59,19 +61,19 @@ public class CtrCartao
         return dadosCartao;
     }
 
-    public String[][] arrayList2StringMatrix(ArrayList<Cartao> alCartao)
+    public Object[][] arrayList2StringMatrix(ArrayList<Cartao> alCartao)
     {
-        String[][] dadosCartao;
+        Object[][] dadosCartao;
         Cartao c;
 
-        dadosCartao = new String[alCartao.size()][6];
+        dadosCartao = new Object[alCartao.size()][6];
         for (int i = 0; i < alCartao.size(); i++)
         {
             c = alCartao.get(i);
             dadosCartao[i][0] = String.valueOf(c.getId());
             dadosCartao[i][1] = String.valueOf(c.getOcorrencia().getId());
             dadosCartao[i][2] = String.valueOf(c.getOcorrencia().getInstantetempo());
-            dadosCartao[i][3] = c.getJogador().getSelecao().getPais();
+            dadosCartao[i][3] = new JLabel(c.getJogador().getSelecao().getPais(), new ImageIcon(c.getJogador().getSelecao().getCaminhoimgbandeira()), JLabel.LEFT);
             dadosCartao[i][4] = c.getJogador().getNome();
             dadosCartao[i][5] = c.getCor();
         }
