@@ -5,7 +5,6 @@
 package sgcmf.view.tecnico;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -46,7 +45,6 @@ public class LimTecnico extends JFrame
         setVisible(false);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setResizable(false);
-        
         
         addWindowListener(new WindowAdapter()
         {
