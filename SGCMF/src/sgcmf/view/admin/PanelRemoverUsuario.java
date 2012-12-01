@@ -40,19 +40,14 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
     JRadioButton jrbLogin;
     JRadioButton jrbEmail;
 
-    String[] items =
-    {
-        "Administrador", "Tecnico da selecao", "Membro Comite",
-        "Entusiasta"
-    };
-
-    JComboBox jcbPerfil = new JComboBox(items);
+    
 
     JTextField jtfLogin = new JTextField(10);
     JTextField jtfSenha = new JTextField(10);
     JTextField jtfNome = new JTextField(10);
     JTextField jtfEmail = new JTextField(10);
     JTextField jtfCPF = new JTextField(10);
+    JTextField jtfPerfil = new JTextField(10);
     JButton jbRemover;
 
      public PanelRemoverUsuario()
@@ -153,9 +148,6 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
         JLabel jlCPF = new JLabel("CPF:");
         UtilView.alinhaLabel(jlCPF);
 
-        jcbPerfil.setEditable(false);
-        jcbPerfil.setPreferredSize(new Dimension(132, 20));
-
         //travarBotao();
         jbRemover = new JButton("Remover");
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
@@ -163,8 +155,7 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfSenha, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlPerfil));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jcbPerfil, FlowLayout.LEFT));
-        jpAux.setBorder(BorderFactory.createEtchedBorder());
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfPerfil, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNome));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNome, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlEmail));
@@ -237,7 +228,7 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
         jtfEmail.setText(dados[2]);
         jtfSenha.setText(dados[5]);
         jtfCPF.setText(dados[1]);
-        jrbPerfil.setText(dados[6]);
+        jtfPerfil.setText(dados[6]);
     }
 
     public void limparTodosCampos()
