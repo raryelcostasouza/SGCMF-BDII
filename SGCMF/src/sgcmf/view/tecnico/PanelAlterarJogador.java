@@ -27,6 +27,8 @@ import sgcmf.control.CtrTecnico;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
+import sgcmf.view.table.DefaultTableModelC1;
+import sgcmf.view.table.JLabelTableCellRenderer;
 import sgcmf.view.table.JTableSGCMF;
 import sgcmf.view.table.ReceiveRowDataSGCMF;
 
@@ -117,7 +119,9 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
             "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção", "Titular"
         };
         jt = new JTableSGCMF(null, nomeColunas, this);
-
+        jt.setModel(new DefaultTableModelC1(null, nomeColunas, 6));
+        jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
+        jt.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -226,14 +230,14 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
 
     public void ativaTela()
     {
-        String[][] dadosJogador;
+        Object[][] dadosJogador;
         dadosJogador = ctrJogador.queryAllDataJogadorTecnico(ctrTecnico.getUser());
         jt.preencheTabela(dadosJogador);
     }
 
     private void pesquisar(String chavePesquisa)
     {
-        String[][] dadosJogadores;
+        Object[][] dadosJogadores;
         if (jrbNome.isSelected())
         {
             dadosJogadores = ctrJogador.queryAllDataJogadorByNomeAndByUser(chavePesquisa, ctrTecnico.getUser());

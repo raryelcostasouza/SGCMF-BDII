@@ -131,10 +131,10 @@ public class CtrJogador
         return idSelecao;
     }
 
-    public String[][] queryAllDataJogadorTecnico(Usuario u)
+    public Object[][] queryAllDataJogadorTecnico(Usuario u)
     {
         JogadorDAO jDAO;
-        String[][] dadosJogadores;
+        Object[][] dadosJogadores;
         ArrayList alJogador;
         Selecao s;
 
@@ -150,10 +150,10 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public String[][] queryAllDataJogadorByNomeAndByUser(String nome, Usuario u)
+    public Object[][] queryAllDataJogadorByNomeAndByUser(String nome, Usuario u)
     {
         JogadorDAO jDAO;
-        String[][] dadosJogador;
+        Object[][] dadosJogador;
         ArrayList<Jogador> alJogador;
         Iterator iterator = u.getSelecaos().iterator();
         Selecao s;
@@ -168,10 +168,10 @@ public class CtrJogador
         return dadosJogador;
     }
 
-    public String[][] queryAllDataJogadorByPosicaoAndByUser(String posicao, Usuario u)
+    public Object[][] queryAllDataJogadorByPosicaoAndByUser(String posicao, Usuario u)
     {
         JogadorDAO jDAO;
-        String[][] dadosJogador;
+        Object[][] dadosJogador;
         ArrayList<Jogador> alJogador;
         Iterator iterator = u.getSelecaos().iterator();
         Selecao s;
@@ -208,13 +208,14 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    private String[][] arrayList2StringMatrixFull(ArrayList<Jogador> alJogador)
+    private Object[][] arrayList2StringMatrixFull(ArrayList<Jogador> alJogador)
     {
-        String[][] dadosJogadores;
+        Object[][] dadosJogadores;
         Jogador j;
         String titular;
+        Selecao s;
 
-        dadosJogadores = new String[alJogador.size()][8];
+        dadosJogadores = new Object[alJogador.size()][8];
         for (int i = 0; i < alJogador.size(); i++)
         {
             j = alJogador.get(i);
@@ -224,7 +225,8 @@ public class CtrJogador
             dadosJogadores[i][3] = String.valueOf(j.getDatanasc());
             dadosJogadores[i][4] = String.valueOf(j.getAltura());
             dadosJogadores[i][5] = j.getPosicao();
-            dadosJogadores[i][6] = j.getSelecao().getPais();
+            s = j.getSelecao();
+            dadosJogadores[i][6] = new JLabel(s.getPais(), new ImageIcon(s.getCaminhoimgbandeira()), JLabel.LEFT);
             if (j.isTitular())
             {
                 titular = "Sim";
