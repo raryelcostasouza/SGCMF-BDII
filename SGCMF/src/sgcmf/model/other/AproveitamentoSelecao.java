@@ -10,24 +10,17 @@ package sgcmf.model.other;
  */
 public class AproveitamentoSelecao
 {
-    private int jogosDisputados;
     private int vitorias;
     private int derrotas;
     private int empates;
     private float aproveitamento;
 
-    public AproveitamentoSelecao(int jogosDisputados, int vitorias, int derrotas, int empates, float aproveitamento)
+    public AproveitamentoSelecao(int vitorias, int derrotas, int empates, float aproveitamento)
     {
-        this.jogosDisputados = jogosDisputados;
         this.vitorias = vitorias;
         this.derrotas = derrotas;
         this.empates = empates;
         this.aproveitamento = aproveitamento;
-    }
-
-    public int getJogosDisputados()
-    {
-        return jogosDisputados;
     }
 
     public int getVitorias()

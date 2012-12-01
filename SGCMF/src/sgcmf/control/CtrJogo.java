@@ -2,9 +2,18 @@ package sgcmf.control;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.CartaoDAO;
 import sgcmf.model.dao.FaltaDAO;
@@ -19,7 +28,6 @@ import sgcmf.model.other.ModelRelatorioJogo;
 import sgcmf.model.other.ResultadoGolsSelecao;
 import sgcmf.model.other.ResultadoSelecao;
 import sgcmf.model.other.SGCMFDate;
-import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.comiteGestor.LimConsultarJogo;
 
 public class CtrJogo
@@ -177,7 +185,15 @@ public class CtrJogo
             dadosJogos[i][1] = j.getCidade();
             dadosJogos[i][2] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
             placar = geraPlacarJogo(j);
-            dadosJogos[i][3] = placar[0] + " x " + placar[1];
+            if (placar != null)
+            {
+                dadosJogos[i][3] = placar[0] + " x " + placar[1];
+            }
+            else
+            {
+                dadosJogos[i][3] = "";
+            }
+
             dadosJogos[i][4] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());
         }
 
@@ -213,29 +229,51 @@ public class CtrJogo
         return placar;
     }
 
-    public ModelRelatorioJogo geraRelatorioJogo(Short idJogo)
+    public void geraRelatorioJogo(Short idJogo)
     {
         int[] placar;
         int[] cartoesAmarelos;
         int[] cartoesVermelhos;
         int[] faltas;
         ModelRelatorioJogo mrljI;
+        ModelRelatorioJogo mrljII;
 
         Jogo j = new Jogo();
+        cartoesAmarelos = new int[2];
+        cartoesVermelhos = new int[2];
+        faltas = new int[2];
+
         JogoDAO jDAO;
         SGCMFSessionManager.abrirSessao();
         jDAO = JogoDAO.getInstance();
         jDAO.carregar(j, idJogo);
         placar = geraPlacarJogo(j);
-        cartoesAmarelos = qtdeCartoesByCor(j, "Amarelo");
-        cartoesVermelhos = qtdeCartoesByCor(j, "Vermelho");
-        faltas = qtdeFaltas(j);
-        mrljI = new ModelRelatorioJogo(placar[0], cartoesAmarelos[0], cartoesVermelhos[0], faltas[0]);
-        SGCMFSessionManager.fecharSessao();
+        if (placar != null)
+        {
+            cartoesAmarelos = qtdeCartoesByCor(j, "Amarelo");
+            cartoesVermelhos = qtdeCartoesByCor(j, "Vermelho");
+            faltas = qtdeFaltas(j);
+        }
+        else
+        {
+            placar = new int[2];
+            placar[0] = 0;
+            cartoesAmarelos[0] = 0;
+            cartoesVermelhos[0] = 0;
+            faltas[0] = 0;
+            placar[1] = 0;
+            cartoesAmarelos[1] = 0;
+            cartoesVermelhos[1] = 0;
+            faltas[1] = 0;
+        }
 
-        return mrljI;
+        mrljI = new ModelRelatorioJogo(placar[0], cartoesAmarelos[0], cartoesVermelhos[0], faltas[0],j.getSelecaoByIdselecaoi().getPais());
+        mrljII = new ModelRelatorioJogo(placar[1], cartoesAmarelos[1], cartoesVermelhos[1], faltas[1],j.getSelecaoByIdselecaoii().getPais());
+        SGCMFSessionManager.fecharSessao();
+        
+        montaRelatorioJogo(mrljI, mrljII);
     }
-    
+
     private int[] qtdeFaltas(Jogo j)
     {
         int[] faltas;
@@ -244,10 +282,10 @@ public class CtrJogo
         faltas = new int[2];
         faltas[0] = faltaDAO.queryQtdeFaltasByJogoBySelecao(j.getId(), j.getSelecaoByIdselecaoi().getId());
         faltas[1] = faltaDAO.queryQtdeFaltasByJogoBySelecao(j.getId(), j.getSelecaoByIdselecaoii().getId());
-        
+
         return faltas;
     }
-    
+
     private int[] qtdeCartoesByCor(Jogo j, String cor)
     {
         int[] cartoes;
@@ -385,7 +423,7 @@ public class CtrJogo
             aproveitamento = (vitoria * 100 + empate * 33) / (float) jogosDisputados;
         }
 
-        objAproveitamento = new AproveitamentoSelecao(jogosDisputados, vitoria, derrota, empate, aproveitamento);
+        objAproveitamento = new AproveitamentoSelecao(vitoria, derrota, empate, aproveitamento);
         SGCMFSessionManager.fecharSessao();
         return objAproveitamento;
     }
@@ -452,5 +490,23 @@ public class CtrJogo
         SGCMFSessionManager.fecharSessao();
 
         return infoJogo;
+    }
+    
+    private void montaRelatorioJogo(ModelRelatorioJogo mrjI, ModelRelatorioJogo mrjII)
+    {
+        ArrayList<ModelRelatorioJogo> lista = new ArrayList<ModelRelatorioJogo>();
+        lista.add(mrjI);
+        lista.add(mrjII);
+        JRDataSource jrds = new JRBeanCollectionDataSource(lista);
+        try
+        {
+            JasperReport jr = JasperCompileManager.compileReport("relatorio/RelatorioJogo.jrxml");
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, jrds);
+            JasperViewer.viewReport(jp, false);
+        }
+        catch (JRException ex)
+        {
+            Logger.getLogger(CtrRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

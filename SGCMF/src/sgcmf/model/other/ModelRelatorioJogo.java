@@ -14,13 +14,20 @@ public class ModelRelatorioJogo
     private int cartoesAmarelos;
     private int cartoesVermelhos;
     private int faltas;
+    private String selecao;
 
-    public ModelRelatorioJogo(int gols, int cartoesAmarelos, int cartoesVermelhos, int faltas)
+    public ModelRelatorioJogo(int gols, int cartoesAmarelos, int cartoesVermelhos, int faltas, String selecao)
     {
         this.gols = gols;
         this.cartoesAmarelos = cartoesAmarelos;
         this.cartoesVermelhos = cartoesVermelhos;
         this.faltas = faltas;
+        this.selecao = selecao;
+    }
+
+    public String getSelecao()
+    {
+        return selecao;
     }
 
     public int getGols()

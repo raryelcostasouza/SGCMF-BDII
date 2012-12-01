@@ -21,7 +21,8 @@ public class LimGerenciarRelatorio extends JDialog
 {
     private PanelRelatorioSelecao panelRelatorioSelecao;
     private PanelRelatorioJogo panelRelatorioJogo;
-
+    private JTabbedPane jtp;
+    
     public LimGerenciarRelatorio(CtrRelatorio ctrRelatorio)
     {
         setIconImage(SGCMFIcons.RELATORIO.getImage());
@@ -40,13 +41,15 @@ public class LimGerenciarRelatorio extends JDialog
             public void windowClosing(WindowEvent e)
             {
                 panelRelatorioSelecao.limparTela();
+                jtp.setSelectedIndex(0);
+                setLocationRelativeTo(null);
             }
         });
     }
 
     public JTabbedPane montaPanel()
     {
-        final JTabbedPane jtp = new JTabbedPane();
+        jtp = new JTabbedPane();
         jtp.addChangeListener(new ChangeListener()
         {
             @Override
@@ -59,9 +62,10 @@ public class LimGerenciarRelatorio extends JDialog
                 }
                 else if (tituloAba.equals("Relatório para Jogo"))
                 {
-                    setSize(590, 400);
+                    setSize(350, 150);
                 }
                 panelRelatorioSelecao.limparTela();
+                panelRelatorioJogo.limparTela();
                 setLocationRelativeTo(null);
             }
         });

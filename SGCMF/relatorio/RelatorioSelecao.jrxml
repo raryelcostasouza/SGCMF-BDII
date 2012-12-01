@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="1190" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="10288777-1dec-4a73-be5a-1479a024cb55">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="340"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -47,11 +47,11 @@
 		<band splitType="Stretch"/>
 	</detail>
 	<columnFooter>
-		<band height="643" splitType="Stretch">
+		<band height="629" splitType="Stretch">
 			<elementGroup>
 				<bar3DChart>
 					<chart>
-						<reportElement uuid="1af1d8df-83ad-405c-92c0-572ba810480a" x="2" y="224" width="139" height="171"/>
+						<reportElement uuid="1af1d8df-83ad-405c-92c0-572ba810480a" x="2" y="3" width="139" height="171"/>
 						<chartTitle>
 							<titleExpression><![CDATA["APROVEITAMENTO"]]></titleExpression>
 						</chartTitle>
@@ -72,7 +72,7 @@
 				</bar3DChart>
 				<bar3DChart>
 					<chart>
-						<reportElement uuid="12a6cf28-607d-417f-afde-499c15981638" x="217" y="224" width="141" height="174"/>
+						<reportElement uuid="12a6cf28-607d-417f-afde-499c15981638" x="2" y="221" width="141" height="174"/>
 						<chartTitle>
 							<titleExpression><![CDATA["FALTAS"]]></titleExpression>
 						</chartTitle>
@@ -93,7 +93,7 @@
 				</bar3DChart>
 				<bar3DChart>
 					<chart>
-						<reportElement uuid="12a6cf28-607d-417f-afde-499c15981638" x="433" y="224" width="141" height="174"/>
+						<reportElement uuid="12a6cf28-607d-417f-afde-499c15981638" x="217" y="221" width="141" height="174"/>
 						<chartTitle>
 							<titleExpression><![CDATA["CARTÕES"]]></titleExpression>
 						</chartTitle>
@@ -114,7 +114,7 @@
 				</bar3DChart>
 				<bar3DChart>
 					<chart>
-						<reportElement uuid="1af1d8df-83ad-405c-92c0-572ba810480a" x="663" y="224" width="139" height="171"/>
+						<reportElement uuid="1af1d8df-83ad-405c-92c0-572ba810480a" x="435" y="224" width="139" height="171"/>
 						<chartTitle>
 							<titleExpression><![CDATA["GOLS MARCADOS"]]></titleExpression>
 						</chartTitle>
@@ -135,7 +135,7 @@
 				</bar3DChart>
 				<bar3DChart>
 					<chart>
-						<reportElement uuid="12a6cf28-607d-417f-afde-499c15981638" x="433" y="442" width="141" height="174"/>
+						<reportElement uuid="12a6cf28-607d-417f-afde-499c15981638" x="325" y="448" width="141" height="174"/>
 						<chartTitle>
 							<titleExpression><![CDATA["SALDO GOLS"]]></titleExpression>
 						</chartTitle>
@@ -156,7 +156,7 @@
 				</bar3DChart>
 				<bar3DChart>
 					<chart>
-						<reportElement uuid="12a6cf28-607d-417f-afde-499c15981638" x="217" y="442" width="141" height="174"/>
+						<reportElement uuid="12a6cf28-607d-417f-afde-499c15981638" x="661" y="221" width="141" height="174"/>
 						<chartTitle>
 							<titleExpression><![CDATA["GOLS SOFRIDOS"]]></titleExpression>
 						</chartTitle>
@@ -211,27 +211,6 @@
 						<seriesExpression><![CDATA[$F{nomeSelecao}]]></seriesExpression>
 						<categoryExpression><![CDATA[""]]></categoryExpression>
 						<valueExpression><![CDATA[$F{objAproveitamentoSelecao}.getVitorias()]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<bar3DPlot yOffset="1.0">
-					<plot/>
-					<itemLabel/>
-				</bar3DPlot>
-			</bar3DChart>
-			<bar3DChart>
-				<chart>
-					<reportElement uuid="12a6cf28-607d-417f-afde-499c15981638" x="0" y="0" width="141" height="174"/>
-					<chartTitle>
-						<titleExpression><![CDATA["JOGOS DISPUTADOS"]]></titleExpression>
-					</chartTitle>
-					<chartSubtitle/>
-					<chartLegend/>
-				</chart>
-				<categoryDataset>
-					<categorySeries>
-						<seriesExpression><![CDATA[$F{nomeSelecao}]]></seriesExpression>
-						<categoryExpression><![CDATA[""]]></categoryExpression>
-						<valueExpression><![CDATA[$F{objAproveitamentoSelecao}.getJogosDisputados()]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
 				<bar3DPlot yOffset="1.0">

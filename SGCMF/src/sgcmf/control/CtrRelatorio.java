@@ -109,38 +109,11 @@ public class CtrRelatorio
         {
             JasperReport jr = JasperCompileManager.compileReport("relatorio/RelatorioSelecao.jrxml");
             JasperPrint jp = JasperFillManager.fillReport(jr, null, jrds);
-            JasperViewer.viewReport(jp, true);
+            JasperViewer.viewReport(jp, false);
         }
         catch (JRException ex)
         {
             Logger.getLogger(CtrRelatorio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-//    //Dados
-//    private void preencheTextFields(Short idSelecao)
-//    {
-//        String nomeSelecao;
-//        AproveitamentoSelecao objAproveitamentoSelecao;
-//        int qtdeFaltas;
-//        int qtdeCartoesByCor;
-//        ResultadoGolsSelecao rgs;
-//        //Recebendo os campos
-//        nomeSelecao = ctrSelecao.pesquisarNomeSelecao(idSelecao);
-//        objAproveitamentoSelecao = ctrJogo.calculaNumVitoriasDerrotaEmpate(idSelecao);
-//        qtdeFaltas = ctrFalta.calculaNumFaltas(idSelecao);
-//        qtdeCartoesByCor = ctrCartao.calculaNumCartoes(idSelecao);
-//        rgs = ctrGol.calculaResultadoGolsSelecaoRelatorio(idSelecao);
-//        //Atulizando os TextFields
-////        jtfNomeSelecao.setText(nomeSelecao);
-////        jtfJogosDisputados.setText(objAproveitamentoSelecao.getJogosDisputados() + "");
-////        jtfVitorias.setText(objAproveitamentoSelecao.getVitorias() + "");
-////        jtfDerrotas.setText(objAproveitamentoSelecao.getDerrotas() + "");
-////        jtfEmpates.setText(objAproveitamentoSelecao.getEmpates() + "");
-////        jtfAproveitamento.setText(objAproveitamentoSelecao.getAproveitamento() + "%");
-////        jtfFaltas.setText(qtdeFaltas + "");
-////        jtfCartoes.setText(qtdeCartoesByCor + "");
-////        jtfGolsPro.setText(rgs.getNumGolsMarcados() + "");
-////        jtfGolsContra.setText(rgs.getNumGolsSofridos() + "");
-////        jtfSaldoGols.setText(rgs.getSaldoGols() + "");
-//    }
 }
