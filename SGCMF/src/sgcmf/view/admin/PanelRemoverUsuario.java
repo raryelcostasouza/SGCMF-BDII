@@ -20,13 +20,25 @@ import sgcmf.control.CtrUsuario;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
+import sgcmf.view.table.DefaultTableModelC1;
+import sgcmf.view.table.JLabelTableCellRenderer;
 import sgcmf.view.table.JTableSGCMF;
+import sgcmf.view.table.ReceiveRowDataSGCMF;
 
 /**
  *
  * @author Thatiane
  */
-public class PanelRemoverUsuario extends JPanel {
+public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
+{
+
+    CtrUsuario ctrUsuario = new CtrUsuario();
+    JTableSGCMF jt;
+    JTextField jtfPesquisar;
+    JRadioButton jrbNome;
+    JRadioButton jrbPerfil;
+    JRadioButton jrbLogin;
+    JRadioButton jrbEmail;
 
     String[] items =
     {
@@ -41,6 +53,7 @@ public class PanelRemoverUsuario extends JPanel {
     JTextField jtfNome = new JTextField(10);
     JTextField jtfEmail = new JTextField(10);
     JTextField jtfCPF = new JTextField(10);
+    JButton jbRemover;
 
      public PanelRemoverUsuario()
     {
@@ -54,7 +67,7 @@ public class PanelRemoverUsuario extends JPanel {
         JPanel jpNorth = montaPainelNorte();
         JScrollPane jpCenter = montaPainelCentral();
         JPanel jpSouth = montaPainelSouth();
-
+        recarregaTodosusuarios();
         this.add(jpNorth,BorderLayout.NORTH);
         this.add(jpCenter,BorderLayout.CENTER);
         this.add(jpSouth,BorderLayout.SOUTH);
@@ -67,13 +80,22 @@ public class PanelRemoverUsuario extends JPanel {
         JPanel jpEsquerda = new JPanel();
         JPanel jpDireita = new JPanel();
 
-        JTextField jtfPesquisar = new JTextField(15);
+        jtfPesquisar = new JTextField(15);
 
-        JRadioButton jrbNome = new JRadioButton("Nome");
+        jtfPesquisar.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                pesquisa(jtfPesquisar.getText());
+            }
+        });
+
+        jrbNome = new JRadioButton("Nome");
         jrbNome.setSelected(true);
-        JRadioButton jrbPerfil = new JRadioButton("Perfil");
-        JRadioButton jrbLogin = new JRadioButton("Login");
-        JRadioButton jrbEmail = new JRadioButton("Email");
+        jrbPerfil = new JRadioButton("Perfil");
+        jrbLogin = new JRadioButton("Login");
+        jrbEmail = new JRadioButton("Email");
 
 
         ButtonGroup bg = new ButtonGroup();
@@ -101,9 +123,12 @@ public class PanelRemoverUsuario extends JPanel {
     {
         String[] nomeColunas =
         {
-            "Login", "Senha", "Perfil", "Nome", "E-mail", "CPF"
+            "ID", "CPF", "E-mail", "Nome", "Login", "Senha", "Perfil"
         };
-        JTableSGCMF jt = new JTableSGCMF(null, nomeColunas);
+
+        jt = new JTableSGCMF(null, nomeColunas, this);
+        jt.setModel(new DefaultTableModelC1(null, nomeColunas));
+        jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -132,7 +157,7 @@ public class PanelRemoverUsuario extends JPanel {
         jcbPerfil.setPreferredSize(new Dimension(132, 20));
 
         //travarBotao();
-        JButton jbRemover = new JButton("Remover");
+        jbRemover = new JButton("Remover");
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfLogin, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));
@@ -158,8 +183,8 @@ public class PanelRemoverUsuario extends JPanel {
             {
                 ResultadoOperacao resultado;
                 CtrUsuario ctrUsuario = new CtrUsuario();
-
-                resultado = ctrUsuario.removerUsuario(jtfLogin.getText());
+                 
+                resultado = ctrUsuario.removerUsuario(jt.getValueAt(jt.getSelectedRow(), 4).toString());
 
                 if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
                 {
@@ -170,11 +195,66 @@ public class PanelRemoverUsuario extends JPanel {
                 {
                     JOptionPane.showMessageDialog(null, resultado.getMsg(), "Remoção"
                             + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
+                    limparTodosCampos();
+                    recarregaTodosusuarios();
                 }
             }
         });
 
 
         return jpPrincipal;
+    }
+
+    private void pesquisa(String chavePesquisa)
+    {
+        Object[][] dadosUsuarios = null;
+
+        if (jrbNome.isSelected())
+        {
+            dadosUsuarios = ctrUsuario.queryUsuarioByNomeUsuario(chavePesquisa);
+        }
+        else if (jrbPerfil.isSelected())
+        {
+            dadosUsuarios = ctrUsuario.queryUsuarioByPerfilUsuario(chavePesquisa);
+        }
+        else if (jrbLogin.isSelected())
+        {
+            dadosUsuarios = ctrUsuario.queryUsuarioByLoginUsuario(chavePesquisa);
+        }
+        else
+        {
+            dadosUsuarios = ctrUsuario.queryUsuarioByEmailUsuario(chavePesquisa);
+        }
+
+        jt.preencheTabela(dadosUsuarios);
+    }
+
+    @Override
+    public void receiveRowData(String[] dados)
+    {
+        jtfLogin.setText(dados[4]);
+        jtfNome.setText(dados[3]);
+        jtfEmail.setText(dados[2]);
+        jtfSenha.setText(dados[5]);
+        jtfCPF.setText(dados[1]);
+        jrbPerfil.setText(dados[6]);
+    }
+
+    public void limparTodosCampos()
+    {
+        jtfLogin.setText("");
+        jtfPesquisar.setText("");
+        jtfNome.setText("");
+        jtfEmail.setText("");
+        jtfSenha.setText("");
+        jtfCPF.setText("");
+    }
+
+    private void recarregaTodosusuarios()
+    {
+        Object[][] dadosUsuarios;
+
+        dadosUsuarios = ctrUsuario.queryUsuarioTodos();
+        jt.preencheTabela(dadosUsuarios);
     }
 }

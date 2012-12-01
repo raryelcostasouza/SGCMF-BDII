@@ -26,7 +26,7 @@ import sgcmf.view.table.JTableSGCMF;
 public class PanelConsultarUsuario extends JPanel {
 
     CtrUsuario ctrUsuario = new CtrUsuario();
-    protected JTableSGCMF jt;
+    JTableSGCMF jt;
     JTextField jtfPesquisar;
     JRadioButton jrbNome;
     JRadioButton jrbPerfil;
@@ -105,7 +105,6 @@ public class PanelConsultarUsuario extends JPanel {
         jt = new JTableSGCMF(null, nomeColunas);
         jt.setModel(new DefaultTableModelC1(null, nomeColunas));
         jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
-        //jt.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 

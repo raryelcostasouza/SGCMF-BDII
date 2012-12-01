@@ -38,7 +38,7 @@ public class CtrUsuario
     {
 
         ArrayList alUsuario;
-
+        SGCMFSessionManager.abrirSessao();
         alUsuario = usuarioDAO.listaTodos();
         dadosUsuarios = arrayList2StringMatrix(alUsuario);
         usuarioDAO.fecharSessao();
