@@ -122,13 +122,13 @@ public class CtrRelatorio
 //        String nomeSelecao;
 //        AproveitamentoSelecao objAproveitamentoSelecao;
 //        int qtdeFaltas;
-//        int qtdeCartoes;
+//        int qtdeCartoesByCor;
 //        ResultadoGolsSelecao rgs;
 //        //Recebendo os campos
 //        nomeSelecao = ctrSelecao.pesquisarNomeSelecao(idSelecao);
 //        objAproveitamentoSelecao = ctrJogo.calculaNumVitoriasDerrotaEmpate(idSelecao);
 //        qtdeFaltas = ctrFalta.calculaNumFaltas(idSelecao);
-//        qtdeCartoes = ctrCartao.calculaNumCartoes(idSelecao);
+//        qtdeCartoesByCor = ctrCartao.calculaNumCartoes(idSelecao);
 //        rgs = ctrGol.calculaResultadoGolsSelecaoRelatorio(idSelecao);
 //        //Atulizando os TextFields
 ////        jtfNomeSelecao.setText(nomeSelecao);
@@ -138,7 +138,7 @@ public class CtrRelatorio
 ////        jtfEmpates.setText(objAproveitamentoSelecao.getEmpates() + "");
 ////        jtfAproveitamento.setText(objAproveitamentoSelecao.getAproveitamento() + "%");
 ////        jtfFaltas.setText(qtdeFaltas + "");
-////        jtfCartoes.setText(qtdeCartoes + "");
+////        jtfCartoes.setText(qtdeCartoesByCor + "");
 ////        jtfGolsPro.setText(rgs.getNumGolsMarcados() + "");
 ////        jtfGolsContra.setText(rgs.getNumGolsSofridos() + "");
 ////        jtfSaldoGols.setText(rgs.getSaldoGols() + "");

@@ -56,4 +56,15 @@ public class FaltaDAO
         qtdeFaltas = Integer.parseInt(SGCMFSessionManager.abrirSessao().createQuery(hql).uniqueResult().toString());
         return qtdeFaltas;
     }
+
+    public int queryQtdeFaltasByJogoBySelecao(Short idJogo, Short idSelecao)
+    {
+        String hql;
+        int qtdeFaltas;
+        hql = "select count(f.idoc) "
+                + "from Falta f "
+                + "where f.jogador.selecao.id = " + idSelecao + " and f.ocorrencia.jogo.id = " + idJogo;
+        qtdeFaltas = Integer.parseInt(SGCMFSessionManager.abrirSessao().createQuery(hql).uniqueResult().toString());
+        return qtdeFaltas;
+    }
 }

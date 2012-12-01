@@ -15,10 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrRelatorio;
+import sgcmf.model.hibernate.Jogo;
+import sgcmf.model.other.ModelRelatorioJogo;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.UtilView;
-import sgcmf.view.comiteGestor.LimConsultarJogo;
 
 /**
  *
@@ -28,14 +30,22 @@ public class PanelRelatorioJogo extends JPanel
 {
     private LimSelecionarJogo limSelecionarJogo;
     private JTextField jtfJogo;
-    
+    private JTextField jtfGolsI = new JTextField(10);
+    private JTextField jtfAmarelosI = new JTextField(10);
+    private JTextField jtfVermelhosI = new JTextField(10);
+    private JTextField jtfFaltasI = new JTextField(10);
+    private JTextField jtfPenaltiI = new JTextField(10);
+    private JTextField jtfSubstituicoesI = new JTextField(10);
+    private CtrJogo ctrJogo;
+
     public PanelRelatorioJogo(CtrRelatorio ctrRelatorio)
     {
         this.setLayout(new BorderLayout());
         add(panelNorte(), BorderLayout.NORTH);
         add(panelCentral(), BorderLayout.CENTER);
-        limSelecionarJogo = new LimSelecionarJogo(ctrRelatorio.getCtrMain().getCtrJogo());
-        
+        ctrJogo = ctrRelatorio.getCtrMain().getCtrJogo();
+        limSelecionarJogo = new LimSelecionarJogo(ctrJogo);
+
     }
 
     private JPanel panelNorte()
@@ -47,8 +57,8 @@ public class PanelRelatorioJogo extends JPanel
         jtfJogo.setEditable(false);
         JButton jbPesquisar = new JButton(SGCMFIcons.PESQUISAR);
         UtilView.ajustarTamanhoBotaoPesquisar(jbPesquisar);
-        jbPesquisar.addActionListener(new ActionListener() {
-
+        jbPesquisar.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -94,17 +104,17 @@ public class PanelRelatorioJogo extends JPanel
         JLabel jlSubstituicoesI = new JLabel("Substituições:");
         UtilView.alinhaLabel(jlSubstituicoesI);
 
-        JTextField jtfGolsI = new JTextField(10);
+        jtfGolsI = new JTextField(10);
         jtfGolsI.setEditable(false);
-        JTextField jtfAmarelosI = new JTextField(10);
+        jtfAmarelosI = new JTextField(10);
         jtfAmarelosI.setEditable(false);
-        JTextField jtfVermelhosI = new JTextField(10);
+        jtfVermelhosI = new JTextField(10);
         jtfVermelhosI.setEditable(false);
-        JTextField jtfFaltasI = new JTextField(10);
+        jtfFaltasI = new JTextField(10);
         jtfFaltasI.setEditable(false);
-        JTextField jtfPenaltiI = new JTextField(10);
+        jtfPenaltiI = new JTextField(10);
         jtfPenaltiI.setEditable(false);
-        JTextField jtfSubstituicoesI = new JTextField(10);
+        jtfSubstituicoesI = new JTextField(10);
         jtfSubstituicoesI.setEditable(false);
 
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlGolsI));
@@ -182,14 +192,22 @@ public class PanelRelatorioJogo extends JPanel
     {
         limSelecionarJogo.ativaTela(this);
     }
-    
-    public void preencherTextFieldJogo(String idJogo)
+
+    public void preencherTextFieldJogo(String strIdJogo)
     {
-        jtfJogo.setText(idJogo);
+        Short idJogo;
+        jtfJogo.setText(strIdJogo);
+        idJogo = Short.parseShort(strIdJogo);
+        preencheDadosTextFields(idJogo);
     }
-    
-    public void preencheTextFields()
+
+    public void preencheDadosTextFields(Short idJogo)
     {
-        
+        ModelRelatorioJogo mrj = ctrJogo.geraRelatorioJogo(idJogo);
+        jtfGolsI.setText(mrj.getGols() + "");
+        jtfAmarelosI.setText(mrj.getCartoesAmarelos() + "");
+        jtfVermelhosI.setText(mrj.getCartoesVermelhos() + "");
+        jtfFaltasI.setText(mrj.getFaltas() + "");
+
     }
 }

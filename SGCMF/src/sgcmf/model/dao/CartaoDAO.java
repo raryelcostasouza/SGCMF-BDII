@@ -67,8 +67,21 @@ public class CartaoDAO
         int qtdeCartoes;
         hql = "select count(c.id) from Cartao c where c.jogador.selecao.id = " + idSelecao;
         qtdeCartoes = Integer.parseInt(SGCMFSessionManager.abrirSessao().createQuery(hql).uniqueResult().toString());
-        
+
         return qtdeCartoes;
-        
+
+    }
+
+    public int queryQtdeCartoesByJogoByCor(Short idJogo, String cor, Short idSelecao)
+    {
+        String hql;
+        int qtdeCartoes;
+        hql = "select count(c.id)"
+                + " from Cartao c "
+                + "where c.ocorrencia.jogo.id = " + idJogo + " and c.cor = '" + cor + 
+                "' and c.jogador.selecao.id = " + idSelecao;
+        qtdeCartoes = Integer.parseInt(SGCMFSessionManager.abrirSessao().createQuery(hql).uniqueResult().toString());
+
+        return qtdeCartoes;
     }
 }

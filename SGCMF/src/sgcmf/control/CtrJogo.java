@@ -6,6 +6,8 @@ import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import sgcmf.hibernate.SGCMFSessionManager;
+import sgcmf.model.dao.CartaoDAO;
+import sgcmf.model.dao.FaltaDAO;
 import sgcmf.model.dao.GolDAO;
 import sgcmf.model.dao.JogoDAO;
 import sgcmf.model.dao.OcorrenciaDAO;
@@ -13,9 +15,11 @@ import sgcmf.model.dao.SelecaoDAO;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.hibernate.Selecao;
 import sgcmf.model.other.AproveitamentoSelecao;
+import sgcmf.model.other.ModelRelatorioJogo;
 import sgcmf.model.other.ResultadoGolsSelecao;
 import sgcmf.model.other.ResultadoSelecao;
 import sgcmf.model.other.SGCMFDate;
+import sgcmf.model.other.SGCMFIcons;
 import sgcmf.view.comiteGestor.LimConsultarJogo;
 
 public class CtrJogo
@@ -27,14 +31,14 @@ public class CtrJogo
     {
         this.ctrMain = ctrMain;
         this.limConsultarJogo = new LimConsultarJogo(this);
-        
+
     }
 
     public void ativaLimConsultarJogo()
     {
         limConsultarJogo.ativaTela();
-    }   
-    
+    }
+
     public Object[][] queryJogoTodos()
     {
         JogoDAO jDAO;
@@ -163,26 +167,29 @@ public class CtrJogo
     {
         String[][] dadosJogos;
         Jogo j;
-
+        int[] placar;
         dadosJogos = new String[alJogo.size()][5];
         for (int i = 0; i < alJogo.size(); i++)
         {
+
             j = alJogo.get(i);
             dadosJogos[i][0] = SGCMFDate.toStringDataHoraFormatoBrasil(j.getDatahora());
             dadosJogos[i][1] = j.getCidade();
             dadosJogos[i][2] = String.valueOf(j.getSelecaoByIdselecaoi().getPais());
-            dadosJogos[i][3] = geraPlacarJogo(j);
+            placar = geraPlacarJogo(j);
+            dadosJogos[i][3] = placar[0] + " x " + placar[1];
             dadosJogos[i][4] = String.valueOf(j.getSelecaoByIdselecaoii().getPais());
         }
 
         return dadosJogos;
     }
 
-    private String geraPlacarJogo(Jogo j)
+    private int[] geraPlacarJogo(Jogo j)
     {
-        String placar = "";
         int numGolsSelI;
         int numGolsSelII;
+        int[] placar = new int[2];
+
         OcorrenciaDAO oDAO;
         GolDAO gDAO;
 
@@ -195,10 +202,62 @@ public class CtrJogo
             numGolsSelI = gDAO.queryNumGolsJogoSelecao(j.getId(), j.getSelecaoByIdselecaoi().getId(), j.getSelecaoByIdselecaoii().getId());
             numGolsSelII = gDAO.queryNumGolsJogoSelecao(j.getId(), j.getSelecaoByIdselecaoii().getId(), j.getSelecaoByIdselecaoi().getId());
 
-            placar = numGolsSelI + " x " + numGolsSelII;
+            placar[0] = numGolsSelI;
+            placar[1] = numGolsSelII;
+        }
+        else
+        {
+            return null;
         }
 
         return placar;
+    }
+
+    public ModelRelatorioJogo geraRelatorioJogo(Short idJogo)
+    {
+        int[] placar;
+        int[] cartoesAmarelos;
+        int[] cartoesVermelhos;
+        int[] faltas;
+        ModelRelatorioJogo mrljI;
+
+        Jogo j = new Jogo();
+        JogoDAO jDAO;
+        SGCMFSessionManager.abrirSessao();
+        jDAO = JogoDAO.getInstance();
+        jDAO.carregar(j, idJogo);
+        placar = geraPlacarJogo(j);
+        cartoesAmarelos = qtdeCartoesByCor(j, "Amarelo");
+        cartoesVermelhos = qtdeCartoesByCor(j, "Vermelho");
+        faltas = qtdeFaltas(j);
+        mrljI = new ModelRelatorioJogo(placar[0], cartoesAmarelos[0], cartoesVermelhos[0], faltas[0]);
+        SGCMFSessionManager.fecharSessao();
+
+        return mrljI;
+    }
+    
+    private int[] qtdeFaltas(Jogo j)
+    {
+        int[] faltas;
+        FaltaDAO faltaDAO;
+        faltaDAO = FaltaDAO.getInstance();
+        faltas = new int[2];
+        faltas[0] = faltaDAO.queryQtdeFaltasByJogoBySelecao(j.getId(), j.getSelecaoByIdselecaoi().getId());
+        faltas[1] = faltaDAO.queryQtdeFaltasByJogoBySelecao(j.getId(), j.getSelecaoByIdselecaoii().getId());
+        
+        return faltas;
+    }
+    
+    private int[] qtdeCartoesByCor(Jogo j, String cor)
+    {
+        int[] cartoes;
+        CartaoDAO cartaoDAO;
+        cartaoDAO = CartaoDAO.getInstance();
+        cartoes = new int[2];
+        cartoes[0] = cartaoDAO.queryQtdeCartoesByJogoByCor(j.getId(), cor, j.getSelecaoByIdselecaoi().getId());
+        cartoes[1] = cartaoDAO.queryQtdeCartoesByJogoByCor(j.getId(), cor, j.getSelecaoByIdselecaoii().getId());
+
+        return cartoes;
     }
 
     public String[] getClassificadosGrupo(String grupo)
@@ -247,7 +306,7 @@ public class CtrJogo
             numPontos = calculaPontosSelecao(s);
             objRGS = ctrMain.getCtrGol().calculaResultadoGolsSelecao(s.getId());
             resultadoSelecoesGrupo[i] = new ResultadoSelecao(s, numPontos, objRGS.getSaldoGols(),
-                                                             objRGS.getNumGolsMarcados());
+                    objRGS.getNumGolsMarcados());
             i++;
         }
         return resultadoSelecoesGrupo;
@@ -275,7 +334,7 @@ public class CtrJogo
 
         return totalPtos;
     }
-    
+
     public AproveitamentoSelecao calculaNumVitoriasDerrotaEmpate(Short idSelecao)
     {
         ArrayList<Jogo> jogosSelecao;
@@ -325,7 +384,7 @@ public class CtrJogo
         {
             aproveitamento = (vitoria * 100 + empate * 33) / (float) jogosDisputados;
         }
-        
+
         objAproveitamento = new AproveitamentoSelecao(jogosDisputados, vitoria, derrota, empate, aproveitamento);
         SGCMFSessionManager.fecharSessao();
         return objAproveitamento;
@@ -377,8 +436,6 @@ public class CtrJogo
 
         return resultado;
     }
-
-   
 
     public String queryInfoJogoById(Short idJogo)
     {
