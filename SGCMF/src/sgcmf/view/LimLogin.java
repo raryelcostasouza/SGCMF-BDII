@@ -38,7 +38,8 @@ public class LimLogin extends JFrame
     private JPanel montaPainel()
     {
         JPanel jpPrincipal = new JPanel(new BorderLayout());
-        JPanel jpAux = new JPanel(new GridLayout(2, 1));
+        JPanel jpAuxI = new JPanel(new BorderLayout());
+        JPanel jpAuxII = new JPanel(new GridLayout(2, 2));
 
         JLabel jlLogo = new JLabel(SGCMFIcons.LOGO);
 
@@ -61,19 +62,16 @@ public class LimLogin extends JFrame
             }
         });
 
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfLogin, FlowLayout.LEFT));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jpSenha, FlowLayout.LEFT));
-
-        jpAux.setBorder(BorderFactory.createEtchedBorder());
-
-
-        this.add(jpAux, BorderLayout.CENTER);
-
-        jpPrincipal.add(jlLogo, BorderLayout.NORTH);
-        jpPrincipal.add(jpAux, BorderLayout.CENTER);
-        jpPrincipal.add(UtilView.putComponentInFlowLayoutPanel(jbLogin), BorderLayout.SOUTH);
+        jpAuxII.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
+        jpAuxII.add(UtilView.putComponentInFlowLayoutPanel(jtfLogin, FlowLayout.LEFT));
+        jpAuxII.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));
+        jpAuxII.add(UtilView.putComponentInFlowLayoutPanel(jpSenha, FlowLayout.LEFT));
+        jpAuxI.add(jpAuxII, BorderLayout.CENTER);
+        jpAuxI.add(UtilView.putComponentInFlowLayoutPanel(jbLogin),BorderLayout.SOUTH);
+        jpAuxI.setBorder(BorderFactory.createEtchedBorder());
+        
+        jpPrincipal.add(jlLogo, BorderLayout.WEST);
+        jpPrincipal.add(jpAuxI, BorderLayout.CENTER);
 
         return jpPrincipal;
     }
