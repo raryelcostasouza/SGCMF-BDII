@@ -249,7 +249,6 @@ public class CtrUsuario
 
             if(u.getPerfil().equals("Administrador") && UsuarioDAO.getInstance().numeroAdmins() <= 1)
             {
-                tr.rollback();
                 SGCMFSessionManager.fecharSessao();
                 resultado = new ResultadoOperacao("Um único administrador não pode ser excluido.\n",
                         TipoResultadoOperacao.ERRO);
