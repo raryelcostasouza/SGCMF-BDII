@@ -4,12 +4,15 @@
  */
 package sgcmf.view.tecnico;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -48,7 +51,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     private JTextField jtfPesquisar;
     private JTextField jtfNumeroCamisa;
     private JTextField jtfNome;
-    private JTextField jtfDataNascimento;
+    private JDateChooser jdcDataNascimento;
     private JTextField jtfAltura;
     private JComboBox jcbPosicao;
     private JButton jbAlterar;
@@ -150,7 +153,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
 
         jtfNumeroCamisa = new JTextField(10);
         jtfNome = new JTextField(10);
-        jtfDataNascimento = new JTextField(10);
+        jdcDataNascimento = new JDateChooser("yyyy/MM/dd", "####/##/##", '_');
         jtfAltura = new JTextField(10);
         jcbPosicao = new JComboBox(posicao);
         jcbPosicao.setPreferredSize(new Dimension(132, 20));
@@ -163,7 +166,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
                 String numCamisaNovo = jtfNumeroCamisa.getText();
                 String numCamisaAtual = jtfNumeroCamisa.getText();
                 String nome = jtfNome.getText();
-                String dtaNascimento = jtfDataNascimento.getText();
+                Date dtaNascimento = jdcDataNascimento.getDate();
                 String altura = jtfAltura.getText();
                 String posicao = (String) jcbPosicao.getSelectedItem();
                 ResultadoOperacao result;
@@ -197,7 +200,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlPosicao));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jcbPosicao, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlDataNascimento));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfDataNascimento, FlowLayout.LEFT));
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jdcDataNascimento, FlowLayout.LEFT));
         jpAux.setBorder(BorderFactory.createEtchedBorder());
 
         jpPrincipal.add(jpAux, BorderLayout.CENTER);
@@ -213,7 +216,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         jrbNome.setSelected(true);
         jcbPosicao.setSelectedIndex(0);
         jtfPesquisar.setText("");
-        jtfDataNascimento.setText("");
+        jdcDataNascimento.setCalendar(null);
         jtfNumeroCamisa.setText("");
         jtfNome.setText("");
         jtfAltura.setText("");
@@ -222,7 +225,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     public void limparParteCampos()
     {
         jcbPosicao.setSelectedIndex(0);
-        jtfDataNascimento.setText("");
+        jdcDataNascimento.setCalendar(null);
         jtfNumeroCamisa.setText("");
         jtfNome.setText("");
         jtfAltura.setText("");
@@ -256,12 +259,14 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     public void receiveRowData(String[] dados)
     {
         String s;
+        GregorianCalendar gc = new GregorianCalendar();
+        
         jbAlterar.setEnabled(true);
         jtfNumeroCamisa.setText(dados[1]);
         jtfNome.setText(dados[2]);
         //Transformando a String de data para o padrao do Java com "/"
         s = dados[3].replace(dados[3].charAt(4), '/');
-        jtfDataNascimento.setText(s);
+        //jtfDataNascimento.setText(s);
         jtfAltura.setText(dados[4]);
         jcbPosicao.setSelectedItem((String) dados[5]);
     }

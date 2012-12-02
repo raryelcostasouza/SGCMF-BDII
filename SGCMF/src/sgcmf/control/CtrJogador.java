@@ -239,12 +239,11 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public ResultadoOperacao cadastrarJogador(String numCamisa, String nome, String dataNascimento,
+    public ResultadoOperacao cadastrarJogador(String numCamisa, String nome, Date dataNascimento,
             String altura, boolean titular, String posicao, Usuario user)
     {
         JogadorDAO jDAO;
         Short nCamisa;
-        Date dtaNascimento;
         BigDecimal aAltura;
         Transaction tr;
         Jogador j = new Jogador();
@@ -269,14 +268,13 @@ public class CtrJogador
             SGCMFSessionManager.abrirSessao();
             jDAO = JogadorDAO.getInstance();
             nCamisa = Short.parseShort(numCamisa);
-            dtaNascimento = new Date(dataNascimento);
             aAltura = new BigDecimal(altura);
             tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             try
             {
                 j.setNcamisa(nCamisa);
                 j.setNome(nome);
-                j.setDatanasc(dtaNascimento);
+                j.setDatanasc(dataNascimento);
                 j.setAltura(aAltura);
                 j.setTitular(titular);
                 j.setPosicao(posicao);
@@ -302,12 +300,11 @@ public class CtrJogador
     }
 
     public ResultadoOperacao alterarJogador(String strIdJogador, String numCamisaNovo,
-            String numCamisaAtual, String nome, String dtaNascimento, String altura,
+            String numCamisaAtual, String nome, Date dataNascimento, String altura,
             String posicao, Usuario user)
     {
         JogadorDAO jDAO;
         Short nCamisa;
-        Date dataNascimento;
         BigDecimal pAltura;
         Short shortIdJogador;
         Jogador j = new Jogador();
@@ -323,7 +320,7 @@ public class CtrJogador
 
         bolNumCamisaJogador = isNumCamisaVelhaIgualCamisaNova(numCamisaNovo, numCamisaAtual);
         bolGoleiro = isJogadorGoleiro(shortIdJogador);
-        errorMessege = validaCampos('a', numCamisaNovo, dtaNascimento, altura,
+        errorMessege = validaCampos('a', numCamisaNovo, dataNascimento, altura,
                 bolGoleiro, bolNumCamisaJogador, s.getId(), posicao);
 
         if (errorMessege.equals(""))
@@ -331,7 +328,6 @@ public class CtrJogador
             SGCMFSessionManager.abrirSessao();
             jDAO = JogadorDAO.getInstance();
             nCamisa = Short.parseShort(numCamisaNovo);
-            dataNascimento = new Date(dtaNascimento);
             pAltura = new BigDecimal(altura);
             tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
             jDAO.carregar(j, shortIdJogador);
@@ -408,7 +404,7 @@ public class CtrJogador
         return resultado;
     }
 
-    private String validaCampos(char metodo, String numCamisa, String dataNascimento,
+    private String validaCampos(char metodo, String numCamisa, Date dataNascimento,
             String altura, boolean bolGoleiro, boolean bolNumCamisaIguais, Short idSelecao, String novaPosicao)
     {
         String errorMessege = "";
@@ -437,11 +433,7 @@ public class CtrJogador
         }
         if (errorMessege.equals(""))
         {
-            try
-            {
-                date = new Date(dataNascimento);
-            }
-            catch (IllegalArgumentException ilae)
+            if (dataNascimento == null)
             {
                 errorMessege = "Formato de data é inválido. Deve seguir o padrão AAAA/MM/DD.";
             }

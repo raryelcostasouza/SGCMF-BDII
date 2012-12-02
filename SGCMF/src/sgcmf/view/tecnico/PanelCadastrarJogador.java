@@ -4,12 +4,14 @@
  */
 package sgcmf.view.tecnico;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -40,7 +42,7 @@ public class PanelCadastrarJogador extends JPanel
     private JTextField jtfNumeroCamisa;
     private JTextField jtfNome;
     private JTextField jtfAltura;
-    private JTextField jtfDataNascimento;
+    private JDateChooser jdcDataNascimento;
     private JComboBox jcbPosicao;
     private JRadioButton jrbSim;
     private String[] items =
@@ -88,7 +90,7 @@ public class PanelCadastrarJogador extends JPanel
 
         jtfNumeroCamisa = new JTextField(10);
         jtfNome = new JTextField(10);
-        jtfDataNascimento = new JTextField(10);
+        jdcDataNascimento = new JDateChooser("yyyy/MM/dd", "####/##/##", '_');
         jtfAltura = new JTextField(10);
 
         jcbPosicao = new JComboBox(items);
@@ -103,7 +105,7 @@ public class PanelCadastrarJogador extends JPanel
             {
                 String numCamisa = jtfNumeroCamisa.getText();
                 String nome = jtfNome.getText();
-                String dataNascimento = jtfDataNascimento.getText();
+                Date dataNascimento = jdcDataNascimento.getDate();
                 String altura = jtfAltura.getText();
                 boolean titular = false;
                 ResultadoOperacao resultado;
@@ -133,7 +135,7 @@ public class PanelCadastrarJogador extends JPanel
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNome));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNome, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlDataNascimento));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfDataNascimento, FlowLayout.LEFT));
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jdcDataNascimento, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlAltura));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfAltura, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlTitular));
@@ -153,7 +155,7 @@ public class PanelCadastrarJogador extends JPanel
     {
         jtfNumeroCamisa.setText("");
         jtfNome.setText("");
-        jtfDataNascimento.setText("");
+        jdcDataNascimento.setCalendar(null);
         jtfAltura.setText("");
         jcbPosicao.setSelectedIndex(0);
         jrbSim.setSelected(true);
