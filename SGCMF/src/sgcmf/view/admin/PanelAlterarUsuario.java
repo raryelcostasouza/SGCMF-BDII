@@ -33,6 +33,7 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
 
 
     JButton jbAlterar = new JButton("Alterar");
+    private JComboBox jcbPerfil;
     private String[] items =
         {
             "Administrador", "Tecnico da selecao", "Membro Comite",
@@ -41,7 +42,6 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
 
     JTextField jtfLogin = new JTextField(10);
     JTextField jtfSenha = new JTextField(10);
-    JTextField jtfPerfil = new JTextField(10);
     JTextField jtfNome = new JTextField(10);
     JTextField jtfEmail = new JTextField(10);
     JTextField jtfCPF = new JTextField(10);
@@ -146,6 +146,10 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
         UtilView.alinhaLabel(jlCPF);
 
 
+        jcbPerfil = new JComboBox(items);
+        jcbPerfil.setEditable(false);
+        jcbPerfil.setPreferredSize(new Dimension(132, 20));
+
         jrbNome.setSelected(true);
 
         jbAlterar.addActionListener(new ActionListener()
@@ -154,21 +158,32 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
             public void actionPerformed(ActionEvent e)
             {
                 ResultadoOperacao resultado;
-                
-                resultado = ctrUsuario.alterarUsuario(jtfCPF.getText(),jtfNome.getText(),
-                        jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), jtfPerfil.getText());
+                String idUsuario = jt.getValueAt(jt.getSelectedRow(), 0).toString();
+                String perfil = (String) jcbPerfil.getSelectedItem();
 
-
-                if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                 if(jtfLogin.getText().equals("") || jtfSenha.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
-                            + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
+                 JOptionPane.showMessageDialog(null, "Login ou senha em branco", "Erro"
+                            + " no Cadastro de Usuario", JOptionPane.ERROR_MESSAGE);
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Alteração"
-                            + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
-                    limparCampos();
+                    resultado = ctrUsuario.alterarUsuario(idUsuario, jtfCPF.getText(),jtfNome.getText(),
+                                jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
+
+                    if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                    {
+                        JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                                + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, resultado.getMsg(), "Alteração"
+                                + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
+                        limparCampos();
+                    }
+
+                    recarregaTodosusuarios();
                 }
             }
         });
@@ -179,7 +194,8 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfSenha, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlPerfil));
-        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfPerfil, FlowLayout.LEFT));
+        jpAux.add(UtilView.putComponentInFlowLayoutPanel(jcbPerfil, FlowLayout.LEFT));
+        jpAux.setBorder(BorderFactory.createEtchedBorder());
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlNome));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfNome, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlEmail));
@@ -240,7 +256,7 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
         jtfEmail.setText(dados[2]);
         jtfSenha.setText(dados[5]);
         jtfCPF.setText(dados[1]);
-        jtfPerfil.setText(dados[6]);
+        jcbPerfil.setSelectedItem((String) dados[6]);
     }
 
     public void limparTodosCampos()
@@ -253,7 +269,7 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
         jtfCPF.setText("");
     }
 
-    private void recarregaTodosusuarios()
+    public void recarregaTodosusuarios()
     {
         Object[][] dadosUsuarios;
 

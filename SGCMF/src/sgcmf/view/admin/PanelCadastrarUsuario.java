@@ -1,9 +1,7 @@
 package sgcmf.view.admin;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,13 +9,11 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import sgcmf.control.CtrAdmin;
-import sgcmf.control.CtrMain;
 import sgcmf.control.CtrUsuario;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
@@ -38,7 +34,7 @@ public class PanelCadastrarUsuario extends JPanel {
     private JComboBox jcbPerfil;
     private String[] items =
     {
-        "Administrador", "Tecnico da selecao", "Membro Comite",
+        "Administrador", "Membro Comite",
         "Entusiasta"
     };
 
@@ -101,19 +97,27 @@ public class PanelCadastrarUsuario extends JPanel {
 
                 String perfil = (String) jcbPerfil.getSelectedItem();
 
-                resultado = ctrUsuario.cadastrarUsuario(jtfCPF.getText(),jtfNome.getText(),
-                        jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
-
-                if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                if(jtfLogin.getText().equals("") || jtfSenha.getText().equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                 JOptionPane.showMessageDialog(null, "Login ou senha em branco", "Erro"
                             + " no Cadastro de Usuario", JOptionPane.ERROR_MESSAGE);
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Cadastro"
-                            + " bem Sucedido", JOptionPane.INFORMATION_MESSAGE);
-                    limparCampos();
+                    resultado = ctrUsuario.cadastrarUsuario(jtfCPF.getText(),jtfNome.getText(),
+                            jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
+
+                    if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                    {
+                        JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                                + " no Cadastro de Usuario", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, resultado.getMsg(), "Cadastro"
+                                + " bem Sucedido", JOptionPane.INFORMATION_MESSAGE);
+                        limparCampos();
+                    }
                 }
             }
         });

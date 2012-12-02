@@ -148,6 +148,13 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
         JLabel jlCPF = new JLabel("CPF:");
         UtilView.alinhaLabel(jlCPF);
 
+        jtfLogin.setEditable(false);
+        jtfSenha.setEditable(false);
+        jtfNome.setEditable(false);
+        jtfEmail.setEditable(false);
+        jtfCPF.setEditable(false);
+        jtfPerfil.setEditable(false);
+
         //travarBotao();
         jbRemover = new JButton("Remover");
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
@@ -175,7 +182,7 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
                 ResultadoOperacao resultado;
                 CtrUsuario ctrUsuario = new CtrUsuario();
                  
-                resultado = ctrUsuario.removerUsuario(jt.getValueAt(jt.getSelectedRow(), 4).toString());
+                resultado = ctrUsuario.removerUsuario(jt.getValueAt(jt.getSelectedRow(), 0).toString());
 
                 if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
                 {
@@ -241,7 +248,7 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
         jtfCPF.setText("");
     }
 
-    private void recarregaTodosusuarios()
+    public void recarregaTodosusuarios()
     {
         Object[][] dadosUsuarios;
 

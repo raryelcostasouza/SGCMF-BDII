@@ -106,7 +106,7 @@ public class PanelConsultarUsuario extends JPanel {
         return jsp;
     }
 
-    private void recarregaTodosusuarios()
+    public void recarregaTodosusuarios()
     {
         Object[][] dadosUsuarios;
 

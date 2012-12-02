@@ -152,8 +152,10 @@ public class CtrUsuario
         ResultadoOperacao result;
         
         SGCMFSessionManager.abrirSessao();
+
         if(UsuarioDAO.getInstance().queryUsuarioOnlyByLogin(login).size() > 0)
         {
+            SGCMFSessionManager.fecharSessao();
             return (new ResultadoOperacao("Login já cadastrado.\n", TipoResultadoOperacao.ERRO));
         }
 
@@ -180,22 +182,31 @@ public class CtrUsuario
         return result;
     }
 
-    public ResultadoOperacao alterarUsuario(String cpf, String nome, String email, String login,
+    public ResultadoOperacao alterarUsuario(String stringIdUsuario, String cpf, String nome, String email, String login,
             String senha, String perfil)
     {
-        Short shortIdUsuario;
         Usuario u = new Usuario();
         Transaction tr;
         ResultadoOperacao result;
         
         SGCMFSessionManager.abrirSessao();
-        shortIdUsuario = UsuarioDAO.getInstance().queryUsuarioByLogin(login, senha).get(0).getId();
+
+        if(UsuarioDAO.getInstance().queryUsuarioOnlyByLogin(login).size() > 0)
+        {
+            SGCMFSessionManager.fecharSessao();
+            return (new ResultadoOperacao("Login já cadastrado.\n", TipoResultadoOperacao.ERRO));
+        }
+
+        Short shortIdUsuario = new Short(stringIdUsuario);
 
         tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
+
         UsuarioDAO.getInstance().carregar(u, shortIdUsuario);
 
         if(u.getPerfil().equals("Administrador") && UsuarioDAO.getInstance().numeroAdmins() <= 1 && !perfil.equals("Administrador"))
         {
+            tr.rollback();
+            SGCMFSessionManager.fecharSessao();
             result = new ResultadoOperacao("Um único administrador não pode ter seu perfil alterado.\n",
                     TipoResultadoOperacao.ERRO);
             return result;
@@ -222,15 +233,14 @@ public class CtrUsuario
         return result;
     }
 
-    public ResultadoOperacao removerUsuario(String login)
+    public ResultadoOperacao removerUsuario(String stringIdUsuario)
     {
         Usuario u = new Usuario();
         Transaction tr;
         ResultadoOperacao resultado;
-        Short shortIdUsuario;
+        Short shortIdUsuario = new Short(stringIdUsuario);
 
         SGCMFSessionManager.abrirSessao();
-        shortIdUsuario = UsuarioDAO.getInstance().queryUsuarioOnlyByLogin(login).get(0).getId();
 
         try
         {
@@ -239,6 +249,8 @@ public class CtrUsuario
 
             if(u.getPerfil().equals("Administrador") && UsuarioDAO.getInstance().numeroAdmins() <= 1)
             {
+                tr.rollback();
+                SGCMFSessionManager.fecharSessao();
                 resultado = new ResultadoOperacao("Um único administrador não pode ser excluido.\n",
                         TipoResultadoOperacao.ERRO);
                 return resultado;

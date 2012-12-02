@@ -56,14 +56,18 @@ public class LimGerenciarUsuario extends JFrame {
                 {
                     setSize(800,600);
                     setLocationRelativeTo(null);
+                    pau.recarregaTodosusuarios();
                 }
-                else if(tituloAba.equals("Remover")){
+                else if(tituloAba.equals("Remover"))
+                {
                     setSize(800,600);
                     setLocationRelativeTo(null);
+                    pru.recarregaTodosusuarios();
                 }
                 else if(tituloAba.equals("Consultar")){
                     setSize(600,500);
                     setLocationRelativeTo(null);
+                    pcnu.recarregaTodosusuarios();
                 }
             }
         });

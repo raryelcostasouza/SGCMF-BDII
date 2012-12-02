@@ -39,7 +39,7 @@ public class UsuarioDAO
     
     public void atualizar(Usuario entidade)
     {
-        SGCMFSessionManager.getCurrentSession().update(entidade);
+        SGCMFSessionManager.getCurrentSession().merge(entidade);
     }
     
     public void apagar(Usuario entidade)
