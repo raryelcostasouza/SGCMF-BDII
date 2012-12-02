@@ -26,7 +26,7 @@ public class CtrUsuario
         {
             return null;
         }
-        Usuario u = UsuarioDAO.getInstance().queryUsuarioByLogin(login, senha).get(0);
+        Usuario u = usuarios.get(0);
         SGCMFSessionManager.fecharSessao();
         
         return u;
@@ -253,6 +253,8 @@ public class CtrUsuario
             resultado = new ResultadoOperacao("Falha na exclusão do usuario.\n" + he.getMessage(),
                     TipoResultadoOperacao.ERRO);
         }
+        SGCMFSessionManager.fecharSessao();
+        
         return resultado;
     }
 }
