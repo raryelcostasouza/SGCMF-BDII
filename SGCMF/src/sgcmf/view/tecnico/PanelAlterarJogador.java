@@ -154,6 +154,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         jtfNumeroCamisa = new JTextField(10);
         jtfNome = new JTextField(10);
         jdcDataNascimento = new JDateChooser("yyyy/MM/dd", "####/##/##", '_');
+        jdcDataNascimento.setPreferredSize(new Dimension(132,20));
         jtfAltura = new JTextField(10);
         jcbPosicao = new JComboBox(posicao);
         jcbPosicao.setPreferredSize(new Dimension(132, 20));
@@ -172,7 +173,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
                 ResultadoOperacao result;
                 String idJogador = jt.getValueAt(jt.getSelectedRow(), 0).toString();
                 result = ctrJogador.alterarJogador(idJogador, numCamisaNovo, numCamisaAtual, nome, dtaNascimento,
-                        altura, posicao, ctrTecnico.getUser());
+                        altura, posicao, ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
 
                 if (result.getTipo().equals(TipoResultadoOperacao.ERRO))
                 {
@@ -208,7 +209,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
 
         return jpPrincipal;
     }
-    
+
     //Daqui pra baixo é identico ao consultarJogador, tem que arrumar.
     public void limparTodosCampos()
     {
@@ -234,7 +235,7 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     public void ativaTela()
     {
         Object[][] dadosJogador;
-        dadosJogador = ctrJogador.queryAllDataJogadorTecnico(ctrTecnico.getUser());
+        dadosJogador = ctrJogador.queryAllDataJogadorTecnico(ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
         jt.preencheTabela(dadosJogador);
     }
 
@@ -243,11 +244,11 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
         Object[][] dadosJogadores;
         if (jrbNome.isSelected())
         {
-            dadosJogadores = ctrJogador.queryAllDataJogadorByNomeAndByUser(chavePesquisa, ctrTecnico.getUser());
+            dadosJogadores = ctrJogador.queryAllDataJogadorByNomeAndByUser(chavePesquisa, ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
         }
         else
         {
-            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicaoAndByUser(chavePesquisa, ctrTecnico.getUser());
+            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicaoAndByUser(chavePesquisa, ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
 
         }
         limparParteCampos();
@@ -260,13 +261,13 @@ public class PanelAlterarJogador extends JPanel implements ReceiveRowDataSGCMF
     {
         String s;
         GregorianCalendar gc = new GregorianCalendar();
-        
+        Date d;
         jbAlterar.setEnabled(true);
         jtfNumeroCamisa.setText(dados[1]);
         jtfNome.setText(dados[2]);
         //Transformando a String de data para o padrao do Java com "/"
-        s = dados[3].replace(dados[3].charAt(4), '/');
-        //jtfDataNascimento.setText(s);
+        d = new Date(dados[3].replace(dados[3].charAt(4), '/'));
+        jdcDataNascimento.setDate(d);
         jtfAltura.setText(dados[4]);
         jcbPosicao.setSelectedItem((String) dados[5]);
     }

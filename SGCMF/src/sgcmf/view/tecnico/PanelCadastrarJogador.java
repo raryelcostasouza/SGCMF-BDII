@@ -91,6 +91,7 @@ public class PanelCadastrarJogador extends JPanel
         jtfNumeroCamisa = new JTextField(10);
         jtfNome = new JTextField(10);
         jdcDataNascimento = new JDateChooser("yyyy/MM/dd", "####/##/##", '_');
+        jdcDataNascimento.setPreferredSize(new Dimension(132,20));
         jtfAltura = new JTextField(10);
 
         jcbPosicao = new JComboBox(items);
@@ -115,7 +116,7 @@ public class PanelCadastrarJogador extends JPanel
                     titular = true;
                 }
                 resultado = ctrJogador.cadastrarJogador(numCamisa, nome, dataNascimento,
-                        altura, titular, posicao, ctrTecnico.getUser());
+                        altura, titular, posicao, ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
                 if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
                 {
                     JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"

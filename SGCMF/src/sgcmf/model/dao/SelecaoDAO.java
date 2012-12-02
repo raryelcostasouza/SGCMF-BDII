@@ -1,7 +1,9 @@
 package sgcmf.model.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
+import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Selecao;
 
 public class SelecaoDAO
@@ -20,6 +22,12 @@ public class SelecaoDAO
             instance = new SelecaoDAO();
         }
         return instance;
+    }
+    
+    public Selecao carregar(Selecao entidade, Serializable id)
+    {
+        SGCMFSessionManager.getCurrentSession().load(entidade, id);
+        return entidade;
     }
     
     public ArrayList<Selecao> listaTodos()

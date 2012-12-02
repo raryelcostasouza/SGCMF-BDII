@@ -78,8 +78,8 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
         JPanel jpDireita = new JPanel();
 
         jtfPesquisar = new JTextField(15);
-        jtfPesquisar.addActionListener(new ActionListener() {
-
+        jtfPesquisar.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -152,8 +152,8 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
         jtfPosicao.setEditable(false);
 
         jbRemover = new JButton("Remover");
-        jbRemover.addActionListener(new ActionListener() {
-
+        jbRemover.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -198,7 +198,7 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
     public void ativaTela()
     {
         Object[][] dadosJogadores;
-        dadosJogadores = ctrJogador.queryAllDataJogadorTecnico(ctrTecnico.getUser());
+        dadosJogadores = ctrJogador.queryAllDataJogadorTecnico(ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
         jt.preencheTabela(dadosJogadores);
     }
 
@@ -207,11 +207,11 @@ public class PanelRemoverJogador extends JPanel implements ReceiveRowDataSGCMF
         Object[][] dadosJogadores;
         if (jrbNome.isSelected())
         {
-            dadosJogadores = ctrJogador.queryAllDataJogadorByNomeAndByUser(chavePesquisa, ctrTecnico.getUser());
+            dadosJogadores = ctrJogador.queryAllDataJogadorByNomeAndByUser(chavePesquisa, ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
         }
         else
         {
-            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicaoAndByUser(chavePesquisa, ctrTecnico.getUser());
+            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicaoAndByUser(chavePesquisa, ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
 
         }
 

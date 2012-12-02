@@ -110,7 +110,7 @@ public class PanelConsultarJogador extends JPanel
     {
         Object[][] dadosJogadores;
 
-        dadosJogadores = ctrJogador.queryAllDataJogadorTecnico(ctrTecnico.getUser());
+        dadosJogadores = ctrJogador.queryAllDataJogadorTecnico(ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
         jt.preencheTabela(dadosJogadores);
     }
 
@@ -125,11 +125,11 @@ public class PanelConsultarJogador extends JPanel
         Object[][] dadosJogadores;
         if (jrbNome.isSelected())
         {
-            dadosJogadores = ctrJogador.queryAllDataJogadorByNomeAndByUser(chavePesquisa, ctrTecnico.getUser());
+            dadosJogadores = ctrJogador.queryAllDataJogadorByNomeAndByUser(chavePesquisa, ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
         }
         else
         {
-            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicaoAndByUser(chavePesquisa, ctrTecnico.getUser());
+            dadosJogadores = ctrJogador.queryAllDataJogadorByPosicaoAndByUser(chavePesquisa, ctrTecnico.getUser(), ctrTecnico.getIdSelecao());
         }
         jt.preencheTabela(dadosJogadores);
     }

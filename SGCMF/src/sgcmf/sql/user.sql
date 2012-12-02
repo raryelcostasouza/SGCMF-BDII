@@ -7,7 +7,7 @@ grant select, insert, delete, update on table Jogador to javaAppSGCMF;
 grant select, insert, delete on table Ocorrencia to javaAppSGCMF;
 grant select, insert, delete on table Gol to javaAppSGCMF;
 grant select, insert, delete on table Cartao to javaAppSGCMF;
-grant select, insert, delete on table Falta to javaAppSGCMF;javaAppSGCMF
+grant select, insert, delete on table Falta to javaAppSGCMF;
 grant select, insert, delete on table Substituicao to javaAppSGCMF;
 
 grant select, update on sequence ocorrencia_id_seq to javaAppSGCMF;

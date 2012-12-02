@@ -58,7 +58,7 @@ public class SubstituicaoDAO
         return Integer.parseInt(String.valueOf(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()));
     }
 
-    public int queryQtdeSubstituicoesJogador(short id)
+    public int queryQtdeSubstituicoesJogador(Short id)
     {
         String hql;
         hql = "select count(s.idoc) "

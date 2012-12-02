@@ -3,7 +3,6 @@ package sgcmf.control;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import org.hibernate.HibernateException;
@@ -130,17 +129,14 @@ public class CtrJogador
         return idSelecao;
     }
 
-    public Object[][] queryAllDataJogadorTecnico(Usuario u)
+    public Object[][] queryAllDataJogadorTecnico(Usuario u, Short idSelecao)
     {
         JogadorDAO jDAO;
         Object[][] dadosJogadores;
         ArrayList alJogador;
-        Short idSelecao;
 
         SGCMFSessionManager.abrirSessao();
         jDAO = JogadorDAO.getInstance();
-        idSelecao = SelecaoDAO.getInstance().queryIdSelecaoByIdUsuarioTecnico(u.getId());
-                
         alJogador = jDAO.listaTodosBySelecao(idSelecao);
         dadosJogadores = arrayList2StringMatrixFull(alJogador);
         SGCMFSessionManager.fecharSessao();
@@ -148,17 +144,14 @@ public class CtrJogador
         return dadosJogadores;
     }
 
-    public Object[][] queryAllDataJogadorByNomeAndByUser(String nome, Usuario u)
+    public Object[][] queryAllDataJogadorByNomeAndByUser(String nome, Usuario u, Short idSelecao)
     {
         JogadorDAO jDAO;
         Object[][] dadosJogador;
         ArrayList<Jogador> alJogador;
-        Iterator iterator = u.getSelecaos().iterator();
-        Selecao s;
-        s = (Selecao) iterator.next();
         SGCMFSessionManager.abrirSessao();
         jDAO = JogadorDAO.getInstance();
-        alJogador = jDAO.queryJogadorByNomeAndByUser(nome, s.getId());
+        alJogador = jDAO.queryJogadorByNomeAndByUser(nome, idSelecao);
         dadosJogador = arrayList2StringMatrixFull(alJogador);
 
         SGCMFSessionManager.fecharSessao();
@@ -166,18 +159,15 @@ public class CtrJogador
         return dadosJogador;
     }
 
-    public Object[][] queryAllDataJogadorByPosicaoAndByUser(String posicao, Usuario u)
+    public Object[][] queryAllDataJogadorByPosicaoAndByUser(String posicao, Usuario u, Short idSelecao)
     {
         JogadorDAO jDAO;
         Object[][] dadosJogador;
         ArrayList<Jogador> alJogador;
-        Iterator iterator = u.getSelecaos().iterator();
-        Selecao s;
-        s = (Selecao) iterator.next();
-
+       
         SGCMFSessionManager.abrirSessao();
         jDAO = JogadorDAO.getInstance();
-        alJogador = jDAO.queryJogadorByPosicaoAndByUser(posicao, s.getId());
+        alJogador = jDAO.queryJogadorByPosicaoAndByUser(posicao, idSelecao);
 
         dadosJogador = arrayList2StringMatrixFull(alJogador);
         SGCMFSessionManager.fecharSessao();
@@ -240,7 +230,7 @@ public class CtrJogador
     }
 
     public ResultadoOperacao cadastrarJogador(String numCamisa, String nome, Date dataNascimento,
-            String altura, boolean titular, String posicao, Usuario user)
+            String altura, boolean titular, String posicao, Usuario user, Short idSelecao)
     {
         JogadorDAO jDAO;
         Short nCamisa;
@@ -249,9 +239,7 @@ public class CtrJogador
         Jogador j = new Jogador();
         ResultadoOperacao result;
         String errorMessege;
-        Iterator iterator = user.getSelecaos().iterator();
-        Selecao s;
-        s = (Selecao) iterator.next();
+        Selecao s = new Selecao();
         boolean bolGoleiro;
         if (posicao.equals("Goleiro"))
         {
@@ -261,7 +249,7 @@ public class CtrJogador
         {
             bolGoleiro = false;
         }
-        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, bolGoleiro, false, s.getId(), posicao);
+        errorMessege = validaCampos('c', numCamisa, dataNascimento, altura, bolGoleiro, false, idSelecao, posicao);
 
         if (errorMessege.equals(""))
         {
@@ -278,6 +266,7 @@ public class CtrJogador
                 j.setAltura(aAltura);
                 j.setTitular(titular);
                 j.setPosicao(posicao);
+                SelecaoDAO.getInstance().carregar(s, idSelecao);
                 j.setSelecao(s);
                 jDAO.salvar(j);
                 tr.commit();
@@ -288,6 +277,8 @@ public class CtrJogador
             {
                 result = new ResultadoOperacao("Erro no Hibernate.\n" + he.getMessage(),
                         TipoResultadoOperacao.ERRO);
+                System.out.println(he.getMessage());
+                he.printStackTrace();
             }
             SGCMFSessionManager.fecharSessao();
         }
@@ -301,7 +292,7 @@ public class CtrJogador
 
     public ResultadoOperacao alterarJogador(String strIdJogador, String numCamisaNovo,
             String numCamisaAtual, String nome, Date dataNascimento, String altura,
-            String posicao, Usuario user)
+            String posicao, Usuario user, Short idSelecao)
     {
         JogadorDAO jDAO;
         Short nCamisa;
@@ -313,15 +304,12 @@ public class CtrJogador
         String errorMessege;
         boolean bolGoleiro;
         boolean bolNumCamisaJogador;
-        Iterator iterator;
-        iterator = user.getSelecaos().iterator();
-        Selecao s = (Selecao) iterator.next();
         shortIdJogador = new Short(strIdJogador);
 
         bolNumCamisaJogador = isNumCamisaVelhaIgualCamisaNova(numCamisaNovo, numCamisaAtual);
         bolGoleiro = isJogadorGoleiro(shortIdJogador);
         errorMessege = validaCampos('a', numCamisaNovo, dataNascimento, altura,
-                bolGoleiro, bolNumCamisaJogador, s.getId(), posicao);
+                bolGoleiro, bolNumCamisaJogador, idSelecao, posicao);
 
         if (errorMessege.equals(""))
         {
@@ -388,7 +376,7 @@ public class CtrJogador
             {
                 jDAO.apagar(j);
                 tr.commit();
-                resultado = new ResultadoOperacao("Jogador excluido com sucesso.", TipoResultadoOperacao.EXITO);
+                resultado = new ResultadoOperacao("Jogador excluído com sucesso.", TipoResultadoOperacao.EXITO);
             }
             else
             {
@@ -399,6 +387,7 @@ public class CtrJogador
         {
             resultado = new ResultadoOperacao("Falha na exclusão do jogador.\n" + he.getMessage(),
                     TipoResultadoOperacao.ERRO);
+            he.printStackTrace();
         }
         SGCMFSessionManager.fecharSessao();
         return resultado;
