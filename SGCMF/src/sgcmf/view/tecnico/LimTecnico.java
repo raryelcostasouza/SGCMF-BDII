@@ -19,7 +19,7 @@ import sgcmf.control.CtrJogo;
 import sgcmf.control.CtrRelatorio;
 import sgcmf.control.CtrTecnico;
 import sgcmf.model.other.SGCMFIcons;
-import sgcmf.view.UtilView;
+import sgcmf.view.util.UtilView;
 
 /**
  *

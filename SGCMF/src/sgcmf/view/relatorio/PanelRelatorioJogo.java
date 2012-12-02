@@ -20,7 +20,7 @@ import sgcmf.control.CtrRelatorio;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.other.ModelRelatorioJogo;
 import sgcmf.model.other.SGCMFIcons;
-import sgcmf.view.UtilView;
+import sgcmf.view.util.UtilView;
 
 /**
  *

@@ -1,4 +1,4 @@
-package sgcmf.view;
+package sgcmf.view.util;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;

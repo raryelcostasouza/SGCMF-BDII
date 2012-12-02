@@ -24,7 +24,7 @@ import sgcmf.control.CtrSelecao;
 import sgcmf.model.other.AproveitamentoSelecao;
 import sgcmf.model.other.ResultadoGolsSelecao;
 import sgcmf.model.other.SGCMFIcons;
-import sgcmf.view.UtilView;
+import sgcmf.view.util.UtilView;
 import sgcmf.view.tecnico.ISelecionarSelecao;
 import sgcmf.view.tecnico.LimSelecionarSelecao;
 

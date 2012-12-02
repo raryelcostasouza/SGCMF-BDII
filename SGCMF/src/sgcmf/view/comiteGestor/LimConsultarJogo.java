@@ -17,9 +17,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.control.CtrJogo;
 import sgcmf.model.other.SGCMFIcons;
-import sgcmf.view.table.DefaultTableModelSGCMF;
-import sgcmf.view.table.JTableSGCMF;
-import sgcmf.view.table.JLabelTableCellRenderer;
+import sgcmf.view.util.DefaultTableModelSGCMF;
+import sgcmf.view.util.JTableSGCMF;
+import sgcmf.view.util.JLabelTableCellRenderer;
 
 public class LimConsultarJogo extends JDialog
 {

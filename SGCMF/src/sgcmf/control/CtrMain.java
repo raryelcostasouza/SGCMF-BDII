@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 import sgcmf.hibernate.SGCMFHibernateUtil;
 import sgcmf.model.hibernate.Usuario;
 import sgcmf.view.LimLogin;
-import sgcmf.view.ShowSplash;
+import sgcmf.view.splash.ShowSplash;
 
 public class CtrMain
 {

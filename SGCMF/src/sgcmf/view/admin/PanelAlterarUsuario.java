@@ -19,11 +19,11 @@ import javax.swing.JTextField;
 import sgcmf.control.CtrUsuario;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
-import sgcmf.view.UtilView;
-import sgcmf.view.table.DefaultTableModelSGCMF;
-import sgcmf.view.table.JLabelTableCellRenderer;
-import sgcmf.view.table.JTableSGCMF;
-import sgcmf.view.table.ReceiveRowDataSGCMF;
+import sgcmf.view.util.UtilView;
+import sgcmf.view.util.DefaultTableModelSGCMF;
+import sgcmf.view.util.JLabelTableCellRenderer;
+import sgcmf.view.util.JTableSGCMF;
+import sgcmf.view.util.ReceiveRowDataSGCMF;
 
 /**
  *

@@ -1,5 +1,6 @@
 package sgcmf.view;
 
+import sgcmf.view.util.UtilView;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;

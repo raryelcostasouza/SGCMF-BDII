@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import sgcmf.control.CtrComiteGestor;
 import sgcmf.model.other.SGCMFIcons;
-import sgcmf.view.UtilView;
+import sgcmf.view.util.UtilView;
 import sgcmf.view.comiteGestor.ocorrenciaJogo.LimGerOcorrSelecionarJogo;
 
 public class LimComiteGestor extends JFrame

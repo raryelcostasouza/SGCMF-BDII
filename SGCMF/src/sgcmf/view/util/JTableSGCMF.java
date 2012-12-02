@@ -1,4 +1,4 @@
-package sgcmf.view.table;
+package sgcmf.view.util;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;

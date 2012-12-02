@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.control.CtrJogador;
-import sgcmf.view.table.JLabelTableCellRenderer;
-import sgcmf.view.table.JTableSGCMF;
-import sgcmf.view.table.DefaultTableModelSGCMF;
+import sgcmf.view.util.JLabelTableCellRenderer;
+import sgcmf.view.util.JTableSGCMF;
+import sgcmf.view.util.DefaultTableModelSGCMF;
 import sgcmf.view.tecnico.ISelecionarJogador;
 
 public class LimBuscarJogador extends JDialog

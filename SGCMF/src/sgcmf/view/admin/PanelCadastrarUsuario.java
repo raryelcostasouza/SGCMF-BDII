@@ -21,7 +21,7 @@ import sgcmf.control.CtrMain;
 import sgcmf.control.CtrUsuario;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
-import sgcmf.view.UtilView;
+import sgcmf.view.util.UtilView;
 
 /**
  *

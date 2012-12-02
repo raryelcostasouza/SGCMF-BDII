@@ -17,10 +17,10 @@ import javax.swing.JTextField;
 import sgcmf.control.CtrJogador;
 import sgcmf.control.CtrMain;
 import sgcmf.control.CtrTecnico;
-import sgcmf.view.UtilView;
-import sgcmf.view.table.DefaultTableModelSGCMF;
-import sgcmf.view.table.JLabelTableCellRenderer;
-import sgcmf.view.table.JTableSGCMF;
+import sgcmf.view.util.UtilView;
+import sgcmf.view.util.DefaultTableModelSGCMF;
+import sgcmf.view.util.JLabelTableCellRenderer;
+import sgcmf.view.util.JTableSGCMF;
 
 /**
  *

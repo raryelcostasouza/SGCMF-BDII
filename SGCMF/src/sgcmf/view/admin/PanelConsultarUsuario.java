@@ -10,9 +10,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.control.CtrUsuario;
-import sgcmf.view.UtilView;
-import sgcmf.view.table.DefaultTableModelSGCMF;
-import sgcmf.view.table.JTableSGCMF;
+import sgcmf.view.util.UtilView;
+import sgcmf.view.util.DefaultTableModelSGCMF;
+import sgcmf.view.util.JTableSGCMF;
 
 /**
  *

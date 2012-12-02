@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sgcmf.view;
+package sgcmf.view.splash;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

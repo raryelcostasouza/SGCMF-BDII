@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import sgcmf.control.CtrSelecao;
-import sgcmf.view.UtilView;
+import sgcmf.view.util.UtilView;
 import sgcmf.view.comiteGestor.LimConsultaSelecao;
 
 /**

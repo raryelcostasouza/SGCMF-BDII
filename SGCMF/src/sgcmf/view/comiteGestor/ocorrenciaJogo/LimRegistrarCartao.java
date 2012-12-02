@@ -19,7 +19,7 @@ import sgcmf.control.CtrCartao;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.SGCMFIcons;
 import sgcmf.model.other.TipoResultadoOperacao;
-import sgcmf.view.UtilView;
+import sgcmf.view.util.UtilView;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.tecnico.ISelecionarJogador;
 

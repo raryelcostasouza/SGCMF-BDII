@@ -25,7 +25,7 @@ import sgcmf.control.CtrSelecao;
 import sgcmf.control.CtrTecnico;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
-import sgcmf.view.UtilView;
+import sgcmf.view.util.UtilView;
 
 /**
  *

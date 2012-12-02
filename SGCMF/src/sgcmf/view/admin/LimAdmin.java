@@ -16,7 +16,7 @@ import sgcmf.control.CtrAdmin;
 import sgcmf.control.CtrRelatorio;
 import sgcmf.control.CtrUsuario;
 import sgcmf.model.other.SGCMFIcons;
-import sgcmf.view.UtilView;
+import sgcmf.view.util.UtilView;
 
 /**
  *
