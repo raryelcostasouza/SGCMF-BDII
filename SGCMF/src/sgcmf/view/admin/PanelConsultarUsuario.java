@@ -1,22 +1,17 @@
 package sgcmf.view.admin;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.control.CtrUsuario;
 import sgcmf.view.UtilView;
-import sgcmf.view.table.DefaultTableModelC1;
-import sgcmf.view.table.JLabelTableCellRenderer;
+import sgcmf.view.table.DefaultTableModelSGCMF;
 import sgcmf.view.table.JTableSGCMF;
 
 /**
@@ -103,8 +98,8 @@ public class PanelConsultarUsuario extends JPanel {
         };
         
         jt = new JTableSGCMF(null, nomeColunas);
-        jt.setModel(new DefaultTableModelC1(null, nomeColunas));
-        jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
+        jt.setModel(new DefaultTableModelSGCMF(null, nomeColunas));
+        
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 

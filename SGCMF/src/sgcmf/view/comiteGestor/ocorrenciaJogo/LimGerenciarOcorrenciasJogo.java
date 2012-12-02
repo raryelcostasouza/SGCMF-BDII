@@ -23,7 +23,7 @@ import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
 import sgcmf.view.comiteGestor.LimBuscarJogador;
-import sgcmf.view.table.DefaultTableModelC1;
+import sgcmf.view.table.DefaultTableModelSGCMF;
 import sgcmf.view.table.JLabelTableCellRenderer;
 import sgcmf.view.table.JTableSGCMF;
 
@@ -188,7 +188,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             "ID", "Tempo", "Seleção", "Jogador Autor", "Jog. Assistente", "Tipo Gol", "Modo"
         };
         jtGol = new JTableSGCMF(null, nomesColunas);
-        jtGol.setModel(new DefaultTableModelC1(null, nomesColunas,2));
+        jtGol.setModel(new DefaultTableModelSGCMF(null, nomesColunas));
         jtGol.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jtGol.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jtGol, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -218,7 +218,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             "ID", "Tempo", "Seleção",  "Jogador Autor", "Cartão", "Tipo"
         };
         jtFalta = new JTableSGCMF(null, nomesColunas);
-        jtFalta.setModel(new DefaultTableModelC1(null, nomesColunas,2));
+        jtFalta.setModel(new DefaultTableModelSGCMF(null, nomesColunas));
         jtFalta.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jtFalta.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jtFalta, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -248,7 +248,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             "ID", "IDOc", "Tempo", "Seleção" ,"Jogador", "Cor"
         };
         jtCartao = new JTableSGCMF(null, nomesColunas);
-        jtCartao.setModel(new DefaultTableModelC1(null, nomesColunas,3));
+        jtCartao.setModel(new DefaultTableModelSGCMF(null, nomesColunas));
         jtCartao.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jtCartao.setRowHeight(32);
         
@@ -279,7 +279,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             "ID", "Tempo", "Seleção", "Jogador Saiu", "Jogador Entrou", "Motivo"
         };
         jtSubst = new JTableSGCMF(null, nomesColunas);
-        jtSubst.setModel(new DefaultTableModelC1(null, nomesColunas,2));
+        jtSubst.setModel(new DefaultTableModelSGCMF(null, nomesColunas));
         jtSubst.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jtSubst.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jtSubst, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

@@ -18,7 +18,7 @@ import sgcmf.control.CtrJogador;
 import sgcmf.control.CtrMain;
 import sgcmf.control.CtrTecnico;
 import sgcmf.view.UtilView;
-import sgcmf.view.table.DefaultTableModelC1;
+import sgcmf.view.table.DefaultTableModelSGCMF;
 import sgcmf.view.table.JLabelTableCellRenderer;
 import sgcmf.view.table.JTableSGCMF;
 
@@ -97,7 +97,7 @@ public class PanelConsultarJogador extends JPanel
             "ID", "Número Camisa", "Nome", "Data Nascimento", "Altura", "Posição", "Seleção", "Titular"
         };
         jt = new JTableSGCMF(null, nomeColunas);
-        jt.setModel(new DefaultTableModelC1(null, nomeColunas, 6));
+        jt.setModel(new DefaultTableModelSGCMF(null, nomeColunas));
         jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jt.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,

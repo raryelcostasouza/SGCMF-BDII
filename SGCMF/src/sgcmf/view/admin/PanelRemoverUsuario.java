@@ -20,7 +20,7 @@ import sgcmf.control.CtrUsuario;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
 import sgcmf.view.UtilView;
-import sgcmf.view.table.DefaultTableModelC1;
+import sgcmf.view.table.DefaultTableModelSGCMF;
 import sgcmf.view.table.JLabelTableCellRenderer;
 import sgcmf.view.table.JTableSGCMF;
 import sgcmf.view.table.ReceiveRowDataSGCMF;
@@ -122,7 +122,7 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
         };
 
         jt = new JTableSGCMF(null, nomeColunas, this);
-        jt.setModel(new DefaultTableModelC1(null, nomeColunas));
+        jt.setModel(new DefaultTableModelSGCMF(null, nomeColunas));
         jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

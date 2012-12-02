@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import sgcmf.control.CtrJogo;
 import sgcmf.model.other.SGCMFIcons;
-import sgcmf.view.table.DefaultTableModelC5C6;
+import sgcmf.view.table.DefaultTableModelSGCMF;
 import sgcmf.view.table.JTableSGCMF;
 import sgcmf.view.table.JLabelTableCellRenderer;
 
@@ -206,7 +206,7 @@ public class LimConsultarJogo extends JDialog
         };
 
         jt = new JTableSGCMF(null, nomesColunas);
-        jt.setModel(new DefaultTableModelC5C6(null, nomesColunas));
+        jt.setModel(new DefaultTableModelSGCMF(null, nomesColunas));
         jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jt.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

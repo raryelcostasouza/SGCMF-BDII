@@ -1,14 +1,12 @@
 package sgcmf.view.comiteGestor;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -16,7 +14,7 @@ import javax.swing.JTextField;
 import sgcmf.control.CtrJogador;
 import sgcmf.view.table.JLabelTableCellRenderer;
 import sgcmf.view.table.JTableSGCMF;
-import sgcmf.view.table.DefaultTableModelC1;
+import sgcmf.view.table.DefaultTableModelSGCMF;
 import sgcmf.view.tecnico.ISelecionarJogador;
 
 public class LimBuscarJogador extends JDialog
@@ -86,7 +84,7 @@ public class LimBuscarJogador extends JDialog
         };
 
         jt = new JTableSGCMF(null, nomesColunas);
-        jt.setModel(new DefaultTableModelC1(null, nomesColunas));
+        jt.setModel(new DefaultTableModelSGCMF(null, nomesColunas));
         jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jt.setRowHeight(32);
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

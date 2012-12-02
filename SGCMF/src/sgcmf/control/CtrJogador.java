@@ -383,16 +383,11 @@ public class CtrJogador
             jDAO.carregar(j, new Short(idJogador));
             
             qtdeGols = golDAO.queryQtdeGolsJogador(j.getId());
-            System.out.println(qtdeGols);
             qtdeFaltas = faltaDAO.queryQtdeFaltasJogador(j.getId());
-            System.out.println(qtdeFaltas);
             qtdeCartoes = cartaoDAO.queryQtdeCartoesJogador(j.getId());
-            System.out.println(qtdeCartoes);
             qtdeSubstituicoes = substituicaoDAO.queryQtdeSubstituicoesJogador(j.getId());
-            System.out.println(qtdeSubstituicoes);
             qtdeOcorrenciasJogador = qtdeGols + qtdeFaltas + qtdeCartoes + qtdeSubstituicoes;
             
-            System.out.println(qtdeOcorrenciasJogador);
             if (qtdeOcorrenciasJogador == 0)
             {
                 jDAO.apagar(j);
@@ -408,8 +403,6 @@ public class CtrJogador
         {
             resultado = new ResultadoOperacao("Falha na exclusão do jogador.\n" + he.getMessage(),
                     TipoResultadoOperacao.ERRO);
-            System.out.println(he.getMessage()+"\n");
-            he.printStackTrace();
         }
         SGCMFSessionManager.fecharSessao();
         return resultado;

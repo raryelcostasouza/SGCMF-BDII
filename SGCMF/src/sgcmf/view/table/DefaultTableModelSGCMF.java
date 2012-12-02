@@ -17,8 +17,15 @@ public class DefaultTableModelSGCMF extends DefaultTableModel
         super(data, columnNames);
     }
     
+    @Override
     public boolean isCellEditable(int row, int col)
     {
         return false;
+    }
+    
+    @Override
+    public Class<?> getColumnClass(int columnIndex)
+    {
+        return getValueAt(0, columnIndex).getClass();
     }
 }
