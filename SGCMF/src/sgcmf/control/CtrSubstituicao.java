@@ -160,7 +160,6 @@ public class CtrSubstituicao
             nSubJogo = sDAO.queryNumSubstituicoesSelecaoJogo(idJogo, jSaiu.getSelecao().getId());
             SGCMFSessionManager.fecharSessao();
 
-            System.out.println(nSubJogo);
             if (nSubJogo == 3)
             {
                 errorMessage = "Já há três substituições cadastradas\npara essa seleção nesse jogo.";
