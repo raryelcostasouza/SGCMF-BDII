@@ -1,16 +1,21 @@
 package sgcmf.model.dao;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.hibernate.Usuario;
-
 
 /**
  *
  * @author Thatiane
  */
-public class UsuarioDAO extends GeneralDAO{
-
+public class UsuarioDAO
+{
     private static UsuarioDAO instance;
+
+    private UsuarioDAO()
+    {
+    }
 
     public static UsuarioDAO getInstance()
     {
@@ -21,9 +26,30 @@ public class UsuarioDAO extends GeneralDAO{
         return instance;
     }
 
+     public Usuario carregar(Usuario entidade, Serializable id)
+    {
+        SGCMFSessionManager.getCurrentSession().load(entidade, id);
+        return entidade;
+    }
+    
+    public void salvar(Usuario entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().save(entidade);
+    }
+    
+    public void atualizar(Usuario entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().update(entidade);
+    }
+    
+    public void apagar(Usuario entidade)
+    {
+        SGCMFSessionManager.getCurrentSession().delete(entidade);
+    }
+    
     public ArrayList<Usuario> listaTodos()
     {
-        return (ArrayList<Usuario>) sessao.createQuery("from Usuario u order by u.perfil").list();
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery("from Usuario u order by u.perfil").list();
     }
 
     public int numeroAdmins()
@@ -32,7 +58,7 @@ public class UsuarioDAO extends GeneralDAO{
 
         hql = "select count(u.perfil) from Usuario u where perfil = 'Administrador' ";
 
-        return Integer.parseInt(sessao.createQuery(hql).uniqueResult()+"");
+        return Integer.parseInt(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult() + "");
     }
 
     public ArrayList<Usuario> queryUsuarioByNomeUsuario(String nome)
@@ -82,7 +108,7 @@ public class UsuarioDAO extends GeneralDAO{
         hql = "from Usuario u "
                 + "where login = '" + login + "' and senha = '" + senha + "' ";
 
-        return (ArrayList<Usuario>) sessao.createQuery(hql).list();
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public ArrayList<Usuario> queryUsuarioOnlyByLogin(String login)
@@ -92,7 +118,7 @@ public class UsuarioDAO extends GeneralDAO{
         hql = "from Usuario u "
                 + "where login = '" + login + "'";
 
-        return (ArrayList<Usuario>) sessao.createQuery(hql).list();
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
     public ArrayList<Usuario> queryUsuarioByNome(String nome)
@@ -102,16 +128,15 @@ public class UsuarioDAO extends GeneralDAO{
         hql = "from Usuario u "
                 + "where lower(u.nome) like lower('%" + nome + "%') order by u.id";
 
-        return (ArrayList<Usuario>) sessao.createQuery(hql).list();
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
-     public ArrayList<Usuario> queryUsuarioByPerfil(String perfil)
+    public ArrayList<Usuario> queryUsuarioByPerfil(String perfil)
     {
         String hql;
 
         hql = "from Usuario u "
                 + "where lower(u.perfil) like lower('%" + perfil + "%') order by u.id";
-        return (ArrayList<Usuario>) sessao.createQuery(hql).list();
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
-
 }

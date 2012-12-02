@@ -8,9 +8,7 @@ import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
 import sgcmf.model.dao.CartaoDAO;
 import sgcmf.model.dao.FaltaDAO;
-import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.JogadorDAO;
-import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.hibernate.Cartao;
 import sgcmf.model.hibernate.Falta;
 import sgcmf.model.hibernate.Jogador;
@@ -76,7 +74,6 @@ public class CtrFalta
     public ResultadoOperacao registrarFalta(String min, String seg, Short idJogo, String idJogador,
                                             String tipo, String cartao)
     {
-        GeneralDAO gdao;
         Short shortIdJogador;
         Transaction tr;
         Falta objFalta;

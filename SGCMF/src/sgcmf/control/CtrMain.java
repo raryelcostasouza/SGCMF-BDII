@@ -3,7 +3,7 @@ package sgcmf.control;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import sgcmf.model.dao.GeneralDAO;
+import sgcmf.hibernate.SGCMFHibernateUtil;
 import sgcmf.model.hibernate.Usuario;
 import sgcmf.view.LimLogin;
 import sgcmf.view.ShowSplash;
@@ -55,10 +55,8 @@ public class CtrMain
             public void run()
             {
                 new ShowSplash().start();
-                GeneralDAO gdao = new GeneralDAO();
-                gdao.fecharSessao();
-                gdao = null;
-
+                SGCMFHibernateUtil.getSessionFactory();
+                
                 try
                 {
                     //Tem que arrumar um jeito de receber um aviso da Thread ShowSplash que terminou e esta pode

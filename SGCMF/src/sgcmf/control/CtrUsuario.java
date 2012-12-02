@@ -1,11 +1,9 @@
 package sgcmf.control;
 
 import java.util.ArrayList;
-import java.util.Date;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
-import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.UsuarioDAO;
 import sgcmf.model.hibernate.Usuario;
 import sgcmf.model.other.ResultadoOperacao;
@@ -17,20 +15,20 @@ import sgcmf.model.other.TipoResultadoOperacao;
  */
 public class CtrUsuario
 {
-    UsuarioDAO usuarioDAO = new UsuarioDAO();
     String[][] dadosUsuarios;
 
     public Usuario loginUsuario(String login, String senha)
     {
-
-        ArrayList<Usuario> usuarios = usuarioDAO.queryUsuarioByLogin(login, senha);
+        SGCMFSessionManager.abrirSessao();
+        ArrayList<Usuario> usuarios = UsuarioDAO.getInstance().queryUsuarioByLogin(login, senha);
         
         if (usuarios.size() <= 0)
         {
             return null;
         }
-        Usuario u = usuarioDAO.queryUsuarioByLogin(login, senha).get(0);
-
+        Usuario u = UsuarioDAO.getInstance().queryUsuarioByLogin(login, senha).get(0);
+        SGCMFSessionManager.fecharSessao();
+        
         return u;
     }
 
@@ -39,9 +37,9 @@ public class CtrUsuario
 
         ArrayList alUsuario;
         SGCMFSessionManager.abrirSessao();
-        alUsuario = usuarioDAO.listaTodos();
+        alUsuario = UsuarioDAO.getInstance().listaTodos();
         dadosUsuarios = arrayList2StringMatrix(alUsuario);
-        usuarioDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosUsuarios;
     }
@@ -50,10 +48,10 @@ public class CtrUsuario
     {
 
         ArrayList<Usuario> alUsuario;
-
-        alUsuario = usuarioDAO.queryUsuarioByNome(nome);
+        SGCMFSessionManager.abrirSessao();
+        alUsuario = UsuarioDAO.getInstance().queryUsuarioByNome(nome);
         dadosUsuarios = arrayList2StringMatrix(alUsuario);
-        usuarioDAO.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return dadosUsuarios;
     }
@@ -152,16 +150,14 @@ public class CtrUsuario
         Transaction tr;
         Usuario u = new Usuario();
         ResultadoOperacao result;
-        GeneralDAO gdao;
         
-        if(usuarioDAO.queryUsuarioOnlyByLogin(login).size() > 0)
+        SGCMFSessionManager.abrirSessao();
+        if(UsuarioDAO.getInstance().queryUsuarioOnlyByLogin(login).size() > 0)
         {
             return (new ResultadoOperacao("Login já cadastrado.\n", TipoResultadoOperacao.ERRO));
         }
 
-        gdao = new GeneralDAO();
-
-        tr = gdao.getSessao().beginTransaction();
+        tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
         try
         {
             u.setCpf(cpf);
@@ -170,7 +166,7 @@ public class CtrUsuario
             u.setLogin(login);
             u.setPerfil(perfil);
             u.setSenha(senha);
-            gdao.salvar(u);
+            UsuarioDAO.getInstance().salvar(u);
             tr.commit();
             
             result = new ResultadoOperacao("Usuario Cadastrado com êxito.", TipoResultadoOperacao.EXITO);
@@ -179,7 +175,7 @@ public class CtrUsuario
         {
             result = new ResultadoOperacao("Erro no cadastro do usuário.\n" + he.getMessage(), TipoResultadoOperacao.ERRO);
         }
-        gdao.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return result;
     }
@@ -190,16 +186,15 @@ public class CtrUsuario
         Short shortIdUsuario;
         Usuario u = new Usuario();
         Transaction tr;
-        GeneralDAO gdao;
         ResultadoOperacao result;
         
-        shortIdUsuario = usuarioDAO.queryUsuarioByLogin(login, senha).get(0).getId();
+        SGCMFSessionManager.abrirSessao();
+        shortIdUsuario = UsuarioDAO.getInstance().queryUsuarioByLogin(login, senha).get(0).getId();
 
-        gdao = new GeneralDAO();
-        tr = gdao.getSessao().beginTransaction();
-        gdao.carregar(u, shortIdUsuario);
+        tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
+        UsuarioDAO.getInstance().carregar(u, shortIdUsuario);
 
-        if(u.getPerfil().equals("Administrador") && usuarioDAO.numeroAdmins() <= 1 && !perfil.equals("Administrador"))
+        if(u.getPerfil().equals("Administrador") && UsuarioDAO.getInstance().numeroAdmins() <= 1 && !perfil.equals("Administrador"))
         {
             result = new ResultadoOperacao("Um único administrador não pode ter seu perfil alterado.\n",
                     TipoResultadoOperacao.ERRO);
@@ -214,7 +209,7 @@ public class CtrUsuario
             u.setLogin(login);
             u.setPerfil(perfil);
             u.setSenha(senha);
-            gdao.atualizar(u);
+            UsuarioDAO.getInstance().atualizar(u);
             tr.commit();
             result = new ResultadoOperacao("Usuario Alterado com êxito.", TipoResultadoOperacao.EXITO);
         }
@@ -222,7 +217,7 @@ public class CtrUsuario
         {
             result = new ResultadoOperacao("Falha na alteracao do usuario.\n" + he.getMessage(), TipoResultadoOperacao.ERRO);
         }
-        gdao.fecharSessao();
+        SGCMFSessionManager.fecharSessao();
 
         return result;
     }
@@ -231,26 +226,25 @@ public class CtrUsuario
     {
         Usuario u = new Usuario();
         Transaction tr;
-        GeneralDAO gDAO;
         ResultadoOperacao resultado;
         Short shortIdUsuario;
 
-        shortIdUsuario = usuarioDAO.queryUsuarioOnlyByLogin(login).get(0).getId();
+        SGCMFSessionManager.abrirSessao();
+        shortIdUsuario = UsuarioDAO.getInstance().queryUsuarioOnlyByLogin(login).get(0).getId();
 
         try
         {
-            gDAO = new GeneralDAO();
-            tr = gDAO.getSessao().beginTransaction();
-            gDAO.carregar(u, new Short(shortIdUsuario));
+            tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
+            UsuarioDAO.getInstance().carregar(u, new Short(shortIdUsuario));
 
-            if(u.getPerfil().equals("Administrador") && usuarioDAO.numeroAdmins() <= 1)
+            if(u.getPerfil().equals("Administrador") && UsuarioDAO.getInstance().numeroAdmins() <= 1)
             {
                 resultado = new ResultadoOperacao("Um único administrador não pode ser excluido.\n",
                         TipoResultadoOperacao.ERRO);
                 return resultado;
             }
 
-            gDAO.apagar(u);
+            UsuarioDAO.getInstance().apagar(u);
             tr.commit();
             resultado = new ResultadoOperacao("Usuario excluido com sucesso.", TipoResultadoOperacao.EXITO);
         }

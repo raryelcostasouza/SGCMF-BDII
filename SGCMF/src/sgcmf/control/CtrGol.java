@@ -6,16 +6,13 @@ import javax.swing.JLabel;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import sgcmf.hibernate.SGCMFSessionManager;
-import sgcmf.model.dao.GeneralDAO;
 import sgcmf.model.dao.GolDAO;
 import sgcmf.model.dao.JogadorDAO;
 import sgcmf.model.dao.JogoDAO;
-import sgcmf.model.dao.OcorrenciaDAO;
 import sgcmf.model.hibernate.Gol;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Jogo;
 import sgcmf.model.hibernate.Ocorrencia;
-import sgcmf.model.hibernate.Selecao;
 import sgcmf.model.other.ResultadoGolsSelecao;
 import sgcmf.model.other.ResultadoOperacao;
 import sgcmf.model.other.TipoResultadoOperacao;
@@ -131,7 +128,6 @@ public class CtrGol
     {
         ResultadoOperacao result;
         Transaction tr;
-        GeneralDAO gdao;
         Gol golParaRemover;
         Ocorrencia ocParaRemover;
         String errorMessage;
