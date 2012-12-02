@@ -380,7 +380,8 @@ public class CtrJogador
             }
             else
             {
-                resultado = new ResultadoOperacao("Jogador não pode ser excluído pois há alguma ocorrência referenciada a ele.", TipoResultadoOperacao.ERRO);
+                resultado = new ResultadoOperacao("Jogador não pode ser excluído pois há"
+                        + " alguma ocorrência referenciada a ele.", TipoResultadoOperacao.ERRO);
             }
         }
         catch (HibernateException he)
@@ -459,7 +460,6 @@ public class CtrJogador
             }
             else if (metodo == 'a')
             {
-                //A merda dessa condição da alteração esta errada.
                 if (bolGoleiro == false)
                 {
                     if (resultado >= 3 && novaPosicao.equals("Goleiro"))
