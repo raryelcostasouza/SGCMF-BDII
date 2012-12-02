@@ -45,6 +45,7 @@ Create Table Jogador
 	unique(idSelecao,nCamisa),
 	foreign key(idSelecao) references Selecao(id)
 );
+create index index_nome_jogador on jogador(nome);
 
 Create Table Ocorrencia
 (
