@@ -71,4 +71,15 @@ public class SelecaoDAO
                 + "where s.grupo = '" +grupo+"'";
         return (ArrayList<Selecao>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
+    
+    public Short queryIdSelecaoByIdUsuarioTecnico(Short idUsuarioTecnico)
+    {
+        String hql;
+        
+        hql = "select s.id "
+                + "from Selecao s "
+                + "where s.usuario.id = '" +idUsuarioTecnico+"'";
+        
+        return Short.parseShort(SGCMFSessionManager.getCurrentSession().createQuery(hql).uniqueResult()+"");
+    }
 }

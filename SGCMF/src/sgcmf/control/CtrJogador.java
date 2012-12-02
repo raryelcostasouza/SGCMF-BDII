@@ -13,6 +13,7 @@ import sgcmf.model.dao.CartaoDAO;
 import sgcmf.model.dao.FaltaDAO;
 import sgcmf.model.dao.GolDAO;
 import sgcmf.model.dao.JogadorDAO;
+import sgcmf.model.dao.SelecaoDAO;
 import sgcmf.model.dao.SubstituicaoDAO;
 import sgcmf.model.hibernate.Jogador;
 import sgcmf.model.hibernate.Selecao;
@@ -134,14 +135,13 @@ public class CtrJogador
         JogadorDAO jDAO;
         Object[][] dadosJogadores;
         ArrayList alJogador;
-        Selecao s;
+        Short idSelecao;
 
         SGCMFSessionManager.abrirSessao();
         jDAO = JogadorDAO.getInstance();
-        Iterator iterator = u.getSelecaos().iterator();
-
-        s = (Selecao) iterator.next();
-        alJogador = jDAO.listaTodosBySelecao(s.getId());
+        idSelecao = SelecaoDAO.getInstance().queryIdSelecaoByIdUsuarioTecnico(u.getId());
+                
+        alJogador = jDAO.listaTodosBySelecao(idSelecao);
         dadosJogadores = arrayList2StringMatrixFull(alJogador);
         SGCMFSessionManager.fecharSessao();
 
