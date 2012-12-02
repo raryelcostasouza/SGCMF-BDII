@@ -40,7 +40,8 @@ public class JogoDAO
 
         hql = "from Jogo j "
                 + "where lower(j.selecaoByIdselecaoi.pais) like lower('%" + selecao + "%') or "
-                + "lower(j.selecaoByIdselecaoii.pais) like lower('%" + selecao + "%')";
+                + "lower(j.selecaoByIdselecaoii.pais) like lower('%" + selecao + "%') "
+                + "order by j.datahora";
 
         return (ArrayList<Jogo>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
@@ -50,7 +51,8 @@ public class JogoDAO
         String hql;
 
         hql = "from Jogo j "
-                + "where lower(j.cidade) like lower('%" + cidade + "%')";
+                + "where lower(j.cidade) like lower('%" + cidade + "%') "
+                + "order by j.datahora";
 
         return (ArrayList<Jogo>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
@@ -60,7 +62,8 @@ public class JogoDAO
         String hql;
 
         hql = "from Jogo j "
-                + "where lower(j.nomeestadio) like lower('%" + estadio + "%')";
+                + "where lower(j.nomeestadio) like lower('%" + estadio + "%') "
+                + "order by j.datahora";
 
         return (ArrayList<Jogo>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
@@ -79,7 +82,8 @@ public class JogoDAO
         String hql;
         
         hql = "from Jogo j "
-                + "where j.selecaoByIdselecaoi.grupo = '" + grupo+"'";
+                + "where j.selecaoByIdselecaoi.grupo = '" + grupo+"' "
+                + "order by j.datahora";
         
         return (ArrayList<Jogo>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
