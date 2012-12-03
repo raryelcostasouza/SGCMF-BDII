@@ -68,18 +68,18 @@ public class LimGerenciarJogador extends JDialog
                 }
                 else if (tituloAba.equals("Alterar"))
                 {
-                    setSize(820, 450);
+                    setSize(820, 600);
                     pAlterarJogador.ativaTela();
 
                 }
                 else if (tituloAba.equals("Remover"))
                 {
-                    setSize(820, 450);
+                    setSize(820, 600);
                     pRemoverJogador.ativaTela();
                 }
                 else if (tituloAba.equals("Consultar"))
                 {
-                    setSize(820, 450);
+                    setSize(820, 600);
                     pConsultarJogador.ativaTela();
                 }
                 pAlterarJogador.limparTodosCampos();
