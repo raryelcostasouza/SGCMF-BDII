@@ -29,17 +29,15 @@ import sgcmf.view.util.ReceiveRowDataSGCMF;
  *
  * @author Thatiane
  */
-public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
-
-
+public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF
+{
     JButton jbAlterar = new JButton("Alterar");
     private JComboBox jcbPerfil;
     private String[] items =
-        {
-            "Administrador",  "Membro Comite", "Tecnico da Selecao",
-            "Entusiasta"
-        };
-
+    {
+        "Administrador", "Membro Comite", "Tecnico da Selecao",
+        "Entusiasta"
+    };
     JTextField jtfLogin = new JTextField(10);
     JTextField jtfSenha = new JTextField(10);
     JTextField jtfNome = new JTextField(10);
@@ -47,7 +45,6 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
     JTextField jtfCPF = new JTextField(10);
     CtrUsuario ctrUsuario = new CtrUsuario();
     String sPerfil = "";
-
     JRadioButton jrbNome = new JRadioButton("Nome");
     JRadioButton jrbPerfil = new JRadioButton("Perfil");
     JRadioButton jrbLogin = new JRadioButton("Login");
@@ -67,9 +64,9 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
         JScrollPane jpCenter = montaPainelCentral();
         JPanel jpSouth = montaPainelSouth();
         recarregaTodosusuarios();
-        this.add(jpNorth,BorderLayout.NORTH);
-        this.add(jpCenter,BorderLayout.CENTER);
-        this.add(jpSouth,BorderLayout.SOUTH);
+        this.add(jpNorth, BorderLayout.NORTH);
+        this.add(jpCenter, BorderLayout.CENTER);
+        this.add(jpSouth, BorderLayout.SOUTH);
 
     }
 
@@ -79,7 +76,7 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
         JPanel jpEsquerda = new JPanel();
         JPanel jpDireita = new JPanel();
 
-        
+
 
         jtfPesquisar = new JTextField(15);
         jtfPesquisar.addActionListener(new ActionListener()
@@ -121,9 +118,9 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
 
         jt = new JTableSGCMF(null, nomeColunas, this);
         jt.setModel(new DefaultTableModelSGCMF(null, nomeColunas));
-        
+
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                                          JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         return jsp;
     }
@@ -158,35 +155,37 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                ResultadoOperacao resultado;
-                String perfil = (String) jcbPerfil.getSelectedItem();
+                if (jt.getSelectedRow() != -1)
+                {
+                    ResultadoOperacao resultado;
+                    String perfil = (String) jcbPerfil.getSelectedItem();
 
-                if(perfil.equals("Tecnico da Selecao") && !sPerfil.equals("Tecnico da Selecao"))
-                {
-                    JOptionPane.showMessageDialog(null, "O perfil técnico não pode ser escolhido", "Erro"
-                            + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
-                }
-                else
-                {
-                    if(sPerfil.equals("Tecnico da Selecao") && !perfil.equals("Tecnico da Selecao"))
+                    if (perfil.equals("Tecnico da Selecao") && !sPerfil.equals("Tecnico da Selecao"))
                     {
-                        JOptionPane.showMessageDialog(null, "Usuário técnico não pode ter o perfil alterado", "Erro"
-                                    + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "O perfil técnico não pode ser escolhido", "Erro"
+                                + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
                     }
                     else
                     {
-                        if(jtfLogin.getText().equals("") || jtfSenha.getText().equals("") || jtfEmail.getText().equals("")
-                                || jtfNome.getText().equals("") || jtfCPF.getText().equals(""))
+                        if (sPerfil.equals("Tecnico da Selecao") && !perfil.equals("Tecnico da Selecao"))
                         {
-                         JOptionPane.showMessageDialog(null, "Campos em branco, preenche corretamente", "Erro"
+                            JOptionPane.showMessageDialog(null, "Usuário técnico não pode ter o perfil alterado", "Erro"
                                     + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
                         }
                         else
                         {
+                            if (jtfLogin.getText().equals("") || jtfSenha.getText().equals("") || jtfEmail.getText().equals("")
+                                    || jtfNome.getText().equals("") || jtfCPF.getText().equals(""))
+                            {
+                                JOptionPane.showMessageDialog(null, "Campos em branco, preenche corretamente", "Erro"
+                                        + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
+                            }
+                            else
+                            {
                                 String idUsuario = jt.getValueAt(jt.getSelectedRow(), 0).toString();
 
-                                resultado = ctrUsuario.alterarUsuario(idUsuario, jtfCPF.getText(),jtfNome.getText(),
-                                            jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
+                                resultado = ctrUsuario.alterarUsuario(idUsuario, jtfCPF.getText(), jtfNome.getText(),
+                                                                      jtfEmail.getText(), jtfLogin.getText(), jtfSenha.getText(), perfil);
 
                                 if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
                                 {
@@ -201,14 +200,14 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
                                 }
 
                                 recarregaTodosusuarios();
+                            }
                         }
-
                     }
                 }
             }
         });
 
-       
+
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlLogin));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jtfLogin, FlowLayout.LEFT));
         jpAux.add(UtilView.putComponentInFlowLayoutPanel(jlSenha));

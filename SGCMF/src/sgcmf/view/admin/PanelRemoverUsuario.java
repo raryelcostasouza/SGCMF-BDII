@@ -31,7 +31,6 @@ import sgcmf.view.util.ReceiveRowDataSGCMF;
  */
 public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
 {
-
     CtrUsuario ctrUsuario = new CtrUsuario();
     JTableSGCMF jt;
     JTextField jtfPesquisar;
@@ -39,9 +38,6 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
     JRadioButton jrbPerfil;
     JRadioButton jrbLogin;
     JRadioButton jrbEmail;
-
-    
-
     JTextField jtfLogin = new JTextField(10);
     JTextField jtfSenha = new JTextField(10);
     JTextField jtfNome = new JTextField(10);
@@ -50,7 +46,7 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
     JTextField jtfPerfil = new JTextField(10);
     JButton jbRemover;
 
-     public PanelRemoverUsuario()
+    public PanelRemoverUsuario()
     {
         setLayout(new BorderLayout());
         montaPainelPrincipal();
@@ -63,9 +59,9 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
         JScrollPane jpCenter = montaPainelCentral();
         JPanel jpSouth = montaPainelSouth();
         recarregaTodosusuarios();
-        this.add(jpNorth,BorderLayout.NORTH);
-        this.add(jpCenter,BorderLayout.CENTER);
-        this.add(jpSouth,BorderLayout.SOUTH);
+        this.add(jpNorth, BorderLayout.NORTH);
+        this.add(jpCenter, BorderLayout.CENTER);
+        this.add(jpSouth, BorderLayout.SOUTH);
 
     }
 
@@ -125,7 +121,7 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
         jt.setModel(new DefaultTableModelSGCMF(null, nomeColunas));
         jt.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         JScrollPane jsp = new JScrollPane(jt, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                                          JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         return jsp;
     }
@@ -179,22 +175,25 @@ public class PanelRemoverUsuario extends JPanel implements ReceiveRowDataSGCMF
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                ResultadoOperacao resultado;
-                CtrUsuario ctrUsuario = new CtrUsuario();
-                 
-                resultado = ctrUsuario.removerUsuario(jt.getValueAt(jt.getSelectedRow(), 0).toString());
+                if (jt.getSelectedRow() != -1)
+                {
+                    ResultadoOperacao resultado;
+                    CtrUsuario ctrUsuario = new CtrUsuario();
 
-                if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
-                {
-                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
-                            + " na remoção de Usuario", JOptionPane.ERROR_MESSAGE);
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Remoção"
-                            + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
-                    limparTodosCampos();
-                    recarregaTodosusuarios();
+                    resultado = ctrUsuario.removerUsuario(jt.getValueAt(jt.getSelectedRow(), 0).toString());
+
+                    if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                    {
+                        JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                                + " na remoção de Usuario", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, resultado.getMsg(), "Remoção"
+                                + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
+                        limparTodosCampos();
+                        recarregaTodosusuarios();
+                    }
                 }
             }
         });
