@@ -235,14 +235,6 @@ public class CtrUsuario
             return result;
         }
 
-        if(u.getPerfil().equals("Tecnico da Selecao"))
-            {
-                SGCMFSessionManager.fecharSessao();
-                result = new ResultadoOperacao("Usuario Tecnico da selecao nao pode ser alterado.\n",
-                        TipoResultadoOperacao.ERRO);
-                return result;
-            }
-
         try
         {
             u.setCpf(cpf);

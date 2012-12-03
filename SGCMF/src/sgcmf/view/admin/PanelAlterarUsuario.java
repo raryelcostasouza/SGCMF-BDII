@@ -168,32 +168,41 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
                 }
                 else
                 {
-                    if(jtfLogin.getText().equals("") || jtfSenha.getText().equals("") || jtfEmail.getText().equals("")
-                            || jtfNome.getText().equals("") || jtfCPF.getText().equals("") )
+                    if(sPerfil.equals("Tecnico da Selecao") && !perfil.equals("Tecnico da Selecao"))
                     {
-                     JOptionPane.showMessageDialog(null, "Campos em branco, preenche corretamente", "Erro"
-                                + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Usuário técnico não pode ter o perfil alterado", "Erro"
+                                    + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
                     }
                     else
                     {
-                        String idUsuario = jt.getValueAt(jt.getSelectedRow(), 0).toString();
-
-                        resultado = ctrUsuario.alterarUsuario(idUsuario, jtfCPF.getText(),jtfNome.getText(),
-                                    jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
-
-                        if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                        if(jtfLogin.getText().equals("") || jtfSenha.getText().equals("") || jtfEmail.getText().equals("")
+                                || jtfNome.getText().equals("") || jtfCPF.getText().equals(""))
                         {
-                            JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                         JOptionPane.showMessageDialog(null, "Campos em branco, preenche corretamente", "Erro"
                                     + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(null, resultado.getMsg(), "Alteração"
-                                    + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
-                            limparCampos();
+                                String idUsuario = jt.getValueAt(jt.getSelectedRow(), 0).toString();
+
+                                resultado = ctrUsuario.alterarUsuario(idUsuario, jtfCPF.getText(),jtfNome.getText(),
+                                            jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
+
+                                if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                                {
+                                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                                            + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, resultado.getMsg(), "Alteração"
+                                            + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
+                                    limparCampos();
+                                }
+
+                                recarregaTodosusuarios();
                         }
 
-                        recarregaTodosusuarios();
                     }
                 }
             }
