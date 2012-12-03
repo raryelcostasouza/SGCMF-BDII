@@ -26,8 +26,9 @@ import sgcmf.view.comiteGestor.LimBuscarJogador;
 import sgcmf.view.util.DefaultTableModelSGCMF;
 import sgcmf.view.util.JLabelTableCellRenderer;
 import sgcmf.view.util.JTableSGCMF;
+import sgcmf.view.util.ReceiveRowDataSGCMF;
 
-public class LimGerenciarOcorrenciasJogo extends JDialog
+public class LimGerenciarOcorrenciasJogo extends JDialog implements ReceiveRowDataSGCMF
 {
     private CtrComiteGestor ctrComiteGestor;
     private LimRegistrarGol limRegistrarGol;
@@ -49,6 +50,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     private JLabel jlInfoJogo;
     private JPanel centerPanel;
     private Short idJogo;
+    private JButton jbRemoverOcorrencia; 
 
     public LimGerenciarOcorrenciasJogo(CtrComiteGestor ctrComiteGestor, LimBuscarJogador limBuscarJogador)
     {
@@ -123,6 +125,8 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             {
                 CardLayout cl = (CardLayout) centerPanel.getLayout();
                 cl.show(centerPanel, nameCardPanelGol);
+                
+                verificaSetabelaTemLinhaSelecionada(jtGol);
             }
         });
 
@@ -133,6 +137,8 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             {
                 CardLayout cl = (CardLayout) centerPanel.getLayout();
                 cl.show(centerPanel, nameCardPanelFalta);
+                
+                verificaSetabelaTemLinhaSelecionada(jtFalta);
             }
         });
 
@@ -143,6 +149,8 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             {
                 CardLayout cl = (CardLayout) centerPanel.getLayout();
                 cl.show(centerPanel, nameCardPanelCartao);
+                
+                verificaSetabelaTemLinhaSelecionada(jtCartao);
             }
         });
 
@@ -153,6 +161,8 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
             {
                 CardLayout cl = (CardLayout) centerPanel.getLayout();
                 cl.show(centerPanel, nameCardPanelSubst);
+                
+                verificaSetabelaTemLinhaSelecionada(jtSubst);
             }
         });
 
@@ -187,7 +197,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         {
             "ID", "Tempo", "Seleção", "Jogador Autor", "Jog. Assistente", "Tipo Gol", "Modo"
         };
-        jtGol = new JTableSGCMF(null, nomesColunas);
+        jtGol = new JTableSGCMF(null, nomesColunas, this);
         jtGol.setModel(new DefaultTableModelSGCMF(null, nomesColunas));
         jtGol.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jtGol.setRowHeight(32);
@@ -217,7 +227,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         {
             "ID", "Tempo", "Seleção",  "Jogador Autor", "Cartão", "Tipo"
         };
-        jtFalta = new JTableSGCMF(null, nomesColunas);
+        jtFalta = new JTableSGCMF(null, nomesColunas, this);
         jtFalta.setModel(new DefaultTableModelSGCMF(null, nomesColunas));
         jtFalta.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jtFalta.setRowHeight(32);
@@ -247,7 +257,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         {
             "ID", "IDOc", "Tempo", "Seleção" ,"Jogador", "Cor"
         };
-        jtCartao = new JTableSGCMF(null, nomesColunas);
+        jtCartao = new JTableSGCMF(null, nomesColunas, this);
         jtCartao.setModel(new DefaultTableModelSGCMF(null, nomesColunas));
         jtCartao.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jtCartao.setRowHeight(32);
@@ -278,7 +288,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         {
             "ID", "Tempo", "Seleção", "Jogador Saiu", "Jogador Entrou", "Motivo"
         };
-        jtSubst = new JTableSGCMF(null, nomesColunas);
+        jtSubst = new JTableSGCMF(null, nomesColunas, this);
         jtSubst.setModel(new DefaultTableModelSGCMF(null, nomesColunas));
         jtSubst.setDefaultRenderer(JLabel.class, new JLabelTableCellRenderer());
         jtSubst.setRowHeight(32);
@@ -304,7 +314,8 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     {
         JPanel southPanel = new JPanel();
 
-        JButton jbRemoverOcorrencia = new JButton("Remover Ocorrência");
+        jbRemoverOcorrencia = new JButton("Remover Ocorrência");
+        jbRemoverOcorrencia.setEnabled(false);
         jbRemoverOcorrencia.addActionListener(new ActionListener()
         {
             @Override
@@ -336,6 +347,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         dadosGol = ctrComiteGestor.getCtrGol().queryGolByIdJogo(idJogo);
         jtGol.preencheTabela(dadosGol);
+        jbRemoverOcorrencia.setEnabled(false);
     }
 
     public void preencheTabelaFalta()
@@ -344,6 +356,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         dadosFalta = ctrComiteGestor.getCtrFalta().queryFaltaByIdJogo(idJogo);
         jtFalta.preencheTabela(dadosFalta);
+        jbRemoverOcorrencia.setEnabled(false);
     }
     
     public void preencheTabelaCartao()
@@ -352,6 +365,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         
         dadosCartao = ctrComiteGestor.getCtrCartao().queryCartaoByIdJogo(idJogo);
         jtCartao.preencheTabela(dadosCartao);
+        jbRemoverOcorrencia.setEnabled(false);
     }
     
     public void preencheTabelaSubstituicao()
@@ -360,6 +374,7 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         
         dadosSubst = ctrComiteGestor.getCtrSubstituicao().querySubstByIdJogo(idJogo);
         jtSubst.preencheTabela(dadosSubst);
+        jbRemoverOcorrencia.setEnabled(false);
     }
 
     private void resetCamposInterface()
@@ -369,6 +384,18 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
 
         CardLayout cl = (CardLayout) centerPanel.getLayout();
         cl.show(centerPanel, nameCardPanelGol);
+    }
+    
+    private void verificaSetabelaTemLinhaSelecionada(JTableSGCMF jt)
+    {
+        if (jt.getSelectedRow() != -1)
+        {
+            jbRemoverOcorrencia.setEnabled(true);
+        }
+        else
+        {
+            jbRemoverOcorrencia.setEnabled(false);
+        }
     }
 
     private void removerOcorrencia()
@@ -427,7 +454,6 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
         if (result.getTipo() == TipoResultadoOperacao.EXITO)
         {
             JOptionPane.showMessageDialog(this, result.getMsg(), "Êxito!", JOptionPane.INFORMATION_MESSAGE);
-            
         }
         else
         {
@@ -440,4 +466,10 @@ public class LimGerenciarOcorrenciasJogo extends JDialog
     {
         return idJogo;
     }   
+
+    @Override
+    public void receiveRowData(String[] dados)
+    {
+        jbRemoverOcorrencia.setEnabled(true);
+    }
 }
