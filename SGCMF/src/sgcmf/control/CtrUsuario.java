@@ -158,6 +158,16 @@ public class CtrUsuario
             SGCMFSessionManager.fecharSessao();
             return (new ResultadoOperacao("Login já cadastrado.\n", TipoResultadoOperacao.ERRO));
         }
+                if(UsuarioDAO.getInstance().queryUsuarioOnlyByEmail(email).size() > 0)
+        {
+            SGCMFSessionManager.fecharSessao();
+            return (new ResultadoOperacao("Email já cadastrado.\n", TipoResultadoOperacao.ERRO));
+        }
+                if(UsuarioDAO.getInstance().queryUsuarioOnlyByCPF(cpf).size() > 0)
+        {
+            SGCMFSessionManager.fecharSessao();
+            return (new ResultadoOperacao("CPF já cadastrado.\n", TipoResultadoOperacao.ERRO));
+        }
 
         tr = SGCMFSessionManager.getCurrentSession().beginTransaction();
         try

@@ -121,6 +121,26 @@ public class UsuarioDAO
         return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
+    public ArrayList<Usuario> queryUsuarioOnlyByEmail(String email)
+    {
+        String hql;
+
+        hql = "from Usuario u "
+                + "where email = '" + email + "'";
+
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
+
+    public ArrayList<Usuario> queryUsuarioOnlyByCPF(String cpf)
+    {
+        String hql;
+
+        hql = "from Usuario u "
+                + "where cpf = '" + cpf + "'";
+
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
+
     public ArrayList<Usuario> queryUsuarioByNome(String nome)
     {
         String hql;

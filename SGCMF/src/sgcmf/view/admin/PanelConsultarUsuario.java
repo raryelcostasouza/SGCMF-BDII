@@ -138,4 +138,9 @@ public class PanelConsultarUsuario extends JPanel {
 
     }
 
+    public void limparTodosCampos()
+    {
+        jtfPesquisar.setText("");
+    }
+
 }

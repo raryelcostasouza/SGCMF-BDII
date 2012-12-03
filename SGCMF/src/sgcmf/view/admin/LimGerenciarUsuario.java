@@ -19,6 +19,7 @@ public class LimGerenciarUsuario extends JFrame {
     private PanelAlterarUsuario pau;
     private PanelRemoverUsuario pru;
     private PanelConsultarUsuario pcnu;
+    final JTabbedPane jtp = new JTabbedPane();
 
     public LimGerenciarUsuario(CtrAdmin ctrAdmin)
     {
@@ -32,11 +33,26 @@ public class LimGerenciarUsuario extends JFrame {
 
         add(montaPainel());
 
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                pcdu.limparCampos();
+                pau.limparTodosCampos();
+                pru.limparTodosCampos();
+                pcnu.limparTodosCampos();
+                jtp.setSelectedIndex(0);
+                setLocationRelativeTo(null);
+            }
+        });
+
+
     }
 
     private JTabbedPane montaPainel()
     {
-        final JTabbedPane jtp = new JTabbedPane();
+        
         jtp.addChangeListener(new ChangeListener()
         {
             @Override
@@ -66,7 +82,7 @@ public class LimGerenciarUsuario extends JFrame {
                     setSize(1000,500);
                     setLocationRelativeTo(null);
                     pcnu.recarregaTodosusuarios();
-
+                    pcnu.limparTodosCampos();
                 }
             }
         });
