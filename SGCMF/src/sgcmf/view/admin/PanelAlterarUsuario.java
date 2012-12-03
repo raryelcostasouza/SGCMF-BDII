@@ -36,7 +36,7 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
     private JComboBox jcbPerfil;
     private String[] items =
         {
-            "Administrador",  "Membro Comite",
+            "Administrador",  "Membro Comite", "Tecnico da Selecao",
             "Entusiasta"
         };
 
@@ -46,6 +46,7 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
     JTextField jtfEmail = new JTextField(10);
     JTextField jtfCPF = new JTextField(10);
     CtrUsuario ctrUsuario = new CtrUsuario();
+    String sPerfil = "";
 
     JRadioButton jrbNome = new JRadioButton("Nome");
     JRadioButton jrbPerfil = new JRadioButton("Perfil");
@@ -158,33 +159,42 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
             public void actionPerformed(ActionEvent e)
             {
                 ResultadoOperacao resultado;
-                String idUsuario = jt.getValueAt(jt.getSelectedRow(), 0).toString();
                 String perfil = (String) jcbPerfil.getSelectedItem();
 
-                if(jtfLogin.getText().equals("") || jtfSenha.getText().equals("") || jtfEmail.getText().equals("")
-                        || jtfNome.getText().equals("") || jtfCPF.getText().equals("") )
+                if(perfil.equals("Tecnico da Selecao") && !sPerfil.equals("Tecnico da Selecao"))
                 {
-                 JOptionPane.showMessageDialog(null, "Campos em branco, preenche corretamente", "Erro"
-                            + " no Cadastro de Usuario", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "O perfil técnico não pode ser escolhido", "Erro"
+                            + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
                 }
                 else
                 {
-                    resultado = ctrUsuario.alterarUsuario(idUsuario, jtfCPF.getText(),jtfNome.getText(),
-                                jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
-
-                    if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                    if(jtfLogin.getText().equals("") || jtfSenha.getText().equals("") || jtfEmail.getText().equals("")
+                            || jtfNome.getText().equals("") || jtfCPF.getText().equals("") )
                     {
-                        JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                     JOptionPane.showMessageDialog(null, "Campos em branco, preenche corretamente", "Erro"
                                 + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, resultado.getMsg(), "Alteração"
-                                + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
-                        limparCampos();
-                    }
+                        String idUsuario = jt.getValueAt(jt.getSelectedRow(), 0).toString();
 
-                    recarregaTodosusuarios();
+                        resultado = ctrUsuario.alterarUsuario(idUsuario, jtfCPF.getText(),jtfNome.getText(),
+                                    jtfEmail.getText(),jtfLogin.getText(),jtfSenha.getText(), perfil);
+
+                        if (resultado.getTipo().equals(TipoResultadoOperacao.ERRO))
+                        {
+                            JOptionPane.showMessageDialog(null, resultado.getMsg(), "Erro"
+                                    + " na alteração de Usuario", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, resultado.getMsg(), "Alteração"
+                                    + " bem Sucedida", JOptionPane.INFORMATION_MESSAGE);
+                            limparCampos();
+                        }
+
+                        recarregaTodosusuarios();
+                    }
                 }
             }
         });
@@ -258,6 +268,8 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
         jtfSenha.setText(dados[5]);
         jtfCPF.setText(dados[1]);
         jcbPerfil.setSelectedItem((String) dados[6]);
+        sPerfil = ((String) dados[6]);
+
     }
 
     public void limparTodosCampos()
