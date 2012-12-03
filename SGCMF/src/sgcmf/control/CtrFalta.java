@@ -184,12 +184,12 @@ public class CtrFalta
                 {
                     cartaoParaRemover = null;
                 }
-
+                
+                FaltaDAO.getInstance().apagar(faltaParaRemover);
                 if (cartaoParaRemover != null)
                 {
                     CartaoDAO.getInstance().apagar(cartaoParaRemover);
                 }
-                FaltaDAO.getInstance().apagar(faltaParaRemover);
                 ctrMain.getCtrOcorrenciaJogo().removerOcorrencia(ocParaRemover);
 
                 tr.commit();
@@ -205,6 +205,7 @@ public class CtrFalta
         {
             tr.rollback();
             result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
+            hex.printStackTrace();
         }
         SGCMFSessionManager.fecharSessao();
 
