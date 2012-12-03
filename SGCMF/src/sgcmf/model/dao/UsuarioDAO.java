@@ -121,6 +121,16 @@ public class UsuarioDAO
         return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
+    public ArrayList<Usuario> queryUsuarioOnlyByLogin(String login, int id)
+    {
+        String hql;
+
+        hql = "from Usuario u "
+                + "where login = '" + login + "' and id != '" + id + "' ";
+
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
+
     public ArrayList<Usuario> queryUsuarioOnlyByEmail(String email)
     {
         String hql;
@@ -131,12 +141,32 @@ public class UsuarioDAO
         return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }
 
+    public ArrayList<Usuario> queryUsuarioOnlyByEmail(String email, int id)
+    {
+        String hql;
+
+        hql = "from Usuario u "
+                + "where email = '" + email + "' and id != '" + id + "' ";
+
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
+
     public ArrayList<Usuario> queryUsuarioOnlyByCPF(String cpf)
     {
         String hql;
 
         hql = "from Usuario u "
                 + "where cpf = '" + cpf + "'";
+
+        return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
+    }
+
+    public ArrayList<Usuario> queryUsuarioOnlyByCPF(String cpf, int id)
+    {
+        String hql;
+
+        hql = "from Usuario u "
+                + "where cpf = '" + cpf + "' and id != '" + id + "' ";
 
         return (ArrayList<Usuario>) SGCMFSessionManager.getCurrentSession().createQuery(hql).list();
     }

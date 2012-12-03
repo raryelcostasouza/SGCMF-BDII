@@ -59,6 +59,7 @@ public class LimGerenciarUsuario extends JFrame {
             public void stateChanged(ChangeEvent e)
             {
                 String tituloAba = jtp.getTitleAt(jtp.getSelectedIndex());
+                
                 if (tituloAba.equals("Cadastrar"))
                 {
                     setSize(400, 400);
