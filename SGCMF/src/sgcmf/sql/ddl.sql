@@ -45,7 +45,7 @@ Create Table Jogador
 	unique(idSelecao,nCamisa),
 	foreign key(idSelecao) references Selecao(id)
 );
-create index index_nome_jogador on jogador(nome);
+
 
 Create Table Ocorrencia
 (
@@ -102,3 +102,20 @@ Create Table Substituicao
 	foreign key(idJogadorEntrou) references Jogador(id),
 	foreign key(idJogadorSaiu) references Jogador(id)
 );
+
+--Indices e justificativas
+--Observação 1: o PostgreSQL gera automaticamente índices para todas as primary keys e unique keys das tabelas.
+create index index_nome_jogador on jogador(nome);
+--Justificativa do indice
+--1) A tabela Jogador é uma tabela bastante consultada pelo nome do jogador, para o lançamento de qualquer ocorrência de jogo (gol, falta, cartão, substituição).
+--2) A tabela Jogador terá um número relativamente grande de registros se comparado com outras tabelas do sistema (736 no total, 23 jogadores para cada uma das 32 seleções).
+-- A tabela Seleção, por exemplo, terá apenas 32 registros, e a tabela jogo, 48 registros, tornando injustificável a criação de um índice secundário para qualquer outro campo dessas tabelas.
+
+create index index_idJogo_ocorrencia on Ocorrencia(idJogo);
+--Justificativa do indice
+--Em um cenário de utilização real do sistema, a tabela de ocorrências conteria milhares de entradas, 
+--muito mais que qualquer outra tabela do sistema. As consultas realizadas nessa tabela,
+--utilizadas na geração dos relatórios e para a montagem da tabela do campeonato (querys complexas), utilizam sempre o idJogo como chave de pesquisa, 
+--justificando assim a criação do índice para esse campo.
+
+
