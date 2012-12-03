@@ -160,6 +160,7 @@ public class CtrFalta
         Transaction tr;
         Falta faltaParaRemover;
         Cartao cartaoParaRemover;
+        Cartao cartaoVermDerivado;
         Ocorrencia ocParaRemover;
         String errorMessage;
 
@@ -179,17 +180,25 @@ public class CtrFalta
                 if (faltaParaRemover.getCartao() != null)
                 {
                     cartaoParaRemover = faltaParaRemover.getCartao();
+                    cartaoVermDerivado = cartaoParaRemover.getCartao();
                 }
                 else
                 {
                     cartaoParaRemover = null;
+                    cartaoVermDerivado = null;
                 }
                 
                 FaltaDAO.getInstance().apagar(faltaParaRemover);
+                
                 if (cartaoParaRemover != null)
                 {
                     CartaoDAO.getInstance().apagar(cartaoParaRemover);
                 }
+                if (cartaoVermDerivado != null)
+                {
+                    CartaoDAO.getInstance().apagar(cartaoVermDerivado);
+                }
+                
                 ctrMain.getCtrOcorrenciaJogo().removerOcorrencia(ocParaRemover);
 
                 tr.commit();
