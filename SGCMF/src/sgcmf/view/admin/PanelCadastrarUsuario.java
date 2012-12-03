@@ -97,9 +97,10 @@ public class PanelCadastrarUsuario extends JPanel {
 
                 String perfil = (String) jcbPerfil.getSelectedItem();
 
-                if(jtfLogin.getText().equals("") || jtfSenha.getText().equals(""))
+                if(jtfLogin.getText().equals("") || jtfSenha.getText().equals("") || jtfEmail.getText().equals("")
+                        || jtfNome.getText().equals("") || jtfCPF.getText().equals("") )
                 {
-                 JOptionPane.showMessageDialog(null, "Login ou senha em branco", "Erro"
+                 JOptionPane.showMessageDialog(null, "Campos em branco, preenche corretamente", "Erro"
                             + " no Cadastro de Usuario", JOptionPane.ERROR_MESSAGE);
                 }
                 else
