@@ -105,7 +105,7 @@ Create Table Substituicao
 
 --Indices e justificativas
 --Observação 1: o PostgreSQL gera automaticamente índices para todas as primary keys e unique keys das tabelas.
-create index index_nome_jogador on jogador(nome);
+create index index_nome_jogador on Jogador(nome);
 --Justificativa do indice
 --1) A tabela Jogador é uma tabela bastante consultada pelo nome do jogador, para o lançamento de qualquer ocorrência de jogo (gol, falta, cartão, substituição).
 --2) A tabela Jogador terá um número relativamente grande de registros se comparado com outras tabelas do sistema (736 no total, 23 jogadores para cada uma das 32 seleções).
