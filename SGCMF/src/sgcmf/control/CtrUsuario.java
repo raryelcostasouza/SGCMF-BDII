@@ -279,6 +279,14 @@ public class CtrUsuario
                 return resultado;
             }
 
+            if(u.getPerfil().equals("Tecnico da Selecao"))
+            {
+                SGCMFSessionManager.fecharSessao();
+                resultado = new ResultadoOperacao("Usuario Tecnico da selecao nao pode ser removido.\n",
+                        TipoResultadoOperacao.ERRO);
+                return resultado;
+            }
+
             UsuarioDAO.getInstance().apagar(u);
             tr.commit();
             resultado = new ResultadoOperacao("Usuario excluido com sucesso.", TipoResultadoOperacao.EXITO);
