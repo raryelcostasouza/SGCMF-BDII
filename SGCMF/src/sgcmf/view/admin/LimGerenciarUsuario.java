@@ -1,17 +1,12 @@
 package sgcmf.view.admin;
 
-import sgcmf.view.admin.PanelAlterarUsuario;
-import sgcmf.view.admin.PanelRemoverUsuario;
-import sgcmf.view.admin.PanelConsultarUsuario;
-import sgcmf.view.admin.PanelCadastrarUsuario;
-import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import sgcmf.control.CtrAdmin;
-import sgcmf.control.CtrUsuario;
 import sgcmf.model.other.SGCMFIcons;
 
 /**
@@ -36,6 +31,7 @@ public class LimGerenciarUsuario extends JFrame {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         add(montaPainel());
+
     }
 
     private JTabbedPane montaPainel()
@@ -57,17 +53,20 @@ public class LimGerenciarUsuario extends JFrame {
                     setSize(1000,600);
                     setLocationRelativeTo(null);
                     pau.recarregaTodosusuarios();
+                    pau.limparTodosCampos();
                 }
                 else if(tituloAba.equals("Remover"))
                 {
                     setSize(1000,600);
                     setLocationRelativeTo(null);
                     pru.recarregaTodosusuarios();
+                    pru.limparTodosCampos();
                 }
                 else if(tituloAba.equals("Consultar")){
                     setSize(1000,500);
                     setLocationRelativeTo(null);
                     pcnu.recarregaTodosusuarios();
+
                 }
             }
         });

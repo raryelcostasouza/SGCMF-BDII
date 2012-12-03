@@ -36,7 +36,7 @@ public class PanelAlterarUsuario extends JPanel implements ReceiveRowDataSGCMF{
     private JComboBox jcbPerfil;
     private String[] items =
         {
-            "Administrador", "Tecnico da selecao", "Membro Comite",
+            "Administrador",  "Membro Comite",
             "Entusiasta"
         };
 
