@@ -205,7 +205,6 @@ public class CtrFalta
         {
             tr.rollback();
             result = new ResultadoOperacao("Erro do Hibernate:\n" + hex.getMessage(), TipoResultadoOperacao.ERRO);
-            hex.printStackTrace();
         }
         SGCMFSessionManager.fecharSessao();
 
