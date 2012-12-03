@@ -41,6 +41,7 @@ public class LimGerenciarRelatorio extends JDialog
             public void windowClosing(WindowEvent e)
             {
                 panelRelatorioSelecao.limparTela();
+                panelRelatorioJogo.limparTela();
                 jtp.setSelectedIndex(0);
                 setLocationRelativeTo(null);
             }

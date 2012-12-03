@@ -49,6 +49,11 @@ public class CtrRelatorio
     {
         limGerenciarRelatorio.setVisible(true);
     }
+    
+    public void desativaTela()
+    {
+        limGerenciarRelatorio.setVisible(false);
+    }
 
     public CtrMain getCtrMain()
     {

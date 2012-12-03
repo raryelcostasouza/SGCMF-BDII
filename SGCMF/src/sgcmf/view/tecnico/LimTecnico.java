@@ -52,6 +52,7 @@ public class LimTecnico extends JFrame
             public void windowClosing(WindowEvent e)
             {
                 acaoLogout();
+                ctrRelatorio.desativaTela();
             }
         });
     }

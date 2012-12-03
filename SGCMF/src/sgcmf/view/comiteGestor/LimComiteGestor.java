@@ -48,6 +48,7 @@ public class LimComiteGestor extends JFrame
             public void windowClosing(WindowEvent e)
             {
                 acaoLogout();
+                
             }
         });
     }
@@ -67,6 +68,7 @@ public class LimComiteGestor extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 acaoLogout();
+                ctrComiteGestor.getCtrRelatorio().desativaTela();
             }
         });
 

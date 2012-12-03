@@ -21,7 +21,7 @@ public class LimEntusiasta extends JFrame
 {
     private CtrEntusiasta ctrEntusiasta;
 
-    public LimEntusiasta(CtrEntusiasta ctrEntusiasta)
+    public LimEntusiasta(final CtrEntusiasta ctrEntusiasta)
     {
         this.ctrEntusiasta = ctrEntusiasta;
 
@@ -39,6 +39,7 @@ public class LimEntusiasta extends JFrame
             public void windowClosing(WindowEvent e)
             {
                 acaoLogout();
+                ctrEntusiasta.getCtrRelatorio().desativaTela();
             }
         });
     }

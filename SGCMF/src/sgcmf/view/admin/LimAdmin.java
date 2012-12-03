@@ -47,6 +47,7 @@ public class LimAdmin extends JFrame
             public void windowClosing(WindowEvent e)
             {
                 acaoLogout();
+                ctrRelatorio.desativaTela();
             }
         });
         
